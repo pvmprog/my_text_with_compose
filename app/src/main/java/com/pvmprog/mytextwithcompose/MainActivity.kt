@@ -1,17 +1,21 @@
 package com.pvmprog.mytextwithcompose
 
+import android.content.res.Resources
 import android.os.Bundle
+import android.util.TypedValue
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.pvmprog.mytextwithcompose.ui.GreetingScreen
+import androidx.compose.ui.unit.dp
 import com.pvmprog.mytextwithcompose.ui.MainScreen
+import com.pvmprog.mytextwithcompose.ui.screens.Examplescreen
+import com.pvmprog.mytextwithcompose.ui.screens.GreetingScreen
 import com.pvmprog.mytextwithcompose.ui.theme.MyTextWithComposeTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -135,18 +139,37 @@ class TextWithComposeApp: Application()  {
 />
 5.Ддобавляем аннотацию классу MainActivity: @AndroidEntryPoint
 
+Android Compose: Create a simple MVVM project with basic four layers
+https://medium.com/@anteprocess/android-compose-create-a-simple-mvvm-project-with-basic-four-layers-776b586d00af
+
+Стиль текста
+https://developer.android.com/develop/ui/compose/text/style-text?hl=ru
+
+https://developer.android.com/develop/ui/compose/resources?hl=ru#strings
 
  */
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             MyTextWithComposeTheme {
-                MainScreen()
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    val windowSize = calculateWindowSizeClass(this)
+                    val isExpanded =  (windowSize.widthSizeClass == WindowWidthSizeClass.Expanded)
+                    MainScreen(isExpanded = isExpanded)
+
+                }
             }
         }
     }
+
+
 }
 

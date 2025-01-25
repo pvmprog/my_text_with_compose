@@ -1,5 +1,6 @@
 package com.pvmprog.mytextwithcompose.di
 
+import android.content.Context
 import com.pvmprog.mytextwithcompose.data.locale.DataExampleImpl
 import com.pvmprog.mytextwithcompose.data.repository.AppRepository
 import com.pvmprog.mytextwithcompose.data.repository.AppRepositoryImpl
@@ -17,8 +18,9 @@ object RepositoryModule {
     @Singleton
     fun provideAppRepository(
         localdata: DataExampleImpl,
+        context: Context
     ): AppRepository {
-        return AppRepositoryImpl(localdata)
+        return AppRepositoryImpl(localdata,context)
     }
 
 }

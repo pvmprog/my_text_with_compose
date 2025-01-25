@@ -12,4 +12,7 @@
         <dimen name="font_size_text_medium">20sp</dimen>
         <dimen name="font_size_text_large">22sp</dimen>
 
+        <dimen name="card_elevation">2dp</dimen>
+
+
 </resources>

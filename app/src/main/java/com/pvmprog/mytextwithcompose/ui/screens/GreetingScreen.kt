@@ -1,4 +1,4 @@
-package com.pvmprog.mytextwithcompose.ui
+package com.pvmprog.mytextwithcompose.ui.screens
 
 import android.content.res.Configuration
 import androidx.activity.compose.BackHandler
@@ -36,20 +36,14 @@ fun GreetingScreen(
     message: String = stringResource(R.string.text_in_jetpack_compose),
     comment: String = stringResource(R.string.in_examples),
     image: Painter = painterResource(id = R.drawable.bg),
-    onExit: (Int) -> Unit = {},
+    onExit: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
-    val s = stringResource(R.string.in_examples)
     val styleButton = TextStyle(
         fontSize = 36.sp,
         fontWeight = FontWeight.Normal
     )
 
-//BackHandler для обнаружения нажатий на кнопку «Назад» устройства внутри Compose
-    BackHandler(
-        // your condition to enable handler
-        enabled = true
-    ) { onExit(-1) }
 
 // A surface container using the 'background' color from the theme
     Surface(
@@ -84,7 +78,7 @@ fun GreetingScreen(
                 Button(
                     modifier = Modifier
                         .padding(all = dimensionResource(id = R.dimen.padding_medium)),
-                    onClick = {},
+                    onClick = { onExit() },
                     shape = RoundedCornerShape(20.dp)
                 ) {
                     Text(

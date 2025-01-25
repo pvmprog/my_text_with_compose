@@ -55,6 +55,9 @@ android {
 
 dependencies {
 
+    //calculateWindowSizeClass
+    implementation("androidx.compose.material3:material3-window-size-class")
+
     implementation(libs.androidx.animation)
     // Hilt dependency for dependency injection
     implementation(libs.dagger.hilt.android)

@@ -30,7 +30,7 @@ class AppViewModel @Inject constructor(
         }
     }
 
-    fun updaterunUIDemo(newValue: Int) {
+    fun updateSelectedIndex(newValue: Int) {
         _appUiState.update {
             it.copy(
                 selectedIndex = newValue

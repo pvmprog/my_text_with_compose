@@ -1,8 +1,17 @@
 <resources>
     <string name="app_name">Text With Compose</string>
 
-    <string name="text_in_jetpack_compose">Text in jetpack Compose</string>
+    <string name="text_in_jetpack_compose">Text in Jetpack Compose</string>
     <string name="in_examples">In examples</string>
     <string name="let_s_begin">Let\'s begin</string>
+    <string name="examples_loaded">Examples loaded</string>
+    <string name="back_button">Back button</string>
+    <string name="simple_text">Simple Text</string>
+    <string name="zoom_in">zoom in</string>
+    <string name="zoom_out">zoom out</string>
+    <string name="next">next</string>
+    <string name="zoom_is_default">zoom is default</string>
+
+    <string name="day_of_month">There are %2$d days in %1$s</string>
 
 </resources>
