@@ -161,14 +161,41 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+                    val h = getScreenHeight()
+                    val w = getScreenWidth()
+                    val minSizeScreen = if (h > w) w
+                    else h
+                    val minSizeScreenDp = intToDp(minSizeScreen).toInt() - 16
+
                     val windowSize = calculateWindowSizeClass(this)
                     val isExpanded =  (windowSize.widthSizeClass == WindowWidthSizeClass.Expanded)
-                    MainScreen(isExpanded = isExpanded)
+                    MainScreen(
+                        isExpanded = isExpanded,
+                        minSizeScreenDp = minSizeScreenDp,
+                        modifier = Modifier.fillMaxSize()
+                    )
 
                 }
             }
         }
     }
+
+    private fun intToDp(size:Int): Float = Math.round(
+            size / TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP, 1f,
+                this.resources.displayMetrics
+            )
+        ).toFloat()
+
+
+
+
+    private fun getScreenWidth(): Int =
+        Resources.getSystem().displayMetrics.widthPixels
+
+    private fun getScreenHeight(): Int =
+        Resources.getSystem().displayMetrics.heightPixels
+
 
 
 }

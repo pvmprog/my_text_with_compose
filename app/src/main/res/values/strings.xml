@@ -13,5 +13,11 @@
     <string name="zoom_is_default">zoom is default</string>
 
     <string name="day_of_month">There are %2$d days in %1$s</string>
+    <string name="results_screen">Results screen</string>
+    <string name="source_code">Source code</string>
+    <string name="a_bit_of_theory">A bit of theory</string>
+    <string name="logo_app">logo app</string>
+    <string name="examples_jetpack_compose">Примеры текста в Jetpack Compose.</string>
+    <string name="recommended_links">Recommended Links</string>
 
 </resources>

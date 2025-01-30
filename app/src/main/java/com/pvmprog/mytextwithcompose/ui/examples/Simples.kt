@@ -68,12 +68,11 @@ fun StringResourceText() {
         id = R.dimen.padding_medium
     )
 
-    Column(){
-        Text(
-            text = text,
-            modifier = Modifier
-                .padding(padding)
-        )
+    Column(
+        modifier = Modifier
+            .padding(padding)
+    ){
+        Text(text = text)
 //позиционное форматирование
         Text(
             text = stringResource(R.string.day_of_month, "January", 31),
@@ -387,7 +386,7 @@ fun SimpleTextPreview() {
         Surface(
             color = MaterialTheme.colorScheme.background
         ) {
-            TextShadow()
+            StringResourceText()
         }
 
     }

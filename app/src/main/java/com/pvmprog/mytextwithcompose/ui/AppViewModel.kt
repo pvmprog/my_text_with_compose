@@ -38,5 +38,23 @@ class AppViewModel @Inject constructor(
         }
     }
 
+    fun updateCurrentBottomNavigation(newValue: Int) {
+        _appUiState.update {
+            if (newValue == 0){
+                it.copy(
+                    currentItemBottomNavigation = 1,
+                    selectedIndex = -1
+                )
+            } else {
+                it.copy(
+                    currentItemBottomNavigation = newValue,
+                )
+
+            }
+
+        }
+    }
+
+
 
 }

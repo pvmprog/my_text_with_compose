@@ -30,6 +30,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.pvmprog.mytextwithcompose.R
+import com.pvmprog.mytextwithcompose.ui.theme.Alice
+import com.pvmprog.mytextwithcompose.ui.theme.Cormorantinfant
 import com.pvmprog.mytextwithcompose.ui.theme.HighColorLight
 import com.pvmprog.mytextwithcompose.ui.theme.HighColorDark
 import com.pvmprog.mytextwithcompose.ui.theme.HighColorLight2
@@ -54,11 +56,9 @@ fun OutTextMessage(
 
     val colorText = MaterialTheme.colorScheme.onTertiaryContainer
 
-    val highLightedСolor = if (darkTheme) HighColorDark // colorResource(id = R.color.light_green_700)
-    else HighColorLight
+    val highLightedColor = MaterialTheme.colorScheme.outline
 
-    val highLightedСolor2 = if (darkTheme) HighColorDark2
-    else HighColorLight2
+    val highLightedColor2 = MaterialTheme.colorScheme.outlineVariant
 
     val messageArrayList = message.split("|")
 
@@ -70,12 +70,13 @@ fun OutTextMessage(
             else {
                 messageArrayList.forEachIndexed { index, s ->
                     if (index % 2 != 0) {
-                        val isColorTwo = s[0] == '!'
+                        val isColorTwo = (s[0] == '!')
                         withStyle(
                             style = SpanStyle(
-                                color = if (isColorTwo) highLightedСolor2
-                                else highLightedСolor,
-                                fontWeight = FontWeight.Bold,
+                                fontSize = (sizeFontText+2).sp,
+                                fontFamily = Alice,
+                                color = if (isColorTwo)  highLightedColor2
+                                else  highLightedColor,
                             )
                         ) {
                             if (isColorTwo) append(s.substring(1))
@@ -85,6 +86,8 @@ fun OutTextMessage(
                     } else {
                         withStyle(
                             style = SpanStyle(
+//                                fontSize = (sizeFontText+2).sp,
+//                                fontFamily = Cormorantinfant,
                                 color = when {
                                     isColorBackground -> Color.Unspecified
                                     else -> colorText
@@ -173,7 +176,7 @@ fun OutTextMessagePreview() {
                     """.trimIndent(),
                 sizeFontText = 18,
                 isNormalStyle = true,
-                isColorBackground = true,
+                isColorBackground = false,
                 isColorBorder = true,
                 isShapeLarge = false,
                 isTextCenter = false

@@ -62,7 +62,7 @@ fun TextWithLink(
         //Переход на новую строку с выравниванием по центру
         withStyle(
             style = ParagraphStyle(
-                textAlign = TextAlign.Left
+                textAlign = TextAlign.Center
             )
         ) {
             withStyle(
@@ -73,6 +73,15 @@ fun TextWithLink(
             ) {
                 append("$text ")
             }
+
+        }
+
+        //Переход на новую строку с выравниванием по центру
+        withStyle(
+            style = ParagraphStyle(
+                textAlign = TextAlign.Center
+            )
+        ) {
             withLink(
                 LinkAnnotation.Url(
                     url = url,
@@ -95,7 +104,9 @@ fun TextWithLink(
 
     Text(
         text = textAnnotation,
+        lineHeight = 32.sp,
         modifier = Modifier
+            .padding(top = dimensionResource(id = R.dimen.padding_small))
             .fillMaxWidth()
             .background(
                 color = colorBackground

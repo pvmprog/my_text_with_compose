@@ -3,13 +3,18 @@ package com.pvmprog.mytextwithcompose.ui.service
 import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.sp
+import com.pvmprog.mytextwithcompose.R
 import com.pvmprog.mytextwithcompose.ui.theme.MyTextWithComposeTheme
 
 @Composable
@@ -38,7 +43,7 @@ fun OutTextSomeMessage(
         )
     } else {
         Column(
-//            horizontalAlignment = Alignment.CenterHorizontally,
+            horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxWidth()
                 .background(
@@ -57,7 +62,7 @@ fun OutTextSomeMessage(
                     OutTextTitleMessage(
                         title = subStr,
                         indexItem = indexItem,
-                        sizeFontText = sizeFontText,
+                        sizeFontText = 22,
                         isNormalStyle = isNormalStyle,
                         onClick = onClick,
                         isAppendIcon = true
@@ -79,6 +84,9 @@ fun OutTextSomeMessage(
 
                 }
             }
+            Spacer(modifier = Modifier
+                .height(dimensionResource(id = R.dimen.padding_small))
+            )
 
         }
 
@@ -112,7 +120,7 @@ fun OutTextSomeMessagePreview() {
                     """.trimIndent(),
                 sizeFontText = 18,
                 isNormalStyle = true,
-                isColorBackground = true,
+                isColorBackground = false,
                 isColorBorder = true,
                 isShapeLarge = false,
                 isTextCenter = false

@@ -38,7 +38,7 @@ fun OutTextCode(
     highlight: List<HighlightCode> = listOf(),
     style: TextStyle = MaterialTheme.typography.labelSmall,
     fontSizeCode: TextUnit = 18.sp,
-    onClick: (String) -> Unit = {},
+    onClick: () -> Unit = {},
 ) {
     val color = Color.Cyan  //MaterialTheme.colorScheme.outline
     val color2 = colorResource(id = R.color.yellow700)
@@ -211,7 +211,7 @@ fun OutTextCode(
                 .fillMaxWidth()
                 .alpha(1.0f)
                 .clickable {
-                    onClick(message)
+                    onClick()
                 }
                 .drawBehind {
                     drawRoundRect(

@@ -2,17 +2,26 @@ package com.pvmprog.mytextwithcompose.ui.screens
 
 import android.content.res.Configuration
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.content.MediaType.Companion.Text
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pvmprog.mytextwithcompose.R
@@ -26,11 +35,37 @@ fun ResultScreen(
     item: ExampleCode = DataCodeUI.codeUI[0]
 ){
     val spacerModifier = Modifier
+        .padding(horizontal = dimensionResource(id = R.dimen.padding_small))
         .height(2.dp)
         .fillMaxWidth()
         .background(color = MaterialTheme.colorScheme.primary)
         .padding(dimensionResource(id = R.dimen.padding_medium))
 
+
+    Column(
+        modifier = Modifier
+            .background(MaterialTheme.colorScheme.secondaryContainer)
+            .fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(stringResource(R.string.results_screen))
+        Spacer(modifier = spacerModifier)
+        Box(
+            modifier = modifier
+                .padding(dimensionResource(id = R.dimen.padding_small))
+                .heightIn(min = 200.dp)
+                .background(color = MaterialTheme.colorScheme.background),
+            contentAlignment = Alignment.Center
+        ) {
+            Column(
+                modifier = Modifier
+                    .border(1.dp, MaterialTheme.colorScheme.onBackground)
+            ) {
+                item.lambdaFun()
+            }
+        }
+    }
+/*
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -50,7 +85,6 @@ fun ResultScreen(
 
                 item.lambdaFun()
 
-                /*
 
             when (index) {
                 0 -> SimpleText()
@@ -88,16 +122,16 @@ fun ResultScreen(
                             29 -> SimpleBackgroundAGSL(indexSelect = 3)
                             30 -> ShaderTextDemoAnimate()
                 }
-            */
 
                 Spacer(modifier = spacerModifier)
 
             }
 
         }
-
-
     }
+
+ */
+
 }
 
 @Preview("Light Theme", showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_NO)
@@ -105,8 +139,14 @@ fun ResultScreen(
 @Composable
 fun PreviewResultScreen() {
     MyTextWithComposeTheme {
-        ResultScreen(
-            item = DataCodeUI.codeUI[18]
-        )
+        Surface(
+            color = MaterialTheme.colorScheme.background
+        ) {
+            ResultScreen(
+                item = DataCodeUI.codeUI[2]
+            )
+
+        }
+
     }
 }

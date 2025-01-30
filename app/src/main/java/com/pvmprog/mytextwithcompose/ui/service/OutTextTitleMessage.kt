@@ -35,25 +35,25 @@ fun OutTextTitleMessage(
     val darkTheme: Boolean = isSystemInDarkTheme()
 
     val gradientColors = if (darkTheme) listOf(
-        colorResource(id = R.color.gradient0401),     //Color.Cyan
-        colorResource(id = R.color.gradient0402),      //LightBlue
-        colorResource(id = R.color.gradient0403),          //Purple
+        colorResource(id = R.color.gradient0401),
+        colorResource(id = R.color.gradient0402),
+        colorResource(id = R.color.gradient0403),
     ) else listOf(
-        colorResource(id = R.color.gradient0501),     //Color.Cyan
-        colorResource(id = R.color.gradient0502),      //LightBlue
-        colorResource(id = R.color.gradient0503),          //Purple
+        colorResource(id = R.color.gradient0501),
+        colorResource(id = R.color.gradient0502),
+        colorResource(id = R.color.gradient0503),
     )
 
     val brush = Brush.linearGradient(colors = gradientColors)
 
     Text(
         text = buildAnnotatedString {
-
+/*
             withStyle(
                 SpanStyle(
                     brush = brush,
                     fontWeight = FontWeight.Bold,
-                    alpha = .6f
+                    alpha = .9f
                 )
             ) {
                 if (indexItem>0) {
@@ -61,6 +61,8 @@ fun OutTextTitleMessage(
                     append("$indStr. ")
                 }
             }
+
+ */
 
             withStyle(
                 SpanStyle(
@@ -75,7 +77,7 @@ fun OutTextTitleMessage(
         else MaterialTheme.typography.bodySmall,
         fontSize = (sizeFontText+4).sp,
         modifier = Modifier
-            .padding(top = dimensionResource(id = R.dimen.padding_large))
+            .padding(top = dimensionResource(id = R.dimen.padding_small))
             .clickable { onClick(indexItem-1) },
         textAlign = TextAlign.Center
     )
@@ -88,7 +90,7 @@ fun OutTextTitleMessage(
 fun OutTextTitleMessagePreview() {
     MyTextWithComposeTheme {
         Surface(
-            color = MaterialTheme.colorScheme.background
+            color = MaterialTheme.colorScheme.tertiaryContainer
         ) {
             OutTextTitleMessage(
                 title = "Text in Jetpack Compose",
