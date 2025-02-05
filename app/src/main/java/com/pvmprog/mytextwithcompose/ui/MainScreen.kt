@@ -63,7 +63,9 @@ fun MainScreen(
             onNext = { selectedIndexExample:Int ->
                 viewModel.updateSelectedIndex(selectedIndexExample)
             },
-            modifier = modifier
-            )
+            modifier = modifier,
+            heightMinDp  = minSizeScreenDp
+
+        )
     }
 }

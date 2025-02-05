@@ -13,8 +13,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.sp
 import com.pvmprog.mytextwithcompose.R
+import com.pvmprog.mytextwithcompose.ui.screens.OutCardMessage
 import com.pvmprog.mytextwithcompose.ui.theme.MyTextWithComposeTheme
 
 @Composable
@@ -39,7 +39,6 @@ fun OutTextSomeMessage(
             isColorBorder = isColorBorder,
             isShapeLarge = isShapeLarge,
             isTextCenter = isTextCenter,
-            onClick = onClick,
         )
     } else {
         Column(
@@ -69,7 +68,7 @@ fun OutTextSomeMessage(
                     )
                 } else {
                     if (subStr.isNotBlank())
-                        OutTextMessage(
+                        OutCardMessage(
                             message = subStr,
                             sizeFontText = sizeFontText,
                             isNormalStyle = isNormalStyle,
@@ -78,7 +77,6 @@ fun OutTextSomeMessage(
                             isShapeLarge = isShapeLarge,
                             isTextCenter = isTextCenter,
                             indexItem = indexItem - 1,
-                            maxLines = 2,
                             onClick = onClick,
                         )
 

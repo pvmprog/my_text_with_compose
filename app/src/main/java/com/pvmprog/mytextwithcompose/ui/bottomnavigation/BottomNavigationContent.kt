@@ -23,6 +23,7 @@ fun BottomNavigationContent(
     indexExample: Int = 0,
     itemList: List<ExampleCode> = DataCodeUI.codeUI,
     onNext: (Int) -> Unit = {},
+    heightMinDp:Int = 200
 
     ) {
     Box(modifier = modifier) {
@@ -40,7 +41,8 @@ fun BottomNavigationContent(
                     isExpanded = isExpanded,
                     indexExample = indexExample,
                     itemList = itemList,
-                    onNext = onNext
+                    onNext = onNext,
+                    heightMinDp = heightMinDp
                 )
             }
             AnimatedVisibility(

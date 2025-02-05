@@ -1,5 +1,6 @@
 package com.pvmprog.mytextwithcompose
 
+import android.content.Context
 import android.content.res.Resources
 import android.os.Bundle
 import android.util.TypedValue
@@ -187,7 +188,13 @@ class MainActivity : ComponentActivity() {
             )
         ).toFloat()
 
+    fun Context.dpToPx(dp: Int): Int {
+        return (dp * resources.displayMetrics.density).toInt()
+    }
 
+    fun Context.pxToDp(px: Int): Int {
+        return (px / resources.displayMetrics.density).toInt()
+    }
 
 
     private fun getScreenWidth(): Int =

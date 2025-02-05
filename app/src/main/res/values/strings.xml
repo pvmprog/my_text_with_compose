@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Text With Compose</string>
-
-    <string name="text_in_jetpack_compose">Text in Jetpack Compose</string>
+    <string name="hello_world">Hello, World!</string>
+    <string name="text_compose">Text in Jetpack Compose</string>
     <string name="in_examples">In examples</string>
     <string name="let_s_begin">Let\'s begin</string>
     <string name="examples_loaded">Examples loaded</string>

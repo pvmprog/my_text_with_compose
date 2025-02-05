@@ -25,7 +25,9 @@ fun MainNavigationScreen(
     itemList: List<ExampleCode> = DataCodeUI.codeUI,
     onNext: (Int) -> Unit = {},
     modifier: Modifier = Modifier,
-    ){
+    heightMinDp:Int = 200
+
+){
    if (isExpanded){
        LeftNavigationContent(
            selectedDestination = selectedDestination,
@@ -35,7 +37,9 @@ fun MainNavigationScreen(
            indexExample = indexExample,
            itemList = itemList,
            onNext = onNext,
-           modifier= modifier
+           modifier= modifier,
+           heightMinDp = heightMinDp - 50
+
        )
    } else{
        BottomNavigationContent(
@@ -46,7 +50,9 @@ fun MainNavigationScreen(
            indexExample = indexExample,
            itemList = itemList,
            onNext = onNext,
-           modifier= modifier
+           modifier= modifier,
+           heightMinDp = heightMinDp
+
            )
    }
 

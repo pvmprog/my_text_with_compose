@@ -5,16 +5,19 @@ import androidx.compose.ui.graphics.Color
 import com.pvmprog.mytextwithcompose.data.model.ExampleCode
 import com.pvmprog.mytextwithcompose.data.model.HighlightCode
 import com.pvmprog.mytextwithcompose.data.model.TextClickLink
-import com.pvmprog.mytextwithcompose.ui.examples.AlignText
+import com.pvmprog.mytextwithcompose.ui.examples.SimpleAlign
 import com.pvmprog.mytextwithcompose.ui.examples.AnnotatedHtmlString
+import com.pvmprog.mytextwithcompose.ui.examples.ExampleFontSize
 import com.pvmprog.mytextwithcompose.ui.examples.TextFontWeight
 import com.pvmprog.mytextwithcompose.ui.examples.ItalicText
-import com.pvmprog.mytextwithcompose.ui.examples.LongText
+import com.pvmprog.mytextwithcompose.ui.examples.MessageGradient
+import com.pvmprog.mytextwithcompose.ui.examples.MessageShodow
+import com.pvmprog.mytextwithcompose.ui.examples.SimpleLimit
 import com.pvmprog.mytextwithcompose.ui.examples.MultipleStylesInText
-import com.pvmprog.mytextwithcompose.ui.examples.SimplePaddingText
-import com.pvmprog.mytextwithcompose.ui.examples.SimpleText
-import com.pvmprog.mytextwithcompose.ui.examples.StringResourceText
-import com.pvmprog.mytextwithcompose.ui.examples.TextAlignJustify
+import com.pvmprog.mytextwithcompose.ui.examples.SimpleWithPadding
+import com.pvmprog.mytextwithcompose.ui.examples.Simple
+import com.pvmprog.mytextwithcompose.ui.examples.SimpleStringResource
+import com.pvmprog.mytextwithcompose.ui.examples.SimpleAlignJustify
 import com.pvmprog.mytextwithcompose.ui.examples.TextAlignedHeight
 import com.pvmprog.mytextwithcompose.ui.examples.TextAnnotatedStringClickLink
 import com.pvmprog.mytextwithcompose.ui.examples.TextBuildAnnotatedString
@@ -23,10 +26,138 @@ import com.pvmprog.mytextwithcompose.ui.examples.TextBuildAnnotatedString3
 import com.pvmprog.mytextwithcompose.ui.examples.TextColorAny
 import com.pvmprog.mytextwithcompose.ui.examples.TextFontFamalyAlternate
 import com.pvmprog.mytextwithcompose.ui.examples.TextFontFamily
-import com.pvmprog.mytextwithcompose.ui.examples.TextFontSize
-import com.pvmprog.mytextwithcompose.ui.examples.TextShadow
+import com.pvmprog.mytextwithcompose.ui.examples.TypographyStyles
 
 object DataCodeUI {
+    val highCodeList = listOf(
+        HighlightCode("@Composable", Color(0xFFb2c231)),
+        HighlightCode("class", Color(0xFFd27749)),
+        HighlightCode("data", Color(0xFFd27749)),
+        HighlightCode("val", Color(0xFFd27749)),
+        HighlightCode("false", Color(0xFFd27749)),
+        HighlightCode("true", Color(0xFFd27749)),
+        HighlightCode(".repeat", Color(0xFFd27749)),
+        HighlightCode("when", Color(0xFFB84E18)),
+        HighlightCode("else", Color(0xFFB84E18)),
+        HighlightCode("if ", Color(0xFFB84E18)),
+        HighlightCode("items", Color(0xFFF5996B)),
+        HighlightCode(".padding", Color(0xFFF5996B)),
+        HighlightCode(".fillMaxWidth", Color(0xFFF5996B)),
+        HighlightCode(".clickable", Color(0xFFF5996B)),
+        HighlightCode(".clip", Color(0xFFF5996B)),
+        HighlightCode(".background", Color(0xFFF5996B)),
+        HighlightCode(".border", Color(0xFFF5996B)),
+        HighlightCode("withStyle", Color(0xFFF5996B)),
+
+        HighlightCode("LazyColumn", Color(0xFF0D8113)),
+        HighlightCode("Text ", Color(0xFF0D8113)),
+        HighlightCode("Column", Color(0xFF0D8113)),
+        HighlightCode("Row", Color(0xFF0D8113)),
+        HighlightCode("Box", Color(0xFF0D8113)),
+        HighlightCode(".typography", Color(0xFF0D8113)),
+        HighlightCode(".current", Color(0xFF0D8113)),
+        HighlightCode(".colorScheme", Color(0xFF0D8113)),
+        HighlightCode("isSystemInDarkTheme", Color(0xFF0D8113)),
+        HighlightCode(".colorScheme", Color(0xFF0D8113)),
+        HighlightCode("stringResource", Color(0xFF0D8113)),
+        HighlightCode("dimensionResource", Color(0xFF0D8113)),
+        HighlightCode("colorResource", Color(0xFF0D8113)),
+        HighlightCode("Surface", Color(0xFF0D8113)),
+        HighlightCode("text =", Color(0xFF00a9ff)),
+        HighlightCode("fontSize =", Color(0xFF00a9ff)),
+        HighlightCode("fontWeight =", Color(0xFF00a9ff)),
+        HighlightCode("style = ", Color(0xFF00a9ff)),
+        HighlightCode("modifier =", Color(0xFF00a9ff)),
+        HighlightCode("id ", Color(0xFF00a9ff)),
+        HighlightCode("bottom =", Color(0xFF2DB8FF)),
+        HighlightCode("top =", Color(0xFF2DB8FF)),
+        HighlightCode("horizontalAlignment =", Color(0xFF2DB8FF)),
+        HighlightCode("platformStyle =", Color(0xFF2DB8FF)),
+        HighlightCode("includeFontPadding =", Color(0xFF2DB8FF)),
+        HighlightCode("lineHeight =", Color(0xFF2DB8FF)),
+        HighlightCode("alignment =", Color(0xFF2DB8FF)),
+        HighlightCode("trim =", Color(0xFF2DB8FF)),
+        HighlightCode("shadow =", Color(0xFF2DB8FF)),
+        HighlightCode("color =", Color(0xFF2DB8FF)),
+        HighlightCode("brushColors =", Color(0xFF2DB8FF)),
+        HighlightCode("startX =", Color(0xFF2DB8FF)),
+        HighlightCode("endX =", Color(0xFF2DB8FF)),
+        HighlightCode("StartDp =", Color(0xFF2DB8FF)),
+        HighlightCode("endDp =", Color(0xFF2DB8FF)),
+        HighlightCode("tileMode =", Color(0xFF2DB8FF)),
+        HighlightCode("offset =", Color(0xFF2DB8FF)),
+        HighlightCode("blurRadius =", Color(0xFF2DB8FF)),
+        HighlightCode("overflow =", Color(0xFF2DB8FF)),
+        HighlightCode("maxLines =", Color(0xFF2DB8FF)),
+        HighlightCode("verticalArrangement =", Color(0xFF2DB8FF)),
+        HighlightCode("textAlign =", Color(0xFF2DB8FF)),
+        HighlightCode("fontFamily =", Color(0xFF2DB8FF)),
+        HighlightCode("0xff000000", Color(0xFF2DB8FF)),
+        HighlightCode("0xffffffff", Color(0xFF2DB8FF)),
+        HighlightCode("0xff22200d", Color(0xFF2DB8FF)),
+        HighlightCode("0xffffff00", Color(0xFF2DB8FF)),
+        HighlightCode("0xFF993399", Color(0xFF2DB8FF)),
+        HighlightCode(".value", Color(0xFFe48def)),
+        HighlightCode(".resources.displayMetrics.density", Color(0xFFe48def)),
+        HighlightCode(".Unspecified", Color(0xFFe48def)),
+        HighlightCode(".sp", Color(0xFFe48def)),
+        HighlightCode(".dp", Color(0xFFe48def)),
+        HighlightCode(".em", Color(0xFFe48def)),
+        HighlightCode(".hello_world", Color(0xFFe48def)),
+        HighlightCode(".padding_medium", Color(0xFFe48def)),
+        HighlightCode(".padding_small", Color(0xFFe48def)),
+        HighlightCode(".padding_large", Color(0xFFe48def)),
+        HighlightCode(".titleLarge", Color(0xFFe48def)),
+        HighlightCode(".titleMedium", Color(0xFFe48def)),
+        HighlightCode(".titleSmall", Color(0xFFe48def)),
+        HighlightCode(".Italic", Color(0xFFe48def)),
+        HighlightCode(".Normal", Color(0xFFe48def)),
+        HighlightCode(".Bold", Color(0xFFe48def)),
+        HighlightCode(".ExtraBold", Color(0xFFe48def)),
+        HighlightCode(".Light", Color(0xFFe48def)),
+        HighlightCode(".W100", Color(0xFFe48def)),
+        HighlightCode(".W300", Color(0xFFe48def)),
+        HighlightCode(".W900", Color(0xFFe48def)),
+        HighlightCode(".Center", Color(0xFFe48def)),
+        HighlightCode(".CenterHorizontally", Color(0xFFe48def)),
+        HighlightCode(".Left", Color(0xFFe48def)),
+        HighlightCode(".Right", Color(0xFFe48def)),
+        HighlightCode(".bodyMedium", Color(0xFFe48def)),
+        HighlightCode(".bodySmall", Color(0xFFe48def)),
+        HighlightCode(".bodyLarge", Color(0xFFe48def)),
+        HighlightCode(".Justify", Color(0xFFe48def)),
+        HighlightCode("LocalTextStyle", Color(0xFFe48def)),
+        HighlightCode(".LastLineBottom", Color(0xFFe48def)),
+        HighlightCode(".Ellipsis", Color(0xFFe48def)),
+        HighlightCode(".Start", Color(0xFFe48def)),
+        HighlightCode(".End", Color(0xFFe48def)),
+        HighlightCode(".Bottom", Color(0xFFe48def)),
+        HighlightCode(".SpaceAround", Color(0xFFe48def)),
+        HighlightCode(".SpaceBetween", Color(0xFFe48def)),
+        HighlightCode(".SpaceEvenly", Color(0xFFe48def)),
+        HighlightCode(".size", Color(0xFFe48def)),
+        HighlightCode(".Clamp", Color(0xFFe48def)),
+        HighlightCode("LocalTextStyle", Color(0xFFe48def)),
+        HighlightCode("LocalContext", Color(0xFFe48def)),
+        HighlightCode(".Cyan", Color(0xFFe48def)),
+        HighlightCode(".Yellow", Color(0xFFe48def)),
+        HighlightCode(".Green", Color(0xFFe48def)),
+        HighlightCode(".Blue", Color(0xFFe48def)),
+        HighlightCode(".Black", Color(0xFFe48def)),
+        HighlightCode(".Red", Color(0xFFe48def)),
+        HighlightCode(".red700", Color(0xFFe48def)),
+        HighlightCode("Alice", Color(0xFFe48def)),
+        HighlightCode(".secondary", Color(0xFFe48def)),
+        HighlightCode(".onSecondary", Color(0xFFe48def)),
+        HighlightCode(".secondaryContainer", Color(0xFFe48def)),
+        HighlightCode(".onSecondaryContainer", Color(0xFFe48def)),
+        HighlightCode(".tertiaryContainer", Color(0xFFe48def)),
+        HighlightCode(".onTertiaryContainer", Color(0xFFe48def)),
+        HighlightCode(".text_compose", Color(0xFFFFEB3B)),
+        HighlightCode(".spacedBy", Color(0xFFFFFFFF)),
+        HighlightCode("//", Color(0xFF3CEE0A)),
+    )
+
     val codeUI: List<ExampleCode> = listOf(
         ExampleCode(
             id = 0,
@@ -73,21 +204,27 @@ object DataCodeUI {
                 
             """.trimIndent(),
             links = listOf(
-              TextClickLink(
-                  text = "Больше информации на",
-                  textUrl = "\uD83D\uDCD6 Developers", //📗 📖
-                  url = "https://developer.android.com/develop/ui/compose/text?hl=ru"
-              ),
+                TextClickLink(
+                    text = "Больше информации на",
+                    textUrl = "\uD83D\uDCD6 Developers", //📗 📖
+                    url = "https://developer.android.com/develop/ui/compose/text?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Шкала стилей",
+                    textUrl = "\uD83D\uDCD6 Type scale",
+                    url = "https://m3.material.io/styles/typography/type-scale-tokens"
+                ),
+
+                ),
+            highlightCode = highCodeList +listOf(
+                HighlightCode("Simple", Color(0xFFffc530)),
+                HighlightCode("Text", Color(0xFF3CEE0A)),
             ),
-            highlightCode = listOf(
-                HighlightCode("Text(", Color(0xFF3CEE0A)),
-                HighlightCode("@Composable", Color(0xFF3CEE0A)),
-            ),
-            lambdaFun =  @Composable { SimpleText() },
+            lambdaFun =  @Composable { Simple() },
             code ="""
                 @Composable
                 fun Simple() {
-                    Text("Text in jetpack Compose")
+                    Text("Hello, World!")
                 }
             """.trimIndent()
         ),
@@ -109,7 +246,7 @@ fun Modifier.|padding|(
     |horizontal|: Dp = 0.dp, 
     |vertical|: Dp = 0.dp
 ): Modifier
-3)|!от всех четырех сторон!:
+3)|!от всех четырех сторон|:
 fun Modifier.|padding|(
     |all|: Dp
 ): Modifier
@@ -152,21 +289,22 @@ fun Modifier.|padding|(
                     url = "https://developer.android.com/develop/ui/compose/modifiers?hl=ru"
                 ),
             ),
-            highlightCode = listOf(
-                HighlightCode("Text(", Color(0xFF3CEE0A)),
-                HighlightCode("padding", Color(0xFF3CEE0A)),
-                HighlightCode("@Composable", Color(0xFF3CEE0A)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
+            highlightCode = highCodeList + listOf(
+                HighlightCode("SimpleWithPadding", Color(0xFFffc530)),
+                HighlightCode("16", Color(0xFF2DB8FF)),
+                HighlightCode(".padding ", Color(0xFF3CEE0A)),
             ),
-            lambdaFun = { SimplePaddingText() },
+            lambdaFun = { SimpleWithPadding() },
 
             code ="""
 @Composable
-fun SimplePaddingText () {
-    Text(
-        text = "Text in jetpack Compose",
+fun SimpleWithPadding() {
+    Text (
+        text = "Hello, World!",
         modifier = Modifier
-            .padding(16.dp) //одинаковый отступ со всех сторон
+//одинаковый отступ со всех сторон        
+            .padding (16.dp)                   
+
     )
 }
             """.trimIndent()
@@ -197,38 +335,42 @@ fun SimplePaddingText () {
                     url = "https://developer.android.com/develop/ui/compose/resources?hl=ru#strings"
                 ),
             ),
-            highlightCode = listOf(
-                HighlightCode("Text(", Color(0xFF3CEE0A)),
-                HighlightCode("val", Color(0xFFFFEB3B)),
+            highlightCode = highCodeList + listOf(
+                HighlightCode("SimpleStringResource", Color(0xFFffc530)),
+                HighlightCode("31", Color(0xFF2DB8FF)),
+                HighlightCode(".day_of_month", Color(0xFFe48def)),
+                HighlightCode("January", Color(0xFFFFEB3B)),
                 HighlightCode("stringResource", Color(0xFF3CEE0A)),
                 HighlightCode("dimensionResource", Color(0xFF3CEE0A)),
-                HighlightCode("R.string", Color(0xFF00BCD4)),
-                HighlightCode("R.dimen", Color(0xFF00BCD4)),
-                HighlightCode("@Composable", Color(0xFF3CEE0A)),
                 HighlightCode("//", Color(0xFF3CEE0A)),
             ),
-            lambdaFun = { StringResourceText() },
+            lambdaFun = { SimpleStringResource() },
             code ="""
 @Composable
-fun StringResourceText () {
-    val text = stringResource(
-        id = R.string.text_in_jetpack_compose
+fun SimpleStringResource() {
+    val text1 = stringResource(
+        id = R.string.hello_world
+    )
+
+//позиционное форматирование
+    val text2 = stringResource(
+        id = R.string.day_of_month, "January", 31
     )
 
     val padding = dimensionResource(
         id = R.dimen.padding_medium
     )
 
-    Column(){
-        Text(
-            text = text,
+    Column(
+        modifier = Modifier
+            .padding (padding)
+    ){
+        Text (text = text1)
+        Text (
+            text = text2,
             modifier = Modifier
-                .padding(padding)
-        )
-        
-//позиционное форматирование
-        Text(
-            text = stringResource(R.string.day_of_month, "January", 31)
+                .padding (bottom = padding)
+
         )
     }
 }
@@ -245,6 +387,7 @@ fun StringResourceText () {
  2)|!em| - относительный размер шрифта (например, 18.em).
   
 Значение |!TextUnit.Unspecified| указывает, что высота шрифта наследуется от настроек родительного компонента.
+                
                 
 Рекомендации при установке размера текста:
  |Заголовки страниц|(|!22|sp)
@@ -270,22 +413,17 @@ fun StringResourceText () {
             ),
 
             nameFun = "",
-            highlightCode = listOf(
-                HighlightCode(".sp", Color(0xFFFFEB3B)),
-                HighlightCode(".em", Color(0xFFFFEB3B)),
+            highlightCode = highCodeList + listOf(
+                HighlightCode("ExampleFontSize", Color(0xFFffc530)),
                 HighlightCode("fontSize", Color(0xFF3CEE0A)),
-                HighlightCode("TextStyle", Color(0xFF00BCD4)),
-                HighlightCode("MaterialTheme.typography", Color(0xFF00BCD4)),
-                HighlightCode("Text(", Color(0xFF3CEE0A)),
-                HighlightCode("@Composable", Color(0xFF3CEE0A)),
                 HighlightCode("//", Color(0xFF3CEE0A)),
             ),
-            lambdaFun = { TextFontSize() },
+            lambdaFun = { ExampleFontSize() },
             code = """
 @Composable
-fun TextFontSize() {
+fun ExampleFontSize() {
     val text = stringResource(
-        id = R.string.text_in_jetpack_compose
+        id = R.string.hello_world
     )
 
     val padding = dimensionResource(
@@ -294,41 +432,29 @@ fun TextFontSize() {
 
     Column(
         modifier = Modifier
-            .padding(padding)
-            .fillMaxWidth(),
+            .padding (padding)
+            .fillMaxWidth (),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(
+        Text (
             text = text + "(default)",
             fontSize = TextUnit.Unspecified
         )
-        Text(
+        Text (
             text = text + "(20.sp)",
             fontSize = 20.sp
         )
-        Text(
+        Text (
             text = text + "(3.em)",
             fontSize = 3.em
         )
-        Text(
-            text = text,
+        Text (
+            text = text + "(15.sp)",
             style = TextStyle(
                 fontSize = 15.sp,
             )
         )
 
-        Text(
-            text = text,
-            style = MaterialTheme.typography.titleLarge
-        )
-        Text(
-            text = text,
-            style = MaterialTheme.typography.titleMedium
-        )
-        Text(
-            text = text,
-            style = MaterialTheme.typography.titleSmall
-        )
 
     }
 
@@ -336,10 +462,158 @@ fun TextFontSize() {
             """.trimIndent()
         ),
 
-
         ExampleCode(
             id = 4,
-            title = "Цвет шрифта и фона",
+            title = "Cтили типографики Material 3",
+            comment = """
+Набор стилей |Typography| можно использовать и для определения размера шрифта текста. 
+
+|Typography|(
+
+|!//Отображаемый текст|
+    |displayLarge|: TextStyle,   
+    |displayMedium|: TextStyle, 
+    |displaySmall|: TextStyle,  
+
+|!//Новости одной строкой 
+Предназначен для короткого, важного текста или цифр.
+Для headline можно выбрать выразительный, нетрадиционный шрифт, например рукописный,который помогают привлечь внимание.|
+    |headlineLarge|: TextStyle,  
+    |headlineMedium|: TextStyle, 
+    |headlineSmall|: TextStyle,
+
+|!//Заголовок 
+Используется для текста со средним акцентом, короткими по длине. 
+Шрифты с засечками или без засечек хорошо подходят для заголовкой.|
+    |titleLarge|: TextStyle,     
+    |titleMedium|: TextStyle,
+    |titleSmall|: TextStyle,
+    
+|!//Основной текст 
+Обычно используется для длинного письма.| 
+    bodyLarge: TextStyle,      
+    bodyMedium: TextStyle,
+    bodySmall: TextStyle,
+  
+|!//Метка 
+Это призыв к действию, используемый в различных типах кнопок, а также во вкладках, диалоговых окнах и карточках. 
+Текст кнопки, как правило, без засечек, заглавными буквами.|
+    |labelLarge|: TextStyle,   
+    |labelMedium|: TextStyle,
+    |labelSmall|: TextStyle    
+    
+  )
+  
+ |displayLarge| - самый большой отображаемый текст. 
+ |labelSmall| - один из самых маленьких размеров шрифта. 
+ 
+ Пример использования:
+        Text(
+            text = "Hello, World!",
+            style = MaterialTheme.typography.|titleLarge|
+        )
+
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Типографика помогает сделать текст разборчивым и красивым.",
+                    textUrl = "\uD83D\uDCD6 MaterialTheme.typography",
+                    url = "https://m3.material.io/styles/typography/overview"
+                ),
+                TextClickLink(
+                    text = "Шкала стилей",
+                    textUrl = "\uD83D\uDCD6 Type scale",
+                    url = "https://m3.material.io/styles/typography/type-scale-tokens"
+                ),
+                TextClickLink(
+                    text = "Jetpack Compose предлагает реализацию",
+                    textUrl = "\uD83D\uDCD6 Material Design 3 в Compose",
+                    url = "https://developer.android.com/develop/ui/compose/designsystems/material3?hl=ru"
+                ),
+            ),
+
+            nameFun = "",
+            highlightCode = highCodeList + listOf(
+                HighlightCode("TypographyStyles", Color(0xFFffc530)),
+                HighlightCode(".displayLarge", Color(0xFF3CEE0A)),
+                HighlightCode(".displayMedium", Color(0xFF3CEE0A)),
+                HighlightCode(".displaySmall", Color(0xFF3CEE0A)),
+                HighlightCode(".headlineLarge", Color(0xFF3CEE0A)),
+                HighlightCode(".headlineMedium", Color(0xFF3CEE0A)),
+                HighlightCode(".headlineSmall", Color(0xFF3CEE0A)),
+                HighlightCode(".titleLarge", Color(0xFF3CEE0A)),
+                HighlightCode(".titleMedium", Color(0xFF3CEE0A)),
+                HighlightCode(".titleSmall", Color(0xFF3CEE0A)),
+                HighlightCode(".bodyLarge", Color(0xFF3CEE0A)),
+                HighlightCode(".bodyMedium", Color(0xFF3CEE0A)),
+                HighlightCode(".bodySmall", Color(0xFF3CEE0A)),
+                HighlightCode(".labelLarge", Color(0xFF3CEE0A)),
+                HighlightCode(".labelMedium", Color(0xFF3CEE0A)),
+                HighlightCode(".labelSmall", Color(0xFF3CEE0A)),
+                HighlightCode("16", Color(0xFF2DB8FF)),
+                HighlightCode(".name", Color(0xFFe48def)),
+                HighlightCode(".style", Color(0xFFe48def)),
+                HighlightCode("//", Color(0xFF3CEE0A)),
+            ),
+            lambdaFun = { TypographyStyles() },
+            code = """
+data class TypographyStyle(
+    val name: String,
+    val style:TextStyle
+)
+
+@Composable
+fun TypographyStyles() {
+    val listStyle = listOf(
+        TypographyStyle("displayLarge", MaterialTheme.typography.displayLarge),
+        TypographyStyle("displayMedium", MaterialTheme.typography.displayMedium),
+        TypographyStyle("displaySmall", MaterialTheme.typography.displaySmall),
+        TypographyStyle("headlineLarge", MaterialTheme.typography.headlineLarge),
+        TypographyStyle("headlineMedium", MaterialTheme.typography.headlineMedium),
+        TypographyStyle("headlineSmall", MaterialTheme.typography.headlineSmall),
+        TypographyStyle("titleLarge", MaterialTheme.typography.titleLarge),
+        TypographyStyle("titleMedium", MaterialTheme.typography.titleMedium),
+        TypographyStyle("titleSmall", MaterialTheme.typography.titleSmall),
+        TypographyStyle("bodyLarge", MaterialTheme.typography.bodyLarge),
+        TypographyStyle("bodyMedium", MaterialTheme.typography.bodyMedium),
+        TypographyStyle("bodySmall", MaterialTheme.typography.bodySmall),
+        TypographyStyle("labelLarge", MaterialTheme.typography.labelLarge),
+        TypographyStyle("labelMedium", MaterialTheme.typography.labelMedium),
+        TypographyStyle("labelSmall", MaterialTheme.typography.labelSmall),
+    )
+
+    LazyColumn(
+        modifier = Modifier
+            .padding(16.dp)
+            .fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        items(listStyle) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                Text (
+                    text = it.name,
+                    style = it.style
+                )
+                Text (
+                    text = "(${'$'}{it.style.fontSize})",
+                )
+            }
+        }
+
+    }
+
+}
+            """.trimIndent()
+        ),
+
+        ExampleCode(
+            id = 5,
+            title = "Цвет,контастность",
             comment = """
 За определение цвета шрифта отвечает параметр |color|.
 
@@ -350,6 +624,16 @@ fun TextFontSize() {
 Кроме того, если цвет не установлен и стиль не имеет цвета, будет использоваться |!LocalContentColor| с альфа-каналом |!LocalContentAlpha|. Это позволяет этому тексту или элементу, содержащему этот текст, адаптироваться |!к различным цветам фона| и при этом сохранять |!контраст| и |!доступность|.
                 
 Лучше использовать цвета |MaterialTheme|. Получить доступ к цветам можно через |!MaterialTheme.colorScheme|
+
+При выборе цветов необходимо учитывать |контастность| цвета текста и цвета фона.
+
+Контрастность выражается во взаимодействии предельной насыщенности чистых цветов. 
+
+Как белый и чёрный являют самый сильный контраст светлого и тёмного, так и первичные цвета, жёлтый, синий и красный, наделены свойством наиболее сильного цветового контраста, создающего впечатление простоты, силы и решительности. 
+
+Интенсивность цветового контраста ослабевает от первичных — к цветам третьего порядка.
+
+(из книги Иттена).
                 
             """.trimIndent(),
             links = listOf(
@@ -364,52 +648,65 @@ fun TextFontSize() {
                     url = "https://developer.android.com/develop/ui/compose/designsystems/material3?hl=ru"
                 ),
                 TextClickLink(
-                    text = "Визуализация динамического цвета в приложении",
+                    text = "Визуализация динамического цвета в приложении ",
                     textUrl = "\uD83D\uDCD6 Developers.Codelabs",
                     url = "https://codelabs.developers.google.com/visualize-dynamic-color#0"
                 ),
+                TextClickLink(
+                    text = "Проверка контрастности цветов ",
+                    textUrl = "\uD83D\uDCD6 ImageColorPicker.com",
+                    url = "https://imagecolorpicker.com/color-contrast-checker/000000-ef1515"
+                ),
+                TextClickLink(
+                    text = "Цветная палитра ",
+                    textUrl = "\uD83D\uDCD6 ImageColorPicker.com",
+                    url = "https://imagecolorpicker.com/color-code/22200d"
+                ),
+                TextClickLink(
+                    text = "Теория цвета, контраст ",
+                    textUrl = "\uD83D\uDCD6 Datasakura. Хабр ",
+                    url = "https://habr.com/ru/articles/494750/"
+                ),
             ),
 
-            highlightCode = listOf(
-                HighlightCode("@Composable", Color(0xFF3CEE0A)),
-                HighlightCode("Text(", Color(0xFF3CEE0A)),
-                HighlightCode("color ", Color(0xFF00BCD4)),
-                HighlightCode("background(", Color(0xFF00BCD4)),
-                HighlightCode("MaterialTheme.colorScheme", Color(0xFFFFEB3B)),
-                HighlightCode("TextStyle", Color(0xFF3CEE0A)),
+            highlightCode = highCodeList + listOf(
+                HighlightCode("TextColorAny", Color(0xFFffc530)),
+                HighlightCode("color = ", Color(0xFF3CEE0A)),
                 HighlightCode("//", Color(0xFF3CEE0A)),
             ),
             lambdaFun = { TextColorAny() },
             code ="""   
+/*
+Примечание.
+В примере контрастность определена относительно темной (darkTheme) темы.
+*/
 @Composable
 fun TextColorAny() {
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .padding(8.dp)
             .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.background),
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        val text = "Text in jetpack Compose"
-        val modifier = Modifier.padding(16.dp)
 
-        Text(
-            text = text,
-            fontSize = 20.sp,
+        Text (
+            text = "Контраст:17.08 (Отличный)",
+        )
+
+        Text (
+            text = "Контраст:5.44 (Хороший)",
             color = Color.Red,
-            modifier = modifier,
         )
 
-        Text(
-            text = text,
-            fontSize = 20.sp,
+        Text (
+            text = "Контраст:4.16 (Плохой)",
             color = colorResource(id = R.color.red700),
-            modifier = modifier,
         )
 
-        Text(
-            text = text,
-            fontSize = 20.sp,
+        Text (
+            text = "Контраст:2.14 (Плохой)",
 //Из целочисленных значений компонентов SRGB. Альфа необязательна
             color = Color(
                 red = 0x44,   //between 0 and 255
@@ -417,42 +714,69 @@ fun TextColorAny() {
                 blue = 0x88,  //between 0 and 255
                 alpha = 0xFF
             ),//between 0 and 255
-            modifier = modifier,
         )
 
-        Text(
-            text = text,
-            fontSize = 20.sp,
+        Text (
+            text = "Контраст:2.67 (Плохой)",
 //32-bit ARGB color
             color = Color(0xFF993399),
-            modifier = modifier,
         )
 
 //Установка цвета с использованием TextStyle
-        Text(
-            text = text,
-            modifier = modifier,
+        Text (
+            text = "Контраст:12.44 (Отличный)",
             style = TextStyle(
-                fontSize = 20.sp,
                 color = Color.Green
             )
         )
 
-        Text(
-            text = text,
-            modifier = modifier,
+        Text (
+            text = "Контраст:8.59 (Хороший)",
             style = TextStyle(
-                fontSize = 20.sp,
                 color = Color.Yellow,
                 background = Color.Blue
             )
         )
 
-        Text(
-            text = text,
-            fontSize = 20.sp,
-            color = MaterialTheme.colorScheme.onBackground,
-            modifier = modifier,
+        Text (
+            text = "Контраст:16.40 (Отличный)",
+            modifier = Modifier
+                .background(Color(0xff22200d))
+                .padding(8.dp),
+            color = Color(0xffffff00),
+        )
+
+
+
+        Text (
+            text = "Контраст:7.41 (Хороший)",
+            modifier = Modifier
+                .background(MaterialTheme.colorScheme.secondary),
+            color = MaterialTheme.colorScheme.onSecondary,
+        )
+
+        Text (
+            text = "Контраст:7.55 (Хороший)",
+            modifier = Modifier
+                .background(MaterialTheme.colorScheme.secondaryContainer)
+                .padding(8.dp),
+            color = MaterialTheme.colorScheme.onSecondaryContainer,
+        )
+
+        Text (
+            text = "Контраст:9.31 (Хороший)",
+            modifier = Modifier
+                .background(MaterialTheme.colorScheme.tertiaryContainer)
+                .padding(8.dp),
+            color = MaterialTheme.colorScheme.onTertiaryContainer,
+        )
+
+        Text (
+            text = "Контраст:21.00 (Отличный)",
+            modifier = Modifier
+                .background(Color(0xff000000))
+                .padding(8.dp),
+            color = Color(0xffffffff),
         )
 
     }
@@ -460,6 +784,115 @@ fun TextColorAny() {
             """.trimIndent()
         ),
 
+        ExampleCode(
+            id = 5,
+            title = "Градиент цвета",
+            comment = """
+Кисть(Brush) в Compose описывает, как что-то рисуется на экране: 
+ она определяет цвет(а), которые рисуются в области рисования (круг, прямоугольник, путь). 
+
+Кисть применяется к нескольким различным типам рисования: 
+   |фону|, |тексту| и |холсту|.                        
+ 
+Есть несколько встроенных кистей, которые полезны для рисования:
+ 
+|horizontalGradient|(colorStops)
+  или
+|horizontalGradient|(colors)
+
+|linearGradient|(colorStops)
+  или
+|linearGradient|(colors)
+
+|verticalGradient|(colorStops)
+  или
+|verticalGradient|(colors)
+
+|sweepGradient|(colorStops)
+  или
+|sweepGradient|(colors)
+
+|radialGradient|(colorStops)
+  или
+|radialGradient|(colors)
+
+  или обычная кисть |SolidColor|.
+
+Кисти можно использовать с вызовами отрисовки 
+ |Modifier.background|() 
+ |TextStyle| 
+ |DrawScope| 
+  для применения стиля рисования к рисуемому содержимому.
+
+ 
+ Можно настроить |распределение цветов| с помощью |colorStops|.
+
+ Можно настроить |повторение фрагмента| рисунка с помощью |TileMode|.
+
+ Можно изменить размер кисти.
+
+ Можно использовать изображение в качестве кисти.
+
+ Можно использовать пользовательскую кисть |AGSL| RuntimeShader
+
+В нашем примере будем использовать |horizontalGradient|
+
+|!fun horizontalGradient(
+    colors: List<Color>,
+    startX: Float = 0.0f,
+    endX: Float = Float.POSITIVE_INFINITY,
+    tileMode: TileMode = TileMode.Clamp
+): Brush|
+ 
+|colors| - Цвета градиента
+
+|start| - Начальное положение линейного градиента. 
+
+|end| - Конечное положение линейного градиента. 
+     
+|tileMode| - Определяет поведение шейдера при заполнении области за пределами его границ. 
+ 
+ TileMode 
+   .|!Clamp| - край фиксируется по конечному цвету (по умолчанию);
+   .|!Decal| - визуализация пикселей изображения шейдера только в пределах исходных границ;
+   .|!Mirror| - фрагмент зеркально отображен от последнего цвета к первому;
+   .|!Repeated| - фрагмент повторяется от первого цвета до последнего;
+
+ 
+
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Кисть: градиенты и шейдеры — ",
+                    textUrl = "\uD83D\uDCD6 Developers. Brush",
+                    url = "https://developer.android.com/develop/ui/compose/graphics/draw/brush?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Анимационная кисть. Раскраска текста в Compose — ",
+                    textUrl = "\uD83D\uDCD6 Medium. Android Developers. Alejandra Stamato",
+                    url = "https://medium.com/androiddevelopers/animating-brush-text-coloring-in-compose-%EF%B8%8F-26ae99d9b402"
+                ),
+                TextClickLink(
+                    text = " Brush — кисть для рисования ",
+                    textUrl = "\uD83D\uDCD6 Developers. Brush",
+                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/graphics/Brush"
+                ),
+                TextClickLink(
+                    text = " RuntimeShader — вычисляет цвет каждого пикселя на основе выходных данных пользовательской функции языка шейдеров графики Android (AGSL)",
+                    textUrl = "\uD83D\uDCD6 Developers.  Android Graphics Shading Language (AGSL)",
+                    url = "https://developer.android.com/reference/android/graphics/RuntimeShader"
+                ),
+            ),
+
+            highlightCode = highCodeList + listOf(
+                HighlightCode("MessageGradient", Color(0xFFffc530)),
+                HighlightCode("brush = ", Color(0xFF3CEE0A)),
+                HighlightCode("//", Color(0xFF3CEE0A)),
+            ),
+            lambdaFun = { MessageGradient(it) },
+            code ="""   
+            """.trimIndent()
+        ),
 
         ExampleCode(
             id =  5,
@@ -676,7 +1109,7 @@ fun TextFontWeight() {
                 HighlightCode("fillMaxWidth", Color(0xFF3CEE0A)),
                 HighlightCode("//", Color(0xFF3CEE0A)),
             ),
-            lambdaFun = { AlignText() },
+            lambdaFun = { SimpleAlign() },
             code ="""
 @Composable
 fun AlignText () {
@@ -739,7 +1172,7 @@ fun AlignText () {
                 HighlightCode("fillMaxWidth", Color(0xFF3CEE0A)),
                 HighlightCode("//", Color(0xFF3CEE0A)),
             ),
-            lambdaFun = { TextAlignJustify() },
+            lambdaFun = { SimpleAlignJustify() },
             code ="""
 @Composable
 fun TextAlignJustify() {
@@ -894,7 +1327,7 @@ fun TextAlignedHeight() {
                 HighlightCode("shadow", Color(0xFF3CEE0A)),
                 HighlightCode("//", Color(0xFF3CEE0A)),
             ),
-            lambdaFun = { TextShadow() },
+            lambdaFun = { MessageShodow() },
             code ="""
 @Composable
 fun TextShadow() {
@@ -1272,6 +1705,11 @@ fun TextFontFamalyAlternate() {
                     text = "Выбрать и загрузить шрифт можно с ",
                     textUrl = "\uD83D\uDCD6 Google Fonts",
                     url = "https://fonts.google.com/?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Playwrite — это новое суперсемейство шрифтов, помогающее учащимся по всему миру изучать почерк.",
+                    textUrl = "\uD83D\uDCD6 Google Fonts blog",
+                    url = "https://fonts.googleblog.com/"
                 ),
             ),
 
@@ -1785,7 +2223,7 @@ Examples:
                 HighlightCode("Text(", Color(0xFF3CEE0A)),
                 HighlightCode("//", Color(0xFF3CEE0A)),
             ),
-            lambdaFun = { LongText() },
+            lambdaFun = { SimpleLimit() },
             code ="""
 @Composable
 fun LongText ()  {

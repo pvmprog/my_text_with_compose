@@ -2,9 +2,18 @@ package com.pvmprog.mytextwithcompose.ui.examples
 
 import android.content.res.Configuration
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -33,17 +42,44 @@ import com.pvmprog.mytextwithcompose.R
 import com.pvmprog.mytextwithcompose.ui.theme.MyTextWithComposeTheme
 
 @Composable
-fun SimpleText() {
-    Text("Text in jetpack Compose")
+fun Simple() {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(
+            modifier = Modifier
+                .border(1.dp, MaterialTheme.colorScheme.onBackground)
+        ) {
+            Text("Hello, World!")
+        }
+
+    }
 }
 
 @Composable
-fun SimplePaddingText() {
-    Text(
-        text = "Text in jetpack Compose",
+fun SimpleWithPadding() {
+    Box(
         modifier = Modifier
-            .padding(16.dp)
-    )
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(
+            modifier = Modifier
+                .border(1.dp, MaterialTheme.colorScheme.onBackground)
+        ) {
+            Text(
+                text = "Hello, World!",
+                modifier = Modifier
+                    .padding(16.dp)
+            )
+        }
+
+    }
+
 }
 
 /*
@@ -59,143 +95,152 @@ In the res/values/strings.xml file
 
 */
 @Composable
-fun StringResourceText() {
-    val text = stringResource(
-        id = R.string.text_in_jetpack_compose
+fun SimpleStringResource() {
+
+    val text1 = stringResource(
+        id = R.string.hello_world
     )
 
-    val padding = dimensionResource(
-        id = R.dimen.padding_medium
-    )
-
-    Column(
-        modifier = Modifier
-            .padding(padding)
-    ){
-        Text(text = text)
 //позиционное форматирование
-        Text(
-            text = stringResource(R.string.day_of_month, "January", 31),
-            modifier = Modifier
-                .padding(bottom = padding)
-
-        )
-    }
-}
-
-@Composable
-fun ColorText() {
-    val text = stringResource(
-        id = R.string.text_in_jetpack_compose
+    val text2 = stringResource(
+        id = R.string.day_of_month, "January", 31
     )
 
     val padding = dimensionResource(
         id = R.dimen.padding_medium
     )
 
-    Text(
-        text = text,
+    Box(
         modifier = Modifier
-            .padding(padding)
-            .background(Color.Black)
-            .padding(padding),
-        color =  Color.Cyan
-
-    )
-}
-
-@Composable
-fun TextFontSize() {
-    val text = stringResource(
-        id = R.string.text_in_jetpack_compose
-    )
-
-    val padding = dimensionResource(
-        id = R.dimen.padding_medium
-    )
-
-    Column(
-        modifier = Modifier
-            .padding(padding)
-            .fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background),
+        contentAlignment = Alignment.Center
     ) {
-        Text(
-            text = text + "(default)",
-            fontSize = TextUnit.Unspecified
-        )
-        Text(
-            text = text + "(20.sp)",
-            fontSize = 20.sp
-        )
-        Text(
-            text = text + "(3.em)",
-            fontSize = 3.em
-        )
-        Text(
-            text = text,
-            style = TextStyle(
-                fontSize = 15.sp,
-            )
-        )
-
-        Text(
-            text = text,
-            style = MaterialTheme.typography.titleLarge
-        )
-        Text(
-            text = text,
-            style = MaterialTheme.typography.titleMedium
-        )
-        Text(
-            text = text,
-            style = MaterialTheme.typography.titleSmall
-        )
-
+        Column(
+            modifier = Modifier
+                .border(1.dp, MaterialTheme.colorScheme.onBackground)
+                .padding(padding),
+            verticalArrangement = Arrangement.spacedBy(padding),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(text = text1)
+            Text(text = text2)
+        }
     }
 
+
 }
+
+
 
 @Composable
 fun ItalicText() {
+
     val text = stringResource(
-        id = R.string.text_in_jetpack_compose
+        id = R.string.hello_world
     )
 
     val padding = dimensionResource(
         id = R.dimen.padding_medium
     )
 
-    val modifier = Modifier
-        .padding(top = 16.dp)
 
-    Column(
+    Box(
         modifier = Modifier
-            .padding(padding)
-            .fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background),
+        contentAlignment = Alignment.Center
     ) {
-
-        Text(
-            text = text,
-            modifier = modifier,
-            fontStyle = FontStyle.Italic
-        )
-
-        Text(
-            text = text,
-            modifier = modifier,
-            fontStyle = FontStyle.Normal
-        )
-
+        Column(
+            modifier = Modifier
+                .border(1.dp, MaterialTheme.colorScheme.onBackground)
+                .padding(padding),
+            verticalArrangement = Arrangement.spacedBy(padding),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = text + " (Italic)",
+                fontStyle = FontStyle.Italic
+            )
+            Text(
+                text = text + " (Normal)",
+                fontStyle = FontStyle.Normal
+            )
+        }
     }
+
 
 }
 
 @Composable
 fun TextFontWeight() {
+
     val text = stringResource(
-        id = R.string.text_in_jetpack_compose
+        id = R.string.hello_world
+    )
+
+    val padding = dimensionResource(
+        id = R.dimen.padding_medium
+    )
+
+    val modifier = Modifier
+        .padding(8.dp)
+
+
+    LazyColumn(
+        modifier = Modifier
+            .border(1.dp, MaterialTheme.colorScheme.onBackground)
+            .fillMaxWidth()
+            .padding(padding),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        item {
+            Text(
+                text = "$text (Normal)",
+                modifier = modifier,
+                fontWeight = FontWeight.Normal
+            )
+            Text(
+                text = "$text (Bold)",
+                modifier = modifier,
+                fontWeight = FontWeight.Bold
+            )
+            Text(
+                text = "$text (ExtraBold)",
+                modifier = modifier,
+                fontWeight = FontWeight.ExtraBold
+            )
+            Text(
+                text = "$text (Light)",
+                modifier = modifier,
+                fontWeight = FontWeight.Light
+            )
+            Text(
+                text = "$text (W100)",
+                modifier = modifier,
+                fontWeight = FontWeight.W100
+            )
+            Text(
+                text = "$text (W300)",
+                modifier = modifier,
+                fontWeight = FontWeight.W300
+            )
+            Text(
+                text = "$text (W900)",
+                modifier = modifier,
+                fontWeight = FontWeight.W900
+            )
+
+        }
+    }
+
+
+}
+
+@Composable
+fun SimpleAlign() {
+    val text = stringResource(
+        id = R.string.hello_world
     )
 
     val padding = dimensionResource(
@@ -204,177 +249,155 @@ fun TextFontWeight() {
 
     val modifier = Modifier
         .padding(top = 16.dp)
+        .fillMaxWidth() // !!!
 
-    Column(
+    Box(
         modifier = Modifier
-            .padding(padding)
-            .fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background),
+        contentAlignment = Alignment.Center
     ) {
-        Text(
-            text = "$text (Normal)",
-            modifier = modifier,
-            fontWeight = FontWeight.Normal
-        )
-        Text(
-            text = "$text (Bold)",
-            modifier = modifier,
-            fontWeight = FontWeight.Bold
-        )
-        Text(
-            text = "$text (ExtraBold)",
-            modifier = modifier,
-            fontWeight = FontWeight.ExtraBold
-        )
-        Text(
-            text = "$text (Light)",
-            modifier = modifier,
-            fontWeight = FontWeight.Light
-        )
-        Text(
-            text = "$text (W100)",
-            modifier = modifier,
-            fontWeight = FontWeight.W100
-        )
-        Text(
-            text = "$text (W300)",
-            modifier = modifier,
-            fontWeight = FontWeight.W300
-        )
-        Text(
-            text = "$text (W900)",
-            modifier = modifier,
-            fontWeight = FontWeight.W900
-        )
+        LazyColumn(
+            modifier = Modifier
+                .border(1.dp, MaterialTheme.colorScheme.onBackground)
+                .padding(padding),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            item {
+                Text(
+                    text = text + " (Left)",
+                    textAlign = TextAlign.Left,
+                    modifier = modifier
+                )
+                Text(
+                    text = text + " (Center)",
+                    textAlign = TextAlign.Center,
+                    modifier = modifier
+                )
+                Text(
+                    text = text + " (Right)",
+                    textAlign = TextAlign.Right,
+                    modifier = modifier
+                )
 
+            }
+        }
     }
 
 }
 
 @Composable
-fun AlignText() {
-    val modifier = Modifier
-        .padding(top = 16.dp)
-        .fillMaxWidth()
+fun SimpleAlignJustify() {
 
-    Column {
-        Text(
-            text = "Text in jetpack Compose",
-            fontSize = 15.sp,
-            textAlign = TextAlign.Left,
-            modifier = modifier
-        )
-        Text(
-            text = "Text in jetpack Compose",
-            fontSize = 15.sp,
-            textAlign = TextAlign.Center,
-            modifier = modifier
-        )
-        Text(
-            text = "Text in jetpack Compose",
-            fontSize = 15.sp,
-            textAlign = TextAlign.Right,
-            modifier = modifier
-        )
+    val text = "Без выравнивания. ".repeat(10)
 
+    val text2 = "Выравнивание строк по всей ширине контейнера. ".repeat(10)
+
+    val padding = dimensionResource(
+        id = R.dimen.padding_medium
+    )
+
+
+    LazyColumn(
+        modifier = Modifier
+            .border(1.dp, MaterialTheme.colorScheme.onBackground)
+            .padding(padding),
+    ) {
+        item {
+            //Без выравнивания
+            Text(text = text)
+            
+            Spacer(modifier = Modifier.padding(padding))
+
+            //выравнивание по всей ширине контейнера, кроме последней
+            Text(
+                text = text2,
+                textAlign = TextAlign.Justify,
+            )
+
+        }
     }
-}
 
-@Composable
-fun TextAlignJustify() {
-
-    val text = "Text in jetpack Compose. ".repeat(10)
-
-    val modifier = Modifier
-        .padding(16.dp)
-        .fillMaxWidth()
-
-    Column {
-
-        //Без выравнивания
-        Text(
-            text = text,
-            modifier = modifier,
-            style = MaterialTheme.typography.bodyMedium,
-        )
-
-        //выравнивание строк по всей ширине контейнера, кроме последней
-        Text(
-            text = text + "(Justify)",
-            modifier = modifier,
-            style = MaterialTheme.typography.bodyMedium,
-            textAlign = TextAlign.Justify,
-        )
-
-    }
 
 }
 
 @Composable
 fun TextAlignedHeight() {
-    val text = "Text in jetpack Compose. ".repeat(5)
-    val modifier = Modifier
-        .padding(16.dp)
 
-    Column {
-        //без выравнивания
-        Text(
-            text = text,
-            modifier = modifier,
-            style = MaterialTheme.typography.bodyMedium,
-        )
+    val text = "Без выравнивания. ".repeat(10)
 
-        //выравнивание строки по заданной высоте
-        Text(
-            text = text,
-            modifier = modifier,
-            style = LocalTextStyle.current.merge(
-                TextStyle(
-                    lineHeight = 2.0.em,
-                    platformStyle = PlatformTextStyle(
-                        includeFontPadding = false
-                    ),
-                    lineHeightStyle = LineHeightStyle(
-                        alignment = LineHeightStyle.Alignment.Center,
-                        //обрезка низа последней строки
-                        trim = LineHeightStyle.Trim.LastLineBottom
+    val text2 = "Выравнивание строки по заданной высоте. ".repeat(10)
+
+    val padding = dimensionResource(
+        id = R.dimen.padding_medium
+    )
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .border(1.dp, MaterialTheme.colorScheme.onBackground)
+            .padding(padding),
+    ) {
+        item {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(padding)
+            ) {
+                //без выравнивания
+                Text(
+                    text = text,
+                )
+
+                //выравнивание строки по заданной высоте
+                Text(
+                    text = text2,
+                    style = LocalTextStyle.current.merge(
+                        TextStyle(
+                            lineHeight = 2.0.em,
+                            platformStyle = PlatformTextStyle(
+                                includeFontPadding = false
+                            ),
+                            lineHeightStyle = LineHeightStyle(
+                                alignment = LineHeightStyle.Alignment.Center,
+                                //обрезка низа последней строки
+                                trim = LineHeightStyle.Trim.LastLineBottom
+                            )
+                        )
                     )
                 )
-            )
-        )
+
+            }
+
+        }
+
     }
 
 }
 
 
-//Тень
-@Composable
-fun TextShadow() {
 
-    val offset = Offset(3.0f, 5.0f)
-    Text(
-        text = "Text in jetpack Compose",
-        style = TextStyle(
-            fontSize = 24.sp,
-            shadow = Shadow(
-                color = Color.Blue,
-                offset = offset, //смещение тени
-                blurRadius = 3f  //размытие
-            )
-        )
+@Composable
+fun SimpleLimit() {
+
+    val padding = dimensionResource(
+        id = R.dimen.padding_medium
     )
-}
 
-@Composable
-fun LongText() {
-    Text(
-        text = "Text in Jetpack Compose.".repeat(10),
+    LazyColumn(
         modifier = Modifier
-            .padding(16.dp),
-        style = MaterialTheme.typography.bodyMedium,
-        overflow = TextOverflow.Ellipsis,
-        maxLines = 2,
-    )
+            .border(1.dp, MaterialTheme.colorScheme.onBackground)
+            .padding(padding),
+    ) {
+        item {
+            Text(
+                text = "Очень длинный-длинный текст ".repeat(20),
+                overflow = TextOverflow.Ellipsis,
+                maxLines = 2,
+            )
+
+        }
+
+    }
+
 }
 
 
@@ -386,7 +409,7 @@ fun SimpleTextPreview() {
         Surface(
             color = MaterialTheme.colorScheme.background
         ) {
-            StringResourceText()
+            TextAlignedHeight()
         }
 
     }

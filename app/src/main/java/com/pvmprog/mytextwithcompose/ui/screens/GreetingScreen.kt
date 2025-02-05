@@ -1,7 +1,6 @@
 package com.pvmprog.mytextwithcompose.ui.screens
 
 import android.content.res.Configuration
-import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -33,7 +32,7 @@ import com.pvmprog.mytextwithcompose.ui.theme.MyTextWithComposeTheme
 
 @Composable
 fun GreetingScreen(
-    message: String = stringResource(R.string.text_in_jetpack_compose),
+    message: String = stringResource(R.string.text_compose),
     comment: String = stringResource(R.string.in_examples),
     image: Painter = painterResource(id = R.drawable.bg),
     onExit: () -> Unit = {},

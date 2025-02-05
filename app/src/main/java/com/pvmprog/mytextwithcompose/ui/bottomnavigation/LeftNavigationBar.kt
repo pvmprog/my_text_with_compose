@@ -1,19 +1,13 @@
 package com.pvmprog.mytextwithcompose.ui.bottomnavigation
 
-import android.content.res.Configuration
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.NavigationDrawerItemDefaults
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -21,14 +15,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.pvmprog.mytextwithcompose.R
-import com.pvmprog.mytextwithcompose.ui.theme.MyTextWithComposeTheme
 
 
 @Composable
@@ -78,7 +69,7 @@ private fun NavigationDrawerHeader(
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = stringResource(id = R.string.text_in_jetpack_compose),
+            text = stringResource(id = R.string.text_compose),
             textAlign = TextAlign.Center,
             fontFamily = FontFamily.Cursive,
             fontSize = 26.sp,

@@ -48,8 +48,8 @@ fun OutTextMessage(
     isShapeLarge: Boolean = false,
     isTextCenter: Boolean = false,
     maxLines:Int = Int.MAX_VALUE,
-    indexItem: Int = 0,
-    onClick: (Int) -> Unit = {},
+//    indexItem: Int = 0,
+//    onClick: (Int) -> Unit = {},
 
     ) {
     val darkTheme: Boolean = isSystemInDarkTheme()
@@ -116,8 +116,7 @@ fun OutTextMessage(
             } else {
                 TextAlign.Left
             },
-            //шрифт с засечками
-            fontFamily = FontFamily.Serif
+           fontFamily = FontFamily.SansSerif
         )
     )
 
@@ -127,8 +126,8 @@ fun OutTextMessage(
         modifier = Modifier  //суб,воск   занят
 //            .padding(top = dimensionResource(id = R.dimen.padding_small))
             .fillMaxWidth()
-            .alpha(if (isNormalStyle) 1.0f else 0.6f)
-            .clickable { onClick(indexItem) }
+//            .alpha(if (isNormalStyle) 1.0f else 0.6f)
+//            .clickable { onClick(indexItem) }
             .clip(
                 shape = when {
                     isShapeLarge -> RoundedCornerShape(dimensionResource(id = R.dimen.roundedCornerCicle))

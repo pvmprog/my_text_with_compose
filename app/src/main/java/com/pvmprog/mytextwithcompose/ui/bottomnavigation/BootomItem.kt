@@ -31,13 +31,13 @@ sealed class BootomItem(
 
     object BootomItem3 : BootomItem(
         index = 2,
-        title = "Theory",
+        title = "Code",
         icon = Icons.Filled.Settings,
     )
 
     object BootomItem4 : BootomItem(
         index = 3,
-        title = "Links",
+        title = "Theory",
         icon = Icons.Filled.List,
     )
 

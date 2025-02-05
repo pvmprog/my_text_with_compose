@@ -7,6 +7,7 @@ import androidx.compose.foundation.content.MediaType.Companion.Text
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
@@ -31,8 +32,10 @@ import com.pvmprog.mytextwithcompose.ui.theme.MyTextWithComposeTheme
 
 @Composable
 fun ResultScreen(
+    isExpanded: Boolean = false,
     modifier: Modifier = Modifier,
-    item: ExampleCode = DataCodeUI.codeUI[0]
+    item: ExampleCode = DataCodeUI.codeUI[0],
+    heightMinDp:Int = 200
 ){
     val spacerModifier = Modifier
         .padding(horizontal = dimensionResource(id = R.dimen.padding_small))
@@ -53,7 +56,8 @@ fun ResultScreen(
         Box(
             modifier = modifier
                 .padding(dimensionResource(id = R.dimen.padding_small))
-                .heightIn(min = 200.dp)
+//                .aspectRatio(1f) //ширина и высота одинаковы
+                .heightIn(min = heightMinDp.dp)
                 .background(color = MaterialTheme.colorScheme.background),
             contentAlignment = Alignment.Center
         ) {
@@ -61,7 +65,7 @@ fun ResultScreen(
                 modifier = Modifier
                     .border(1.dp, MaterialTheme.colorScheme.onBackground)
             ) {
-                item.lambdaFun()
+                item.lambdaFun(isExpanded)
             }
         }
     }
@@ -142,10 +146,7 @@ fun PreviewResultScreen() {
         Surface(
             color = MaterialTheme.colorScheme.background
         ) {
-            ResultScreen(
-                item = DataCodeUI.codeUI[2]
-            )
-
+            ResultScreen(item = DataCodeUI.codeUI[2])
         }
 
     }

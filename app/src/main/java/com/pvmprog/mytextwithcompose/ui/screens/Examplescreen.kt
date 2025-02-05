@@ -1,16 +1,8 @@
 package com.pvmprog.mytextwithcompose.ui.screens
 
 import android.content.res.Configuration
-import android.widget.Toast
 import androidx.activity.compose.BackHandler
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.expandHorizontally
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.shrinkHorizontally
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -37,7 +29,6 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
@@ -52,31 +43,50 @@ import com.pvmprog.mytextwithcompose.data.Constants.maxFontSizeCode
 import com.pvmprog.mytextwithcompose.data.Constants.minFontSizeCode
 import com.pvmprog.mytextwithcompose.data.locale.DataCodeUI
 import com.pvmprog.mytextwithcompose.data.model.ExampleCode
-import com.pvmprog.mytextwithcompose.ui.service.OutTextMessage
-import com.pvmprog.mytextwithcompose.ui.service.TextWithLink
 import com.pvmprog.mytextwithcompose.ui.theme.MyTextWithComposeTheme
 import com.pvmprog.mytextwithcompose.ui.topbar.TopSubBar
+
+//Анимация на основе значений
+//https://developer.android.com/develop/ui/compose/animation/value-based?hl=ru
+
+/*
+Как добавить иконки в проект В Android Studio смотрите по ссылке:
+  https://developer.android.com/studio/write/vector-asset-studio?hl=ru#svg
+или можно загрузит файлы иконок из сайта Google Fonts в разделе Icons и поместить их в папку res/draweble
+  https://fonts.google.com/icons?selected=Material+Symbols+Outlined:pip_exit:FILL@0;wght@400;GRAD@0;opsz@24&icon.size=24&icon.color=%235f6368
+
+*/
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Examplescreen(
-    selectedDestination: Int = 1, //1-result+code; 2-theory 3-links
+    selectedDestination: Int = 1, //1-result 2-code 3-theory
     isExpanded: Boolean = false,
     indexExample: Int = 0,
     itemList: List<ExampleCode> = DataCodeUI.codeUI,
     onNext: (Int) -> Unit = {},
+    heightMinDp:Int = 200
 
     ) {
-    var isAllView by remember { mutableStateOf(true) }
+    var isViewTheory by remember { mutableStateOf(true) }
+    var isViewLinks by remember { mutableStateOf(true) }
 
+    val weightTheory: Float by animateFloatAsState(if (isViewTheory) 1f else 0.01f, label = "result")
+    val weightLinks: Float by animateFloatAsState(if (isViewLinks) 1f else 0.01f, label = "code")
+
+//    var isViewResult2 by remember { mutableStateOf(true) }
+//    var isViewCode2 by remember { mutableStateOf(true) }
+
+    val isViewTheory2 = (weightTheory > 0.1f)
+    val isViewLinks2 = (weightLinks > 0.1f)
 
     //BackHandler для обнаружения нажатий на кнопку «Назад» устройства внутри Compose
     BackHandler(
         // your condition to enable handler
         enabled = true
     ) {
-        isAllView = true
+        isViewTheory = true
         onNext(-1)
     }
 
@@ -84,13 +94,6 @@ fun Examplescreen(
     else ExampleCode()
 
     val context =  LocalContext.current
-
-    val spacerModifier = Modifier
-        .padding(horizontal = dimensionResource(id = R.dimen.padding_small))
-        .height(2.dp)
-        .fillMaxWidth()
-        .background(color = MaterialTheme.colorScheme.primary)
-        .padding(dimensionResource(id = R.dimen.padding_medium))
 
     var fontSizeCode by remember {
         mutableIntStateOf(defaultFontSizeCode)     //18.sp
@@ -110,7 +113,7 @@ fun Examplescreen(
                 title = example.title,
                 navigateUp = {
                     onNext(indexExample - 1) //indexExample - 1
-                    isAllView = true
+                    isViewTheory = true
                 }
             )
         },
@@ -119,59 +122,56 @@ fun Examplescreen(
                 Modifier
                     .padding(10.dp)
             ) {
-/*
-Как добавить иконки в проект В Android Studio смотрите по ссылке:
-  https://developer.android.com/studio/write/vector-asset-studio?hl=ru#svg
-или можно загрузит файлы иконок из сайта Google Fonts в разделе Icons и поместить их в папку res/draweble
-  https://fonts.google.com/icons?selected=Material+Symbols+Outlined:pip_exit:FILL@0;wght@400;GRAD@0;opsz@24&icon.size=24&icon.color=%235f6368
-
- */
-
-                //Установить маштаб по умолчанию
-                if (fontSizeCode != defaultFontSizeCode){
-                    Icon(
-                        imageVector = Icons.Filled.Clear,
+                if (selectedDestination != 1){
+                    //Установить маштаб по умолчанию
+                    if (fontSizeCode != defaultFontSizeCode){
+                        Icon(
+                            imageVector = Icons.Filled.Clear,
 //                    painter = painterResource(id = R.drawable.baseline_disabled_by_default_24),
-                        contentDescription = stringResource(R.string.zoom_is_default),
+                            contentDescription = stringResource(R.string.zoom_is_default),
+                            modifier = modifierIcon
+                                .background(MaterialTheme.colorScheme.inversePrimary)
+                                .clickable {
+                                    fontSizeCode = defaultFontSizeCode
+                                },
+                        )
+
+                    }
+
+                    //Увеличить маштаб
+                    Icon(
+                        painter = painterResource(id = R.drawable.zoom_in_24px),
+                        contentDescription = stringResource(R.string.zoom_in),
                         modifier = modifierIcon
-                            .background(MaterialTheme.colorScheme.background)
+                            .background(MaterialTheme.colorScheme.inversePrimary)
                             .clickable {
-                                fontSizeCode = defaultFontSizeCode
+                                fontSizeCode += 2
+                                if (fontSizeCode > maxFontSizeCode) fontSizeCode = maxFontSizeCode
                             },
                     )
 
+                    //Уменьшить маштаб
+                    Icon(
+                        painter = painterResource(id = R.drawable.zoom_out_24px),
+                        contentDescription = stringResource(R.string.zoom_out),
+                        modifier = modifierIcon
+                            .background(MaterialTheme.colorScheme.inversePrimary)
+                            .clickable {
+                                fontSizeCode -= 2
+                                if (fontSizeCode < minFontSizeCode) fontSizeCode = minFontSizeCode
+                            },
+                    )
+
+
                 }
 
-                //Увеличить маштаб
-                Icon(
-                    painter = painterResource(id = R.drawable.zoom_in_24px),
-                    contentDescription = stringResource(R.string.zoom_in),
-                    modifier = modifierIcon
-                        .background(MaterialTheme.colorScheme.inversePrimary)
-                        .clickable {
-                            fontSizeCode += 2
-                            if (fontSizeCode > maxFontSizeCode) fontSizeCode = maxFontSizeCode
-                        },
-                )
-
-                //Уменьшить маштаб
-                Icon(
-                    painter = painterResource(id = R.drawable.zoom_out_24px),
-                    contentDescription = stringResource(R.string.zoom_out),
-                    modifier = modifierIcon
-                        .background(MaterialTheme.colorScheme.inversePrimary)
-                        .clickable {
-                            fontSizeCode -= 2
-                            if (fontSizeCode < minFontSizeCode) fontSizeCode = minFontSizeCode
-                        },
-                )
 
                 //переход на следующий пример
                 FloatingActionButton(
                     onClick = {
                         var index = indexExample + 1
                         if (index >= itemList.size) index = 0
-                        isAllView = true
+                        isViewTheory = true
                         onNext(index)
                     },
                     shape = MaterialTheme.shapes.medium, //  shape = Shapes.medium,
@@ -194,40 +194,94 @@ fun Examplescreen(
         ) {
 
             when (selectedDestination){
-//result+code
+//Result
                 1 -> {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize(),
+                    ) {
+                        example.lambdaFun(isExpanded)
+                    }
+                }
+
+//Code
+                2 -> {
+                    LazyColumn(
+                        modifier = Modifier
+                            .fillMaxSize()
+                    ) {
+                        item {
+                            CodeScreen(
+                                modifier = Modifier
+                                    .fillMaxWidth(),
+                                item = example,
+                                fontSizeCode = fontSizeCode
+                            )
+
+                        }
+                    }
+                }
+
+//theory+link
+                3 -> {
                     if (isExpanded) {
                         Row(
                             modifier = Modifier
                                 .fillMaxSize()
                         ) {
-                            if (isAllView){
+                            if (isViewTheory2){
                                 LazyColumn(
-                                    modifier = Modifier.weight(1f),
+                                    modifier = Modifier.weight(weightTheory),
                                 ) {
                                     item {
-                                        ResultScreen(
-                                            item = example
-                                        )
+                                        MessageScreen(
+                                            message = example.comment,
+                                            sizeFontText = fontSizeCode,
+                                            isNormalStyle = true,
+                                            isColorBackground = false,
+                                            isColorBorder = true,
+                                            isShapeLarge = false,
+                                            isTextCenter = false,
+                                            modifier = Modifier
+                                                .pointerInput(Unit) {
+                                                    detectTapGestures(
+                                                        onDoubleTap = {
+                                                            isViewLinks = !isViewLinks
+                                                        },
+                                                    )
+                                                },
+
+                                            )
+
                                     }
                                 }
+                            }
+                            if ((isViewTheory) && (isViewLinks))
                                 Spacer(modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_spacer)))
 
-                            }
-                            LazyColumn(
-                                modifier = Modifier.weight(1f),
-                            ) {
-                                item {
-                                    CodeScreen(
-                                        item = example,
-                                        fontSizeCode = fontSizeCode,
-                                        onClick = {
-                                            isAllView = !isAllView
-                                        }
-                                    )
+                            if (isViewLinks2){
+                                LazyColumn(
+                                    modifier = Modifier.weight(weightLinks),
+                                ) {
+                                    item {
+                                        LinksScreen(
+                                            example = example,
+                                            sizeFontText = fontSizeCode,
+                                            modifier = Modifier
+                                                .pointerInput(Unit) {
+                                                    detectTapGestures(
+                                                        onDoubleTap = {
+                                                            isViewTheory = !isViewTheory
+                                                        },
+                                                    )
+                                                },
+                                        )
 
+                                    }
                                 }
+
                             }
+
 
                         }
                     } else {
@@ -237,19 +291,29 @@ fun Examplescreen(
                                     modifier = Modifier
                                         .fillMaxSize()
                                 ) {
-                                    ResultScreen(
-                                        modifier = Modifier.fillMaxWidth(),
-                                        item = example
+                                    MessageScreen(
+                                        message = example.comment,
+                                        sizeFontText = fontSizeCode,
+                                        isNormalStyle = true,
+                                        isColorBackground = false,
+                                        isColorBorder = true,
+                                        isShapeLarge = false,
+                                        isTextCenter = false,
+                                        modifier = Modifier
+                                            .fillMaxWidth(),
+
                                     )
 
                                     Spacer(modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_small)))
 
-                                    CodeScreen(
+                                    LinksScreen(
+                                        example = example,
+                                        sizeFontText = fontSizeCode,
                                         modifier = Modifier
                                             .fillMaxWidth(),
-                                        item = example,
-                                        fontSizeCode = fontSizeCode
                                     )
+
+                                    Spacer(modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_medium)))
                                 }
 
                             }
@@ -258,7 +322,7 @@ fun Examplescreen(
 
                 }
 //theory
-                2 -> {
+                3 -> {
                     LazyColumn(
                         modifier = Modifier
                             .fillMaxSize()
@@ -274,17 +338,8 @@ fun Examplescreen(
                                 isTextCenter = false
                             )
 
-                        }
-                    }
-                }
+                            Spacer(modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_small)))
 
-//links
-                3 -> {
-                    LazyColumn(
-                        modifier = Modifier
-                            .fillMaxSize()
-                    ) {
-                        item {
                             LinksScreen(
                                 example = example,
                                 sizeFontText = fontSizeCode,

@@ -26,6 +26,7 @@ fun LeftNavigationContent(
     indexExample: Int = 0,
     itemList: List<ExampleCode> = DataCodeUI.codeUI,
     onNext: (Int) -> Unit = {},
+    heightMinDp:Int = 200
 
     ) {
     PermanentNavigationDrawer(
@@ -52,7 +53,9 @@ fun LeftNavigationContent(
             isExpanded = isExpanded,
             indexExample = indexExample,
             itemList = itemList,
-            onNext = onNext
+            onNext = onNext,
+            heightMinDp = heightMinDp - 50
+
         )
     }
 }

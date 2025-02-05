@@ -28,7 +28,6 @@ import com.pvmprog.mytextwithcompose.ui.theme.MyTextWithComposeTheme
 fun CodeScreen(
     modifier: Modifier = Modifier,
     item: ExampleCode = DataCodeUI.codeUI[0],
-    onClick: () -> Unit = {},
     fontSizeCode : Int = defaultFontSizeCode
 ){
     val spacerModifier = Modifier
@@ -49,7 +48,6 @@ fun CodeScreen(
         Spacer(modifier = spacerModifier)
         OutTextCode(
             message = item.code,
-            onClick = onClick,
             highlight = item.highlightCode,
             fontSizeCode = fontSizeCode.sp
         )

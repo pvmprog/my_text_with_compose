@@ -1,12 +1,22 @@
 package com.pvmprog.mytextwithcompose.ui.examples
 
+import android.content.res.Configuration
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
@@ -15,10 +25,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.pvmprog.mytextwithcompose.R
 import com.pvmprog.mytextwithcompose.ui.theme.AbrilFatface
 import com.pvmprog.mytextwithcompose.ui.theme.Alice
 import com.pvmprog.mytextwithcompose.ui.theme.Cabin
 import com.pvmprog.mytextwithcompose.ui.theme.Cormorantinfant
+import com.pvmprog.mytextwithcompose.ui.theme.MyTextWithComposeTheme
 import com.pvmprog.mytextwithcompose.ui.theme.Poppins
 
 /*
@@ -67,11 +79,10 @@ data class FontExample(
 @Composable
 fun TextFontFamalyAlternate() {
 
-    var style = MaterialTheme.typography.bodyMedium.merge(
+    val style = MaterialTheme.typography.bodyMedium.merge(
         TextStyle(
             fontSize = 18.sp,
             textAlign = TextAlign.Start,
-            fontFamily = Cabin,
             fontStyle = FontStyle.Normal
         )
     )
@@ -128,22 +139,33 @@ fun TextFontFamalyAlternate() {
     )
 
 
-    var nameFont: String
     val text = "Альтернативные шрифты."
 
-    Column {
-        for (item in fonts) {
-            nameFont = item.nameFont
-            style = item.style
+    val padding = dimensionResource(
+        id = R.dimen.padding_medium
+    )
 
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .border(1.dp, MaterialTheme.colorScheme.onBackground)
+            .padding(padding),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(padding)
+
+    ) {
+        items(fonts){
+            val nameFont = it.nameFont
+            val styleText = it.style
             Text(
                 text = "$text ($nameFont)",
-                style = style
+                style = styleText
             )
 
             Text(
                 text = "$text - Italic",
-                style = style.merge(
+                style = styleText.merge(
                     TextStyle(
                         fontStyle = FontStyle.Italic
                     )
@@ -152,17 +174,32 @@ fun TextFontFamalyAlternate() {
 
             Text(
                 text = "$text - Bold",
-                style = style.merge(
+                style = styleText.merge(
                     TextStyle(
                         fontWeight = FontWeight.Bold,
                     )
                 )
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
-        }
+            Spacer(modifier = Modifier.height(padding))
 
+        }
 
     }
 
 }
+
+@Preview("Light Theme",showBackground = true)
+@Preview("Dark Theme", showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun TextFontFamalyAlternatePreview() {
+    MyTextWithComposeTheme {
+        Surface(
+            color = MaterialTheme.colorScheme.background
+        ) {
+            TextFontFamalyAlternate()
+        }
+
+    }
+}
+
