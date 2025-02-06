@@ -8,6 +8,7 @@ import com.pvmprog.mytextwithcompose.data.model.TextClickLink
 import com.pvmprog.mytextwithcompose.ui.examples.SimpleAlign
 import com.pvmprog.mytextwithcompose.ui.examples.AnnotatedHtmlString
 import com.pvmprog.mytextwithcompose.ui.examples.ExampleFontSize
+import com.pvmprog.mytextwithcompose.ui.examples.GradientDriver
 import com.pvmprog.mytextwithcompose.ui.examples.TextFontWeight
 import com.pvmprog.mytextwithcompose.ui.examples.ItalicText
 import com.pvmprog.mytextwithcompose.ui.examples.MessageGradient
@@ -889,7 +890,7 @@ fun TextColorAny() {
                 HighlightCode("brush = ", Color(0xFF3CEE0A)),
                 HighlightCode("//", Color(0xFF3CEE0A)),
             ),
-            lambdaFun = { MessageGradient(it) },
+            lambdaFun = { GradientDriver(it) },
             code ="""   
             """.trimIndent()
         ),
