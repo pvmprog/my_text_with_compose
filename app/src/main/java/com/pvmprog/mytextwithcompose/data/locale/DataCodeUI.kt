@@ -2,6 +2,7 @@ package com.pvmprog.mytextwithcompose.data.locale
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import com.pvmprog.mytextwithcompose.data.locale.DataHighCode.highCodeList
 import com.pvmprog.mytextwithcompose.data.model.ExampleCode
 import com.pvmprog.mytextwithcompose.data.model.HighlightCode
 import com.pvmprog.mytextwithcompose.data.model.TextClickLink
@@ -11,10 +12,10 @@ import com.pvmprog.mytextwithcompose.ui.examples.ExampleFontSize
 import com.pvmprog.mytextwithcompose.ui.examples.GradientDriver
 import com.pvmprog.mytextwithcompose.ui.examples.TextFontWeight
 import com.pvmprog.mytextwithcompose.ui.examples.ItalicText
-import com.pvmprog.mytextwithcompose.ui.examples.MessageGradient
-import com.pvmprog.mytextwithcompose.ui.examples.MessageShodow
+import com.pvmprog.mytextwithcompose.ui.examples.MessageShadow
 import com.pvmprog.mytextwithcompose.ui.examples.SimpleLimit
 import com.pvmprog.mytextwithcompose.ui.examples.MultipleStylesInText
+import com.pvmprog.mytextwithcompose.ui.examples.ShadowDriver
 import com.pvmprog.mytextwithcompose.ui.examples.SimpleWithPadding
 import com.pvmprog.mytextwithcompose.ui.examples.Simple
 import com.pvmprog.mytextwithcompose.ui.examples.SimpleStringResource
@@ -30,135 +31,6 @@ import com.pvmprog.mytextwithcompose.ui.examples.TextFontFamily
 import com.pvmprog.mytextwithcompose.ui.examples.TypographyStyles
 
 object DataCodeUI {
-    val highCodeList = listOf(
-        HighlightCode("@Composable", Color(0xFFb2c231)),
-        HighlightCode("class", Color(0xFFd27749)),
-        HighlightCode("data", Color(0xFFd27749)),
-        HighlightCode("val", Color(0xFFd27749)),
-        HighlightCode("false", Color(0xFFd27749)),
-        HighlightCode("true", Color(0xFFd27749)),
-        HighlightCode(".repeat", Color(0xFFd27749)),
-        HighlightCode("when", Color(0xFFB84E18)),
-        HighlightCode("else", Color(0xFFB84E18)),
-        HighlightCode("if ", Color(0xFFB84E18)),
-        HighlightCode("items", Color(0xFFF5996B)),
-        HighlightCode(".padding", Color(0xFFF5996B)),
-        HighlightCode(".fillMaxWidth", Color(0xFFF5996B)),
-        HighlightCode(".clickable", Color(0xFFF5996B)),
-        HighlightCode(".clip", Color(0xFFF5996B)),
-        HighlightCode(".background", Color(0xFFF5996B)),
-        HighlightCode(".border", Color(0xFFF5996B)),
-        HighlightCode("withStyle", Color(0xFFF5996B)),
-
-        HighlightCode("LazyColumn", Color(0xFF0D8113)),
-        HighlightCode("Text ", Color(0xFF0D8113)),
-        HighlightCode("Column", Color(0xFF0D8113)),
-        HighlightCode("Row", Color(0xFF0D8113)),
-        HighlightCode("Box", Color(0xFF0D8113)),
-        HighlightCode(".typography", Color(0xFF0D8113)),
-        HighlightCode(".current", Color(0xFF0D8113)),
-        HighlightCode(".colorScheme", Color(0xFF0D8113)),
-        HighlightCode("isSystemInDarkTheme", Color(0xFF0D8113)),
-        HighlightCode(".colorScheme", Color(0xFF0D8113)),
-        HighlightCode("stringResource", Color(0xFF0D8113)),
-        HighlightCode("dimensionResource", Color(0xFF0D8113)),
-        HighlightCode("colorResource", Color(0xFF0D8113)),
-        HighlightCode("Surface", Color(0xFF0D8113)),
-        HighlightCode("text =", Color(0xFF00a9ff)),
-        HighlightCode("fontSize =", Color(0xFF00a9ff)),
-        HighlightCode("fontWeight =", Color(0xFF00a9ff)),
-        HighlightCode("style = ", Color(0xFF00a9ff)),
-        HighlightCode("modifier =", Color(0xFF00a9ff)),
-        HighlightCode("id ", Color(0xFF00a9ff)),
-        HighlightCode("bottom =", Color(0xFF2DB8FF)),
-        HighlightCode("top =", Color(0xFF2DB8FF)),
-        HighlightCode("horizontalAlignment =", Color(0xFF2DB8FF)),
-        HighlightCode("platformStyle =", Color(0xFF2DB8FF)),
-        HighlightCode("includeFontPadding =", Color(0xFF2DB8FF)),
-        HighlightCode("lineHeight =", Color(0xFF2DB8FF)),
-        HighlightCode("alignment =", Color(0xFF2DB8FF)),
-        HighlightCode("trim =", Color(0xFF2DB8FF)),
-        HighlightCode("shadow =", Color(0xFF2DB8FF)),
-        HighlightCode("color =", Color(0xFF2DB8FF)),
-        HighlightCode("brushColors =", Color(0xFF2DB8FF)),
-        HighlightCode("startX =", Color(0xFF2DB8FF)),
-        HighlightCode("endX =", Color(0xFF2DB8FF)),
-        HighlightCode("StartDp =", Color(0xFF2DB8FF)),
-        HighlightCode("endDp =", Color(0xFF2DB8FF)),
-        HighlightCode("tileMode =", Color(0xFF2DB8FF)),
-        HighlightCode("offset =", Color(0xFF2DB8FF)),
-        HighlightCode("blurRadius =", Color(0xFF2DB8FF)),
-        HighlightCode("overflow =", Color(0xFF2DB8FF)),
-        HighlightCode("maxLines =", Color(0xFF2DB8FF)),
-        HighlightCode("verticalArrangement =", Color(0xFF2DB8FF)),
-        HighlightCode("textAlign =", Color(0xFF2DB8FF)),
-        HighlightCode("fontFamily =", Color(0xFF2DB8FF)),
-        HighlightCode("0xff000000", Color(0xFF2DB8FF)),
-        HighlightCode("0xffffffff", Color(0xFF2DB8FF)),
-        HighlightCode("0xff22200d", Color(0xFF2DB8FF)),
-        HighlightCode("0xffffff00", Color(0xFF2DB8FF)),
-        HighlightCode("0xFF993399", Color(0xFF2DB8FF)),
-        HighlightCode(".value", Color(0xFFe48def)),
-        HighlightCode(".resources.displayMetrics.density", Color(0xFFe48def)),
-        HighlightCode(".Unspecified", Color(0xFFe48def)),
-        HighlightCode(".sp", Color(0xFFe48def)),
-        HighlightCode(".dp", Color(0xFFe48def)),
-        HighlightCode(".em", Color(0xFFe48def)),
-        HighlightCode(".hello_world", Color(0xFFe48def)),
-        HighlightCode(".padding_medium", Color(0xFFe48def)),
-        HighlightCode(".padding_small", Color(0xFFe48def)),
-        HighlightCode(".padding_large", Color(0xFFe48def)),
-        HighlightCode(".titleLarge", Color(0xFFe48def)),
-        HighlightCode(".titleMedium", Color(0xFFe48def)),
-        HighlightCode(".titleSmall", Color(0xFFe48def)),
-        HighlightCode(".Italic", Color(0xFFe48def)),
-        HighlightCode(".Normal", Color(0xFFe48def)),
-        HighlightCode(".Bold", Color(0xFFe48def)),
-        HighlightCode(".ExtraBold", Color(0xFFe48def)),
-        HighlightCode(".Light", Color(0xFFe48def)),
-        HighlightCode(".W100", Color(0xFFe48def)),
-        HighlightCode(".W300", Color(0xFFe48def)),
-        HighlightCode(".W900", Color(0xFFe48def)),
-        HighlightCode(".Center", Color(0xFFe48def)),
-        HighlightCode(".CenterHorizontally", Color(0xFFe48def)),
-        HighlightCode(".Left", Color(0xFFe48def)),
-        HighlightCode(".Right", Color(0xFFe48def)),
-        HighlightCode(".bodyMedium", Color(0xFFe48def)),
-        HighlightCode(".bodySmall", Color(0xFFe48def)),
-        HighlightCode(".bodyLarge", Color(0xFFe48def)),
-        HighlightCode(".Justify", Color(0xFFe48def)),
-        HighlightCode("LocalTextStyle", Color(0xFFe48def)),
-        HighlightCode(".LastLineBottom", Color(0xFFe48def)),
-        HighlightCode(".Ellipsis", Color(0xFFe48def)),
-        HighlightCode(".Start", Color(0xFFe48def)),
-        HighlightCode(".End", Color(0xFFe48def)),
-        HighlightCode(".Bottom", Color(0xFFe48def)),
-        HighlightCode(".SpaceAround", Color(0xFFe48def)),
-        HighlightCode(".SpaceBetween", Color(0xFFe48def)),
-        HighlightCode(".SpaceEvenly", Color(0xFFe48def)),
-        HighlightCode(".size", Color(0xFFe48def)),
-        HighlightCode(".Clamp", Color(0xFFe48def)),
-        HighlightCode("LocalTextStyle", Color(0xFFe48def)),
-        HighlightCode("LocalContext", Color(0xFFe48def)),
-        HighlightCode(".Cyan", Color(0xFFe48def)),
-        HighlightCode(".Yellow", Color(0xFFe48def)),
-        HighlightCode(".Green", Color(0xFFe48def)),
-        HighlightCode(".Blue", Color(0xFFe48def)),
-        HighlightCode(".Black", Color(0xFFe48def)),
-        HighlightCode(".Red", Color(0xFFe48def)),
-        HighlightCode(".red700", Color(0xFFe48def)),
-        HighlightCode("Alice", Color(0xFFe48def)),
-        HighlightCode(".secondary", Color(0xFFe48def)),
-        HighlightCode(".onSecondary", Color(0xFFe48def)),
-        HighlightCode(".secondaryContainer", Color(0xFFe48def)),
-        HighlightCode(".onSecondaryContainer", Color(0xFFe48def)),
-        HighlightCode(".tertiaryContainer", Color(0xFFe48def)),
-        HighlightCode(".onTertiaryContainer", Color(0xFFe48def)),
-        HighlightCode(".text_compose", Color(0xFFFFEB3B)),
-        HighlightCode(".spacedBy", Color(0xFFFFFFFF)),
-        HighlightCode("//", Color(0xFF3CEE0A)),
-    )
-
     val codeUI: List<ExampleCode> = listOf(
         ExampleCode(
             id = 0,
@@ -465,7 +337,7 @@ fun ExampleFontSize() {
 
         ExampleCode(
             id = 4,
-            title = "Cтили типографики Material 3",
+            title = "Типографика Material 3",
             comment = """
 Набор стилей |Typography| можно использовать и для определения размера шрифта текста. 
 
@@ -611,6 +483,766 @@ fun TypographyStyles() {
 }
             """.trimIndent()
         ),
+        ExampleCode(
+            id =  5,
+            title = "Стиль шрифта",
+            comment = """
+Стиль шрифта определяется параметром |fontStyle|:
+ 
+ FontStyle.|Italic| - наклоннный (курсивный) шрифт;
+ 
+ FontStyle.|Normal|  - стандартный шрифт.
+                
+            """.trimIndent(),
+            highlightCode = listOf(
+                HighlightCode("@Composable", Color(0xFF3CEE0A)),
+                HighlightCode("Text(", Color(0xFF3CEE0A)),
+                HighlightCode("fontStyle", Color(0xFF3CEE0A)),
+                HighlightCode("Normal", Color(0xFF00BCD4)),
+                HighlightCode("Italic", Color(0xFF00BCD4)),
+                HighlightCode("fontStyle", Color(0xFF3CEE0A)),
+                HighlightCode("//", Color(0xFF3CEE0A)),
+            ),
+            lambdaFun = { ItalicText() },
+            code ="""
+@Composable
+fun ItalicText () {
+
+    val text = stringResource(
+        id = R.string.text_in_jetpack_compose
+    )
+
+    val padding = dimensionResource(
+        id = R.dimen.padding_medium
+    )
+
+    val modifier = Modifier
+        .padding(top = 16.dp)
+
+    Column(
+        modifier = Modifier
+            .padding(padding)
+            .fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+
+        Text(
+            text = text,
+            modifier = modifier,
+            fontStyle = FontStyle.Italic
+        )
+
+        Text(
+            text = text,
+            modifier = modifier,
+            fontStyle = FontStyle.Normal
+        )
+
+    }
+
+}
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Больше информации смотрите ",
+                    textUrl = "\uD83D\uDCD6 Developers. Стиль текста",
+                    url = "https://developer.android.com/develop/ui/compose/text/style-text?hl=ru"
+                ),
+            ),
+
+            ),
+        ExampleCode(
+            id =  6,
+            title = "Насыщенность шрифта",
+            comment = """
+Толщина шрифта задается параметром |fontWeight|, который представляет класс |!FontWeight|.
+                        
+Два способа установки толщины шрифта:
+ 
+ 1)передача числового значения от 1 до 1000;
+ 
+ 2)константы |FontWeight|:
+ 
+    |Black| (Эквивалентно значению W900)
+
+    |Bold| (W700)
+
+    |ExtraBold| (W800)
+
+    |ExtraLight| (W200)
+
+    |Light| (W300)
+
+    |Medium| (W500)
+
+    |Normal| (W400 - значение по умолчанию)
+
+    |SemiBold| (W600)
+
+    |Thin| (W100)
+                          
+                
+            """.trimIndent(),
+            highlightCode = listOf(
+                HighlightCode("@Composable", Color(0xFF3CEE0A)),
+                HighlightCode("Text(", Color(0xFF3CEE0A)),
+                HighlightCode("fontWeight", Color(0xFF3CEE0A)),
+                HighlightCode(".Bold", Color(0xFF00BCD4)),
+                HighlightCode(".Normal", Color(0xFF00BCD4)),
+                HighlightCode(".ExtraBold", Color(0xFF00BCD4)),
+                HighlightCode(".Light", Color(0xFF00BCD4)),
+                HighlightCode(".W100", Color(0xFF00BCD4)),
+                HighlightCode(".W300", Color(0xFF00BCD4)),
+                HighlightCode(".W900", Color(0xFF00BCD4)),
+                HighlightCode("//", Color(0xFF3CEE0A)),
+            ),
+            lambdaFun = { TextFontWeight() },
+            code ="""
+@Composable
+fun TextFontWeight() {
+
+    val text = stringResource(
+        id = R.string.text_in_jetpack_compose
+    )
+
+    val padding = dimensionResource(
+        id = R.dimen.padding_medium
+    )
+
+    val modifier = Modifier
+        .padding(top = 16.dp)
+
+    Column(
+        modifier = Modifier
+            .padding(padding)
+            .fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = "${'$'}text (Normal)",
+            modifier = modifier,
+            fontWeight = FontWeight.Normal
+        )
+        Text(
+            text = "${'$'}text (Bold)",
+            modifier = modifier,
+            fontWeight = FontWeight.Bold
+        )
+        Text(
+            text = "${'$'}text (ExtraBold)",
+            modifier = modifier,
+            fontWeight = FontWeight.ExtraBold
+        )
+        Text(
+            text = "${'$'}text (Light)",
+            modifier = modifier,
+            fontWeight = FontWeight.Light
+        )
+        Text(
+            text = "${'$'}text (W100)",
+            modifier = modifier,
+            fontWeight = FontWeight.W100
+        )
+        Text(
+            text = "${'$'}text (W300)",
+            modifier = modifier,
+            fontWeight = FontWeight.W300
+        )
+        Text(
+            text = "${'$'}text (W900)",
+            modifier = modifier,
+            fontWeight = FontWeight.W900
+        )
+
+    }
+
+}
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Больше информации смотрите ",
+                    textUrl = "\uD83D\uDCD6 Developers. Стиль текста",
+                    url = "https://developer.android.com/develop/ui/compose/text/style-text?hl=ru"
+                ),
+            ),
+
+            ),
+        ExampleCode(
+            id =  7,
+            title = "Выравнивание по ширине",
+            comment = """
+Параметр |textAlign| управляет выравниванием текста и представляет объект класса |TextAlign|. 
+
+В качестве значения этому параметру можно передать значение одного из свойств класса |TextAlign|:
+
+ |!Center|: выравнивание текста по центру контейнера
+
+ |!Justify|: текст равномерно растягивается по всей ширине контейнера
+
+ |!End|: выравнивание текста по конечному краю контейнера (в зависимости от ориентации текста это может быть левый или правый край)
+
+ |!Start|: выравнивание текста по началу контейнера (в зависимости от ориентации текста это может быть левый или правый край)
+
+ |!Left|: выравнивание текста по левому краю контейнера
+
+ |!Right|: выравнивание текста по правому краю контейнера                        
+                
+            """.trimIndent(),
+            highlightCode = listOf(
+                HighlightCode("@Composable", Color(0xFF3CEE0A)),
+                HighlightCode("Text(", Color(0xFF3CEE0A)),
+                HighlightCode("Left", Color(0xFF00BCD4)),
+                HighlightCode("Center", Color(0xFF00BCD4)),
+                HighlightCode("Right", Color(0xFF00BCD4)),
+                HighlightCode("textAlign", Color(0xFF3CEE0A)),
+                HighlightCode("fillMaxWidth", Color(0xFF3CEE0A)),
+                HighlightCode("//", Color(0xFF3CEE0A)),
+            ),
+            lambdaFun = { SimpleAlign() },
+            code ="""
+@Composable
+fun AlignText () {
+    val modifier = Modifier
+        .padding(top = 16.dp)
+        .fillMaxWidth()
+
+    Column {
+        Text(
+            text = "Text in jetpack Compose",
+            fontSize = 15.sp,
+            textAlign = TextAlign.Left,
+            modifier = modifier
+        )
+        Text(
+            text = "Text in jetpack Compose",
+            fontSize = 15.sp,
+            textAlign = TextAlign.Center,
+            modifier = modifier
+        )
+        Text(
+            text = "Text in jetpack Compose",
+            fontSize = 15.sp,
+            textAlign = TextAlign.Right,
+            modifier = modifier
+        )
+
+    }
+}
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Установить выравнивание текста. ",
+                    textUrl = "\uD83D\uDCD6 Developers. Стиль абзаца",
+                    url = "https://developer.android.com/develop/ui/compose/text/style-paragraph?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Больше информации смотрите ",
+                    textUrl = "\uD83D\uDCD6 Developers. TextAlign",
+                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/text/style/TextAlign"
+                ),
+            ),
+        ),
+
+        ExampleCode(
+            id =  8,
+            title = "Выравнивание по контейнеру",
+            comment = """
+Параметр |textAlign| управляет выравниванием текста. 
+
+  TextAlign.|!Justify| равномерно растягивает текст по всей ширине контейнера.
+
+                
+            """.trimIndent(),
+            highlightCode = listOf(
+                HighlightCode("@Composable", Color(0xFF3CEE0A)),
+                HighlightCode("Text(", Color(0xFF3CEE0A)),
+                HighlightCode(".Justify", Color.Cyan),
+                HighlightCode("textAlign", Color(0xFF3CEE0A)),
+                HighlightCode("fillMaxWidth", Color(0xFF3CEE0A)),
+                HighlightCode("//", Color(0xFF3CEE0A)),
+            ),
+            lambdaFun = { SimpleAlignJustify() },
+            code ="""
+@Composable
+fun TextAlignJustify() {
+
+    val text = "Text in jetpack Compose. ".repeat(10)
+
+    val modifier = Modifier
+        .padding(16.dp)
+        .fillMaxWidth()
+
+    Column {
+
+        //Без выравнивания
+        Text(
+            text = text,
+            modifier = modifier,
+            style = MaterialTheme.typography.bodyMedium,
+        )
+
+        //выравнивание строк по всей ширине контейнера, кроме последней
+        Text(
+            text = text + "(Justify)",
+            modifier = modifier,
+            style = MaterialTheme.typography.bodyMedium,
+            textAlign = TextAlign.Justify,
+        )
+
+    }
+
+}
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Больше информации смотрите ",
+                    textUrl = "\uD83D\uDCD6 Developers. TextAlign",
+                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/text/style/TextAlign"
+                ),
+            ),
+
+            ),
+        ExampleCode(
+            id =  9,
+            title = "Выравнивание по высоте",
+            comment = """
+Добавление дополнительного пространства в зависимости от высоты строки к верху первой строки, верху и низу последней строки.         
+               
+Конфигурация применяется только в том случае, если в тексте определена высота строки.
+               
+Функция обрезки доступна только в том случае, если |PlatformParagraphStyle.includeFontPadding| имеет значение |false|.
+               
+|trim| определяет, следует ли обрезать пространство, которое будет добавлено к верху первой строки и внизу последней строки.
+
+Возможные значения |trim|: 
+ |!Both| - Обрезает пространство, которое будет добавлено к верху первой строки и внизу последней строки из-за высоты строки.
+                 
+ |!FirstLineTop| - Обрезает пространство, которое будет добавлено к верхней части последней строки из-за высоты строки
+                  
+ |!LastLineBottom| - Обрезает пространство, которое будет добавлено к нижней части последней строки из-за высоты строки
+                  
+ |!None| - ет обрезки                
+                
+            """.trimIndent(),
+            highlightCode = listOf(
+                HighlightCode("@Composable", Color(0xFF3CEE0A)),
+                HighlightCode("Text(", Color(0xFF3CEE0A)),
+                HighlightCode("alignment", Color.Cyan),
+                HighlightCode("includeFontPadding", Color.Cyan),
+                HighlightCode("trim", Color.Cyan),
+                HighlightCode("false", Color.Yellow),
+                HighlightCode(".Center", Color.Yellow),
+                HighlightCode(".em", Color.Yellow),
+                HighlightCode(".LastLineBottom", Color.Yellow),
+                HighlightCode("lineHeightStyle", Color(0xFF3CEE0A)),
+                HighlightCode("lineHeight ", Color(0xFF3CEE0A)),
+                HighlightCode("platformStyle", Color(0xFF3CEE0A)),
+                HighlightCode("//", Color(0xFF3CEE0A)),
+            ),
+            lambdaFun = { TextAlignedHeight() },
+            code ="""
+@Composable
+fun TextAlignedHeight() {
+    val text = "Text in jetpack Compose. ".repeat(5)
+
+    val modifier = Modifier
+        .padding(16.dp)
+
+    Column {
+        //без выравнивания
+        Text(
+            text = text,
+            modifier = modifier,
+            style = MaterialTheme.typography.bodyMedium,
+        )
+
+        //выравнивание строки по заданной высоте
+        Text(
+            text = text,
+            modifier = modifier,
+            style = LocalTextStyle.current.merge(
+                TextStyle(
+                    lineHeight = 2.0.em,
+                    platformStyle = PlatformTextStyle(
+                        includeFontPadding = false
+                    ),
+                    lineHeightStyle = LineHeightStyle(
+                        alignment = LineHeightStyle.Alignment.Center,
+                        //обрезка низа последней строки
+                        trim = LineHeightStyle.Trim.LastLineBottom
+                    )
+                )
+            )
+        )
+    }
+
+}
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Больше информации смотрите ",
+                    textUrl = "\uD83D\uDCD6 Developers. LineHeightStyle",
+                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/text/style/LineHeightStyle"
+                ),
+            ),
+
+            ),
+
+        ExampleCode(
+            id = 11,
+            title = "Типы шрифтов",
+            comment = """
+                      
+ |Тип шрифта| определяется параметром |!fontFamily|
+ 
+ |FontFamily| предоставляет ряд встроенных констант:
+ 
+    |!Cursive| - курсивный, рукописный шрифт;
+ 
+    |!Monospace| -  моноширинный шрифт, все знаки (точнее, кегельные площадки знаков) имеют одинаковую ширину;
+ 
+    |!Serif| - шрифты с засечками;
+ 
+    |!SansSerif| - шрифты без засечек;
+ 
+    |!Default| - шрифт по умолчанию на текущей платформе.
+
+ Примеры шрифтов без засечек (sans-serif):
+ •|Arial|
+ •|Verdana|
+
+ Пример шрифта с засечками (serif):
+ •|Times New Roman|
+
+
+Шрифты |Serif| транслируют уверенность, устойчивость, надёжность, стабильность приверженность традициям.
+
+Шрифты |Sans Serif| транслируют инновационность, динамичность и доступность. Часто эти шрифты ассоциируются с минимализмом и лёгкостью: они довольно просты и лаконичны, выглядят современно и аккуратно.
+
+Преимущество |Sans Serif| заключается в |!адаптивности|: начертания без засечек проще масштабируются.
+
+|!Некоторые правила|:
+
+1.Не использовать более 3-4 шрифтов на одной странице.
+
+2.Не изменяйте шрифт в середине предложения, пока у вас нет очень веских оснований.
+
+3.Sans-serif шрифты являются основой приложения.
+
+                
+            """.trimIndent(),
+            highlightCode = listOf(
+                HighlightCode("@Composable", Color(0xFF3CEE0A)),
+                HighlightCode("Text(", Color(0xFF3CEE0A)),
+                HighlightCode("style", Color.Cyan),
+                HighlightCode(".Serif", Color.Yellow),
+                HighlightCode(".SansSerif", Color.Yellow),
+                HighlightCode(".Cursive", Color.Yellow),
+                HighlightCode(".Monospace", Color.Yellow),
+                HighlightCode(".Default", Color.Yellow),
+                HighlightCode("fontFamily", Color(0xFF3CEE0A)),
+                HighlightCode("merge", Color(0xFFD540EE)),
+                HighlightCode("//", Color(0xFF3CEE0A)),
+            ),
+            lambdaFun = { TextFontFamily() },
+            code ="""
+@Composable
+fun TextFontFamily() {
+
+    val modifier = Modifier
+        .padding(top = 16.dp)
+        .fillMaxWidth()
+
+    val style = MaterialTheme.typography.bodyMedium.merge(
+        TextStyle(
+            fontSize = 20.sp,
+            textAlign = TextAlign.Center,
+            //шрифт с засечками
+            fontFamily = FontFamily.Serif
+        )
+    )
+
+    Column()
+    {
+        Text(
+            text = "Text in jetpack Compose\n(Serif)",
+            modifier = modifier,
+            //шрифт с засечками
+            style = style,
+        )
+
+        Text(
+            text = "Text in jetpack Compose\n(SansSerif)",
+            modifier = modifier,
+            style = style.merge(
+                TextStyle(
+                    //шрифт без засечек
+                    fontFamily = FontFamily.SansSerif
+                )
+            )
+        )
+
+        Text(
+            text = "Text in jetpack Compose\n(Cursive)",
+            modifier = modifier,
+            style = style.merge(
+                TextStyle(
+                    //курсивный, рукописный шрифт
+                    fontFamily = FontFamily.Cursive
+                )
+            )
+        )
+
+        Text(
+            text = "Text in jetpack Compose\n(Monospace)",
+            modifier = modifier,
+            style = style.merge(
+                TextStyle(
+                    //моноширинный шрифт
+                    //(все знаки имеют одинаковую ширину)
+                    fontFamily = FontFamily.Monospace
+                )
+            )
+        )
+
+        Text(
+            text = "Text in jetpack Compose\n(Default)",
+            modifier = modifier,
+            style = style.merge(
+                TextStyle(
+                    //шрифт по умолчанию на текущей платформе
+                    fontFamily = FontFamily.Default
+                )
+            )
+        )
+
+    }
+
+}
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Больше информации смотрите ",
+                    textUrl = "\uD83D\uDCD6 Developers. Работа со шрифтами",
+                    url = "https://developer.android.com/develop/ui/compose/text/fonts?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Больше информации смотрите ",
+                    textUrl = "\uD83D\uDCD6 Developers. FontFamily",
+                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/text/font/FontFamily#summary"
+                ),
+            ),
+
+            ),
+
+        ExampleCode(
+            id = 12,
+            title = "Альтернативные шрифты",
+            comment = """
+Пользовательские шрифты с гарнитурами определяются в папке 
+ |!res/font|
+ 
+Выбрать и загрузить шрифт можно из сайта |!Google Fonts| и разместить в папку 
+ |!res/font|, при необходимости заменив заглавные символы на прописные.
+
+В файле |!ui/theme/Type.kt| 
+подключить загруженный новый шрифт, например:
+
+//шрифт курсивный для кириллицы    
+|val Cormorantinfant = FontFamily(
+    Font(R.font.cormorantinfant_regular, FontWeight.Normal),
+    Font(R.font.cormorantinfant_medium, FontWeight.Medium),
+    Font(R.font.cormorantinfant_bold, FontWeight.Bold),
+    Font(R.font.cormorantinfant_light, FontWeight.Light),
+    Font(R.font.cormorantinfant_italic, FontWeight.Normal,FontStyle.Italic),
+    Font(R.font.cormorantinfant_mediumitalic, FontWeight.Medium,FontStyle.Italic),
+    Font(R.font.cormorantinfant_bolditalic, FontWeight.Bold,FontStyle.Italic),
+    Font(R.font.cormorantinfant_lightitalic, FontWeight.Light,FontStyle.Italic),
+)|
+                   
+            """.trimIndent(),
+            highlightCode = listOf(
+                HighlightCode("@Composable", Color(0xFF3CEE0A)),
+                HighlightCode("Text(", Color(0xFF3CEE0A)),
+                HighlightCode("style", Color.Cyan),
+                HighlightCode("fontFamily", Color(0xFF3CEE0A)),
+                HighlightCode("merge", Color(0xFFD540EE)),
+                HighlightCode("Cormorantinfant", Color(0xFF3CEE0A)),
+                HighlightCode("Serif", Color(0xFF3CEE0A)),
+                HighlightCode("Cabin", Color(0xFF3CEE0A)),
+                HighlightCode("Poppins", Color(0xFF3CEE0A)),
+                HighlightCode("AbrilFatface", Color(0xFF3CEE0A)),
+                HighlightCode("Alice", Color(0xFF3CEE0A)),
+                HighlightCode("//", Color(0xFF3CEE0A)),
+            ),
+            lambdaFun = { TextFontFamalyAlternate() },
+            code ="""
+/*
+                 Альтернативные шрифты
+
+ ui/theme/Type.kt
+
+    val Cabin = FontFamily(
+        Font(R.font.cabin_regular, FontWeight.Normal),
+        Font(R.font.cabin_bold, FontWeight.Bold)
+    )
+
+    val Poppins = FontFamily(
+        Font(R.font.poppins_medium, FontWeight.Medium),
+        Font(R.font.poppins_regular, FontWeight.Normal),
+        Font(R.font.poppins_bold, FontWeight.Bold)
+    )
+
+    val AbrilFatface = FontFamily(
+        Font(R.font.abril_fatface_regular)
+    )
+
+    val Alice = FontFamily(
+        Font(R.font.alice_regular)
+    )
+
+//шрифт курсивный для кириллицы
+    val Cormorantinfant = FontFamily(
+        Font(R.font.cormorantinfant_regular, FontWeight.Normal),
+        Font(R.font.cormorantinfant_medium, FontWeight.Medium),
+        Font(R.font.cormorantinfant_bold, FontWeight.Bold),
+        Font(R.font.cormorantinfant_light, FontWeight.Light),
+        Font(R.font.cormorantinfant_italic, FontWeight.Normal,FontStyle.Italic),
+        Font(R.font.cormorantinfant_mediumitalic, FontWeight.Medium,FontStyle.Italic),
+        Font(R.font.cormorantinfant_bolditalic, FontWeight.Bold,FontStyle.Italic),
+        Font(R.font.cormorantinfant_lightitalic, FontWeight.Light,FontStyle.Italic),
+    )
+
+ */
+
+data class FontExample(
+    val nameFont: String = "",
+    val style: TextStyle = TextStyle()
+)
+
+@Composable
+fun TextFontFamalyAlternate() {
+
+    var style = MaterialTheme.typography.bodyMedium.merge(
+        TextStyle(
+            fontSize = 18.sp,
+            textAlign = TextAlign.Start,
+            fontFamily = Cabin,
+            fontStyle = FontStyle.Normal
+        )
+    )
+
+    val fonts = listOf(
+        FontExample(
+            nameFont = "Serif",
+            style = style.merge(
+                TextStyle(
+                    fontFamily = FontFamily.Serif
+                )
+            )
+        ),
+        FontExample(
+            nameFont = "Cabin",
+            style = style.merge(
+                TextStyle(
+                    fontFamily = Cabin
+                )
+            )
+        ),
+        FontExample(
+            nameFont = "Poppins",
+            style = style.merge(
+                TextStyle(
+                    fontFamily = Poppins
+                )
+            )
+        ),
+        FontExample(
+            nameFont = "AbrilFatface",
+            style = style.merge(
+                TextStyle(
+                    fontFamily = AbrilFatface
+                )
+            )
+        ),
+        FontExample(
+            nameFont = "Alice",
+            style = style.merge(
+                TextStyle(
+                    fontFamily = Alice
+                )
+            )
+        ),
+        FontExample(
+            nameFont = "Cormorantinfant",
+            style = style.merge(
+                TextStyle(
+                    fontFamily = Cormorantinfant
+                )
+            )
+        ),
+    )
+
+
+    var nameFont: String
+    val text = "Альтернативные шрифты."
+
+    Column {
+        for (item in fonts) {
+            nameFont = item.nameFont
+            style = item.style
+
+            Text(
+                text = "${'$'}text (${'$'}nameFont)",
+                style = style
+            )
+
+            Text(
+                text = "${'$'}text - Italic",
+                style = style.merge(
+                    TextStyle(
+                        fontStyle = FontStyle.Italic
+                    )
+                )
+            )
+
+            Text(
+                text = "${'$'}text - Bold",
+                style = style.merge(
+                    TextStyle(
+                        fontWeight = FontWeight.Bold,
+                    )
+                )
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+        }
+
+
+    }
+
+}
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Больше информации смотрите ",
+                    textUrl = "\uD83D\uDCD6 Developers. Работа со шрифтами",
+                    url = "https://developer.android.com/develop/ui/compose/text/fonts?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Выбрать и загрузить шрифт можно с ",
+                    textUrl = "\uD83D\uDCD6 Google Fonts",
+                    url = "https://fonts.google.com/?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Playwrite — это новое суперсемейство шрифтов, помогающее учащимся по всему миру изучать почерк.",
+                    textUrl = "\uD83D\uDCD6 Google Fonts blog",
+                    url = "https://fonts.googleblog.com/"
+                ),
+            ),
+
+            ),
+
 
         ExampleCode(
             id = 5,
@@ -895,410 +1527,6 @@ fun TextColorAny() {
             """.trimIndent()
         ),
 
-        ExampleCode(
-            id =  5,
-            title = "Стиль шрифта",
-            comment = """
-Стиль шрифта определяется параметром |fontStyle|:
- 
- FontStyle.|Italic| - наклоннный (курсивный) шрифт;
- 
- FontStyle.|Normal|  - стандартный шрифт.
-                
-            """.trimIndent(),
-            highlightCode = listOf(
-                HighlightCode("@Composable", Color(0xFF3CEE0A)),
-                HighlightCode("Text(", Color(0xFF3CEE0A)),
-                HighlightCode("fontStyle", Color(0xFF3CEE0A)),
-                HighlightCode("Normal", Color(0xFF00BCD4)),
-                HighlightCode("Italic", Color(0xFF00BCD4)),
-                HighlightCode("fontStyle", Color(0xFF3CEE0A)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
-            ),
-            lambdaFun = { ItalicText() },
-            code ="""
-@Composable
-fun ItalicText () {
-
-    val text = stringResource(
-        id = R.string.text_in_jetpack_compose
-    )
-
-    val padding = dimensionResource(
-        id = R.dimen.padding_medium
-    )
-
-    val modifier = Modifier
-        .padding(top = 16.dp)
-
-    Column(
-        modifier = Modifier
-            .padding(padding)
-            .fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-
-        Text(
-            text = text,
-            modifier = modifier,
-            fontStyle = FontStyle.Italic
-        )
-
-        Text(
-            text = text,
-            modifier = modifier,
-            fontStyle = FontStyle.Normal
-        )
-
-    }
-
-}
-            """.trimIndent(),
-            links = listOf(
-                TextClickLink(
-                    text = "Больше информации смотрите ",
-                    textUrl = "\uD83D\uDCD6 Developers. Стиль текста",
-                    url = "https://developer.android.com/develop/ui/compose/text/style-text?hl=ru"
-                ),
-            ),
-
-        ),
-        ExampleCode(
-            id =  6,
-            title = "Насыщенность шрифта",
-            comment = """
-Толщина шрифта задается параметром |fontWeight|, который представляет класс |!FontWeight|.
-                        
-Два способа установки толщины шрифта:
- 
- 1)передача числового значения от 1 до 1000;
- 
- 2)константы |FontWeight|:
- 
-    |Black| (Эквивалентно значению W900)
-
-    |Bold| (W700)
-
-    |ExtraBold| (W800)
-
-    |ExtraLight| (W200)
-
-    |Light| (W300)
-
-    |Medium| (W500)
-
-    |Normal| (W400 - значение по умолчанию)
-
-    |SemiBold| (W600)
-
-    |Thin| (W100)
-                          
-                
-            """.trimIndent(),
-            highlightCode = listOf(
-                HighlightCode("@Composable", Color(0xFF3CEE0A)),
-                HighlightCode("Text(", Color(0xFF3CEE0A)),
-                HighlightCode("fontWeight", Color(0xFF3CEE0A)),
-                HighlightCode(".Bold", Color(0xFF00BCD4)),
-                HighlightCode(".Normal", Color(0xFF00BCD4)),
-                HighlightCode(".ExtraBold", Color(0xFF00BCD4)),
-                HighlightCode(".Light", Color(0xFF00BCD4)),
-                HighlightCode(".W100", Color(0xFF00BCD4)),
-                HighlightCode(".W300", Color(0xFF00BCD4)),
-                HighlightCode(".W900", Color(0xFF00BCD4)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
-            ),
-            lambdaFun = { TextFontWeight() },
-            code ="""
-@Composable
-fun TextFontWeight() {
-
-    val text = stringResource(
-        id = R.string.text_in_jetpack_compose
-    )
-
-    val padding = dimensionResource(
-        id = R.dimen.padding_medium
-    )
-
-    val modifier = Modifier
-        .padding(top = 16.dp)
-
-    Column(
-        modifier = Modifier
-            .padding(padding)
-            .fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            text = "${'$'}text (Normal)",
-            modifier = modifier,
-            fontWeight = FontWeight.Normal
-        )
-        Text(
-            text = "${'$'}text (Bold)",
-            modifier = modifier,
-            fontWeight = FontWeight.Bold
-        )
-        Text(
-            text = "${'$'}text (ExtraBold)",
-            modifier = modifier,
-            fontWeight = FontWeight.ExtraBold
-        )
-        Text(
-            text = "${'$'}text (Light)",
-            modifier = modifier,
-            fontWeight = FontWeight.Light
-        )
-        Text(
-            text = "${'$'}text (W100)",
-            modifier = modifier,
-            fontWeight = FontWeight.W100
-        )
-        Text(
-            text = "${'$'}text (W300)",
-            modifier = modifier,
-            fontWeight = FontWeight.W300
-        )
-        Text(
-            text = "${'$'}text (W900)",
-            modifier = modifier,
-            fontWeight = FontWeight.W900
-        )
-
-    }
-
-}
-            """.trimIndent(),
-            links = listOf(
-                TextClickLink(
-                    text = "Больше информации смотрите ",
-                    textUrl = "\uD83D\uDCD6 Developers. Стиль текста",
-                    url = "https://developer.android.com/develop/ui/compose/text/style-text?hl=ru"
-                ),
-            ),
-
-        ),
-        ExampleCode(
-            id =  7,
-            title = "Выравнивание по ширине",
-            comment = """
-Параметр |textAlign| управляет выравниванием текста и представляет объект класса |TextAlign|. 
-
-В качестве значения этому параметру можно передать значение одного из свойств класса |TextAlign|:
-
- |!Center|: выравнивание текста по центру контейнера
-
- |!Justify|: текст равномерно растягивается по всей ширине контейнера
-
- |!End|: выравнивание текста по конечному краю контейнера (в зависимости от ориентации текста это может быть левый или правый край)
-
- |!Start|: выравнивание текста по началу контейнера (в зависимости от ориентации текста это может быть левый или правый край)
-
- |!Left|: выравнивание текста по левому краю контейнера
-
- |!Right|: выравнивание текста по правому краю контейнера                        
-                
-            """.trimIndent(),
-            highlightCode = listOf(
-                HighlightCode("@Composable", Color(0xFF3CEE0A)),
-                HighlightCode("Text(", Color(0xFF3CEE0A)),
-                HighlightCode("Left", Color(0xFF00BCD4)),
-                HighlightCode("Center", Color(0xFF00BCD4)),
-                HighlightCode("Right", Color(0xFF00BCD4)),
-                HighlightCode("textAlign", Color(0xFF3CEE0A)),
-                HighlightCode("fillMaxWidth", Color(0xFF3CEE0A)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
-            ),
-            lambdaFun = { SimpleAlign() },
-            code ="""
-@Composable
-fun AlignText () {
-    val modifier = Modifier
-        .padding(top = 16.dp)
-        .fillMaxWidth()
-
-    Column {
-        Text(
-            text = "Text in jetpack Compose",
-            fontSize = 15.sp,
-            textAlign = TextAlign.Left,
-            modifier = modifier
-        )
-        Text(
-            text = "Text in jetpack Compose",
-            fontSize = 15.sp,
-            textAlign = TextAlign.Center,
-            modifier = modifier
-        )
-        Text(
-            text = "Text in jetpack Compose",
-            fontSize = 15.sp,
-            textAlign = TextAlign.Right,
-            modifier = modifier
-        )
-
-    }
-}
-            """.trimIndent(),
-            links = listOf(
-                TextClickLink(
-                    text = "Установить выравнивание текста. ",
-                    textUrl = "\uD83D\uDCD6 Developers. Стиль абзаца",
-                    url = "https://developer.android.com/develop/ui/compose/text/style-paragraph?hl=ru"
-                ),
-                TextClickLink(
-                    text = "Больше информации смотрите ",
-                    textUrl = "\uD83D\uDCD6 Developers. TextAlign",
-                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/text/style/TextAlign"
-                ),
-            ),
-        ),
-
-        ExampleCode(
-            id =  8,
-            title = "Выравнивание по контейнеру",
-            comment = """
-Параметр |textAlign| управляет выравниванием текста. 
-
-  TextAlign.|!Justify| равномерно растягивает текст по всей ширине контейнера.
-
-                
-            """.trimIndent(),
-            highlightCode = listOf(
-                HighlightCode("@Composable", Color(0xFF3CEE0A)),
-                HighlightCode("Text(", Color(0xFF3CEE0A)),
-                HighlightCode(".Justify", Color.Cyan),
-                HighlightCode("textAlign", Color(0xFF3CEE0A)),
-                HighlightCode("fillMaxWidth", Color(0xFF3CEE0A)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
-            ),
-            lambdaFun = { SimpleAlignJustify() },
-            code ="""
-@Composable
-fun TextAlignJustify() {
-
-    val text = "Text in jetpack Compose. ".repeat(10)
-
-    val modifier = Modifier
-        .padding(16.dp)
-        .fillMaxWidth()
-
-    Column {
-
-        //Без выравнивания
-        Text(
-            text = text,
-            modifier = modifier,
-            style = MaterialTheme.typography.bodyMedium,
-        )
-
-        //выравнивание строк по всей ширине контейнера, кроме последней
-        Text(
-            text = text + "(Justify)",
-            modifier = modifier,
-            style = MaterialTheme.typography.bodyMedium,
-            textAlign = TextAlign.Justify,
-        )
-
-    }
-
-}
-            """.trimIndent(),
-            links = listOf(
-                TextClickLink(
-                    text = "Больше информации смотрите ",
-                    textUrl = "\uD83D\uDCD6 Developers. TextAlign",
-                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/text/style/TextAlign"
-                ),
-            ),
-
-        ),
-        ExampleCode(
-            id =  9,
-            title = "Выравнивание по высоте",
-            comment = """
-Добавление дополнительного пространства в зависимости от высоты строки к верху первой строки, верху и низу последней строки.         
-               
-Конфигурация применяется только в том случае, если в тексте определена высота строки.
-               
-Функция обрезки доступна только в том случае, если |PlatformParagraphStyle.includeFontPadding| имеет значение |false|.
-               
-|trim| определяет, следует ли обрезать пространство, которое будет добавлено к верху первой строки и внизу последней строки.
-
-Возможные значения |trim|: 
- |!Both| - Обрезает пространство, которое будет добавлено к верху первой строки и внизу последней строки из-за высоты строки.
-                 
- |!FirstLineTop| - Обрезает пространство, которое будет добавлено к верхней части последней строки из-за высоты строки
-                  
- |!LastLineBottom| - Обрезает пространство, которое будет добавлено к нижней части последней строки из-за высоты строки
-                  
- |!None| - ет обрезки                
-                
-            """.trimIndent(),
-            highlightCode = listOf(
-                HighlightCode("@Composable", Color(0xFF3CEE0A)),
-                HighlightCode("Text(", Color(0xFF3CEE0A)),
-                HighlightCode("alignment", Color.Cyan),
-                HighlightCode("includeFontPadding", Color.Cyan),
-                HighlightCode("trim", Color.Cyan),
-                HighlightCode("false", Color.Yellow),
-                HighlightCode(".Center", Color.Yellow),
-                HighlightCode(".em", Color.Yellow),
-                HighlightCode(".LastLineBottom", Color.Yellow),
-                HighlightCode("lineHeightStyle", Color(0xFF3CEE0A)),
-                HighlightCode("lineHeight ", Color(0xFF3CEE0A)),
-                HighlightCode("platformStyle", Color(0xFF3CEE0A)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
-            ),
-            lambdaFun = { TextAlignedHeight() },
-            code ="""
-@Composable
-fun TextAlignedHeight() {
-    val text = "Text in jetpack Compose. ".repeat(5)
-
-    val modifier = Modifier
-        .padding(16.dp)
-
-    Column {
-        //без выравнивания
-        Text(
-            text = text,
-            modifier = modifier,
-            style = MaterialTheme.typography.bodyMedium,
-        )
-
-        //выравнивание строки по заданной высоте
-        Text(
-            text = text,
-            modifier = modifier,
-            style = LocalTextStyle.current.merge(
-                TextStyle(
-                    lineHeight = 2.0.em,
-                    platformStyle = PlatformTextStyle(
-                        includeFontPadding = false
-                    ),
-                    lineHeightStyle = LineHeightStyle(
-                        alignment = LineHeightStyle.Alignment.Center,
-                        //обрезка низа последней строки
-                        trim = LineHeightStyle.Trim.LastLineBottom
-                    )
-                )
-            )
-        )
-    }
-
-}
-            """.trimIndent(),
-            links = listOf(
-                TextClickLink(
-                    text = "Больше информации смотрите ",
-                    textUrl = "\uD83D\uDCD6 Developers. LineHeightStyle",
-                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/text/style/LineHeightStyle"
-                ),
-            ),
-
-        ),
 
         ExampleCode(
             id =  10,
@@ -1328,7 +1556,7 @@ fun TextAlignedHeight() {
                 HighlightCode("shadow", Color(0xFF3CEE0A)),
                 HighlightCode("//", Color(0xFF3CEE0A)),
             ),
-            lambdaFun = { MessageShodow() },
+            lambdaFun = { ShadowDriver() },
             code ="""
 @Composable
 fun TextShadow() {
@@ -1358,363 +1586,16 @@ fun TextShadow() {
                     textUrl = "\uD83D\uDCD6 Developers. Стиль текста",
                     url = "https://developer.android.com/develop/ui/compose/text/style-text?hl=ru"
                 ),
-            ),
-
-        ),
-        ExampleCode(
-            id = 11,
-            title = "Типы шрифтов",
-            comment = """
-                      
- |Тип шрифта| определяется параметром |!fontFamily|
- 
- |FontFamily| предоставляет ряд встроенных констант:
- 
-    |!Cursive| - курсивный, рукописный шрифт;
- 
-    |!Monospace| -  моноширинный шрифт, все знаки (точнее, кегельные площадки знаков) имеют одинаковую ширину;
- 
-    |!Serif| - шрифты с засечками;
- 
-    |!SansSerif| - шрифты без засечек;
- 
-    |!Default| - шрифт по умолчанию на текущей платформе.
-
- Примеры шрифтов без засечек (sans-serif):
- •|Arial|
- •|Verdana|
-
- Пример шрифта с засечками (serif):
- •|Times New Roman|
-
-
-Шрифты |Serif| транслируют уверенность, устойчивость, надёжность, стабильность приверженность традициям.
-
-Шрифты |Sans Serif| транслируют инновационность, динамичность и доступность. Часто эти шрифты ассоциируются с минимализмом и лёгкостью: они довольно просты и лаконичны, выглядят современно и аккуратно.
-
-Преимущество |Sans Serif| заключается в |!адаптивности|: начертания без засечек проще масштабируются.
-
-|!Некоторые правила|:
-
-1.Не использовать более 3-4 шрифтов на одной странице.
-
-2.Не изменяйте шрифт в середине предложения, пока у вас нет очень веских оснований.
-
-3.Sans-serif шрифты являются основой приложения.
-
-                
-            """.trimIndent(),
-            highlightCode = listOf(
-                HighlightCode("@Composable", Color(0xFF3CEE0A)),
-                HighlightCode("Text(", Color(0xFF3CEE0A)),
-                HighlightCode("style", Color.Cyan),
-                HighlightCode(".Serif", Color.Yellow),
-                HighlightCode(".SansSerif", Color.Yellow),
-                HighlightCode(".Cursive", Color.Yellow),
-                HighlightCode(".Monospace", Color.Yellow),
-                HighlightCode(".Default", Color.Yellow),
-                HighlightCode("fontFamily", Color(0xFF3CEE0A)),
-                HighlightCode("merge", Color(0xFFD540EE)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
-            ),
-            lambdaFun = { TextFontFamily() },
-            code ="""
-@Composable
-fun TextFontFamily() {
-
-    val modifier = Modifier
-        .padding(top = 16.dp)
-        .fillMaxWidth()
-
-    val style = MaterialTheme.typography.bodyMedium.merge(
-        TextStyle(
-            fontSize = 20.sp,
-            textAlign = TextAlign.Center,
-            //шрифт с засечками
-            fontFamily = FontFamily.Serif
-        )
-    )
-
-    Column()
-    {
-        Text(
-            text = "Text in jetpack Compose\n(Serif)",
-            modifier = modifier,
-            //шрифт с засечками
-            style = style,
-        )
-
-        Text(
-            text = "Text in jetpack Compose\n(SansSerif)",
-            modifier = modifier,
-            style = style.merge(
-                TextStyle(
-                    //шрифт без засечек
-                    fontFamily = FontFamily.SansSerif
-                )
-            )
-        )
-
-        Text(
-            text = "Text in jetpack Compose\n(Cursive)",
-            modifier = modifier,
-            style = style.merge(
-                TextStyle(
-                    //курсивный, рукописный шрифт
-                    fontFamily = FontFamily.Cursive
-                )
-            )
-        )
-
-        Text(
-            text = "Text in jetpack Compose\n(Monospace)",
-            modifier = modifier,
-            style = style.merge(
-                TextStyle(
-                    //моноширинный шрифт
-                    //(все знаки имеют одинаковую ширину)
-                    fontFamily = FontFamily.Monospace
-                )
-            )
-        )
-
-        Text(
-            text = "Text in jetpack Compose\n(Default)",
-            modifier = modifier,
-            style = style.merge(
-                TextStyle(
-                    //шрифт по умолчанию на текущей платформе
-                    fontFamily = FontFamily.Default
-                )
-            )
-        )
-
-    }
-
-}
-            """.trimIndent(),
-            links = listOf(
                 TextClickLink(
-                    text = "Больше информации смотрите ",
-                    textUrl = "\uD83D\uDCD6 Developers. Работа со шрифтами",
-                    url = "https://developer.android.com/develop/ui/compose/text/fonts?hl=ru"
-                ),
-                TextClickLink(
-                    text = "Больше информации смотрите ",
-                    textUrl = "\uD83D\uDCD6 Developers. FontFamily",
-                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/text/font/FontFamily#summary"
+                    text = "Открывайте мир через призму творчества авторов на ",
+                    textUrl = "\uD83D\uDCD6 Pixabay ",
+                    url = "https://pixabay.com/ru/photos/%D0%BC%D0%BE%D0%BB%D0%BD%D0%B8%D1%8F-%D0%B1%D1%83%D1%80%D1%8F-%D0%BD%D0%B5%D0%B1%D0%BE-%D0%BE%D0%B1%D0%BB%D0%B0%D0%BA%D0%BE-%D0%B3%D0%BE%D1%80%D0%B0-7401119/"
                 ),
             ),
 
         ),
 
-        ExampleCode(
-            id = 12,
-            title = "Альтернативные шрифты",
-            comment = """
-Пользовательские шрифты с гарнитурами определяются в папке 
- |!res/font|
- 
-Выбрать и загрузить шрифт можно из сайта |!Google Fonts| и разместить в папку 
- |!res/font|, при необходимости заменив заглавные символы на прописные.
 
-В файле |!ui/theme/Type.kt| 
-подключить загруженный новый шрифт, например:
-
-//шрифт курсивный для кириллицы    
-|val Cormorantinfant = FontFamily(
-    Font(R.font.cormorantinfant_regular, FontWeight.Normal),
-    Font(R.font.cormorantinfant_medium, FontWeight.Medium),
-    Font(R.font.cormorantinfant_bold, FontWeight.Bold),
-    Font(R.font.cormorantinfant_light, FontWeight.Light),
-    Font(R.font.cormorantinfant_italic, FontWeight.Normal,FontStyle.Italic),
-    Font(R.font.cormorantinfant_mediumitalic, FontWeight.Medium,FontStyle.Italic),
-    Font(R.font.cormorantinfant_bolditalic, FontWeight.Bold,FontStyle.Italic),
-    Font(R.font.cormorantinfant_lightitalic, FontWeight.Light,FontStyle.Italic),
-)|
-                   
-            """.trimIndent(),
-            highlightCode = listOf(
-                HighlightCode("@Composable", Color(0xFF3CEE0A)),
-                HighlightCode("Text(", Color(0xFF3CEE0A)),
-                HighlightCode("style", Color.Cyan),
-                HighlightCode("fontFamily", Color(0xFF3CEE0A)),
-                HighlightCode("merge", Color(0xFFD540EE)),
-                HighlightCode("Cormorantinfant", Color(0xFF3CEE0A)),
-                HighlightCode("Serif", Color(0xFF3CEE0A)),
-                HighlightCode("Cabin", Color(0xFF3CEE0A)),
-                HighlightCode("Poppins", Color(0xFF3CEE0A)),
-                HighlightCode("AbrilFatface", Color(0xFF3CEE0A)),
-                HighlightCode("Alice", Color(0xFF3CEE0A)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
-            ),
-            lambdaFun = { TextFontFamalyAlternate() },
-            code ="""
-/*
-                 Альтернативные шрифты
-
- ui/theme/Type.kt
-
-    val Cabin = FontFamily(
-        Font(R.font.cabin_regular, FontWeight.Normal),
-        Font(R.font.cabin_bold, FontWeight.Bold)
-    )
-
-    val Poppins = FontFamily(
-        Font(R.font.poppins_medium, FontWeight.Medium),
-        Font(R.font.poppins_regular, FontWeight.Normal),
-        Font(R.font.poppins_bold, FontWeight.Bold)
-    )
-
-    val AbrilFatface = FontFamily(
-        Font(R.font.abril_fatface_regular)
-    )
-
-    val Alice = FontFamily(
-        Font(R.font.alice_regular)
-    )
-
-//шрифт курсивный для кириллицы
-    val Cormorantinfant = FontFamily(
-        Font(R.font.cormorantinfant_regular, FontWeight.Normal),
-        Font(R.font.cormorantinfant_medium, FontWeight.Medium),
-        Font(R.font.cormorantinfant_bold, FontWeight.Bold),
-        Font(R.font.cormorantinfant_light, FontWeight.Light),
-        Font(R.font.cormorantinfant_italic, FontWeight.Normal,FontStyle.Italic),
-        Font(R.font.cormorantinfant_mediumitalic, FontWeight.Medium,FontStyle.Italic),
-        Font(R.font.cormorantinfant_bolditalic, FontWeight.Bold,FontStyle.Italic),
-        Font(R.font.cormorantinfant_lightitalic, FontWeight.Light,FontStyle.Italic),
-    )
-
- */
-
-data class FontExample(
-    val nameFont: String = "",
-    val style: TextStyle = TextStyle()
-)
-
-@Composable
-fun TextFontFamalyAlternate() {
-
-    var style = MaterialTheme.typography.bodyMedium.merge(
-        TextStyle(
-            fontSize = 18.sp,
-            textAlign = TextAlign.Start,
-            fontFamily = Cabin,
-            fontStyle = FontStyle.Normal
-        )
-    )
-
-    val fonts = listOf(
-        FontExample(
-            nameFont = "Serif",
-            style = style.merge(
-                TextStyle(
-                    fontFamily = FontFamily.Serif
-                )
-            )
-        ),
-        FontExample(
-            nameFont = "Cabin",
-            style = style.merge(
-                TextStyle(
-                    fontFamily = Cabin
-                )
-            )
-        ),
-        FontExample(
-            nameFont = "Poppins",
-            style = style.merge(
-                TextStyle(
-                    fontFamily = Poppins
-                )
-            )
-        ),
-        FontExample(
-            nameFont = "AbrilFatface",
-            style = style.merge(
-                TextStyle(
-                    fontFamily = AbrilFatface
-                )
-            )
-        ),
-        FontExample(
-            nameFont = "Alice",
-            style = style.merge(
-                TextStyle(
-                    fontFamily = Alice
-                )
-            )
-        ),
-        FontExample(
-            nameFont = "Cormorantinfant",
-            style = style.merge(
-                TextStyle(
-                    fontFamily = Cormorantinfant
-                )
-            )
-        ),
-    )
-
-
-    var nameFont: String
-    val text = "Альтернативные шрифты."
-
-    Column {
-        for (item in fonts) {
-            nameFont = item.nameFont
-            style = item.style
-
-            Text(
-                text = "${'$'}text (${'$'}nameFont)",
-                style = style
-            )
-
-            Text(
-                text = "${'$'}text - Italic",
-                style = style.merge(
-                    TextStyle(
-                        fontStyle = FontStyle.Italic
-                    )
-                )
-            )
-
-            Text(
-                text = "${'$'}text - Bold",
-                style = style.merge(
-                    TextStyle(
-                        fontWeight = FontWeight.Bold,
-                    )
-                )
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
-        }
-
-
-    }
-
-}
-            """.trimIndent(),
-            links = listOf(
-                TextClickLink(
-                    text = "Больше информации смотрите ",
-                    textUrl = "\uD83D\uDCD6 Developers. Работа со шрифтами",
-                    url = "https://developer.android.com/develop/ui/compose/text/fonts?hl=ru"
-                ),
-                TextClickLink(
-                    text = "Выбрать и загрузить шрифт можно с ",
-                    textUrl = "\uD83D\uDCD6 Google Fonts",
-                    url = "https://fonts.google.com/?hl=ru"
-                ),
-                TextClickLink(
-                    text = "Playwrite — это новое суперсемейство шрифтов, помогающее учащимся по всему миру изучать почерк.",
-                    textUrl = "\uD83D\uDCD6 Google Fonts blog",
-                    url = "https://fonts.googleblog.com/"
-                ),
-            ),
-
-        ),
         ExampleCode(
             id = 13,
             title = "Текст с различными стилями",

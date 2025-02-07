@@ -54,8 +54,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.pvmprog.mytextwithcompose.R
-import com.pvmprog.mytextwithcompose.ui.examples.MessageGradient
-import com.pvmprog.mytextwithcompose.ui.examples.MessageShodow
+import com.pvmprog.mytextwithcompose.ui.examples.MessageShadow
 import com.pvmprog.mytextwithcompose.ui.service.PrintDateTime
 import com.pvmprog.mytextwithcompose.ui.shader.SHADER_GRADIENT
 import com.pvmprog.mytextwithcompose.ui.theme.Alice
@@ -160,7 +159,7 @@ fun GreetingScreen2(
                     verticalArrangement = Arrangement.SpaceAround
 
                 ) {
-                    MessageShodow(
+                    MessageShadow(
                         message = message,
                         modifier = Modifier
                             .padding(16.dp),

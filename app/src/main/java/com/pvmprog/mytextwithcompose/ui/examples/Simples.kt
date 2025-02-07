@@ -326,7 +326,7 @@ fun TextAlignedHeight() {
 
     val text = "Без выравнивания. ".repeat(10)
 
-    val text2 = "Выравнивание строки по заданной высоте. ".repeat(10)
+    val text2 = "Выравнивание строки по заданной высоте строки. ".repeat(10)
 
     val padding = dimensionResource(
         id = R.dimen.padding_medium

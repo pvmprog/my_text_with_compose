@@ -24,16 +24,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.pvmprog.mytextwithcompose.R
+import com.pvmprog.mytextwithcompose.data.locale.DataColor
 import com.pvmprog.mytextwithcompose.ui.theme.MyTextWithComposeTheme
 
 @Composable
 fun ColorSelect(
-    colorCurrent:Color = Color.Cyan,
+    colorCurrent:Color = DataColor.colors[0],
+    colors: List<Color> = DataColor.colors,
+    title: String = "Выберите цвет",
     onColorSelect: (Color) -> Unit = {}
 ){
-    val colors = remember {
-        listOf(Color.Cyan, Color.Yellow, Color.Green, Color.Blue, Color.Magenta, Color.Red,  Color.LightGray)
-    }
 
     val padding = dimensionResource(
         id = R.dimen.padding_medium
@@ -48,7 +48,7 @@ fun ColorSelect(
         verticalArrangement = Arrangement.spacedBy(padding)
 
     ) {
-        Text(text = "Выберите цвет", fontSize = 22.sp)
+        Text(text = title, fontSize = 22.sp)
         for(color in colors){
             Box(
                 modifier = Modifier

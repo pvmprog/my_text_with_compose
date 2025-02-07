@@ -4,7 +4,6 @@ import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -15,19 +14,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.pvmprog.mytextwithcompose.R
-import com.pvmprog.mytextwithcompose.ui.service.OutTextTitleMessage
 import com.pvmprog.mytextwithcompose.ui.theme.Alice
 import com.pvmprog.mytextwithcompose.ui.theme.MyTextWithComposeTheme
 
 @Composable
-fun MessageShodow(
+fun MessageShadow(
     message:String = stringResource(R.string.text_compose),
     style: TextStyle = TextStyle(
         textAlign = TextAlign.Center,
@@ -61,7 +57,7 @@ fun MessageShodowPreview() {
         Surface(
             color = MaterialTheme.colorScheme.background
         ) {
-            MessageShodow()
+            MessageShadow()
         }
 
     }
