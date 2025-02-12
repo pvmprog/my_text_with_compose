@@ -19,5 +19,6 @@
     <string name="logo_app">logo app</string>
     <string name="examples_jetpack_compose">Примеры текста в Jetpack Compose.</string>
     <string name="recommended_links">Recommended Links</string>
+    <string name="сontrast">Контраст: %1$.2f </string>
 
 </resources>

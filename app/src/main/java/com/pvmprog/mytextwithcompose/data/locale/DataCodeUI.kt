@@ -6,15 +6,21 @@ import com.pvmprog.mytextwithcompose.data.locale.DataHighCode.highCodeList
 import com.pvmprog.mytextwithcompose.data.model.ExampleCode
 import com.pvmprog.mytextwithcompose.data.model.HighlightCode
 import com.pvmprog.mytextwithcompose.data.model.TextClickLink
+import com.pvmprog.mytextwithcompose.ui.examples.AnimationSizeText
 import com.pvmprog.mytextwithcompose.ui.examples.SimpleAlign
 import com.pvmprog.mytextwithcompose.ui.examples.AnnotatedHtmlString
+import com.pvmprog.mytextwithcompose.ui.examples.BackgroundDriver
+import com.pvmprog.mytextwithcompose.ui.examples.DrawAnimeScaleAText
+import com.pvmprog.mytextwithcompose.ui.examples.DrawTextCanvas
 import com.pvmprog.mytextwithcompose.ui.examples.ExampleFontSize
 import com.pvmprog.mytextwithcompose.ui.examples.GradientDriver
+import com.pvmprog.mytextwithcompose.ui.examples.GradientOverview
 import com.pvmprog.mytextwithcompose.ui.examples.TextFontWeight
 import com.pvmprog.mytextwithcompose.ui.examples.ItalicText
 import com.pvmprog.mytextwithcompose.ui.examples.MessageShadow
 import com.pvmprog.mytextwithcompose.ui.examples.SimpleLimit
 import com.pvmprog.mytextwithcompose.ui.examples.MultipleStylesInText
+import com.pvmprog.mytextwithcompose.ui.examples.ScaleDraver
 import com.pvmprog.mytextwithcompose.ui.examples.ShadowDriver
 import com.pvmprog.mytextwithcompose.ui.examples.SimpleWithPadding
 import com.pvmprog.mytextwithcompose.ui.examples.Simple
@@ -336,6 +342,97 @@ fun ExampleFontSize() {
         ),
 
         ExampleCode(
+            id = 3,
+            title = "Анимация размера",
+            comment = """
+Экземпляр |InfiniteTransition| используется для управления дочерними анимациями.
+
+    val infiniteTransition = rememberInfiniteTransition()
+
+Для анимации размера шрифта необходимо создать дочернюю анимацию типа |float|, как часть |InfiniteTransition|.
+
+val size by
+    infiniteTransition.animateFloat(
+        |initialValue| = 10f, |! Начальный размер шрифта| 
+        |targetValue| = 120f, |! Конечный размер шрифта|
+        animationSpec =
+        infiniteRepeatable(
+            |!// Бесконечное повторение анимации длительностью 10000 мс с использованием кривой замедления LinearOutSlowInEasing|
+            animation = tween(10000, easing = LinearEasing),
+            |!// После каждой итерации анимации (т. е. каждые 10000 мс) анимация будет начинаться  реверсном порядке, т.е. с [targetValue]|
+            repeatMode = RepeatMode.Reverse
+        )
+    )
+     
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Больше информации смотрите в ",
+                    textUrl = "\uD83D\uDCD6 Стиль текста",
+                    url = "https://developer.android.com/develop/ui/compose/text/style-text?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Анимации в Compose",
+                    textUrl = "\uD83D\uDCD6 Animations in Compose ",
+                    url = "https://developer.android.com/develop/ui/compose/animation/introduction"
+                ),
+            ),
+
+            nameFun = "",
+            highlightCode = highCodeList + listOf(
+                HighlightCode("AnimationSizeText", Color(0xFFffc530)),
+                HighlightCode("fontSize", Color(0xFF3CEE0A)),
+                HighlightCode("initialValue", Color(0xFF3CEE0A)),
+                HighlightCode("targetValue", Color(0xFF3CEE0A)),
+                HighlightCode("10f", Color(0xFF5EADD6)),
+                HighlightCode("170f", Color(0xFF5EADD6)),
+                HighlightCode("//", Color(0xFF3CEE0A)),
+            ),
+            lambdaFun = { AnimationSizeText() },
+            code = """
+@Composable
+fun AnimationSizeText(
+    text: String ="Ш Б",
+){
+
+    // Создает экземпляр [InfiniteTransition] для управления дочерними анимациями
+    val infiniteTransition = rememberInfiniteTransition()
+
+    // Создает дочернюю анимацию типа float как часть [InfiniteTransition].
+    val size by
+    infiniteTransition.animateFloat(
+        initialValue = 10f,
+        targetValue = 170f,
+        animationSpec =
+        infiniteRepeatable(
+            // Бесконечное повторение анимации длительностью 5000 мс с использованием кривой замедления LinearOutSlowInEasing
+            animation = tween(20000, easing = LinearEasing),
+            // После каждой итерации анимации (т. е. каждые 5000 мс) анимация будет начинаться снова с [initialValue]
+            repeatMode = RepeatMode.Reverse
+        )
+    )
+
+
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.Black),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = text,
+            fontSize = size.sp,
+            color = Color.White,
+            fontWeight = FontWeight.ExtraBold
+            )
+    }
+
+}
+                
+            """.trimIndent()
+        ),
+
+        ExampleCode(
             id = 4,
             title = "Типографика Material 3",
             comment = """
@@ -494,10 +591,8 @@ fun TypographyStyles() {
  FontStyle.|Normal|  - стандартный шрифт.
                 
             """.trimIndent(),
-            highlightCode = listOf(
-                HighlightCode("@Composable", Color(0xFF3CEE0A)),
-                HighlightCode("Text(", Color(0xFF3CEE0A)),
-                HighlightCode("fontStyle", Color(0xFF3CEE0A)),
+            highlightCode = highCodeList + listOf(
+                HighlightCode("ItalicText", Color(0xFFffc530)),
                 HighlightCode("Normal", Color(0xFF00BCD4)),
                 HighlightCode("Italic", Color(0xFF00BCD4)),
                 HighlightCode("fontStyle", Color(0xFF3CEE0A)),
@@ -583,9 +678,8 @@ fun ItalicText () {
                           
                 
             """.trimIndent(),
-            highlightCode = listOf(
-                HighlightCode("@Composable", Color(0xFF3CEE0A)),
-                HighlightCode("Text(", Color(0xFF3CEE0A)),
+            highlightCode = highCodeList + listOf(
+                HighlightCode("TextFontWeight", Color(0xFFffc530)),
                 HighlightCode("fontWeight", Color(0xFF3CEE0A)),
                 HighlightCode(".Bold", Color(0xFF00BCD4)),
                 HighlightCode(".Normal", Color(0xFF00BCD4)),
@@ -667,6 +761,61 @@ fun TextFontWeight() {
             ),
 
             ),
+
+        ExampleCode(
+            id = 19,
+            title = "Ограничение строк",
+            comment = """
+|overflow| определяет, как будет обрабатываться текст при его выходе за границы контейнера. 
+
+Этот параметр принимает значение класса |TextOverflow|:
+
+|Clip|: текст усекается (по умолчанию)
+
+|Ellipsis|: текст усекается, а в конце текста добавляется многоточие
+
+|Visible|: весь текст может отображаться     
+                   
+Примечание. 
+  Текст, который выходит за пределы своих границ с помощью |Visible|, может быть обрезан другими модификаторами, такими как Modifier.|clipToBounds|
+                
+            """.trimIndent(),
+            highlightCode = highCodeList + listOf(
+                HighlightCode("LongText", Color(0xFFffc530)),
+                HighlightCode("overflow", Color(0xFF3CEE0A)),
+                HighlightCode("maxLines", Color(0xFF3CEE0A)),
+                HighlightCode("//", Color(0xFF3CEE0A)),
+            ),
+            lambdaFun = { SimpleLimit() },
+            code ="""
+@Composable
+fun SimpleLimit() {
+
+    val padding = dimensionResource(
+        id = R.dimen.padding_medium
+    )
+
+    LazyColumn(
+        modifier = Modifier
+            .border(1.dp, MaterialTheme.colorScheme.onBackground)
+            .padding(padding),
+    ) {
+        item {
+            Text(
+                text = "Очень длинный-длинный текст ".repeat(20),
+                overflow = TextOverflow.Ellipsis,
+                maxLines = 2,
+            )
+
+        }
+
+    }
+
+}
+            """.trimIndent()
+        ),
+
+
         ExampleCode(
             id =  7,
             title = "Выравнивание по ширине",
@@ -688,45 +837,63 @@ fun TextFontWeight() {
  |!Right|: выравнивание текста по правому краю контейнера                        
                 
             """.trimIndent(),
-            highlightCode = listOf(
-                HighlightCode("@Composable", Color(0xFF3CEE0A)),
-                HighlightCode("Text(", Color(0xFF3CEE0A)),
-                HighlightCode("Left", Color(0xFF00BCD4)),
-                HighlightCode("Center", Color(0xFF00BCD4)),
-                HighlightCode("Right", Color(0xFF00BCD4)),
+            highlightCode = highCodeList + listOf(
+                HighlightCode("LongText", Color(0xFFffc530)),
+                HighlightCode(".Left", Color(0xFF00BCD4)),
+                HighlightCode(".Center", Color(0xFF00BCD4)),
+                HighlightCode(".Right", Color(0xFF00BCD4)),
                 HighlightCode("textAlign", Color(0xFF3CEE0A)),
-                HighlightCode("fillMaxWidth", Color(0xFF3CEE0A)),
                 HighlightCode("//", Color(0xFF3CEE0A)),
             ),
             lambdaFun = { SimpleAlign() },
             code ="""
 @Composable
-fun AlignText () {
+fun SimpleAlign() {
+    val text = stringResource(
+        id = R.string.hello_world
+    )
+
+    val padding = dimensionResource(
+        id = R.dimen.padding_medium
+    )
+
     val modifier = Modifier
         .padding(top = 16.dp)
-        .fillMaxWidth()
+        .fillMaxWidth() // !!!
 
-    Column {
-        Text(
-            text = "Text in jetpack Compose",
-            fontSize = 15.sp,
-            textAlign = TextAlign.Left,
-            modifier = modifier
-        )
-        Text(
-            text = "Text in jetpack Compose",
-            fontSize = 15.sp,
-            textAlign = TextAlign.Center,
-            modifier = modifier
-        )
-        Text(
-            text = "Text in jetpack Compose",
-            fontSize = 15.sp,
-            textAlign = TextAlign.Right,
-            modifier = modifier
-        )
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background),
+        contentAlignment = Alignment.Center
+    ) {
+        LazyColumn(
+            modifier = Modifier
+                .border(1.dp, MaterialTheme.colorScheme.onBackground)
+                .padding(padding),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            item {
+                Text(
+                    text = text + " (Left)",
+                    textAlign = TextAlign.Left,
+                    modifier = modifier
+                )
+                Text(
+                    text = text + " (Center)",
+                    textAlign = TextAlign.Center,
+                    modifier = modifier
+                )
+                Text(
+                    text = text + " (Right)",
+                    textAlign = TextAlign.Right,
+                    modifier = modifier
+                )
 
+            }
+        }
     }
+
 }
             """.trimIndent(),
             links = listOf(
@@ -753,43 +920,45 @@ fun AlignText () {
 
                 
             """.trimIndent(),
-            highlightCode = listOf(
-                HighlightCode("@Composable", Color(0xFF3CEE0A)),
-                HighlightCode("Text(", Color(0xFF3CEE0A)),
-                HighlightCode(".Justify", Color.Cyan),
-                HighlightCode("textAlign", Color(0xFF3CEE0A)),
-                HighlightCode("fillMaxWidth", Color(0xFF3CEE0A)),
+            highlightCode = highCodeList + listOf(
+                HighlightCode("TextAlignJustify", Color(0xFFffc530)),
+                HighlightCode(".Justify", Color(0xFF3CEE0A)),
                 HighlightCode("//", Color(0xFF3CEE0A)),
             ),
             lambdaFun = { SimpleAlignJustify() },
             code ="""
 @Composable
-fun TextAlignJustify() {
+fun SimpleAlignJustify() {
 
-    val text = "Text in jetpack Compose. ".repeat(10)
+    val text = "Без выравнивания. ".repeat(10)
 
-    val modifier = Modifier
-        .padding(16.dp)
-        .fillMaxWidth()
+    val text2 = "Выравнивание строк по всей ширине контейнера. ".repeat(10)
 
-    Column {
+    val padding = dimensionResource(
+        id = R.dimen.padding_medium
+    )
 
-        //Без выравнивания
-        Text(
-            text = text,
-            modifier = modifier,
-            style = MaterialTheme.typography.bodyMedium,
-        )
 
-        //выравнивание строк по всей ширине контейнера, кроме последней
-        Text(
-            text = text + "(Justify)",
-            modifier = modifier,
-            style = MaterialTheme.typography.bodyMedium,
-            textAlign = TextAlign.Justify,
-        )
+    LazyColumn(
+        modifier = Modifier
+            .border(1.dp, MaterialTheme.colorScheme.onBackground)
+            .padding(padding),
+    ) {
+        item {
+            //Без выравнивания
+            Text(text = text)
+            
+            Spacer(modifier = Modifier.padding(padding))
 
+            //выравнивание по всей ширине контейнера, кроме последней
+            Text(
+                text = text2,
+                textAlign = TextAlign.Justify,
+            )
+
+        }
     }
+
 
 }
             """.trimIndent(),
@@ -824,59 +993,66 @@ fun TextAlignJustify() {
  |!None| - ет обрезки                
                 
             """.trimIndent(),
-            highlightCode = listOf(
-                HighlightCode("@Composable", Color(0xFF3CEE0A)),
-                HighlightCode("Text(", Color(0xFF3CEE0A)),
-                HighlightCode("alignment", Color.Cyan),
-                HighlightCode("includeFontPadding", Color.Cyan),
-                HighlightCode("trim", Color.Cyan),
-                HighlightCode("false", Color.Yellow),
-                HighlightCode(".Center", Color.Yellow),
-                HighlightCode(".em", Color.Yellow),
-                HighlightCode(".LastLineBottom", Color.Yellow),
-                HighlightCode("lineHeightStyle", Color(0xFF3CEE0A)),
-                HighlightCode("lineHeight ", Color(0xFF3CEE0A)),
-                HighlightCode("platformStyle", Color(0xFF3CEE0A)),
+            highlightCode = highCodeList + listOf(
+                HighlightCode("TextAlignedHeight", Color(0xFFffc530)),
+                HighlightCode("lineHeightStyle =", Color(0xFF3CEE0A)),
+                HighlightCode("lineHeight =", Color(0xFF3CEE0A)),
                 HighlightCode("//", Color(0xFF3CEE0A)),
             ),
             lambdaFun = { TextAlignedHeight() },
             code ="""
 @Composable
 fun TextAlignedHeight() {
-    val text = "Text in jetpack Compose. ".repeat(5)
 
-    val modifier = Modifier
-        .padding(16.dp)
+    val text = "Без выравнивания. ".repeat(10)
 
-    Column {
-        //без выравнивания
-        Text(
-            text = text,
-            modifier = modifier,
-            style = MaterialTheme.typography.bodyMedium,
-        )
+    val text2 = "Выравнивание строки по заданной высоте строки. ".repeat(10)
 
-        //выравнивание строки по заданной высоте
-        Text(
-            text = text,
-            modifier = modifier,
-            style = LocalTextStyle.current.merge(
-                TextStyle(
-                    lineHeight = 2.0.em,
-                    platformStyle = PlatformTextStyle(
-                        includeFontPadding = false
-                    ),
-                    lineHeightStyle = LineHeightStyle(
-                        alignment = LineHeightStyle.Alignment.Center,
-                        //обрезка низа последней строки
-                        trim = LineHeightStyle.Trim.LastLineBottom
+    val padding = dimensionResource(
+        id = R.dimen.padding_medium
+    )
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .border(1.dp, MaterialTheme.colorScheme.onBackground)
+            .padding(padding),
+    ) {
+        item {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(padding)
+            ) {
+                //без выравнивания
+                Text(
+                    text = text,
+                )
+
+                //выравнивание строки по заданной высоте
+                Text(
+                    text = text2,
+                    style = LocalTextStyle.current.merge(
+                        TextStyle(
+                            lineHeight = 2.0.em,
+                            platformStyle = PlatformTextStyle(
+                                includeFontPadding = false
+                            ),
+                            lineHeightStyle = LineHeightStyle(
+                                alignment = LineHeightStyle.Alignment.Center,
+                                //обрезка низа последней строки
+                                trim = LineHeightStyle.Trim.LastLineBottom
+                            )
+                        )
                     )
                 )
-            )
-        )
+
+            }
+
+        }
+
     }
 
 }
+
             """.trimIndent(),
             links = listOf(
                 TextClickLink(
@@ -931,17 +1107,14 @@ fun TextAlignedHeight() {
 
                 
             """.trimIndent(),
-            highlightCode = listOf(
-                HighlightCode("@Composable", Color(0xFF3CEE0A)),
-                HighlightCode("Text(", Color(0xFF3CEE0A)),
-                HighlightCode("style", Color.Cyan),
+            highlightCode = highCodeList +  listOf(
+                HighlightCode("TextFontFamily", Color(0xFFffc530)),
                 HighlightCode(".Serif", Color.Yellow),
                 HighlightCode(".SansSerif", Color.Yellow),
                 HighlightCode(".Cursive", Color.Yellow),
                 HighlightCode(".Monospace", Color.Yellow),
                 HighlightCode(".Default", Color.Yellow),
-                HighlightCode("fontFamily", Color(0xFF3CEE0A)),
-                HighlightCode("merge", Color(0xFFD540EE)),
+                HighlightCode("fontFamily =", Color(0xFF3CEE0A)),
                 HighlightCode("//", Color(0xFF3CEE0A)),
             ),
             lambdaFun = { TextFontFamily() },
@@ -949,9 +1122,9 @@ fun TextAlignedHeight() {
 @Composable
 fun TextFontFamily() {
 
-    val modifier = Modifier
-        .padding(top = 16.dp)
-        .fillMaxWidth()
+    val padding = dimensionResource(
+        id = R.dimen.padding_medium
+    )
 
     val style = MaterialTheme.typography.bodyMedium.merge(
         TextStyle(
@@ -962,59 +1135,69 @@ fun TextFontFamily() {
         )
     )
 
-    Column()
-    {
-        Text(
-            text = "Text in jetpack Compose\n(Serif)",
-            modifier = modifier,
-            //шрифт с засечками
-            style = style,
-        )
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .border(1.dp, MaterialTheme.colorScheme.onBackground)
+            .padding(padding),
+        horizontalAlignment = Alignment.CenterHorizontally
 
-        Text(
-            text = "Text in jetpack Compose\n(SansSerif)",
-            modifier = modifier,
-            style = style.merge(
-                TextStyle(
-                    //шрифт без засечек
-                    fontFamily = FontFamily.SansSerif
+    ) {
+        item {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(padding)
+            ) {
+                Text(
+                    text = "Text in jetpack Compose\n(Serif)",
+                    //шрифт с засечками
+                    style = style,
                 )
-            )
-        )
 
-        Text(
-            text = "Text in jetpack Compose\n(Cursive)",
-            modifier = modifier,
-            style = style.merge(
-                TextStyle(
-                    //курсивный, рукописный шрифт
-                    fontFamily = FontFamily.Cursive
+                Text(
+                    text = "Text in jetpack Compose\n(SansSerif)",
+                    style = style.merge(
+                        TextStyle(
+                            //шрифт без засечек
+                            fontFamily = FontFamily.SansSerif
+                        )
+                    )
                 )
-            )
-        )
 
-        Text(
-            text = "Text in jetpack Compose\n(Monospace)",
-            modifier = modifier,
-            style = style.merge(
-                TextStyle(
-                    //моноширинный шрифт
-                    //(все знаки имеют одинаковую ширину)
-                    fontFamily = FontFamily.Monospace
+                Text(
+                    text = "Text in jetpack Compose\n(Cursive)",
+                    style = style.merge(
+                        TextStyle(
+                            //курсивный, рукописный шрифт
+                            fontFamily = FontFamily.Cursive
+                        )
+                    )
                 )
-            )
-        )
 
-        Text(
-            text = "Text in jetpack Compose\n(Default)",
-            modifier = modifier,
-            style = style.merge(
-                TextStyle(
-                    //шрифт по умолчанию на текущей платформе
-                    fontFamily = FontFamily.Default
+                Text(
+                    text = "Text in jetpack Compose\n(Monospace)",
+                    style = style.merge(
+                        TextStyle(
+                            //моноширинный шрифт
+                            //(все знаки имеют одинаковую ширину)
+                            fontFamily = FontFamily.Monospace
+                        )
+                    )
                 )
-            )
-        )
+
+                Text(
+                    text = "Text in jetpack Compose\n(Default)",
+                    style = style.merge(
+                        TextStyle(
+                            //шрифт по умолчанию на текущей платформе
+                            fontFamily = FontFamily.Default
+                        )
+                    )
+                )
+
+            }
+
+        }
 
     }
 
@@ -1061,18 +1244,9 @@ fun TextFontFamily() {
 )|
                    
             """.trimIndent(),
-            highlightCode = listOf(
-                HighlightCode("@Composable", Color(0xFF3CEE0A)),
-                HighlightCode("Text(", Color(0xFF3CEE0A)),
-                HighlightCode("style", Color.Cyan),
+            highlightCode = highCodeList + listOf(
+                HighlightCode("TextFontFamalyAlternate", Color(0xFFffc530)),
                 HighlightCode("fontFamily", Color(0xFF3CEE0A)),
-                HighlightCode("merge", Color(0xFFD540EE)),
-                HighlightCode("Cormorantinfant", Color(0xFF3CEE0A)),
-                HighlightCode("Serif", Color(0xFF3CEE0A)),
-                HighlightCode("Cabin", Color(0xFF3CEE0A)),
-                HighlightCode("Poppins", Color(0xFF3CEE0A)),
-                HighlightCode("AbrilFatface", Color(0xFF3CEE0A)),
-                HighlightCode("Alice", Color(0xFF3CEE0A)),
                 HighlightCode("//", Color(0xFF3CEE0A)),
             ),
             lambdaFun = { TextFontFamalyAlternate() },
@@ -1123,11 +1297,10 @@ data class FontExample(
 @Composable
 fun TextFontFamalyAlternate() {
 
-    var style = MaterialTheme.typography.bodyMedium.merge(
+    val style = MaterialTheme.typography.bodyMedium.merge(
         TextStyle(
             fontSize = 18.sp,
             textAlign = TextAlign.Start,
-            fontFamily = Cabin,
             fontStyle = FontStyle.Normal
         )
     )
@@ -1184,22 +1357,33 @@ fun TextFontFamalyAlternate() {
     )
 
 
-    var nameFont: String
     val text = "Альтернативные шрифты."
 
-    Column {
-        for (item in fonts) {
-            nameFont = item.nameFont
-            style = item.style
+    val padding = dimensionResource(
+        id = R.dimen.padding_medium
+    )
 
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .border(1.dp, MaterialTheme.colorScheme.onBackground)
+            .padding(padding),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(padding)
+
+    ) {
+        items(fonts){
+            val nameFont = it.nameFont
+            val styleText = it.style
             Text(
                 text = "${'$'}text (${'$'}nameFont)",
-                style = style
+                style = styleText
             )
 
             Text(
                 text = "${'$'}text - Italic",
-                style = style.merge(
+                style = styleText.merge(
                     TextStyle(
                         fontStyle = FontStyle.Italic
                     )
@@ -1208,16 +1392,16 @@ fun TextFontFamalyAlternate() {
 
             Text(
                 text = "${'$'}text - Bold",
-                style = style.merge(
+                style = styleText.merge(
                     TextStyle(
                         fontWeight = FontWeight.Bold,
                     )
                 )
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
-        }
+            Spacer(modifier = Modifier.height(padding))
 
+        }
 
     }
 
@@ -1267,7 +1451,7 @@ fun TextFontFamalyAlternate() {
 Интенсивность цветового контраста ослабевает от первичных — к цветам третьего порядка.
 
 (из книги Иттена).
-                
+
             """.trimIndent(),
             links = listOf(
                 TextClickLink(
@@ -1300,6 +1484,31 @@ fun TextFontFamalyAlternate() {
                     textUrl = "\uD83D\uDCD6 Datasakura. Хабр ",
                     url = "https://habr.com/ru/articles/494750/"
                 ),
+                TextClickLink(
+                    text = "Полная версия стандарта по контрастности цвета ",
+                    textUrl = "\uD83D\uDCD6 W3C Recommendation 11 December 2008 ",
+                    url = "https://www.w3.org/TR/WCAG20/"
+                ),
+                TextClickLink(
+                    text = "Что нужно знать о контрасте текста и как контролировать контраст с помощью SASS ",
+                    textUrl = "\uD83D\uDCD6 Datasakura. Хабр ",
+                    url = "https://ru.hexlet.io/blog/posts/chto-nuzhno-znat-o-kontraste-teksta-i-kak-kontrolirovat-kontrast-s-pomoschyu-sass#primer-vychisleniya-koeffitsient-kontrasta"
+                ),
+                TextClickLink(
+                    text = "Конвертер цветов Онлайн",
+                    textUrl = "\uD83D\uDCD6 Color Scheme ",
+                    url = "https://colorscheme.ru/color-converter.html"
+                ),
+                TextClickLink(
+                    text = "Расчет коэффициента контрастности по двум цветам. Kotlin программа. ",
+                    textUrl = "\uD83D\uDCD6 play.kotlinlang.org ",
+                    url = "https://play.kotlinlang.org/#eyJ2ZXJzaW9uIjoiMS44LjIxIiwiY29kZSI6ImltcG9ydCBqYXZhLnV0aWwuKlxuaW1wb3J0IGphdmEubWF0aC4qXG5pbXBvcnQgamF2YS5hd3QuQ29sb3JcblxuLy9pbnB1dDogYzggPSAwLi4yNTVcbi8vb3V0cHV0OiBjID0gMC4uMVxuLy/QntC/0YDQtdC00LXQu9C10L3QuNC1INC70LjQvdC10LnQvdC+0LPQviDQt9C90LDRh9C10L3QuNGPINC60L7QvNC/0L7QvdC10L3RgtGLINGG0LLQtdGC0LBcbmZ1biBjb2xvcl9jb21wb25lbnRzKGM4OkludCk6RmxvYXQge1xuICAgIHZhciBjU3JnYjpGbG9hdCA9IGM4LnRvRmxvYXQoKS8yNTVcbiAgICBcbiAgICBpZiAoY1NyZ2IgPiAwLjAzOTI4KXtcbiAgICAgICAgdmFsIGMgPSAoY1NyZ2IrMC4wNTUpLzEuMDU1XG4gICAgICAgIGNTcmdiID0gTWF0aC5wb3coYywyLjQpLnRvRmxvYXQoKVxuICAgIH0gXG4gICAgIGVsc2UgY1NyZ2IgPSAoY1NyZ2IvMTIuOTIpLnRvRmxvYXQoKVxuICAgIFxuICAgIHJldHVybiBjU3JnYlxufVxuXG4vL9Cy0YvRh9C40YHQu9C10L3QuNGPINC+0YLQvdC+0YHQuNGC0LXQu9GM0L3QvtC5INGP0YDQutC+0YHRgtC4XG5mdW4gY2FsY3VsYXRfYnJpZ2h0bmVzcyhyOkZsb2F0LGc6RmxvYXQsYjpGbG9hdCkgPSAwLjIxMjYgKiByICsgMC43MTUyICogZyArIDAuMDcyMiAqIGJcblxuLy/QstGL0YfQuNGB0LvQtdC90LjRjyDQutC+0Y3RhNGE0LjRhtC40LXQvdGCINC60L7QvdGC0YDQsNGB0YLQsFxuZnVuIGNvbnRyYXN0X3JhdGlvX2NhbGN1bGF0aW9uKGNvbG9yMTpDb2xvcixjb2xvcjI6Q29sb3IpOkZsb2F0e1xuICAgIFxuICAgIHZhciByID0gY29sb3JfY29tcG9uZW50cyhjb2xvcjEucmVkKSBcbiAgICB2YXIgZyA9IGNvbG9yX2NvbXBvbmVudHMoY29sb3IxLmdyZWVuKVxuICAgIHZhciBiID0gY29sb3JfY29tcG9uZW50cyhjb2xvcjEuYmx1ZSlcbiAgICBcbiAgICB2YWwgbDEgPSBjYWxjdWxhdF9icmlnaHRuZXNzKHIsZyxiKVxuXG4gICAgciA9IGNvbG9yX2NvbXBvbmVudHMoY29sb3IyLmdldFJlZCgpKSBcbiAgICBnID0gY29sb3JfY29tcG9uZW50cyhjb2xvcjIuZ2V0R3JlZW4oKSlcbiAgICBiID0gY29sb3JfY29tcG9uZW50cyhjb2xvcjIuZ2V0Qmx1ZSgpKVxuICAgIFxuICAgIHZhbCBsMiA9IGNhbGN1bGF0X2JyaWdodG5lc3MocixnLGIpXG5cbiAgICBcbiAgICB2YWwgY29udHJhc3RfcmF0aW8gPSBpZiAobDE+bDIpICgobDEgKyAwLjA1KS8obDIgKyAwLjA1KSkudG9GbG9hdCgpXG4gICAgZWxzZSAoKGwyICsgMC4wNSkvKGwxICsgMC4wNSkpLnRvRmxvYXQoKVxuICAgIFxuICAgIHJldHVybiBjb250cmFzdF9yYXRpb1xufVxuXG5mdW4gbWFpbigpIHtcblxuLy8g0KbQstC10YIg0YTQvtC90LA6IENvbG9yKDB4RkYyMDFCMTYpICByZ2IoMzIsIDI3LCAyMikgIFxuICAgIHZhbCBoZXhDb2xvcjEgPSBcIiMyMDFCMTZcIlxuICAgIHZhbCBjb2xvcjEgPSBDb2xvci5kZWNvZGUoaGV4Q29sb3IxKVxuLy8g0KbQstC10YIg0YLQtdC60YHRgtCwOiBDb2xvcigweEZGRUJFMEQ5KSAgcmdiKDIzNSwgMjI0LCAyMTcpICBcbiAgICB2YWwgaGV4Q29sb3IyID0gXCIjRUJFMEQ5XCJcbiAgICB2YWwgY29sb3IyID0gQ29sb3IuZGVjb2RlKGhleENvbG9yMilcbiAgICBcbiAgICB2YWwgaz0gY29udHJhc3RfcmF0aW9fY2FsY3VsYXRpb24oY29sb3IxLGNvbG9yMilcbiAgICBwcmludGxuKFwi0KbQstC10YIg0YTQvtC90LA6ICAgJGhleENvbG9yMVwiKSAgXG4gICAgcHJpbnRsbihcItCm0LLQtdGCINGC0LXQutGB0YLQsDogJGhleENvbG9yMlwiKSAgXG4gICAgcHJpbnRsbihcIiDQmtC+0L3RgtGA0LDRgdGC0L3QvtGB0YLRjDogJGtcIikgIFxuICAgIFxufSIsInBsYXRmb3JtIjoiamF2YSIsImFyZ3MiOiIifQ=="
+                ),
+                TextClickLink(
+                    text = "Вычисление относительной яркости и контрастности двух цветов ",
+                    textUrl = "\uD83D\uDCD6 Онлайн калькулятор ",
+                    url = "https://planetcalc.ru/7779/"
+                ),
             ),
 
             highlightCode = highCodeList + listOf(
@@ -1309,120 +1518,422 @@ fun TextFontFamalyAlternate() {
             ),
             lambdaFun = { TextColorAny() },
             code ="""   
-/*
-Примечание.
-В примере контрастность определена относительно темной (darkTheme) темы.
-*/
 @Composable
 fun TextColorAny() {
-    Column(
+
+    LazyColumn(
         modifier = Modifier
             .padding(8.dp)
             .fillMaxWidth()
+            .background(Color(0xFF201B16))
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
+        item {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                Text (
+                    text = "Контраст:17.08 (Отличный)",
+                    color = Color(0xFFEBE0D9),
+                    fontSize = 18.sp
+                )
 
-        Text (
-            text = "Контраст:17.08 (Отличный)",
-        )
+                Text (
+                    text = "Контраст:5.44 (Хороший)",
+                    color = Color.Red,
+                    fontSize = 18.sp
+                )
 
-        Text (
-            text = "Контраст:5.44 (Хороший)",
-            color = Color.Red,
-        )
+                Text (
+                    text = "Контраст:4.16 (Плохой)",
+                    color = colorResource(id = R.color.red700),
+                    fontSize = 18.sp
+                )
 
-        Text (
-            text = "Контраст:4.16 (Плохой)",
-            color = colorResource(id = R.color.red700),
-        )
-
-        Text (
-            text = "Контраст:2.14 (Плохой)",
+                Text (
+                    text = "Контраст:2.14 (Плохой)",
 //Из целочисленных значений компонентов SRGB. Альфа необязательна
-            color = Color(
-                red = 0x44,   //between 0 and 255
-                green = 0x55, //between 0 and 255
-                blue = 0x88,  //between 0 and 255
-                alpha = 0xFF
-            ),//between 0 and 255
-        )
+                    color = Color(
+                        red = 0x44,   //between 0 and 255
+                        green = 0x55,
+                        blue = 0x88,
+                        alpha = 0xFF
+                    ),
+                    fontSize = 18.sp
+                )
 
-        Text (
-            text = "Контраст:2.67 (Плохой)",
-//32-bit ARGB color
-            color = Color(0xFF993399),
-        )
+                Text (
+                    text = "Контраст:2.67 (Плохой)", //32-bit ARGB color
+                    color = Color(0xFF993399),
+                    fontSize = 18.sp
+                )
 
-//Установка цвета с использованием TextStyle
-        Text (
-            text = "Контраст:12.44 (Отличный)",
-            style = TextStyle(
-                color = Color.Green
-            )
-        )
+                Text (
+                    text = "Контраст:12.44 (Отличный)",
+                    fontSize = 18.sp,
+                    style = TextStyle(
+                        color = Color.Green,
+                    )
+                )
 
-        Text (
-            text = "Контраст:8.59 (Хороший)",
-            style = TextStyle(
-                color = Color.Yellow,
-                background = Color.Blue
-            )
-        )
+                Text (
+                    text = "Контраст:8.59 (Хороший)",
+                    style = TextStyle(
+                        color = Color.Yellow,
+                        background = Color.Blue
+                    ),
+                    fontSize = 18.sp,
+                )
 
-        Text (
-            text = "Контраст:16.40 (Отличный)",
-            modifier = Modifier
-                .background(Color(0xff22200d))
-                .padding(8.dp),
-            color = Color(0xffffff00),
-        )
+                Text (
+                    text = "Контраст:16.40 (Отличный)",
+                    modifier = Modifier
+                        .background(Color(0xff22200d)),
+                    color = Color(0xffffff00),
+                    fontSize = 18.sp,
+                )
 
+                Text (
+                    text = "Контраст:7.41 (Хороший)",
+                    modifier = Modifier
+                        .background(MaterialTheme.colorScheme.secondary),
+                    color = MaterialTheme.colorScheme.onSecondary,
+                    fontSize = 18.sp,
+                )
 
+                Text (
+                    text = "Контраст:7.55 (Хороший)",
+                    modifier = Modifier
+                        .background(MaterialTheme.colorScheme.secondaryContainer),
+                    color = MaterialTheme.colorScheme.onSecondaryContainer,
+                    fontSize = 18.sp,
+                )
 
-        Text (
-            text = "Контраст:7.41 (Хороший)",
-            modifier = Modifier
-                .background(MaterialTheme.colorScheme.secondary),
-            color = MaterialTheme.colorScheme.onSecondary,
-        )
+                Text (
+                    text = "Контраст:9.31 (Хороший)",
+                    modifier = Modifier
+                        .background(MaterialTheme.colorScheme.tertiaryContainer),
+                    color = MaterialTheme.colorScheme.onTertiaryContainer,
+                    fontSize = 18.sp,
+                )
 
-        Text (
-            text = "Контраст:7.55 (Хороший)",
-            modifier = Modifier
-                .background(MaterialTheme.colorScheme.secondaryContainer)
-                .padding(8.dp),
-            color = MaterialTheme.colorScheme.onSecondaryContainer,
-        )
+                Text (
+                    text = "Контраст:21.00 (Отличный)",
+                    modifier = Modifier
+                        .background(Color(0xff000000)),
+                    color = Color(0xffffffff),
+                    fontSize = 18.sp,
+                )
 
-        Text (
-            text = "Контраст:9.31 (Хороший)",
-            modifier = Modifier
-                .background(MaterialTheme.colorScheme.tertiaryContainer)
-                .padding(8.dp),
-            color = MaterialTheme.colorScheme.onTertiaryContainer,
-        )
+            }
+        }
 
-        Text (
-            text = "Контраст:21.00 (Отличный)",
-            modifier = Modifier
-                .background(Color(0xff000000))
-                .padding(8.dp),
-            color = Color(0xffffffff),
-        )
 
     }
 }
             """.trimIndent()
+        ),
+        ExampleCode(
+            id = 20,
+            title = "Цвет фона ",
+            comment = """
+Модификатор Modifier.|background|(color) устанавливает цвет фона компонуемого элемента.
+
+При установки цвета фона и текста важно учитывать контрастность цветов, чтобы выводимый текст был хорошо виден.
+
+Лучше использовать сочитание цветов MaterialTheme.|colorScheme|, например:
+  
+  Для фона                   Для текста
+    primary                onPrimary
+    primaryContainer       onPrimaryContainer
+    secondary              onSecondary
+    secondaryContainer     onSecondaryContainer
+    tertiary               onTertiary
+    tertiaryContainer      onTertiaryContainer
+  
+  
+      |Коэффициент контраста|
+
+Коэффициент контраста, согласно стандарту |Web Content Accessibility Guidelines| (WCAG), высчитывается по формуле: 
+
+    |(L1 + 0,05) / (L2 + 0,05)|, 
+в которой: 
+ |L1| — относительная яркость |самого светлого| цвета. 
+ |L2| — относительная яркость |самого тёмного| цвета.
+
+
+|!Требования к тексту относительно контрастности|:
+
+1)Текст должен иметь коэффициент контраста не менее |4.5|. 
+В идеале это значение должно быть не менее |7|.
+
+2)Для увеличенного текста коэффициент контраста должен иметь значение не менее |3|. 
+В идеале это значение должно быть не менее |4.5|. 
+
+|!Примечание|:
+Увеличенным считается текст размером в |18| пикселей, либо |14| пикселей с полужирным начертанием.
+
+
+     |Вычисление относительной яркости|
+
+ Относительной яркостью считается коэффициент от нуля до единицы, 
+где 0 - чёрный цвет, 
+    1 - белый цвет. 
+
+ Каждая компонента цвета в шестнадцатеричном формате это целое число C8, находящееся в диапазоне от 0 до 255 
+( C8 = {R8 - красный, G8 - зеленый, B8 - синий}).
+  
+ Переведем значения компоненты цвета из целых в вещественные значения в диапазоне 0..1:
+ |Csrgb| = C8/255, где C8 = { R8, G8, B8 }
+
+ Найдем для каждой компоненты цвета линейное значение C = { R,G,B }:
+ |C = ((Csrgb+0.055)/1.055)^2.4| , 
+    если |Csrgb > 0.03928|
+или
+ |C = Csrgb/12.92|, 
+     если |Csrgb <= 0.03928|
+
+Используя линейное значение компоненты цвета C={R, G, B} получаем относительную яркость цвета по формуле:
+L = 0.2126R + 0.7152G + 0.0722B
+
+Коэффициенты в формуле, отражают чувствительность человеческого глаза к отдельным компонентам света: зеленая компонента света воспринимается наиболее ярко, красная - менее и синяя меньше всего.
+
+
+    |Пример расчета|
+    
+ Цвет фона:   .background(Color(0xFF201B16)) 
+  rgb(32, 27, 22)
+    
+R_sRGB = 32 / 255 = 0,12
+G_sRGB = 27 / 255 = 0,10
+B_sRGB = 22 / 255 = 0,09   
+
+ R_sRGB < 0,03928 , следовательно 
+     |R| = 0,12 / 12,92 =  |!0,009|
+ G_sRGB < 0,03928 , следовательно 
+     |G| = 0,10 / 12,92 =  |!0,008|
+ B_sRGB < 0,03928 , следовательно 
+     |B| = 0,09 / 12,92 =  |!0,007|
+
+Исходя из формулы
+  L = 0,2126 * R + 0,7152 * G + 0,0722 * B
+
+ |L1| = 0.2126 * |0,009| + 0.7152 * |0,008| + 0.0722 * |0,007| = 0.0081404     
+   
+ Цвет текста: color = Color(0xFFEBE0D9)
+ rgb(235, 224, 217)
+    
+R_sRGB = 235 / 255 = 0,92
+G_sRGB = 224 / 255 = 0,88
+B_sRGB = 217 / 255 = 0,85  
+
+ Все значения > 0,03928 ,следовательно
+ r = ((0.92 + 0.055) / 1.055)
+ g = ((0.88 + 0.055) / 1.055)
+ b = ((0.85 + 0.055) / 1.055)
+
+ R = Math.pow(r,2.4) = 0.8276
+ G = Math.pow(g,2.4) = 0.7484
+ B = Math.pow(b,2.4) = 0.6921
+ 
+ L = 0,2126 * R + 0,7152 * G + 0,0722 * B
+ 
+ |L2| = 0.2126 * |0.8276| + 0.7152 * |0.7484| + 0.0722 * |0.6921| = 0.76117306          
+
+ k  = (L2+ 0,05) / (L1 + 0,05)
+ 
+ k  = (0.76117306 + 0,05)/(0.0081404 + 0,05)=13.9604
+ 
+"Контраст:17.08 (Отличный)"    
+
+
+                
+                
+            """.trimIndent(),
+            highlightCode = highCodeList +  listOf(
+                HighlightCode("BackgroundDriver", Color(0xFFffc530)),
+                HighlightCode("color = ", Color(0xFF3CEE0A)),
+                HighlightCode("//", Color(0xFF3CEE0A)),
+            ),
+            lambdaFun = { BackgroundDriver() },
+            code ="""
+@Composable
+fun BackgroundDriver(
+    message: String = stringResource(R.string.text_compose),
+
+    ){
+
+    val padding = dimensionResource(
+        id = R.dimen.padding_medium
+    )
+
+    val fontSize = remember {
+        mutableFloatStateOf(35f)
+    }
+
+    var indexColor by remember { mutableIntStateOf(-1) }
+
+    var colorBg by remember {
+        mutableStateOf(DataColor.colors[8])
+    }
+    var colorTx by remember {
+        mutableStateOf(DataColor.colors[12])
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(padding)
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .border(1.dp, Color.White)
+                .background(color = colorBg)
+                .widthIn(min = 150.dp)
+                .padding(padding),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = message,
+                modifier = Modifier
+                    .padding(16.dp),
+                style = TextStyle(
+                    textAlign = TextAlign.Center,
+                    fontFamily = Alice,
+                    fontSize = fontSize.floatValue.sp,
+                    lineHeight = fontSize.floatValue.sp,
+                    color = colorTx
+                ),
+            )
+        }
+
+        val k = contrast_ratio_calculation(colorTx,colorBg)
+
+        val status = stringResource(id = R.string.сontrast,k) + contrast_ratio_comment(k)
+    
+        Text(
+            text = status,
+            textAlign = TextAlign.Center,
+            fontSize = 20.sp
+        )
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(padding),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            item {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(padding)
+                ) {
+                    if (indexColor == -1){
+
+                        SliderSimple("size",fontSize,10f,50f)
+
+                        Row(
+                            modifier = Modifier
+                                .padding(padding)
+                                .widthIn(max = 250.dp),
+                            horizontalArrangement = Arrangement.SpaceAround,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Box(
+                                modifier = Modifier
+                                    .padding(padding)
+                                    .border(1.dp, MaterialTheme.colorScheme.onBackground)
+                                    .background(colorBg)
+                                    .size(40.dp)
+                                    .clickable {
+                                        indexColor = 0
+                                    }
+                            )
+                            Box(
+                                modifier = Modifier
+                                    .padding(padding)
+                                    .border(1.dp, MaterialTheme.colorScheme.onBackground)
+                                    .background(colorTx)
+                                    .size(40.dp)
+                                    .clickable {
+                                        indexColor = 1
+                                    }
+                            )
+                        }
+                    } else{
+                        ColorSelect(
+                            colorCurrent = when(indexColor){
+                                0 -> colorBg
+                                else -> colorTx
+                            },
+                            onColorSelect ={
+                                when(indexColor){
+                                    0 -> colorBg = it
+                                    else -> colorTx= it
+                                }
+                                indexColor = -1
+                            },
+                            title = when(indexColor){
+                                0 -> "Выберите цвет фона"
+                                else -> "Выберите цвет текста"
+                            },
+
+                        )
+
+                    }
+
+
+                }
+
+            }
+
+        }
+    }
+}
+                
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Теория цвета, контраст ",
+                    textUrl = "\uD83D\uDCD6 Datasakura. Хабр ",
+                    url = "https://habr.com/ru/articles/494750/"
+                ),
+                TextClickLink(
+                    text = "Полная версия стандарта по контрастности цвета ",
+                    textUrl = "\uD83D\uDCD6 W3C Recommendation 11 December 2008 ",
+                    url = "https://www.w3.org/TR/WCAG20/"
+                ),
+                TextClickLink(
+                    text = "Что нужно знать о контрасте текста и как контролировать контраст с помощью SASS ",
+                    textUrl = "\uD83D\uDCD6 Datasakura. Хабр ",
+                    url = "https://ru.hexlet.io/blog/posts/chto-nuzhno-znat-o-kontraste-teksta-i-kak-kontrolirovat-kontrast-s-pomoschyu-sass#primer-vychisleniya-koeffitsient-kontrasta"
+                ),
+                TextClickLink(
+                    text = "Конвертер цветов Онлайн",
+                    textUrl = "\uD83D\uDCD6 Color Scheme ",
+                    url = "https://colorscheme.ru/color-converter.html"
+                ),
+                TextClickLink(
+                    text = "Расчет коэффициента контрастности по двум цветам. Kotlin программа. ",
+                    textUrl = "\uD83D\uDCD6 play.kotlinlang.org ",
+                    url = "https://play.kotlinlang.org/#eyJ2ZXJzaW9uIjoiMS44LjIxIiwiY29kZSI6ImltcG9ydCBqYXZhLnV0aWwuKlxuaW1wb3J0IGphdmEubWF0aC4qXG5pbXBvcnQgamF2YS5hd3QuQ29sb3JcblxuLy9pbnB1dDogYzggPSAwLi4yNTVcbi8vb3V0cHV0OiBjID0gMC4uMVxuLy/QntC/0YDQtdC00LXQu9C10L3QuNC1INC70LjQvdC10LnQvdC+0LPQviDQt9C90LDRh9C10L3QuNGPINC60L7QvNC/0L7QvdC10L3RgtGLINGG0LLQtdGC0LBcbmZ1biBjb2xvcl9jb21wb25lbnRzKGM4OkludCk6RmxvYXQge1xuICAgIHZhciBjU3JnYjpGbG9hdCA9IGM4LnRvRmxvYXQoKS8yNTVcbiAgICBcbiAgICBpZiAoY1NyZ2IgPiAwLjAzOTI4KXtcbiAgICAgICAgdmFsIGMgPSAoY1NyZ2IrMC4wNTUpLzEuMDU1XG4gICAgICAgIGNTcmdiID0gTWF0aC5wb3coYywyLjQpLnRvRmxvYXQoKVxuICAgIH0gXG4gICAgIGVsc2UgY1NyZ2IgPSAoY1NyZ2IvMTIuOTIpLnRvRmxvYXQoKVxuICAgIFxuICAgIHJldHVybiBjU3JnYlxufVxuXG4vL9Cy0YvRh9C40YHQu9C10L3QuNGPINC+0YLQvdC+0YHQuNGC0LXQu9GM0L3QvtC5INGP0YDQutC+0YHRgtC4XG5mdW4gY2FsY3VsYXRfYnJpZ2h0bmVzcyhyOkZsb2F0LGc6RmxvYXQsYjpGbG9hdCkgPSAwLjIxMjYgKiByICsgMC43MTUyICogZyArIDAuMDcyMiAqIGJcblxuLy/QstGL0YfQuNGB0LvQtdC90LjRjyDQutC+0Y3RhNGE0LjRhtC40LXQvdGCINC60L7QvdGC0YDQsNGB0YLQsFxuZnVuIGNvbnRyYXN0X3JhdGlvX2NhbGN1bGF0aW9uKGNvbG9yMTpDb2xvcixjb2xvcjI6Q29sb3IpOkZsb2F0e1xuICAgIFxuICAgIHZhciByID0gY29sb3JfY29tcG9uZW50cyhjb2xvcjEucmVkKSBcbiAgICB2YXIgZyA9IGNvbG9yX2NvbXBvbmVudHMoY29sb3IxLmdyZWVuKVxuICAgIHZhciBiID0gY29sb3JfY29tcG9uZW50cyhjb2xvcjEuYmx1ZSlcbiAgICBcbiAgICB2YWwgbDEgPSBjYWxjdWxhdF9icmlnaHRuZXNzKHIsZyxiKVxuXG4gICAgciA9IGNvbG9yX2NvbXBvbmVudHMoY29sb3IyLmdldFJlZCgpKSBcbiAgICBnID0gY29sb3JfY29tcG9uZW50cyhjb2xvcjIuZ2V0R3JlZW4oKSlcbiAgICBiID0gY29sb3JfY29tcG9uZW50cyhjb2xvcjIuZ2V0Qmx1ZSgpKVxuICAgIFxuICAgIHZhbCBsMiA9IGNhbGN1bGF0X2JyaWdodG5lc3MocixnLGIpXG5cbiAgICBcbiAgICB2YWwgY29udHJhc3RfcmF0aW8gPSBpZiAobDE+bDIpICgobDEgKyAwLjA1KS8obDIgKyAwLjA1KSkudG9GbG9hdCgpXG4gICAgZWxzZSAoKGwyICsgMC4wNSkvKGwxICsgMC4wNSkpLnRvRmxvYXQoKVxuICAgIFxuICAgIHJldHVybiBjb250cmFzdF9yYXRpb1xufVxuXG5mdW4gbWFpbigpIHtcblxuLy8g0KbQstC10YIg0YTQvtC90LA6IENvbG9yKDB4RkYyMDFCMTYpICByZ2IoMzIsIDI3LCAyMikgIFxuICAgIHZhbCBoZXhDb2xvcjEgPSBcIiMyMDFCMTZcIlxuICAgIHZhbCBjb2xvcjEgPSBDb2xvci5kZWNvZGUoaGV4Q29sb3IxKVxuLy8g0KbQstC10YIg0YLQtdC60YHRgtCwOiBDb2xvcigweEZGRUJFMEQ5KSAgcmdiKDIzNSwgMjI0LCAyMTcpICBcbiAgICB2YWwgaGV4Q29sb3IyID0gXCIjRUJFMEQ5XCJcbiAgICB2YWwgY29sb3IyID0gQ29sb3IuZGVjb2RlKGhleENvbG9yMilcbiAgICBcbiAgICB2YWwgaz0gY29udHJhc3RfcmF0aW9fY2FsY3VsYXRpb24oY29sb3IxLGNvbG9yMilcbiAgICBwcmludGxuKFwi0KbQstC10YIg0YTQvtC90LA6ICAgJGhleENvbG9yMVwiKSAgXG4gICAgcHJpbnRsbihcItCm0LLQtdGCINGC0LXQutGB0YLQsDogJGhleENvbG9yMlwiKSAgXG4gICAgcHJpbnRsbihcIiDQmtC+0L3RgtGA0LDRgdGC0L3QvtGB0YLRjDogJGtcIikgIFxuICAgIFxufSIsInBsYXRmb3JtIjoiamF2YSIsImFyZ3MiOiIifQ=="
+                ),
+                TextClickLink(
+                    text = "Вычисление относительной яркости и контрастности двух цветов ",
+                    textUrl = "\uD83D\uDCD6 Онлайн калькулятор ",
+                    url = "https://planetcalc.ru/7779/"
+                ),
+            )
+
         ),
 
         ExampleCode(
             id = 5,
             title = "Градиент цвета",
             comment = """
-Кисть(Brush) в Compose описывает, как что-то рисуется на экране: 
- она определяет цвет(а), которые рисуются в области рисования (круг, прямоугольник, путь). 
+|brush| в Compose представляет кисть для рисования.
 
 Кисть применяется к нескольким различным типам рисования: 
    |фону|, |тексту| и |холсту|.                        
@@ -1468,31 +1979,6 @@ fun TextColorAny() {
 
  Можно использовать пользовательскую кисть |AGSL| RuntimeShader
 
-В нашем примере будем использовать |horizontalGradient|
-
-|!fun horizontalGradient(
-    colors: List<Color>,
-    startX: Float = 0.0f,
-    endX: Float = Float.POSITIVE_INFINITY,
-    tileMode: TileMode = TileMode.Clamp
-): Brush|
- 
-|colors| - Цвета градиента
-
-|start| - Начальное положение линейного градиента. 
-
-|end| - Конечное положение линейного градиента. 
-     
-|tileMode| - Определяет поведение шейдера при заполнении области за пределами его границ. 
- 
- TileMode 
-   .|!Clamp| - край фиксируется по конечному цвету (по умолчанию);
-   .|!Decal| - визуализация пикселей изображения шейдера только в пределах исходных границ;
-   .|!Mirror| - фрагмент зеркально отображен от последнего цвета к первому;
-   .|!Repeated| - фрагмент повторяется от первого цвета до последнего;
-
- 
-
             """.trimIndent(),
             links = listOf(
                 TextClickLink(
@@ -1518,12 +2004,271 @@ fun TextColorAny() {
             ),
 
             highlightCode = highCodeList + listOf(
-                HighlightCode("MessageGradient", Color(0xFFffc530)),
+                HighlightCode("GradientOverview", Color(0xFFffc530)),
+                HighlightCode("BackgroundWithBrush ", Color(0xFFffc530)),
+                HighlightCode("RadioButtonColumn ", Color(0xFFffc530)),
                 HighlightCode("brush = ", Color(0xFF3CEE0A)),
                 HighlightCode("//", Color(0xFF3CEE0A)),
             ),
-            lambdaFun = { GradientDriver(it) },
+            lambdaFun = { GradientOverview(it) },
             code ="""   
+
+//********************************
+
+@Composable
+fun GradientOverview(
+    isExpanded: Boolean = false,
+){
+    val padding = dimensionResource(
+        id = R.dimen.padding_medium
+    )
+
+    var indexSelect by remember { mutableIntStateOf(4) }
+
+    val gradients = listOf(
+        "linearGradient",
+        "horizontalGradient",
+        "verticalGradient",
+        "sweepGradient",
+        "radialGradient",
+    )
+    if (isExpanded) {
+        Row(
+            modifier = Modifier.fillMaxSize(),
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column(
+                modifier = Modifier.weight(0.7f),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+
+            ) {
+                RadioButtonColumn(
+                    indexSelect = indexSelect,
+                    items = listOf(
+                        "linear",
+                        "horizontal",
+                        "vertical",
+                        "sweep",
+                        "radial",
+                    ),
+                    onClick = { indexSelect = it }
+                )
+            }
+
+            BackgroundWithBrush(
+                indexSelect = indexSelect,
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .background(color = Color.Black)
+                    .padding(padding)
+                    .weight(1f),
+            )
+        }
+    } else {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+
+        ) {
+            RadioButtonColumn(
+                indexSelect = indexSelect,
+                items = gradients,
+                onClick = { indexSelect = it }
+            )
+
+            BackgroundWithBrush(
+                indexSelect = indexSelect,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(color = Color.Black)
+                    .padding(padding)
+                    .weight(1f),
+            )
+        }
+    }
+}
+
+//********************************
+
+@Composable
+fun BackgroundWithBrush (
+    indexSelect: Int = 0,
+    modifier: Modifier = Modifier,
+    colors: List<Color> = listOf(Color.Red,Color.Blue),
+    text: String = "Hello, World!",
+    style: TextStyle = MaterialTheme.typography.bodyMedium.merge(
+        TextStyle(
+            fontSize = 30.sp,
+            textAlign = TextAlign.Center,
+            color = Color.White,
+            fontFamily = FontFamily.Serif //шрифт с засечками
+        )
+    ),
+    ) {
+    val gradientBrush = when (indexSelect) {
+        0 -> Brush.linearGradient(colors)
+        1 -> Brush.horizontalGradient(colors)
+        2 -> Brush.verticalGradient(colors)
+        3 -> Brush.sweepGradient(colors)
+        else -> Brush.radialGradient(colors)
+    }
+
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .background(brush = gradientBrush),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+           text = text,
+           style = style
+        )
+    }
+}
+
+//********************************
+
+@Composable
+fun RadioButtonColumn (
+    indexSelect: Int = 0,
+    items: List<String> = listOf(
+        "linearGradient",
+        "horizontalGradient",
+        "verticalGradient",
+        "sweepGradient",
+        "radialGradient",
+    ),
+    onClick: (Int) -> Unit = {},
+) {
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .selectableGroup(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    )
+    {
+        items.forEachIndexed { index, element ->
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable {onClick(index)  },
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                RadioButton(
+                    selected = indexSelect == index,
+                    onClick = { onClick(index) },
+                    modifier = Modifier.padding(8.dp)
+                )
+                Text(
+                    text = element,
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    fontSize = 22.sp
+                )
+            }
+        }
+
+    }
+}
+                
+                
+            """.trimIndent()
+        ),
+        ExampleCode(
+            id = 20,
+            title = "linearGradient",
+            comment = """
+|linearGradient|(
+    colors: List<Color>,
+    start: Offset,
+    end: Offset,
+    tileMode: TileMode
+)
+
+|colors| - Цвета градиента
+
+|start| - Начальное положение линейного градиента. 
+    |Offset.Zero| - крайний верхний, левый угол области рисования
+
+|end| - Конечное положение линейного градиента. 
+    |Offset.Infinite| - крайний правый, нижний угол области рисования.
+     
+|tileMode| - Определяет поведение шейдера при заполнении области за пределами его границ. 
+    По умолчанию используется TileMode.Clamp для повторения краевых пикселей
+
+                
+            """.trimIndent(),
+            highlightCode = listOf(
+                HighlightCode("GradientOverview", Color(0xFFffc530)),
+                HighlightCode("AnnotatedString", Color(0xFF3CEE0A)),
+                HighlightCode("SpanStyle", Color(0xFF3CEE0A)),
+                HighlightCode("TextLinkStyles", Color(0xFF3CEE0A)),
+                HighlightCode("//", Color(0xFF3CEE0A)),
+            ),
+            lambdaFun = {  },
+            code ="""
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "How to Create Gradient Background in Android Jetpack Compose ",
+                    textUrl = "\uD83D\uDCD6 Bolt UiX ",
+                    url = "https://www.boltuix.com/2023/01/how-to-create-gradient-background-in.html"
+                ),
+                TextClickLink(
+                    text = "Кисть: градиенты и шейдеры — ",
+                    textUrl = "\uD83D\uDCD6 Developers. Brush",
+                    url = "https://developer.android.com/develop/ui/compose/graphics/draw/brush?hl=ru"
+                ),
+            )
+
+        ),
+
+        ExampleCode(
+            id = 21,
+            title = "Градиент цвета - Text",
+            comment = """
+Параметр |brush| можно использовать вместо |color| для установки градиента цвета шрифта текста.
+                
+В нашем примере будем использовать кисть |horizontalGradient|:
+
+|!fun horizontalGradient(
+    colors: List<Color>,
+    startX: Float = 0.0f,
+    endX: Float = Float.POSITIVE_INFINITY,
+    tileMode: TileMode = TileMode.Clamp
+): Brush|
+ 
+|colors| - Цвета градиента
+
+|start| - Начальное положение линейного градиента. 
+
+|end| - Конечное положение линейного градиента. 
+     
+|tileMode| - Определяет поведение шейдера при заполнении области за пределами его границ. 
+ 
+ TileMode 
+   .|!Clamp| - край фиксируется по конечному цвету (по умолчанию);
+   .|!Decal| - визуализация пикселей изображения шейдера только в пределах исходных границ;
+   .|!Mirror| - фрагмент зеркально отображен от последнего цвета к первому;
+   .|!Repeated| - фрагмент повторяется от первого цвета до последнего;
+
+ 
+
+                
+            """.trimIndent(),
+            highlightCode = listOf(
+                HighlightCode("GradientOverview", Color(0xFFffc530)),
+                HighlightCode("AnnotatedString", Color(0xFF3CEE0A)),
+                HighlightCode("SpanStyle", Color(0xFF3CEE0A)),
+                HighlightCode("TextLinkStyles", Color(0xFF3CEE0A)),
+                HighlightCode("//", Color(0xFF3CEE0A)),
+            ),
+            lambdaFun = { GradientDriver(it) },
+            code ="""
             """.trimIndent()
         ),
 
@@ -1545,6 +2290,7 @@ fun TextColorAny() {
                 
             """.trimIndent(),
             highlightCode = listOf(
+                HighlightCode("TextShadow", Color(0xFFffc530)),
                 HighlightCode("text ", Color.Cyan),
                 HighlightCode("fontSize", Color.Cyan),
                 HighlightCode("style ", Color.Cyan),
@@ -1596,10 +2342,12 @@ fun TextShadow() {
         ),
 
 
+
         ExampleCode(
             id = 13,
             title = "Текст с различными стилями",
             highlightCode = listOf(
+                HighlightCode("TextShadow", Color(0xFFffc530)),
                 HighlightCode("text ", Color.Cyan),
                 HighlightCode("color", Color.Cyan),
                 HighlightCode("fontWeight", Color.Cyan),
@@ -1650,6 +2398,7 @@ fun TextShadow() {
             id = 14,
             title = "Текст с различными стилями 2",
             highlightCode = listOf(
+                HighlightCode("TextShadow", Color(0xFFffc530)),
                 HighlightCode("text ", Color.Cyan),
                 HighlightCode("color", Color.Cyan),
                 HighlightCode("textAlign", Color.Cyan),
@@ -1718,6 +2467,7 @@ fun TextShadow() {
             id = 15,
             title = "Текст с различными стилями 3",
             highlightCode = listOf(
+                HighlightCode("TextShadow", Color(0xFFffc530)),
                 HighlightCode("pushStyle", Color.Cyan),
                 HighlightCode("pop", Color.Cyan),
                 HighlightCode("text ", Color.Cyan),
@@ -1837,6 +2587,7 @@ fun TextShadow() {
             id = 16,
             title = "Текст с различными стилями 4",
             highlightCode = listOf(
+                HighlightCode("TextShadow", Color(0xFFffc530)),
                 HighlightCode("text ", Color.Cyan),
                 HighlightCode("color", Color.Cyan),
                 HighlightCode("modifier", Color.Cyan),
@@ -1916,6 +2667,7 @@ fun TextBuildAnnotatedString() {
             id = 17,
             title = "Текст с различными стилями 5",
             highlightCode = listOf(
+                HighlightCode("TextShadow", Color(0xFFffc530)),
                 HighlightCode("text ", Color.Cyan),
                 HighlightCode("color ", Color.Cyan),
                 HighlightCode("textAlign", Color.Cyan),
@@ -2016,6 +2768,7 @@ fun TextBuildAnnotatedString() {
             id = 18,
             title = "HTML со ссылками в тексте",
             highlightCode = listOf(
+                HighlightCode("TextShadow", Color(0xFFffc530)),
                 HighlightCode("https://www.android.com", Color(0xFFBAF576)),
                 HighlightCode("fromHtml", Color(0xFFFF9800)),
                 HighlightCode("AnnotatedString", Color(0xFF3CEE0A)),
@@ -2081,46 +2834,292 @@ Examples:
             """.trimIndent()
         ),
         ExampleCode(
-            id = 19,
-            title = "Ограничение строк",
+            id = 3,
+            title = "Маштабирование",
             comment = """
-|overflow| определяет, как будет обрабатываться текст при его выходе за границы контейнера. 
-
-Этот параметр принимает значение класса |TextOverflow|:
-
-|Clip|: текст усекается (по умолчанию)
-
-|Ellipsis|: текст усекается, а в конце текста добавляется многоточие
-
-|Visible|: весь текст может отображаться     
-                   
-Примечание. 
-  Текст, который выходит за пределы своих границ с помощью |Visible|, может быть обрезан другими модификаторами, такими как Modifier.|clipToBounds|
-                
+Modifier.|graphicsLayer|  применяет преобразования к составным объектам.                
             """.trimIndent(),
-            highlightCode = listOf(
-                HighlightCode("@Composable", Color(0xFF3CEE0A)),
-                HighlightCode("overflow", Color(0xFF3CEE0A)),
-                HighlightCode("maxLines", Color(0xFF3CEE0A)),
-                HighlightCode("Text(", Color(0xFF3CEE0A)),
+            links = listOf(
+                TextClickLink(
+                    text = "Больше информации смотрите в ",
+                    textUrl = "\uD83D\uDCD6 Стиль текста",
+                    url = "https://developer.android.com/develop/ui/compose/text/style-text?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Модификаторы графики",
+                    textUrl = "\uD83D\uDCD6 ",
+                    url = "https://developer.android.com/develop/ui/compose/graphics/draw/modifiers?hl=ru"
+                ),
+            ),
+
+            nameFun = "",
+            highlightCode = highCodeList + listOf(
+                HighlightCode("ScaleDraver", Color(0xFFffc530)),
+                HighlightCode("fontSize", Color(0xFF3CEE0A)),
+                HighlightCode("initialValue", Color(0xFF3CEE0A)),
+                HighlightCode("targetValue", Color(0xFF3CEE0A)),
+                HighlightCode("10f", Color(0xFF5EADD6)),
+                HighlightCode("170f", Color(0xFF5EADD6)),
                 HighlightCode("//", Color(0xFF3CEE0A)),
             ),
-            lambdaFun = { SimpleLimit() },
-            code ="""
+            lambdaFun = { ScaleDraver() },
+            code = """
+            """.trimIndent()
+        ),
+
+
+        ExampleCode(
+            id = 3,
+            title = "Рисование текста на холсте",
+            comment = """
+Нарисовать текст вручную можно с DrawScope.|drawText|()
+
+Чтобы нарисовать текст, создайте |TextMeasurer| с помощью |rememberTextMeasurer| и вызовите |drawText|
+                 
+val textMeasurer = rememberTextMeasurer()
+
+|Canvas|(modifier = Modifier.fillMaxSize()) {
+    drawText(textMeasurer, "Hello")
+}
+
+|!fun DrawScope.drawText(
+    textMeasurer: TextMeasurer,
+    text: String,
+    topLeft: Offset,
+    style: TextStyle,
+    overflow: TextOverflow,
+    softWrap: Boolean,
+    maxLines: Int,
+    size: Size,
+    blendMode: BlendMode
+): Unit|
+
+Эта функция рисования поддерживает только один стиль текста и асинхронную загрузку шрифтов.
+
+TextMeasurer имеет внутренний кеш для оптимизации измерения макета текста для повторных вызовов на этапе рисования.
+
+|overflow| - как следует обрабатывать визуальное переполнение.
+
+|softWrap| - должен ли текст разрываться при мягких разрывах строк. Если установлено значение false, глифы в тексте будут расположены так, как если бы пространство по горизонтали было неограниченным. 
+
+|size| определяет насколько широким и высоким должен быть текст. 
+ |Size.Unspecified| - текст помещаться внутри общей области рисования с того места, где он размещен. 
+ |Size.width|  - определяет ширину текста 
+ |Size.height| - помогает определить количество строк, которые помещаются, если включена |softWrap| и переполнением является |TextOverflow.Ellipsis|. В противном случае Size.height либо определяет, где текст обрезается (TextOverflow.Clip), либо становится неактивным.
+
+|maxLines| - необязательный, определяет максимальное количество строк текста, при необходимости перенос. Если текст превышает заданное количество строк, он будет обрезан в соответствии с переполнением и softWrap. Если оно не равно нулю, то оно должно быть больше нуля.
+
+|blendMode| - алгоритм смешивания, который будет применен к тексту
+
+Для вывода текста по центру |DrawScope| необходимо определить размер в пикселях отображаемого текста.
+
+Размер отображаемого текста зависит от:
+   размера шрифта, 
+   вида шрифта, 
+   интервала между буквами,
+   количества символов и др.
+
+В Compose можно использовать |TextMeasurer|, чтобы получить доступ к измеренному размеру текста.
+                        
+
+                 
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Графика в Compose ",
+                    textUrl = "\uD83D\uDCD6 Отображать текст",
+                    url = "https://developer.android.com/develop/ui/compose/graphics/draw/overview?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Анимации в Compose",
+                    textUrl = "\uD83D\uDCD6 Animations in Compose ",
+                    url = "https://developer.android.com/develop/ui/compose/animation/introduction"
+                ),
+                TextClickLink(
+                    text = "Коллекция быстрых руководств ",
+                    textUrl = "\uD83D\uDCD6 Отображать текст",
+                    url = "https://developer.android.com/develop/ui/compose/quick-guides/collections/display-text?hl=ru"
+                ),
+            ),
+
+            nameFun = "",
+            highlightCode = highCodeList + listOf(
+                HighlightCode("AnimationSizeText", Color(0xFFffc530)),
+                HighlightCode("fontSize", Color(0xFF3CEE0A)),
+                HighlightCode("initialValue", Color(0xFF3CEE0A)),
+                HighlightCode("targetValue", Color(0xFF3CEE0A)),
+                HighlightCode("10f", Color(0xFF5EADD6)),
+                HighlightCode("170f", Color(0xFF5EADD6)),
+                HighlightCode("//", Color(0xFF3CEE0A)),
+            ),
+            lambdaFun = { DrawTextCanvas() },
+            code = """
 @Composable
-fun LongText ()  {
-    Text(
-        text = "Text in Jetpack Compose.".repeat(10),
-        modifier = Modifier
-            .padding(16.dp),
-        style = MaterialTheme.typography.bodyMedium,
-        overflow = TextOverflow.Ellipsis,
-        maxLines = 2,
+fun DrawTextCanvas(
+    textToCenter: String = "Hello, World!"
+) {
+    val styleCenter = TextStyle(
+        color = Color.White,
+        fontSize = 24.sp,
+        fontFamily = Alice,
+        fontWeight = FontWeight.Bold,
+        textDecoration = TextDecoration.Underline
     )
+
+    val textMeasurer = rememberTextMeasurer()
+
+    val textLayoutCenter = remember(textToCenter) {
+        textMeasurer.measure(textToCenter, styleCenter)
+    }
+
+    Canvas(
+        Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+            .background(color = Color.Black)
+    ) {
+        val height = size.height
+        val width = size.width
+
+        val startX = 0f
+        val endX = width
+        val startY = height / 2 + 50.dp.toPx()
+        val endY = startY
+
+
+        drawLine(
+            start = Offset(x = startX, y = startY),
+            end = Offset(x = endX, y = endY),
+            color = Color.Yellow,
+            strokeWidth = 10f,
+            pathEffect = PathEffect.dashPathEffect(
+                intervals = floatArrayOf(
+                    10f.dp.toPx(),
+                    10f.dp.toPx()
+                ),
+                phase = 10f.dp.toPx()
+            )
+        )
+
+//размещение по центру
+        drawText(
+            textMeasurer = textMeasurer,
+            text = textToCenter,
+            style = styleCenter,
+//            topLeft = Offset(50.dp.toPx(),50.dp.toPx()),
+            topLeft = Offset(
+                x = center.x - textLayoutCenter.size.width / 2,
+                y = center.y - textLayoutCenter.size.height / 2,
+            ),
+        )
+
+    }
 }
                 
             """.trimIndent()
         ),
+        ExampleCode(
+            id = 3,
+            title = "Маштабирование на холсте",
+            comment = """
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Графика в Compose ",
+                    textUrl = "\uD83D\uDCD6 Отображать текст",
+                    url = "https://developer.android.com/develop/ui/compose/graphics/draw/overview?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Анимации в Compose",
+                    textUrl = "\uD83D\uDCD6 Animations in Compose ",
+                    url = "https://developer.android.com/develop/ui/compose/animation/introduction"
+                ),
+                TextClickLink(
+                    text = "Коллекция быстрых руководств ",
+                    textUrl = "\uD83D\uDCD6 Отображать текст",
+                    url = "https://developer.android.com/develop/ui/compose/quick-guides/collections/display-text?hl=ru"
+                ),
+            ),
+
+            nameFun = "",
+            highlightCode = highCodeList + listOf(
+                HighlightCode("DrawAnimeScaleAText", Color(0xFFffc530)),
+                HighlightCode("initialValue", Color(0xFF3CEE0A)),
+                HighlightCode("targetValue", Color(0xFF3CEE0A)),
+                HighlightCode("33f", Color(0xFF5EADD6)),
+                HighlightCode("1f", Color(0xFF5EADD6)),
+                HighlightCode("10000", Color(0xFF5EADD6)),
+                HighlightCode("18", Color(0xFF5EADD6)),
+                HighlightCode("//", Color(0xFF3CEE0A)),
+            ),
+            lambdaFun = { DrawAnimeScaleAText() },
+            code = """
+@Composable
+fun DrawAnimeScaleAText(
+    modifier: Modifier = Modifier,
+    duration: Int = 10000,   //10 sek
+    textToCenter: String = "А",
+    color: Color = Color.White,
+    fontFamily: FontFamily = Cabin  //Alice
+) {
+    val textMeasurer = rememberTextMeasurer()
+
+    val styleCenter = TextStyle(
+        fontSize = 18.sp,
+        fontFamily = fontFamily,
+        fontWeight = FontWeight.Bold,
+        color = color,
+    )
+    val textLayoutCenter = remember(textToCenter) {
+        textMeasurer.measure(textToCenter, styleCenter)
+    }
+
+    val infiniteTransition = rememberInfiniteTransition(
+        label = "infinite"
+    )
+
+    val scale by infiniteTransition.animateFloat(
+        initialValue = 33f,
+        targetValue = 1f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(
+                durationMillis = duration,
+                easing = LinearEasing
+            ),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "scale text"
+    )
+
+    Canvas(
+        modifier = modifier
+            .fillMaxSize()
+            .background(color = Color.Black),
+    ) {
+        withTransform({
+            scale(scaleX = scale, scaleY = scale)
+        }) {
+//размещение по цетру текста
+            drawText(
+                textMeasurer = textMeasurer,
+                text = textToCenter,
+                style = styleCenter,
+                topLeft = Offset(
+                    x = center.x - textLayoutCenter.size.width / 2,
+                    y = center.y - textLayoutCenter.size.height / 2,
+                ),
+            )
+
+        }
+
+    }
+}
+                
+            """.trimIndent()
+        ),
+
+
+
         ExampleCode(
             id = 20,
             title = "",

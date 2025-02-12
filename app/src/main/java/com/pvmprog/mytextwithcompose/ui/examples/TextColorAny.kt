@@ -39,7 +39,7 @@ fun TextColorAny() {
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 Text (
-                    text = "Контраст:17.08 (Отличный)",
+                    text = "Контраст:13.08 (Отличный)",
                     color = Color(0xFFEBE0D9),
                     fontSize = 18.sp
                 )

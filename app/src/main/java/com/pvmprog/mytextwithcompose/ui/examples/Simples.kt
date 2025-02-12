@@ -41,6 +41,10 @@ import androidx.compose.ui.unit.sp
 import com.pvmprog.mytextwithcompose.R
 import com.pvmprog.mytextwithcompose.ui.theme.MyTextWithComposeTheme
 
+/*
+Коэффициент контраста, согласно стандарту WCAG, высчитывается по формуле: (L1 + 0,05) / (L2 + 0,05), в которой: L1 — относительная яркость самого светлого цвета. L2 — относительная яркость самого тёмного цвета
+ */
+
 @Composable
 fun Simple() {
     Box(

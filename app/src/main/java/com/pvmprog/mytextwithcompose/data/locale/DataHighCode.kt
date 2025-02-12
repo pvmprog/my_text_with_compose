@@ -1,6 +1,11 @@
 package com.pvmprog.mytextwithcompose.data.locale
 
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.foundation.Canvas
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.drawText
 import com.pvmprog.mytextwithcompose.data.model.HighlightCode
 
 object DataHighCode {
@@ -9,12 +14,18 @@ object DataHighCode {
         HighlightCode("class", Color(0xFFd27749)),
         HighlightCode("data", Color(0xFFd27749)),
         HighlightCode("val", Color(0xFFd27749)),
+        HighlightCode("var", Color(0xFFd27749)),
         HighlightCode("false", Color(0xFFd27749)),
         HighlightCode("true", Color(0xFFd27749)),
         HighlightCode(".repeat", Color(0xFFd27749)),
         HighlightCode("when", Color(0xFFB84E18)),
         HighlightCode("else", Color(0xFFB84E18)),
         HighlightCode("if ", Color(0xFFB84E18)),
+        HighlightCode("drawText", Color(0xFFB84E18)),
+        HighlightCode("withTransform", Color(0xFFB84E18)),
+        HighlightCode("weight", Color(0xFFB84E18)),
+
+
 
         HighlightCode("items", Color(0xFFF5996B)),
         HighlightCode(".padding", Color(0xFFF5996B)),
@@ -25,6 +36,7 @@ object DataHighCode {
         HighlightCode(".border", Color(0xFFF5996B)),
         HighlightCode("withStyle", Color(0xFFF5996B)),
 
+        HighlightCode("remember", Color(0xFF0D8113)),
         HighlightCode("LazyColumn", Color(0xFF0D8113)),
         HighlightCode("Text ", Color(0xFF0D8113)),
         HighlightCode("Column", Color(0xFF0D8113)),
@@ -39,6 +51,21 @@ object DataHighCode {
         HighlightCode("dimensionResource", Color(0xFF0D8113)),
         HighlightCode("colorResource", Color(0xFF0D8113)),
         HighlightCode("Surface", Color(0xFF0D8113)),
+        HighlightCode("rememberInfiniteTransition", Color(0xFF0D8113)),
+        HighlightCode(".animateFloat", Color(0xFF0D8113)),
+        HighlightCode("Canvas ", Color(0xFF0D8113)),
+        HighlightCode("rememberTextMeasurer", Color(0xFF0D8113)),
+        HighlightCode("linearGradient", Color(0xFF0D8113)),
+        HighlightCode("horizontalGradient", Color(0xFF0D8113)),
+        HighlightCode("verticalGradient", Color(0xFF0D8113)),
+        HighlightCode("sweepGradient", Color(0xFF0D8113)),
+        HighlightCode("radialGradient", Color(0xFF0D8113)),
+        HighlightCode("RadioButtonColumn", Color(0xFF0D8113)),
+        HighlightCode("BackgroundWithBrush", Color(0xFF0D8113)),
+        HighlightCode("radialGradient", Color(0xFF0D8113)),
+        HighlightCode("Выберите цвет фона", Color(0xFF0D8113)),
+        HighlightCode("Выберите цвет текста", Color(0xFF0D8113)),
+
 
         HighlightCode("text =", Color(0xFF00a9ff)),
         HighlightCode("fontSize =", Color(0xFF00a9ff)),
@@ -74,6 +101,41 @@ object DataHighCode {
         HighlightCode("0xff22200d", Color(0xFF2DB8FF)),
         HighlightCode("0xffffff00", Color(0xFF2DB8FF)),
         HighlightCode("0xFF993399", Color(0xFF2DB8FF)),
+        HighlightCode("initialValue =", Color(0xFF2DB8FF)),
+        HighlightCode("targetValue =", Color(0xFF2DB8FF)),
+        HighlightCode("animationSpec =", Color(0xFF2DB8FF)),
+        HighlightCode("animation =", Color(0xFF2DB8FF)),
+        HighlightCode("easing =", Color(0xFF2DB8FF)),
+        HighlightCode("repeatMode =", Color(0xFF2DB8FF)),
+        HighlightCode("contentAlignment =", Color(0xFF2DB8FF)),
+        HighlightCode("label =", Color(0xFF2DB8FF)),
+        HighlightCode("durationMillis =", Color(0xFF2DB8FF)),
+        HighlightCode("scaleX =", Color(0xFF2DB8FF)),
+        HighlightCode("scaleY =", Color(0xFF2DB8FF)),
+        HighlightCode("textMeasurer =", Color(0xFF2DB8FF)),
+        HighlightCode("topLeft =", Color(0xFF2DB8FF)),
+        HighlightCode("x =", Color(0xFF2DB8FF)),
+        HighlightCode("y =", Color(0xFF2DB8FF)),
+        HighlightCode("1f", Color(0xFF2DB8FF)),
+        HighlightCode("0.7f", Color(0xFF2DB8FF)),
+        HighlightCode("indexSelect =", Color(0xFF2DB8FF)),
+        HighlightCode("items =", Color(0xFF2DB8FF)),
+        HighlightCode("onClick =", Color(0xFF2DB8FF)),
+        HighlightCode("colorCurrent =", Color(0xFF2DB8FF)),
+        HighlightCode("onColorSelect =", Color(0xFF2DB8FF)),
+        HighlightCode("title =", Color(0xFF2DB8FF)),
+        HighlightCode("0", Color(0xFF2DB8FF)),
+        HighlightCode("1", Color(0xFF2DB8FF)),
+        HighlightCode("2", Color(0xFF2DB8FF)),
+        HighlightCode("3", Color(0xFF2DB8FF)),
+        HighlightCode("4", Color(0xFF2DB8FF)),
+        HighlightCode("5", Color(0xFF2DB8FF)),
+        HighlightCode("6", Color(0xFF2DB8FF)),
+        HighlightCode("7", Color(0xFF2DB8FF)),
+        HighlightCode("8", Color(0xFF2DB8FF)),
+        HighlightCode("9", Color(0xFF2DB8FF)),
+        HighlightCode("-1", Color(0xFF2DB8FF)),
+
 
         HighlightCode(".value", Color(0xFFe48def)),
         HighlightCode(".resources.displayMetrics.density", Color(0xFFe48def)),
@@ -131,6 +193,16 @@ object DataHighCode {
         HighlightCode(".onSecondaryContainer", Color(0xFFe48def)),
         HighlightCode(".tertiaryContainer", Color(0xFFe48def)),
         HighlightCode(".onTertiaryContainer", Color(0xFFe48def)),
+        HighlightCode("LinearEasing", Color(0xFFe48def)),
+        HighlightCode(".Reverse", Color(0xFFe48def)),
+        HighlightCode("center.x", Color(0xFFe48def)),
+        HighlightCode("center.y", Color(0xFFe48def)),
+        HighlightCode("size.width", Color(0xFFe48def)),
+        HighlightCode("size.height", Color(0xFFe48def)),
+        HighlightCode("floatValue", Color(0xFFe48def)),
+        HighlightCode(".сontrast", Color(0xFFe48def)),
+        HighlightCode("colors", Color(0xFFe48def)),
+
 
         HighlightCode(".text_compose", Color(0xFFFFEB3B)),
 
