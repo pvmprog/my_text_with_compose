@@ -4,6 +4,7 @@ import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.drawText
 import com.pvmprog.mytextwithcompose.data.model.HighlightCode
@@ -24,6 +25,7 @@ object DataHighCode {
         HighlightCode("drawText", Color(0xFFB84E18)),
         HighlightCode("withTransform", Color(0xFFB84E18)),
         HighlightCode("weight", Color(0xFFB84E18)),
+        HighlightCode(".widthIn", Color(0xFFB84E18)),
 
 
 
@@ -202,6 +204,7 @@ object DataHighCode {
         HighlightCode("floatValue", Color(0xFFe48def)),
         HighlightCode(".сontrast", Color(0xFFe48def)),
         HighlightCode("colors", Color(0xFFe48def)),
+        HighlightCode(".White", Color(0xFFe48def)),
 
 
         HighlightCode(".text_compose", Color(0xFFFFEB3B)),

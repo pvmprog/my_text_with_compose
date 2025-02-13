@@ -21,6 +21,7 @@ fun color_components(c8: Int):Float {
 //вычисления относительной яркости L
 fun calculat_brightness(r:Float,g:Float,b:Float) = 0.2126 * r + 0.7152 * g + 0.0722 * b
 
+
 //вычисления коэффициент контраста
 //Текст должен иметь коэффициент контраста не менее 4.5.
 //В идеале это значение должно быть не менее 7 - для людей с плохим зрением.
@@ -52,6 +53,13 @@ fun contrast_ratio_comment(k: Float): String{
         (koef >= 4) -> "(Хороший)"
         else -> "(Плохой)"
     }
+}
+
+fun color_to_rgb_hex(color: Color):String{
+    val r = (color.red*255).toInt()
+    val g = (color.green*255).toInt()
+    val b = (color.blue*255).toInt()
+    return "#"+"%02x".format(r)+"%02x".format(g)+"%02x".format(b)
 }
 
 /*

@@ -26,6 +26,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -37,10 +38,13 @@ import com.pvmprog.mytextwithcompose.R
 import com.pvmprog.mytextwithcompose.data.locale.DataColor
 import com.pvmprog.mytextwithcompose.ui.service.ColorSelect
 import com.pvmprog.mytextwithcompose.ui.service.SliderSimple
+import com.pvmprog.mytextwithcompose.ui.service.color_components
+import com.pvmprog.mytextwithcompose.ui.service.color_to_rgb_hex
 import com.pvmprog.mytextwithcompose.ui.service.contrast_ratio_calculation
 import com.pvmprog.mytextwithcompose.ui.service.contrast_ratio_comment
 import com.pvmprog.mytextwithcompose.ui.theme.Alice
 import com.pvmprog.mytextwithcompose.ui.theme.MyTextWithComposeTheme
+import java.util.Locale
 
 @Composable
 fun BackgroundDriver(
@@ -60,10 +64,10 @@ fun BackgroundDriver(
     var indexColor by remember { mutableIntStateOf(-1) }
 
     var colorBg by remember {
-        mutableStateOf(DataColor.colors[8])
+        mutableStateOf(Color(0xFF0B410F))
     }
     var colorTx by remember {
-        mutableStateOf(DataColor.colors[12])
+        mutableStateOf(Color(0xFFF3F374))
     }
 
     Column(
@@ -120,30 +124,46 @@ fun BackgroundDriver(
                             modifier = Modifier
                                 .padding(padding)
                                 .widthIn(max = 250.dp),
-                            horizontalArrangement = Arrangement.SpaceAround,
+                            horizontalArrangement = Arrangement.spacedBy(24.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
+                            val modifierBox = Modifier
+                                .border(1.dp, MaterialTheme.colorScheme.onBackground)
+                                .size(110.dp,50.dp)
+
                             Box(
-                                modifier = Modifier
-                                    .padding(padding)
-                                    .border(1.dp, MaterialTheme.colorScheme.onBackground)
+                                modifier = modifierBox
                                     .background(colorBg)
-                                    .size(40.dp)
                                     .clickable {
                                         indexColor = 0
-                                    }
-                            )
+                                    },
+                                contentAlignment = Alignment.Center
+                            ){
+                                Text(
+                                    text = colorBg.toHexRgb(),
+                                    color = colorTx,
+                                    fontSize = 20.sp
+                                )
+                            }
+
                             Box(
-                                modifier = Modifier
-                                    .padding(padding)
-                                    .border(1.dp, MaterialTheme.colorScheme.onBackground)
+                                modifier = modifierBox
                                     .background(colorTx)
-                                    .size(40.dp)
                                     .clickable {
                                         indexColor = 1
-                                    }
-                            )
+                                    },
+                                contentAlignment = Alignment.Center
+                            ){
+                                Text(
+                                    text = colorTx.toHexRgb(),
+                                    color = colorBg,
+                                    fontSize = 20.sp
+
+                                )
+
+                            }
                         }
+
                     } else{
                         ColorSelect(
                             colorCurrent = when(indexColor){
@@ -174,6 +194,17 @@ fun BackgroundDriver(
         }
     }
 }
+
+fun Color.toHexRgb() =
+    "#%06x".format(this.toArgb() and 0x00ffffff)
+
+fun Color.toHex():String{
+    val r = (this.red*255).toInt()
+    val g = (this.green*255).toInt()
+    val b = (this.blue*255).toInt()
+    return "#%02x".format(r)+"%02x".format(g)+"%02x".format(b)  //.toUpperCase(Locale.ROOT)
+}
+
 
 @Preview("Light Theme",showBackground = true)
 @Preview("Dark Theme", showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
