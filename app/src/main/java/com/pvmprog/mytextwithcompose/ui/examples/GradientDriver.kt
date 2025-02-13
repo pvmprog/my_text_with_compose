@@ -192,7 +192,13 @@ fun GradientDriver(
                                     else -> color3 = it
                                 }
                                 indexColor = -1
-                            }
+                            },
+                            title = when(indexColor){
+                                0 -> "Выберите цвет 1"
+                                1 -> "Выберите цвет 2"
+                                else -> "Выберите цвет 3"
+                            },
+
                         )
 
                     }
