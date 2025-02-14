@@ -24,7 +24,7 @@ MVVM (Model-View-ViewModel) — способ организации кода.
   <tr>
     <td><img src="screenshots/screenshot010.jpg" width=270 height=520></td>
     <td><img src="screenshots/screenshot011.jpg" width=270 height=520></td>
-    <td><img src="screenshots/screenshot010.jpg" width=270 height=520></td>
+    <td><img src="screenshots/screenshot012.jpg" width=270 height=520></td>
   </tr>
  </table>
 
