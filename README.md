@@ -28,8 +28,20 @@ MVVM (Model-View-ViewModel) — способ организации кода.
   </tr>
  </table>
 
-Градиет цвета - Text
-expanded 
+Пример: Цвет фона
+<table>
+  <tr>
+    <td>Result 1</td>
+    <td>Result 2</td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/screenshot101.jpg" width=270 height=520></td>
+    <td><img src="screenshots/screenshot102.jpg" width=270 height=520></td>
+  </tr>
+ </table>
+
+
+Пример : "Градиет цвета - Text" (expanded) 
 <table>
   <tr>
     <td>Result</td>
