@@ -6,6 +6,7 @@ import com.pvmprog.mytextwithcompose.data.locale.DataHighCode.highCodeList
 import com.pvmprog.mytextwithcompose.data.model.ExampleCode
 import com.pvmprog.mytextwithcompose.data.model.HighlightCode
 import com.pvmprog.mytextwithcompose.data.model.TextClickLink
+import com.pvmprog.mytextwithcompose.ui.examples.AnimationBgGradient
 import com.pvmprog.mytextwithcompose.ui.examples.AnimationSizeText
 import com.pvmprog.mytextwithcompose.ui.examples.SimpleAlign
 import com.pvmprog.mytextwithcompose.ui.examples.AnnotatedHtmlString
@@ -2180,39 +2181,155 @@ fun RadioButtonColumn (
         ),
         ExampleCode(
             id = 20,
-            title = "linearGradient",
+            title = "Анимация градиента",
             comment = """
-|linearGradient|(
-    colors: List<Color>,
-    start: Offset,
-    end: Offset,
-    tileMode: TileMode
-)
+|Конструктор функции tween|
+@Stable
+fun <T> tween(
+    durationMillis: Int = DefaultDurationMillis,
+    delayMillis: Int = 0,
+    easing: Easing = FastOutSlowInEasing
+): TweenSpec<T> = {...}                        
 
-|colors| - Цвета градиента
+Три обязательных параметра:
 
-|start| - Начальное положение линейного градиента. 
-    |Offset.Zero| - крайний верхний, левый угол области рисования
+    |durationMillis| — продолжительность анимации в миллисекундах;
 
-|end| - Конечное положение линейного градиента. 
-    |Offset.Infinite| - крайний правый, нижний угол области рисования.
-     
-|tileMode| - Определяет поведение шейдера при заполнении области за пределами его границ. 
-    По умолчанию используется TileMode.Clamp для повторения краевых пикселей
+    |delayMillis| — |задержка| в миллисекундах, которая будет выполняться |до запуска| анимации;
 
-                
+    |easing| — кривая смягчения, по которой будет выполняться анимация.
+
+Easing — это характеристика, которая заставляет элементы двигаться так, будто естественные силы, такие как трение, гравитация и масса, работают. 
+
+Easing позволяет анимированным элементам ускоряться и замедляться с разной скоростью.
+
+В Jetpack Compose доступны следующие easing:
+
+ |FastOutSlowInEasing| - медленное начало и медленное завершение
+
+ |LinearOutSlowInEasing| - быстрое начало медленное завершение
+
+ |FastOutLinearInEasing| - медленное начало быстрое завершение
+
+ |LinearEasing| - начало и завершение с ускорением
+
+ |CubicBezierEasing| - позволяет реализовать свою собственную кривую смягчения. Данный easing основан на кривой Безье, которая строится по четырём точкам.
+
+
+
+
+   |Повтор анимации|
+
+Используйте RememberInfiniteTransition с анимацией InfinRepeatable, чтобы постоянно повторять анимацию. 
+
+Измените режимы повтора, чтобы указать, как он должен двигаться вперед и назад.
+
+Используйте FinRepeatable для повторения заданного количества раз. 
+
             """.trimIndent(),
             highlightCode = listOf(
-                HighlightCode("GradientOverview", Color(0xFFffc530)),
-                HighlightCode("AnnotatedString", Color(0xFF3CEE0A)),
-                HighlightCode("SpanStyle", Color(0xFF3CEE0A)),
-                HighlightCode("TextLinkStyles", Color(0xFF3CEE0A)),
+                HighlightCode("AnimationBgGradient", Color(0xFFffc530)),
+                HighlightCode(".animateFloat", Color(0xFF3CEE0A)),
+                HighlightCode(".animateColor", Color(0xFF3CEE0A)),
                 HighlightCode("//", Color(0xFF3CEE0A)),
             ),
-            lambdaFun = {  },
+            lambdaFun = { AnimationBgGradient() },
             code ="""
+@Composable
+fun AnimationBgGradient(
+    backgroundBox: Painter = painterResource(id = R.drawable.bg2),
+){
+
+    // Создает экземпляр [InfiniteTransition] для управления дочерними анимациями
+    val infiniteTransition = rememberInfiniteTransition()
+
+    // Создает дочернюю анимацию типа float как часть [InfiniteTransition].
+    val endX by infiniteTransition.animateFloat(
+        initialValue = 150f,
+        targetValue = 200f,
+        animationSpec = infiniteRepeatable(
+            // Бесконечное повторение анимации длительностью 2000 мс с использованием кривой замедления LinearOutSlowInEasing
+            animation = tween(2000, easing = LinearEasing),
+            // После каждой итерации анимации (т. е. каждые 2000 мс) анимация будет начинаться снова с [initialValue]
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "size"
+        
+    )
+
+    val color by infiniteTransition.animateColor(
+        initialValue = Color.Transparent,
+        targetValue = Color.Blue,
+        animationSpec = infiniteRepeatable(  //LinearOutSlowInEasing
+            animation = tween(1000, easing = LinearEasing),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "color"
+    )
+
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.Black),
+        contentAlignment = Alignment.Center
+    ){
+
+        Image(
+            painter = backgroundBox,
+            contentDescription = null,
+            modifier = Modifier
+                .fillMaxSize(),
+            contentScale = ContentScale.Crop,
+        )
+
+        BackgroundWithBrush(
+            indexSelect = 4,     //radialGradient
+            modifier = Modifier
+                .fillMaxSize(),
+            colors = listOf(Color.Red,color),
+            StartDp = 0,
+            endDp = endX.toInt(),
+            tileMode = TileMode.Decal,
+            style = MaterialTheme.typography.bodyMedium.merge(
+                TextStyle(
+                    fontSize = 25.sp,
+                    textAlign = TextAlign.Center,
+                    color = Color.White,
+                    fontFamily = FontFamily.Serif 
+                )
+            ),
+        )
+
+    }
+}
+                
             """.trimIndent(),
             links = listOf(
+                TextClickLink(
+                    text = "Краткое руководство по анимации в Compose ",
+                    textUrl = "\uD83D\uDCD6 Developers. Animation. Quick guide",
+                    url = "https://developer.android.com/develop/ui/compose/animation/quick-guide?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Настройка анимации  ",
+                    textUrl = "\uD83D\uDCD6 Developers. Animation. Customize",
+                    url = "https://developer.android.com/develop/ui/compose/animation/customize?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Animations in Compose   ",
+                    textUrl = "\uD83D\uDCD6 Developers. Compose. Animation. Introduction",
+                    url = "https://developer.android.com/develop/ui/compose/animation/introduction"
+                ),
+                TextClickLink(
+                    text = "Документация по типам, свойствам и функциям, доступным в пакете androidx.compose.animation.core  ",
+                    textUrl = "\uD83D\uDCD6 Developers. Compose. Animation. Core",
+                    url = "https://developer.android.com/reference/kotlin/androidx/compose/animation/core/package-summary#Ease()"
+                ),
+                TextClickLink(
+                    text = "Ослабление и продолжительность  ",
+                    textUrl = "\uD83D\uDCD6 m3.material.io. Easing and duration",
+                    url = "https://m3.material.io/styles/motion/easing-and-duration/applying-easing-and-duration"
+                ),
                 TextClickLink(
                     text = "How to Create Gradient Background in Android Jetpack Compose ",
                     textUrl = "\uD83D\uDCD6 Bolt UiX ",

@@ -33,12 +33,12 @@ fun RadioButtonColumn(
         "radialGradient",
     ),
     onClick: (Int) -> Unit = {},
+    modifier:Modifier = Modifier
 ) {
     Column(
-        Modifier
-            .fillMaxWidth()
+        modifier = modifier
             .selectableGroup(),
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.SpaceAround,
         horizontalAlignment = Alignment.CenterHorizontally
     )
     {
@@ -52,13 +52,13 @@ fun RadioButtonColumn(
                 RadioButton(
                     selected = indexSelect == index,
                     onClick = { onClick(index) },
-                    modifier = Modifier.padding(8.dp)
+                    modifier = Modifier.padding(end = 4.dp)
                 )
                 Text(
                     text = element,
                     modifier = Modifier
                         .fillMaxWidth(),
-                    fontSize = 22.sp
+                    fontSize = 20.sp
                 )
             }
         }

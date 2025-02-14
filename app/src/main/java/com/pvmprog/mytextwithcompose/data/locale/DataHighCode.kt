@@ -1,12 +1,6 @@
 package com.pvmprog.mytextwithcompose.data.locale
 
-import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.rememberInfiniteTransition
-import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.drawText
 import com.pvmprog.mytextwithcompose.data.model.HighlightCode
 
 object DataHighCode {
@@ -126,17 +120,6 @@ object DataHighCode {
         HighlightCode("colorCurrent =", Color(0xFF2DB8FF)),
         HighlightCode("onColorSelect =", Color(0xFF2DB8FF)),
         HighlightCode("title =", Color(0xFF2DB8FF)),
-        HighlightCode("0", Color(0xFF2DB8FF)),
-        HighlightCode("1", Color(0xFF2DB8FF)),
-        HighlightCode("2", Color(0xFF2DB8FF)),
-        HighlightCode("3", Color(0xFF2DB8FF)),
-        HighlightCode("4", Color(0xFF2DB8FF)),
-        HighlightCode("5", Color(0xFF2DB8FF)),
-        HighlightCode("6", Color(0xFF2DB8FF)),
-        HighlightCode("7", Color(0xFF2DB8FF)),
-        HighlightCode("8", Color(0xFF2DB8FF)),
-        HighlightCode("9", Color(0xFF2DB8FF)),
-        HighlightCode("-1", Color(0xFF2DB8FF)),
 
 
         HighlightCode(".value", Color(0xFFe48def)),

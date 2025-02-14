@@ -105,14 +105,35 @@ fun ControlComponents(){
         verticalArrangement = Arrangement.spacedBy(padding)
     ) {
         if (indexColor == -1){
+            var titleSlider1 = "startX"
+            var titleSlider2 = "endX"
+
+            when(indexSelect){
+                0,3 -> {
+                    titleSlider1 = "OffsetX"
+                    titleSlider2 = "Offsety"
+                }
+                2 -> {
+                    titleSlider1 = "startY"
+                    titleSlider2 = "endY"
+                }
+                4 -> {
+                    titleSlider2 = "radius"
+                }
+
+            }
 
             SliderSimple("size",fontSize,20f,50f)
 
-            SliderSimple("startX",startX,0f,400f)
+            if (indexSelect != 4) {
+                SliderSimple(titleSlider1, startX, 0f, 400f)
+            }
 
-            SliderSimple("endX",endX,0f,400f)
+            SliderSimple(titleSlider2,endX,0f,400f)
 
-            RadioButtonRow(indexTileModes,tileModes,{indexTileModes = it})
+            if (indexSelect != 3){
+                RadioButtonRow(indexTileModes,tileModes,{indexTileModes = it})
+            }
 
 
             Row(
@@ -204,6 +225,8 @@ fun ControlComponents(){
                         "r",
                     ),
                     onClick = { indexSelect = it },
+                    modifier = Modifier
+                        .fillMaxHeight()
 
                 )
             }
