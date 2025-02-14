@@ -1,7 +1,9 @@
 # Android Studio + Kotlin + Compose + Samples
-<img src="screenshots/kotik2.jpg" text-align = "center" />
+<img src="screenshots/kotik2.jpg" />
 
 ## "Text in jetpack Compose"
+
+<h3 style="text-align:center;">Text in jetpack Compose </h3>
 
 <img src="screenshots/video_text_in_compose.gif"/>
 
