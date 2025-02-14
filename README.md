@@ -24,4 +24,21 @@ MVVM (Model-View-ViewModel) — способ организации кода.
   </tr>
  </table>
 
+Градиет цвета - Text
+expanded 
+<table>
+  <tr>
+    <td>Result</td>
+    <td>Code</td>
+    <td>Theory</td>
+    <td>Theory small</td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/screenshot104.jpg" width=520 height=270></td>
+    <td><img src="screenshots/screenshot105.jpg" width=520 height=270></td>
+    <td><img src="screenshots/screenshot106.jpg" width=520 height=270></td>
+    <td><img src="screenshots/screenshot107.jpg" width=520 height=270></td>
+  </tr>
+ </table>
+
  
