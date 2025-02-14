@@ -34,10 +34,10 @@ expanded
     <td>Theory small</td>
   </tr>
   <tr>
-    <td><img src="screenshots/screenshot104.jpg" width=520 height=270></td>
-    <td><img src="screenshots/screenshot105.jpg" width=520 height=270></td>
-    <td><img src="screenshots/screenshot106.jpg" width=520 height=270></td>
-    <td><img src="screenshots/screenshot107.jpg" width=520 height=270></td>
+    <td><img src="screenshots/screenshot104.jpg"></td>
+    <td><img src="screenshots/screenshot105.jpg"></td>
+    <td><img src="screenshots/screenshot106.jpg"></td>
+    <td><img src="screenshots/screenshot107.jpg"></td>
   </tr>
  </table>
 
