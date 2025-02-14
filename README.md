@@ -3,6 +3,8 @@
 
 ## "Text in jetpack Compose"
 
+<img src="screenshots/video_text_in_compose.gif"/>
+
 Простой проект с использованием MVVM - архитектуры c примерами отображения текстовой информации в Андроид с использованием jetpack Compose
 
 MVVM (Model-View-ViewModel) — способ организации кода.
