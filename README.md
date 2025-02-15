@@ -122,18 +122,16 @@
  
 
 
-Пример : "Градиет цвета - Text" (expanded) 
-<table>
-  <tr>
-    <td>Result</td>
-    <td>Code</td>
-    <td>Theory</td>
-  </tr>
-  <tr>
-    <td><img src="screenshots/screenshot104.jpg"></td>
-    <td><img src="screenshots/screenshot105.jpg"></td>
-    <td><img src="screenshots/screenshot106.jpg"></td>
-  </tr>
- </table>
+### Пример : "Градиет цвета - Text" (expanded) 
+    
+<p align="center">
+   <img src="screenshots/screenshot104.jpg">
+   <img src="screenshots/screenshot105.jpg">
+   <img src="screenshots/screenshot106.jpg">
+</p>
+
+    
+
+
 
  
