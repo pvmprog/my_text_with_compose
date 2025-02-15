@@ -6,9 +6,9 @@
     <img src="screenshots/kotik2.jpg" alt="Logo" />
 </p>
 
-<h2 align="center">
+<h1 align="center">
    Text in jetpack Compose
-</h2>
+</h1>
 
  Простой проект с использованием <b>MVVM</b> архитектуры для реализации приложения под <b>Андроид</b> на языке программирования <b>Котлин</b>.
  
@@ -16,16 +16,20 @@
 
  <b>MVVM (Model-View-ViewModel)</b> — способ организации кода. Помогает отделить пользовательский интерфейс(UI) от данных.
 
- ## Структура приложения
+ 
+<h2 align="center">
+   Структура приложения
+</h2>
 
-Приложение содержит:
-  * Screen "Greetings" - экран приветствия
-  * Screen "Home" - список названий примеров
+
+Приложение включает в себя:
+  * Screen "<b>Greetings</b>" - экран приветствия
+  * Screen "<b>Home</b>" - список названий примеров
 
 Каждый пример содержит:
-  * Screen "Result"
-  * Screen "Code"
-  * Screen "Theory"
+  * Screen "<b>Result</b>"
+  * Screen "<b>Code</b>"
+  * Screen "<b>Theory</b>"
 
 
 <h2 align="center">
@@ -55,10 +59,17 @@
   </tr>
  </table>
 
+<p align="center">
+   **************************************************
+</p>
+<h2 align="center">
+   Пример: "<b>Цвет фона</b>b"
+</h2>
+<p align="center">
+   **************************************************
+</p>
 
- 
-
-Пример: Цвет фона
+## Screen "<b>Result</b>" 
 <table>
   <tr>
     <td>Result 1</td>
