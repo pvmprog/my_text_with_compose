@@ -1,5 +1,10 @@
-# Android Studio + Kotlin + Compose + Samples
-<img src="screenshots/kotik2.jpg" />
+<p align="center">
+   # Android Studio + Kotlin + Compose + Samples
+</p>
+
+<p align="center">
+    <img src="screenshots/kotik2.jpg" alt="Logo" />
+</p>
 
 ## "Text in jetpack Compose"
 
