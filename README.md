@@ -1,6 +1,6 @@
-<p align="center">
+<h1 align="center">
    # Android Studio + Kotlin + Compose + Samples
-</p>
+</h1>
 
 <p align="center">
     <img src="screenshots/kotik2.jpg" alt="Logo" />
