@@ -40,6 +40,10 @@
     <img src="screenshots/video_text_in_compose.gif" alt="Start screen" />
 </p>
 
+<p align="center">
+   **************************************************
+</p>
+
 
 <h2 align="center">
    Screen "Home"
@@ -62,18 +66,17 @@
 <p align="center">
    **************************************************
 </p>
+
+
 <h2 align="center">
    Пример: "<b>Цвет фона</b>b"
 </h2>
-<p align="center">
-   **************************************************
-</p>
 
-## Screen "<b>Result</b>" 
+## Screen "Result" 
 <table>
   <tr>
-    <td>Result 1</td>
-    <td>Result 2</td>
+    <td>Preview</td>
+    <td>Color selection</td>
   </tr>
   <tr>
     <td><img src="screenshots/screenshot101.jpg" width=270 height=520></td>
@@ -82,19 +85,54 @@
  </table>
 
 
+## Screen "Code" 
+<table>
+  <tr>
+    <td>Preview</td>
+    <td>to be continued</td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/screenshot101.jpg" width=270 height=520></td>
+    <td><img src="screenshots/screenshot102.jpg" width=270 height=520></td>
+  </tr>
+ </table>
+
+<p align="center">
+   **************************************************
+</p>
+
+
+## Screen "Theory" 
+<table>
+  <tr>
+    <td>Preview</td>
+    <td>to be continued</td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/screenshot101.jpg" width=270 height=520></td>
+    <td><img src="screenshots/screenshot102.jpg" width=270 height=520></td>
+  </tr>
+ </table>
+
+<p align="center">
+   **************************************************
+</p>
+
+
+ 
+
+
 Пример : "Градиет цвета - Text" (expanded) 
 <table>
   <tr>
     <td>Result</td>
     <td>Code</td>
     <td>Theory</td>
-    <td>Theory small</td>
   </tr>
   <tr>
     <td><img src="screenshots/screenshot104.jpg"></td>
     <td><img src="screenshots/screenshot105.jpg"></td>
     <td><img src="screenshots/screenshot106.jpg"></td>
-    <td><img src="screenshots/screenshot107.jpg"></td>
   </tr>
  </table>
 
