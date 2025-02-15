@@ -57,9 +57,9 @@
     <td>to be continued</td>
   </tr>
   <tr>
-    <td><img src="screenshots/screenshot010.jpg" width=30% ></td>
-    <td><img src="screenshots/screenshot011.jpg" width=30% ></td>
-    <td><img src="screenshots/screenshot012.jpg" width=30% </td>
+    <td><img src="screenshots/screenshot010.jpg" ></td>
+    <td><img src="screenshots/screenshot011.jpg" ></td>
+    <td><img src="screenshots/screenshot012.jpg" ></td>
   </tr>
  </table>
 
