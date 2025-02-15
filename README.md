@@ -10,9 +10,27 @@
    Text in jetpack Compose
 </h2>
 
- Простой проект с использованием <b>MVVM</b> - архитектуры c примерами отображения текстовой информации в Андроид с использованием jetpack Compose.
+ Простой проект с использованием <b>MVVM</b> архитектуры для реализации приложения под <b>Андроид</b> на языке программирования <b>Котлин</b>.
+ 
+ Содержит примеры отображения текстовой информации с использованием <b>jetpack Compose</b>.
 
-MVVM (Model-View-ViewModel) — способ организации кода. Помогает отделить пользовательский интерфейс(UI) от данных.
+ <b>MVVM (Model-View-ViewModel)</b> — способ организации кода. Помогает отделить пользовательский интерфейс(UI) от данных.
+
+ ## Структура приложения
+
+Приложение содержит:
+  * Screen "Greetings" - экран приветствия
+  * Screen "Home" - список названий примеров
+
+Каждый пример содержит:
+  * Screen "Result"
+  * Screen "Code"
+  * Screen "Theory"
+
+## Screen "Greetings"
+<h2 align="center">
+   Screen "Greetings"
+</h2>
 
 <p align="center">
     <img src="screenshots/video_text_in_compose.gif" alt="Start screen" />
