@@ -27,7 +27,7 @@
   * Screen "Code"
   * Screen "Theory"
 
-## Screen "Greetings"
+
 <h2 align="center">
    Screen "Greetings"
 </h2>
@@ -37,15 +37,16 @@
 </p>
 
 
+<h2 align="center">
+   Screen "Home"
+</h2>
 
-
-## Demo
 
 <table>
   <tr>
-    <td>Home 1</td>
-    <td>Home 2</td>
-    <td>Home 3</td>
+    <td>Home</td>
+    <td>continuation</td>
+    <td>to be continued</td>
   </tr>
   <tr>
     <td><img src="screenshots/screenshot010.jpg" width=270 height=520></td>
@@ -53,6 +54,9 @@
     <td><img src="screenshots/screenshot012.jpg" width=270 height=520></td>
   </tr>
  </table>
+
+
+ 
 
 Пример: Цвет фона
 <table>
