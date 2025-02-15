@@ -1,16 +1,19 @@
 <h1 align="center">
-   # Android Studio + Kotlin + Compose + Samples
+   Android Studio + Kotlin + Compose + Samples
 </h1>
 
 <p align="center">
     <img src="screenshots/kotik2.jpg" alt="Logo" />
 </p>
 
-## "Text in jetpack Compose"
+<h2 align="center">
+   Text in jetpack Compose
+</h2>
 
-<h3 style="text-align:center;">Text in jetpack Compose </h3>
+<p align="center">
+    <img src="screenshots/video_text_in_compose.gif" alt="Start screen" />
+</p>
 
-<img src="screenshots/video_text_in_compose.gif"/>
 
 Простой проект с использованием MVVM - архитектуры c примерами отображения текстовой информации в Андроид с использованием jetpack Compose
 
