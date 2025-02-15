@@ -125,9 +125,19 @@
 ### Пример : "Градиет цвета - Text" (expanded) 
     
 <p align="center">
+   
    <img src="screenshots/screenshot104.jpg">
+
+   **************************************************
+
    <img src="screenshots/screenshot105.jpg">
+
+   **************************************************
+
    <img src="screenshots/screenshot106.jpg">
+
+   **************************************************
+   
 </p>
 
     
