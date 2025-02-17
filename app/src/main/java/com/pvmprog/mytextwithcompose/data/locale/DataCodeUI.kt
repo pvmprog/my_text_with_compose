@@ -1,5 +1,6 @@
 package com.pvmprog.mytextwithcompose.data.locale
 
+import android.os.Build
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import com.pvmprog.mytextwithcompose.data.locale.DataHighCode.highCodeList
@@ -22,6 +23,7 @@ import com.pvmprog.mytextwithcompose.ui.examples.MessageShadow
 import com.pvmprog.mytextwithcompose.ui.examples.SimpleLimit
 import com.pvmprog.mytextwithcompose.ui.examples.MultipleStylesInText
 import com.pvmprog.mytextwithcompose.ui.examples.ScaleDraver
+import com.pvmprog.mytextwithcompose.ui.examples.ShaderDemo
 import com.pvmprog.mytextwithcompose.ui.examples.ShadowDriver
 import com.pvmprog.mytextwithcompose.ui.examples.SimpleWithPadding
 import com.pvmprog.mytextwithcompose.ui.examples.Simple
@@ -1993,13 +1995,13 @@ fun BackgroundDriver(
                     url = "https://medium.com/androiddevelopers/animating-brush-text-coloring-in-compose-%EF%B8%8F-26ae99d9b402"
                 ),
                 TextClickLink(
-                    text = " Brush — кисть для рисования ",
+                    text = "Brush — кисть для рисования ",
                     textUrl = "\uD83D\uDCD6 Developers. Brush",
                     url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/graphics/Brush"
                 ),
                 TextClickLink(
-                    text = " RuntimeShader — вычисляет цвет каждого пикселя на основе выходных данных пользовательской функции языка шейдеров графики Android (AGSL)",
-                    textUrl = "\uD83D\uDCD6 Developers.  Android Graphics Shading Language (AGSL)",
+                    text = "Android Graphics Shading Language",
+                    textUrl = "\uD83D\uDCD6 Developers.  AGSL",
                     url = "https://developer.android.com/reference/android/graphics/RuntimeShader"
                 ),
             ),
@@ -2227,7 +2229,7 @@ Easing позволяет анимированным элементам уско
 Используйте FinRepeatable для повторения заданного количества раз. 
 
             """.trimIndent(),
-            highlightCode = listOf(
+            highlightCode = highCodeList + listOf(
                 HighlightCode("AnimationBgGradient", Color(0xFFffc530)),
                 HighlightCode(".animateFloat", Color(0xFF3CEE0A)),
                 HighlightCode(".animateColor", Color(0xFF3CEE0A)),
@@ -2346,7 +2348,282 @@ fun AnimationBgGradient(
 
         ExampleCode(
             id = 21,
-            title = "Градиент цвета - Text",
+            title = "Кисть AGSL",
+            comment = """
+
+|AGSL| (Android Graphics Shading Language)  используется для определения поведения программируемых объектов |RuntimeShader|. 
+
+Шейдеры - это инструкции, которые выполняет всю работу по вычислению цвета для каждого пикселя.
+
+|AGSL| используется в Android 13 и более поздних версиях.
+
+|GLSL| ES 1.0 - язык шейдинга |OpenGL ES|
+
+|AGSL| и |GLSL| очень похожи по синтаксису, что позволяет |перенести| многие эффекты фрагментных шейдеров |GLSL| в |Android| с минимальными изменениями.
+                
+|AGSL| (и |GLSL|) — это предметно-ориентированные языки в стиле |C|. 
+Такие типы, как |bool| и |int| точно соответствуют своим эквивалентам в |C|. 
+Существуют и дополнительные типы для поддержки векторов и матриц, поддерживающих функциональность предметной области.
+                        
+В GLSL введены специальные типы переменных:
+ 1)для связи шейдера с внешним миром (|uniform|); 
+ 2)фрагментного шейдера с вершинным шейдером (|varying|); 
+ 3)переменные-атрибуты вершина (|attribute|). 
+ 
+Такие переменные должны иметь глобальную область видимости.
+
+В GLSL есть циклы:  for, while, do..while ... 
+
+|AGSL| поддерживает дополнительные короткие и половинные типы для обеспечения средней точности.
+
+Векторные типы могут быть объявлены как: <base type><columns>
+т.е. можно использовать |float2| вместо |vec2| и |bool4| вместо |bvec4| и т.д.
+
+Типы матриц могут быть объявлены как  <base type><columns>|x|<rows>                        
+т.е. можно использовать |float3x3| вместо |mat3| в AGSL
+
+Имена компонентов вектора для векторов длины 2–4 обозначаются одной буквой.
+
+|vect.xyzw| — используется при доступе к векторам, представляющим точки/нормали.
+
+|vect.rgba| — используется при доступе к векторам, представляющим цвета.
+
+|vect.LTRB| — используйте, когда вектор представляет прямоугольник (не в GLSL).
+
+В AGSL 0 и 1 могут использоваться для создания константы 0 или 1 в этом канале. 
+Пример: 
+  |!vect.rgb1 == vec4(vect.rgb,1)|
+ 
+  
+ Каждая шейдерная программа начинается с основной функции |main|. 
+
+В отличие от GLSL, функция принимает в качестве параметра положение шейдера в «локальных» координатах,а возвращает цвет пикселя в виде vec4 со средней или высокой точностью.
+
+Входные параметры шейдера определяются квалификатором |uniform|
+
+Код шейдера вызывается для каждого нарисованного пикселя и возвращает цвет, которым пиксель должен быть окрашен.
+
+Код шейдера можно разместить в переменной с типом String.
+
+|Передача цвета в шейдер|
+
+Если входные параметры шейдера |uniform| определяют цвет, то их Необходимо пометить half4/float4/vec4 с помощью |layout(color)|
+
+Пример:
+
+В |Android| code установка uniform:
+ shader.setColorUniform(
+     "iColor", 
+     Color.GREEN
+ )
+ 
+ 
+В |AGSL| code получение uniform:
+
+  |layout(color)| uniform half4 iColor;
+  
+  
+
+В функциях используются универсальные типы:
+ float, float2, float3, float4 или half, half2, half3, half4                        
+
+
+   |Функции AGSL|
+
+
+  |!Угловые и тригонометрические функции|
+
+radians(degrees) 	Преобразует градусы в радианы
+
+degrees(radians) 	Преобразует радианы в градусы
+
+sin(angle) 	Стандартный синус (угол)
+
+cos(angle) 	Стандартный косинус
+
+tan(angle) 	Стандартный тангенс
+
+asin(x) 	Возвращает угол, синус которого равен x, в диапазоне [-pi/2,pi/2]
+
+acos(x) 	Возвращает угол, косинус которого равен x, в диапазоне [0,pi]
+
+atan(y,x) 	Возвращает угол, тригонометрический арктангенс которого равен y/x, в диапазоне [-pi,pi]
+
+atan(y_over_x) 	RВозвращает угол, тригонометрический арктангенс которого равен y_over_x в диапазоне [-pi/2,pi/2] 
+
+    |!Экспоненциальные функции|
+    
+pow(x, y) 	Возвращает x^y
+exp(x) 	    Возвращает x^2
+log(x) 	    Возвращает ln(x)
+exp2(x) 	Возвращает  2^x
+log2(x) 	Возвращает  log2(x)
+sqrt(x) 	Возвращает  sqrt(x)
+inversesqrt(x) 	Возвращает  1/sqrt(x)
+  
+    |!Общие функции|
+    
+abs(x) Абсолютное значение
+
+sign(x) Возвращает -1,0, 0,0 или 1,0 в зависимости от знака x.
+
+floor(x) Ближайшее целое число <= x
+
+ceil(x) Ближайшее целое число >= x
+
+fract(x) Возвращает дробную часть x.
+
+mod(x,y) Возвращает значение x по модулю y.
+
+mod(x, float y) Возвращает значение x по модулю y.
+
+min(x,y) Возвращает минимальное значение x или y.
+
+min(x, float y) Возвращает минимальное значение x или y.
+
+max(x,y) Возвращает максимальное значение x или y.
+
+max(x, float y) Возвращает максимальное значение x или y.
+
+Clamp(x, minVal, maxVal) Возвращает значение x, зажатое между minVal и maxVal.
+
+Clamp(x, float minVal, float maxVal) Возвращает значение x, зажатое между minVal и maxVal.
+
+saturation(x) Возвращает значение x, ограниченное диапазоном от 0,0 до 1,0.
+
+mix(x, y, a) Возвращает линейную смесь x и y.
+
+mix(x, y, float a) Возвращает линейную смесь x и y.
+
+step(edge,x) Возвращает 0,0, если x < edge, иначе 1,0
+
+Step(float edge, x) Возвращает 0,0, если x < edge, иначе 1,0
+
+Smoothstep(edge0, edge1, x) Выполняет интерполяцию Эрмита между 0 и 1, когда edge0 < x < edge1
+
+Smoothstep(float edge0, float edge1,x) Выполняет интерполяцию Эрмита между 0 и 1, когда edge0 < x < edge1                   
+                    
+ |!Геометрические функции|
+ 
+length(x) Возвращает длину вектора
+
+distance(p0, p1) Возвращает расстояние между точками
+
+dot(x,y) Возвращает скалярное произведение
+
+cross(float3/half3 x, float3/half3 y) Возвращает векторное произведение
+
+normalize(x) Нормализовать вектор до  1
+
+faceforward(N, I, Nref) Возвращает N, если точка(Nref, I) < 0, иначе -N.
+
+reflect(I, N) Направление отражения I - 2 * dot(N,I) * N.
+
+refract(I, N, float/half eta) Возвращает векто преломления.                        
+                        
+  |!Матричные функции|
+  
+mat matrixCompMult(mat x, mat y) 	умножение x на y 
+
+mat inverse(mat m) 	Возвращает инверсию m     
+       
+ Векторные реляционные функции
+
+Сравнение x и y покомпонентно. 
+
+Размеры векторов ввода и возврата для конкретного вызова должны совпадать.
+
+T — это объединение векторных типов целых чисел и с плавающей запятой. 
+
+BV — это логический вектор, соответствующий размеру входных векторов.
+  
+       
+BV lessThan(T x, T y) 	x < y
+
+BV lessThanEqual(T x, T y) 	x <= y
+
+BV greaterThan(T x, T y) 	x > y
+
+BV greaterThanEqual(T x, T y) 	x >= y
+
+BV equal(T x, T y) 	x == y
+
+BV equal(BV x, BV y) 	x == y
+
+BV notEqual(T x, T y) 	x != y
+
+BV notEqual(BV x, BV y) 	x != y
+
+bool any(BV x) 	true, если какой-либо компонент x true
+
+bool all(BV x) 	true, если все компоненты x true
+
+BV not(BV x) 	логическое дополнение x       
+            
+  |!Функции цвета|
+
+vec4 unpremul(vec4 color) 	Преобразует значение цвета в альфа без предварительного умножения
+
+half3 toLinearSrgb(half3 color) 	Преобразование цветового пространства в линейное SRGB
+
+half3 fromLinearSrgb(half3 color) 	реобразование цветового пространства 
+            
+
+Более детальную информацию смотрите по ссылкам ниже ...
+               
+                
+            """.trimIndent(),
+            highlightCode = highCodeList +  listOf(
+                HighlightCode("ShaderDemo", Color(0xFFffc530)),
+                HighlightCode("//", Color(0xFF3CEE0A)),
+            ),
+            lambdaFun = {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    ShaderDemo()
+                }
+            },
+            code ="""
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Кисть: градиенты и шейдеры — ",
+                    textUrl = "\uD83D\uDCD6 Developers. Brush",
+                    url = "https://developer.android.com/develop/ui/compose/graphics/draw/brush?hl=ru"
+                ),
+
+                TextClickLink(
+                    text = "Язык шейдеров графики Android ",
+                    textUrl = "\uD83D\uDCD6 Developers. Graphics. AGSL",
+                    url = "https://developer.android.com/develop/ui/views/graphics/agsl?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Android Graphics Shading Language ",
+                    textUrl = "\uD83D\uDCD6 Developers. RuntimeShader",
+                    url = "https://developer.android.com/reference/android/graphics/RuntimeShader"
+                ),
+                TextClickLink(
+                    text = "Краткий справочник AGSL ",
+                    textUrl = "\uD83D\uDCD6 Developers. AGSL. Quick reference.",
+                    url = "https://developer.android.com/develop/ui/views/graphics/agsl/agsl-quick-reference"
+                ),
+                TextClickLink(
+                    text = "The OpenGL® ES Shading Language ",
+                    textUrl = "\uD83D\uDCD6 Khronos.org (opengles_shading_language.pdf)",
+                    url = "https://www.khronos.org/files/opengles_shading_language.pdf"
+                ),
+                TextClickLink(
+                    text = "Примеры шейдеров ONLINE ",
+                    textUrl = "\uD83D\uDCD6 Создавайте и делитесь своими лучшими шейдерами со всем миром и вдохновляйтесь!",
+                    url = "https://www.shadertoy.com/browse"
+                ),
+            ),
+
+        ),
+
+
+        ExampleCode(
+            id = 21,
+            title = "Градиент шрифта",
             comment = """
 Параметр |brush| можно использовать вместо |color| для установки градиента цвета шрифта текста.
                 
@@ -2377,18 +2654,33 @@ fun AnimationBgGradient(
 
                 
             """.trimIndent(),
-            highlightCode = listOf(
-                HighlightCode("GradientOverview", Color(0xFFffc530)),
-                HighlightCode("AnnotatedString", Color(0xFF3CEE0A)),
-                HighlightCode("SpanStyle", Color(0xFF3CEE0A)),
-                HighlightCode("TextLinkStyles", Color(0xFF3CEE0A)),
+            highlightCode = highCodeList + listOf(
+                HighlightCode("GradientDriver", Color(0xFFffc530)),
                 HighlightCode("//", Color(0xFF3CEE0A)),
             ),
             lambdaFun = { GradientDriver(it) },
             code ="""
-            """.trimIndent()
-        ),
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Больше информации смотрите ",
+                    textUrl = "\uD83D\uDCD6 Developers. Стиль текста",
+                    url = "https://developer.android.com/develop/ui/compose/text/style-text?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Кисть: градиенты и шейдеры — ",
+                    textUrl = "\uD83D\uDCD6 Developers. Brush",
+                    url = "https://developer.android.com/develop/ui/compose/graphics/draw/brush?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Brush — кисть для рисования ",
+                    textUrl = "\uD83D\uDCD6 Developers. Brush",
+                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/graphics/Brush"
+                ),
 
+            ),
+
+        ),
 
         ExampleCode(
             id =  10,
