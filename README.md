@@ -171,7 +171,7 @@
 </p>
 
 <h2 align="center">
-   Пример: "Цвет фона"
+   "Цвет фона"
 </h2>
 
 ## Screen "Result" 
@@ -185,6 +185,23 @@
     <td><img src="screenshots/screenshot102.jpg" width=270 height=520></td>
   </tr>
  </table>
+
+ <h2 align="center">
+   Примеры с анимацией
+</h2>
+
+## Screen "Result" 
+<table align="center">
+  <tr>
+    <td>Preview</td>
+    <td>more...</td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/anime_grad.gif" width=270 height=520></td>
+    <td><img src="screenshots/anime_sh_b.gif" width=270 height=520></td>
+  </tr>
+ </table>
+
 
 
     
