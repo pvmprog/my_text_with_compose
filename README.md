@@ -18,16 +18,11 @@
  Помогает отделить пользовательский интерфейс (<b>UI</b>) от данных. <br> 
  <b>UI</b> не зависит от источника данных. <br>
 
-### Material Design 3 theming and Material You dynamic color
-Jetchat follows the [Material Design 3](https://m3.material.io) principles and uses the `MaterialTheme` composable and M3 components. On Android 12+ Jetchat supports Material You dynamic color, which extracts a custom color scheme from the device wallpaper. Jetchat uses a custom, branded color scheme as a fallback. It also implements custom typography using the Karla and Montserrat font families.
+### MVVM с Jetpack Compose: структурирование вашего приложения для чистой архитектуры
+Подробнее на [Medium...]([https://m3.material.io](https://medium.com/@sks727633/mvvm-with-jetpack-compose-structuring-your-app-for-clean-architecture-42f4bad4c99e)) 
 
 
 
- ### MVVM с Jetpack Compose: структурирование вашего приложения для чистой архитектуры
-Подробнее на [Medium ] (https://medium.com/@sks727633/mvvm-with-jetpack-compose-structuring-your-app-for-clean-architecture-42f4bad4c99e).
-
-
- 
 <p align="center">
     <img src="screenshots/mvvm.jpg" alt="MVVM" />
 </p>
