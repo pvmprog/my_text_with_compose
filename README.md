@@ -67,14 +67,14 @@
 
 
 <h2 align="center">
-   Пример: "Цвет фона"
+ "Градиет цвета" 
 </h2>
 
 ## Screen "Result" 
 <table align="center">
   <tr>
     <td>Preview</td>
-    <td>Color selection</td>
+    <td>more... </td>
   </tr>
   <tr>
     <td><img src="screenshots/screenshot201.jpg" width=270 height=520></td>
@@ -124,7 +124,7 @@
  
 
 
-### Пример : "Градиет цвета - Text" (expanded) 
+###  "Градиет цвета " (expanded) 
     
 <p align="center">
    
