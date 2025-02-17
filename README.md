@@ -202,6 +202,26 @@
   </tr>
  </table>
 
+<h2 align="center">
+   Другие примеры...
+</h2>
+
+## Screen "Result" 
+<table align="center">
+  <tr>
+    <td>Preview</td>
+    <td>more... </td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/screenshot301.jpg" width=270 height=520></td>
+    <td><img src="screenshots/screenshot302.jpg" width=270 height=520></td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/screenshot303.jpg" width=270 height=520></td>
+    <td><img src="screenshots/screenshot304.jpg" width=270 height=520></td>
+  </tr>
+ </table>
+
 
 
     
