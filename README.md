@@ -53,13 +53,11 @@
 <table>
   <tr>
     <td>Home</td>
-    <td>continuation</td>
     <td>to be continued</td>
   </tr>
   <tr>
-    <td><img src="screenshots/screenshot010.jpg" ></td>
-    <td><img src="screenshots/screenshot011.jpg" ></td>
-    <td><img src="screenshots/screenshot012.jpg" ></td>
+    <td><img src="screenshots/screenshot010.jpg" width=270 height=520> </td>
+    <td><img src="screenshots/screenshot011.jpg" width=270 height=520> </td>
   </tr>
  </table>
 
