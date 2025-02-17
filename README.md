@@ -77,8 +77,12 @@
     <td>Color selection</td>
   </tr>
   <tr>
-    <td><img src="screenshots/screenshot101.jpg" width=270 height=520></td>
-    <td><img src="screenshots/screenshot102.jpg" width=270 height=520></td>
+    <td><img src="screenshots/screenshot201.jpg" width=270 height=520></td>
+    <td><img src="screenshots/screenshot202.jpg" width=270 height=520></td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/screenshot203.jpg" width=270 height=520></td>
+    <td><img src="screenshots/screenshot204.jpg" width=270 height=520></td>
   </tr>
  </table>
 
@@ -90,8 +94,8 @@
     <td>to be continued</td>
   </tr>
   <tr>
-    <td><img src="screenshots/screenshot101.jpg" width=270 height=520></td>
-    <td><img src="screenshots/screenshot102.jpg" width=270 height=520></td>
+    <td><img src="screenshots/screenshot205.jpg" width=270 height=520></td>
+    <td><img src="screenshots/screenshot206.jpg" width=270 height=520></td>
   </tr>
  </table>
 
@@ -107,8 +111,8 @@
     <td>to be continued</td>
   </tr>
   <tr>
-    <td><img src="screenshots/screenshot101.jpg" width=270 height=520></td>
-    <td><img src="screenshots/screenshot102.jpg" width=270 height=520></td>
+    <td><img src="screenshots/screenshot207.jpg" width=270 height=520></td>
+    <td><img src="screenshots/screenshot208.jpg" width=270 height=520></td>
   </tr>
  </table>
 
