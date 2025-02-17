@@ -50,7 +50,7 @@
 </h2>
 
 
-<table>
+<table align="center">
   <tr>
     <td>Home</td>
     <td>to be continued</td>
