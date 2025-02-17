@@ -56,8 +56,8 @@
     <td>to be continued</td>
   </tr>
   <tr>
-    <td><img src="screenshots/screenshot010.jpg" width=270 height=520> </td>
-    <td><img src="screenshots/screenshot011.jpg" width=270 height=520> </td>
+    <td><img src="screenshots/screenshot010.jpg" width=190 height=360> </td>
+    <td><img src="screenshots/screenshot011.jpg" width=190 height=360> </td>
   </tr>
  </table>
 
@@ -71,7 +71,7 @@
 </h2>
 
 ## Screen "Result" 
-<table>
+<table align="center">
   <tr>
     <td>Preview</td>
     <td>Color selection</td>
@@ -84,7 +84,7 @@
 
 
 ## Screen "Code" 
-<table>
+<table align="center">
   <tr>
     <td>Preview</td>
     <td>to be continued</td>
@@ -101,7 +101,7 @@
 
 
 ## Screen "Theory" 
-<table>
+<table align="center">
   <tr>
     <td>Preview</td>
     <td>to be continued</td>
@@ -156,6 +156,23 @@
    **************************************************
    
 </p>
+
+<h2 align="center">
+   Пример: "Цвет фона"
+</h2>
+
+## Screen "Result" 
+<table align="center">
+  <tr>
+    <td>Preview</td>
+    <td>Color selection</td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/screenshot101.jpg" width=270 height=520></td>
+    <td><img src="screenshots/screenshot102.jpg" width=270 height=520></td>
+  </tr>
+ </table>
+
 
     
 
