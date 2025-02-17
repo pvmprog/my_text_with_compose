@@ -19,7 +19,7 @@
  <b>UI</b> не зависит от источника данных. <br>
 
  ### MVVM с Jetpack Compose: структурирование вашего приложения для чистой архитектуры
-Подробнее на [MVVM with Jetpack Compose]([https://developer.android.com/topic/libraries/architecture/livedata](https://medium.com/@sks727633/mvvm-with-jetpack-compose-structuring-your-app-for-clean-architecture-42f4bad4c99e).
+Подробнее на (https://medium.com/@sks727633/mvvm-with-jetpack-compose-structuring-your-app-for-clean-architecture-42f4bad4c99e).
 
 
  
