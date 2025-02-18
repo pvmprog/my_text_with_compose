@@ -2,6 +2,13 @@ package com.pvmprog.mytextwithcompose.ui.shader
 
 import android.graphics.RuntimeShader
 import android.os.Build
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.VectorConverter
+import androidx.compose.animation.core.animateValue
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
 import androidx.compose.animation.core.withInfiniteAnimationFrameMillis
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
@@ -20,7 +27,7 @@ import androidx.compose.ui.graphics.ShaderBrush
 fun Modifier.shaderAGSL(
     shaderSrc: String = SHADER_GRADIENT
 ) = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) this.composed {
-
+/*
     val time by produceState(0f) {
         while (true) {
 //бесконечня покадровая анимация
@@ -29,6 +36,25 @@ fun Modifier.shaderAGSL(
             }
         }
     }
+
+ */
+
+    val infiniteTransition = rememberInfiniteTransition(
+        label = "infinite"
+    )
+
+    val time by infiniteTransition.animateValue(
+        initialValue = 0f,
+        targetValue = 10f,
+        typeConverter = Float.VectorConverter,
+        animationSpec = infiniteRepeatable(
+            animation = tween(
+                5000,
+                easing = LinearEasing
+            ),
+            repeatMode = RepeatMode.Reverse
+        )
+    )
 
 //drawWithCache позволяет не только рисовать что-либо,
 // но и кэшировать значения переменных внутри функции.
