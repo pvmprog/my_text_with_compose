@@ -207,9 +207,9 @@
  </table>
 
    **************************************************
-   <img src="screenshots/anime_water.gif">
-   <img src="screenshots/anime_disco.gif">
-   <img src="screenshots/anime_silex.gif">
+   <img src="screenshots/anime_agsl_water.gif">
+   <img src="screenshots/anime_agsl_disco.gif">
+   <img src="screenshots/anime_agsl_silex.gif">
    **************************************************
 
 
