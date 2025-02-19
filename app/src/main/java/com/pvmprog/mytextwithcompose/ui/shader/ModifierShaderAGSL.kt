@@ -25,10 +25,42 @@ import androidx.compose.ui.graphics.ShaderBrush
  */
 
 fun Modifier.shaderAGSL(
-    shaderSrc: String = SHADER_GRADIENT
+    shaderSrc: String = SHADER_GRADIENT,
+    initialValue:Float = 0f,
+    targetValue:Float = 10f
 ) = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) this.composed {
+
+    val time = if (targetValue == -1f){
+        produceState(0f) {
+            while (true) {
+//бесконечня покадровая анимация
+                withInfiniteAnimationFrameMillis {
+                    value = it / 1000f
+                }
+            }
+        }
+    } else {
+        val infiniteTransition = rememberInfiniteTransition(
+            label = "infinite"
+        )
+        infiniteTransition.animateValue(
+            initialValue = initialValue,
+            targetValue = targetValue,
+            typeConverter = Float.VectorConverter,
+            animationSpec = infiniteRepeatable(
+                animation = tween(
+                    5000,
+                    easing = LinearEasing
+                ),
+                repeatMode = RepeatMode.Reverse
+            )
+        )
+
+    }
+
+
 /*
-    val time by produceState(0f) {
+    val time = produceState(0f) {
         while (true) {
 //бесконечня покадровая анимация
             withInfiniteAnimationFrameMillis {
@@ -37,15 +69,16 @@ fun Modifier.shaderAGSL(
         }
     }
 
- */
+
+
 
     val infiniteTransition = rememberInfiniteTransition(
         label = "infinite"
     )
 
-    val time by infiniteTransition.animateValue(
-        initialValue = 0f,
-        targetValue = 10f,
+    val time = infiniteTransition.animateValue(
+        initialValue = initialValue,
+        targetValue = targetValue,
         typeConverter = Float.VectorConverter,
         animationSpec = infiniteRepeatable(
             animation = tween(
@@ -55,10 +88,10 @@ fun Modifier.shaderAGSL(
             repeatMode = RepeatMode.Reverse
         )
     )
+ */
 
-//drawWithCache позволяет не только рисовать что-либо,
-// но и кэшировать значения переменных внутри функции.
-// Это дает нам возможность оптимизировать выделение памяти
+//drawWithCache позволяет не только рисовать что-либо, но и кэшировать значения переменных внутри функции.
+// Это дает возможность оптимизировать выделение памяти
     Modifier.drawWithCache {
         val shader =
             RuntimeShader(shaderSrc)  //SHADER_WATER SHADER_Discoteq SHADER_SILEXARS SHADER_CLOUDS FRACTAL_PYRAMID
@@ -72,7 +105,7 @@ fun Modifier.shaderAGSL(
         onDrawBehind {
 
             shader.setFloatUniform(
-                "iTime", time
+                "iTime", time.value
             )
 
             drawRect(shaderBrush)

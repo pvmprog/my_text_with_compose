@@ -17,6 +17,7 @@ import com.pvmprog.mytextwithcompose.ui.examples.DrawTextCanvas
 import com.pvmprog.mytextwithcompose.ui.examples.ExampleFontSize
 import com.pvmprog.mytextwithcompose.ui.examples.GradientDriver
 import com.pvmprog.mytextwithcompose.ui.examples.GradientOverview
+import com.pvmprog.mytextwithcompose.ui.examples.ImageBrush
 import com.pvmprog.mytextwithcompose.ui.examples.TextFontWeight
 import com.pvmprog.mytextwithcompose.ui.examples.ItalicText
 import com.pvmprog.mytextwithcompose.ui.examples.SimpleLimit
@@ -2565,9 +2566,9 @@ C помощью шейдеров можно делать больше, чем �
             
     7)|!Функции цвета|
 
-       vec4 unpremul(vec4 color) 	Преобразует значение цвета в альфа без предварительного умножения
-       half3 toLinearSrgb(half3 color) 	Преобразование цветового пространства в линейное SRGB
-       half3 fromLinearSrgb(half3 color) 	реобразование цветового пространства 
+       vec4 |unpremul|(vec4 color) 	Преобразует значение цвета в альфа без предварительного умножения
+       half3 |toLinearSrgb|(half3 color) 	Преобразование цветового пространства в линейное SRGB
+       half3 |fromLinearSrgb|(half3 color) 	реобразование цветового пространства 
             
 
 Более детальную информацию смотрите по ссылкам ниже ...
@@ -2625,6 +2626,8 @@ C помощью шейдеров можно делать больше, чем �
             id = 21,
             title = "Анимация AGSL",
             comment = """
+Использовании |OpenGL|-шейдеров позволяют делать красивые анимированные интерфейсы.
+                
 Для примера анимации |AGSL| создадим новую функцию-расширения для |Modifier|, применяющую шейдер: 
 
  Modifier.|shaderAGSL|(
@@ -2678,10 +2681,51 @@ AGSL |не поддерживает| директивы препроцессор
                     textUrl = "\uD83D\uDCD6 Developers. Brush",
                     url = "https://developer.android.com/develop/ui/compose/graphics/draw/brush?hl=ru"
                 ),
+                TextClickLink(
+                    text = "Анимированные шейдеры в Jetpack Compose — ",
+                    textUrl = "\uD83D\uDCD6 https://habr.com...",
+                    url = "https://habr.com/ru/companies/timeweb/articles/736192/"
+                ),
             ),
 
         ),
 
+        ExampleCode(
+            id = 21,
+            title = "Кисть в виде Image",
+            comment = """
+В качестве |Brush| можно использовать изображение. 
+    val imageBrush =
+        ShaderBrush(
+            shader = ImageShader(
+                image = ImageBitmap.imageResource(id = R.drawable.my_cat)
+            )
+        )
+Кисть применим к нескольким различным типам рисования: 
+   фону, тексту и холсту.                 
+   
+            """.trimIndent(),
+            highlightCode = highCodeList +  listOf(
+                HighlightCode("ImageBrush", Color(0xFFffc530)),
+                HighlightCode("//", Color(0xFF3CEE0A)),
+            ),
+            lambdaFun = { ImageBrush()   },
+            code ="""
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Кисть: градиенты и шейдеры — ",
+                    textUrl = "\uD83D\uDCD6 Developers. Brush",
+                    url = "https://developer.android.com/develop/ui/compose/graphics/draw/brush?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Image in JetPack Compose — ",
+                    textUrl = "\uD83D\uDCD6 https://www.jetpackcompose.net",
+                    url = "https://www.jetpackcompose.net/image-in-jetpack-compose"
+                ),
+            ),
+
+            ),
 
 
 

@@ -4,7 +4,8 @@ import org.intellij.lang.annotations.Language
 
 //https://www.shadertoy.com/view/wfSGzD
 
-@Language("AGSL")
+//@Language("AGSL")
+@Language("GLSL")
 const val SHADER_TETRASKELION = """
 // Параметры шейдера    
                 uniform float2 iResolution;      // Viewport resolution (pixels)
