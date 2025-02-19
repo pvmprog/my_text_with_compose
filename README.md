@@ -206,6 +206,14 @@
   </tr>
  </table>
 
+   **************************************************
+   <img src="screenshots/anime_agsl_water.gif">
+   <img src="screenshots/anime_agsl_disco.gif">
+   <img src="screenshots/anime_agsl_silex.gif">
+   **************************************************
+
+
+
 <h2 align="center">
    Другие примеры...
 </h2>
@@ -223,6 +231,10 @@
   <tr>
     <td><img src="screenshots/screenshot303.jpg" width=270 height=520></td>
     <td><img src="screenshots/screenshot304.jpg" width=270 height=520></td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/screenshot306.jpg" width=270 height=520></td>
+    <td><img src="screenshots/screenshot305.jpg" width=270 height=520></td>
   </tr>
  </table>
 
