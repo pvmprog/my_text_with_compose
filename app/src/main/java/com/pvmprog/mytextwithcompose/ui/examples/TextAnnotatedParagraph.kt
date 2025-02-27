@@ -21,7 +21,9 @@ import androidx.compose.ui.unit.sp
 import com.pvmprog.mytextwithcompose.ui.theme.MyTextWithComposeTheme
 
 @Composable
-fun TextBuildAnnotatedString1() {
+fun TextAnnotatedParagraph(
+    fontSize:Int = 40,
+) {
     val annotatedString = buildAnnotatedString {
 
         withStyle(
@@ -33,6 +35,7 @@ fun TextBuildAnnotatedString1() {
                 style = SpanStyle(
                     color = Color.Red,
                     fontWeight = FontWeight.Bold,
+                    fontSize = fontSize.sp
                 )
             ) {
                 append("Text ")
@@ -56,7 +59,7 @@ fun TextBuildAnnotatedString1() {
                 style = SpanStyle(
                     color = Color.Green,
                     fontFamily = FontFamily.Cursive,
-                    fontSize = 24.sp
+                    fontSize = (fontSize+5).sp
                 )
             ) {
                 append("Compose")
@@ -80,7 +83,7 @@ fun TextBuildAnnotatedString1Preview() {
         Surface(
             color = MaterialTheme.colorScheme.background
         ) {
-            TextBuildAnnotatedString1()
+            TextAnnotatedParagraph()
 
         }
 

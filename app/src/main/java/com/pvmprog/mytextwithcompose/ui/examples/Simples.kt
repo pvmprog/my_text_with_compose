@@ -49,8 +49,7 @@ import com.pvmprog.mytextwithcompose.ui.theme.MyTextWithComposeTheme
 fun Simple() {
     Box(
         modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background),
+            .fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -67,8 +66,7 @@ fun Simple() {
 fun SimpleWithPadding() {
     Box(
         modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background),
+            .fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -328,9 +326,9 @@ fun SimpleAlignJustify() {
 @Composable
 fun TextAlignedHeight() {
 
-    val text = "Без выравнивания. ".repeat(10)
+    val text = "Без выравнивания. ".repeat(5)
 
-    val text2 = "Выравнивание строки по заданной высоте строки. ".repeat(10)
+    val text2 = "Выравнивание строки по заданной высоте строки. ".repeat(5)
 
     val padding = dimensionResource(
         id = R.dimen.padding_medium
@@ -354,6 +352,12 @@ fun TextAlignedHeight() {
                 //выравнивание строки по заданной высоте
                 Text(
                     text = text2,
+                    lineHeight = 2.0.em,
+                )
+
+                //выравнивание строки по заданной высоте
+                Text(
+                    text = text2,
                     style = LocalTextStyle.current.merge(
                         TextStyle(
                             lineHeight = 2.0.em,
@@ -363,7 +367,7 @@ fun TextAlignedHeight() {
                             lineHeightStyle = LineHeightStyle(
                                 alignment = LineHeightStyle.Alignment.Center,
                                 //обрезка низа последней строки
-                                trim = LineHeightStyle.Trim.LastLineBottom
+                                trim = LineHeightStyle.Trim.Both
                             )
                         )
                     )

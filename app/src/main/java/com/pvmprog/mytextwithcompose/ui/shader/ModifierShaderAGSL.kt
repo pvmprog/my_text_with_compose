@@ -59,37 +59,6 @@ fun Modifier.shaderAGSL(
     }
 
 
-/*
-    val time = produceState(0f) {
-        while (true) {
-//бесконечня покадровая анимация
-            withInfiniteAnimationFrameMillis {
-                value = it / 1000f
-            }
-        }
-    }
-
-
-
-
-    val infiniteTransition = rememberInfiniteTransition(
-        label = "infinite"
-    )
-
-    val time = infiniteTransition.animateValue(
-        initialValue = initialValue,
-        targetValue = targetValue,
-        typeConverter = Float.VectorConverter,
-        animationSpec = infiniteRepeatable(
-            animation = tween(
-                5000,
-                easing = LinearEasing
-            ),
-            repeatMode = RepeatMode.Reverse
-        )
-    )
- */
-
 //drawWithCache позволяет не только рисовать что-либо, но и кэшировать значения переменных внутри функции.
 // Это дает возможность оптимизировать выделение памяти
     Modifier.drawWithCache {

@@ -15,33 +15,44 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import com.pvmprog.mytextwithcompose.R
+import com.pvmprog.mytextwithcompose.ui.theme.Alice
 import com.pvmprog.mytextwithcompose.ui.theme.MyTextWithComposeTheme
 
 @Composable
-fun MultipleStylesInText() {
-    val Alice = FontFamily(
-        Font(R.font.alice_regular)
-    )
-    val style = SpanStyle(
-        color = Color.Cyan,
-        fontSize = 22.sp,
+fun MultipleStylesInText(
+    fontSize:Int = 32,
+    style:SpanStyle = SpanStyle(
+        fontSize = fontSize.sp,
         fontFamily = Alice,
         fontStyle = FontStyle.Italic,
-    )
+    ),
+    modifier: Modifier = Modifier.padding(16.dp)
+) {
 
     Text(
         text = buildAnnotatedString {
             withStyle(
-                style = style
+                style = style.merge(
+                    SpanStyle(
+                        color = Color.Cyan,
+                    )
+                )
             ) {
                 append("T")
             }
-            append("ext in jetpack ")
+
+            withStyle(
+                style = style
+            ){
+                append("ext in jetpack ")
+            }
 
             withStyle(
                 style = style.merge(
@@ -52,9 +63,17 @@ fun MultipleStylesInText() {
             ) {
                 append("C")
             }
-            append("ompose")
+            withStyle(
+                style = style
+            ){
+                append("ompose")
+            }
+
+
         },
-        modifier = Modifier.padding(16.dp)
+        modifier = modifier,
+        lineHeight = (fontSize+10).sp,
+        textAlign = TextAlign.Center
     )
 }
 

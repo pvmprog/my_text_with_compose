@@ -40,7 +40,7 @@ fun AnimationSizeText(
         infiniteRepeatable(
             // Бесконечное повторение анимации длительностью 5000 мс с использованием кривой замедления LinearOutSlowInEasing
             animation = tween(20000, easing = LinearEasing),
-            // После каждой итерации анимации (т. е. каждые 5000 мс) анимация будет начинаться снова с [initialValue]
+            // После каждой итерации анимации (т. е. каждые 20000 мс) анимация будет начинаться с [targetValue]
             repeatMode = RepeatMode.Reverse
         )
     )

@@ -17,6 +17,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.pvmprog.mytextwithcompose.ui.shader.SHADER_CLOUD
 import com.pvmprog.mytextwithcompose.ui.shader.SHADER_SILEXARS
 import com.pvmprog.mytextwithcompose.ui.shader.shaderAGSL
 import com.pvmprog.mytextwithcompose.ui.theme.Alice
@@ -26,7 +27,7 @@ import com.pvmprog.mytextwithcompose.ui.theme.Alice
 @Preview
 fun TextInCenterBox(
 //SHADER_GRADIENT SHADER_WATER SHADER_DISCOTEQ SHADER_SILEXARS
-    nameShaderStr: String = SHADER_SILEXARS, //SHADER_GRADIENT //SHADER_WATER
+    nameShaderStr: String = SHADER_CLOUD, //SHADER_GRADIENT //SHADER_WATER
     text: String = "Shader in Jetpack Compose",
     modifier: Modifier = Modifier,
     style: TextStyle = TextStyle(
