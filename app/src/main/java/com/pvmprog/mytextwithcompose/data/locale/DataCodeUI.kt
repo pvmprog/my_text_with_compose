@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalDensity
 import com.pvmprog.mytextwithcompose.data.locale.DataHighCode.highCodeList
 import com.pvmprog.mytextwithcompose.data.model.ExampleCode
 import com.pvmprog.mytextwithcompose.data.model.HighlightCode
@@ -21,6 +22,7 @@ import com.pvmprog.mytextwithcompose.ui.examples.DirectionExampleText
 import com.pvmprog.mytextwithcompose.ui.examples.DrawAnimeScaleAText
 import com.pvmprog.mytextwithcompose.ui.examples.DrawTextCanvas
 import com.pvmprog.mytextwithcompose.ui.examples.ExampleFontSize
+import com.pvmprog.mytextwithcompose.ui.examples.FontScale
 import com.pvmprog.mytextwithcompose.ui.examples.GeneralStylization
 import com.pvmprog.mytextwithcompose.ui.examples.GeometricTransform
 import com.pvmprog.mytextwithcompose.ui.examples.GradientDriver
@@ -31,7 +33,9 @@ import com.pvmprog.mytextwithcompose.ui.examples.ItalicText
 import com.pvmprog.mytextwithcompose.ui.examples.LetterSpacing
 import com.pvmprog.mytextwithcompose.ui.examples.SimpleLimit
 import com.pvmprog.mytextwithcompose.ui.examples.MultipleStylesInText
+import com.pvmprog.mytextwithcompose.ui.examples.OutSipmleArticle
 import com.pvmprog.mytextwithcompose.ui.examples.ScaleDraver
+import com.pvmprog.mytextwithcompose.ui.examples.SemanticsText
 import com.pvmprog.mytextwithcompose.ui.examples.ShaderAnimation
 import com.pvmprog.mytextwithcompose.ui.examples.ShaderDriver
 import com.pvmprog.mytextwithcompose.ui.examples.ShadowDriver
@@ -136,6 +140,105 @@ fun Simple() {
 }
             """.trimIndent()
         ),
+
+        ExampleCode(
+            id = 1,
+            title = "Доступность текста",
+            comment = """
+Свойство |liveRegion| из модификатора блока |semantics| используется для уведомления об изменениях состояния |Composable| 
+
+Это может быть полезно для людей с ограниченым зрением.
+
+Активная область указывает службам доступности, что они должны автоматически уведомлять пользователя об изменениях в описании или тексте содержимого узла или в описаниях или тексте содержимого дочерних узлов. 
+
+Например, в случае активности |!вспомогательной технологии| программа чтения с экрана прочтет сообщение вслух.
+                
+Можно использовать один из двух вариантов для |liveRegion|:
+
+ LiveRegionMode.|Polite| - режим региона в реальном времени, указывающий, что службы специальных возможностей должны объявлять об изменениях в этом узле;
+
+ LiveRegionMode.|Assertive| - режим региона в реальном времени, указывающий, что службы специальных возможностей должны прерывать текущую речь, чтобы немедленно объявить об изменениях в этом узле.
+
+ 
+ 
+ Ключевые шаги по улучшению доступности приложения |Compose|:
+
+1)|!Учитывайте минимальные размеры сенсорных объектов|. Убедитесь, что кликабельные и интерактивные элементы имеют размер не менее |48| dp. Это соответствует рекомендациям по доступности |Material Design|.
+
+2)|!Добавьте метки кликов! . Опишите поведение щелчка с помощью модификатора |clickable| или модификатора |semantics| , если у вас нет прямого доступа к |clickable| .
+
+3)|!Опишите визуальные элементы| . Используйте параметр |contentDescription| для текстового описания значков и изображений. Установите для |contentDescription| значение |null| для декоративных элементов.
+
+4)|!Определить заголовки| . Используйте свойство модификатора |semantics| , чтобы пометить элементы как заголовки для упрощения навигации.
+
+5)|!Управляйте порядком обхода| . Используйте |isTraversalGroup| , чтобы отметить группы элементов, которые следует читать вместе. Используйте |traversalIndex| для дальнейшей настройки порядка элементов в этих группах.
+
+
+            """.trimIndent(),
+            highlightCode = highCodeList + listOf(
+                HighlightCode("SemanticsText", Color(0xFFffc530)),
+                HighlightCode("@Preview", Color(0xFFb2c231)),
+                HighlightCode("Измененный текст", Color(0xFF05B80D)),
+                HighlightCode("remember ", Color(0xFF05B80D)),
+                HighlightCode("liveRegion =", Color(0xFFe48def)),
+                HighlightCode("contentDescription =", Color(0xFFe48def)),
+                HighlightCode(".Polite", Color(0xFFe48def)),
+                HighlightCode(".semantics", Color(0xFF3CEE0A)),
+
+            ),
+            lambdaFun = { SemanticsText() },
+
+            code ="""
+/*
+Важно: известна проблема с liveRegion, которая предотвращает речевые объявления при изменении параметра text. Текущий способ решения проблемы — назначить тот же текст contentDescription
+ */
+@Composable
+@Preview
+fun SemanticsText(){
+
+    var changingText by remember {
+        mutableStateOf("Измененный текст")
+    }
+//...
+    Text (
+        text = changingText,
+        modifier = Modifier.semantics {
+            liveRegion = LiveRegionMode.Polite
+            contentDescription = changingText
+        }
+    )
+}                
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Доступность в Jetpack Compose ",
+                    textUrl = "\uD83D\uDCD6 Семантика в Compose ",
+                    url = "https://developer.android.com/develop/ui/compose/accessibility?hl=ru#custom-actions"
+                ),
+                TextClickLink(
+                    text = "Ключевые шаги по улучшению доступности Compose\n ",
+                    textUrl = "\uD83D\uDCD6 Developers. Key steps ",
+                    url = "https://developer.android.com/develop/ui/compose/accessibility/key-steps?hl=ru#add-click-labels"
+                ),
+                TextClickLink(
+                    text = "Больше информации смотрите в ",
+                    textUrl = "\uD83D\uDCD6 Developers. LiveRegionMode",
+                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/semantics/LiveRegionMode"
+                ),
+                TextClickLink(
+                    text = "Адаптируем Android-приложение для незрячих людей.  ",
+                    textUrl = "\uD83D\uDCD6 https://habr.com/...",
+                    url = "https://habr.com/ru/companies/surfstudio/articles/694622/"
+                ),
+                TextClickLink(
+                    text = "Больше информации смотрите в ",
+                    textUrl = "\uD83D\uDCD6 Developers. Accessibility",
+                    url = "https://developer.android.com/develop/ui/compose/accessibility/semantics?hl=ru"
+                ),
+            ),
+        ),
+
+
         ExampleCode(
             id = 1,
             title = "Текст с отступом",
@@ -203,7 +306,7 @@ fun Modifier.|padding|(
                 HighlightCode("6", Color(0xFF2DB8FF)),
                 HighlightCode(".padding ", Color(0xFF3CEE0A)),
 
-            ),
+                ),
             lambdaFun = { SimpleWithPadding() },
 
             code ="""
@@ -230,142 +333,6 @@ fun SimpleWithPadding() {
 }
             """.trimIndent()
         ),
-
-        ExampleCode(
-            title = "Отступы между символами",
-            comment = """
-Параметр |letterSpacing| задает расстояние между символами для текста. Расстояние, так как и размер шрифта, представлено классом |TextUnit| и определяется с помощью единиц |sp| или |em| 
-                
-            """.trimIndent(),
-            highlightCode = highCodeList + listOf(
-                HighlightCode("LetterSpacing", Color(0xFFffc530)),
-                HighlightCode("letterSpacing =", Color(0xFF3CEE0A)),
-                HighlightCode("16", Color(0xFF00a9ff)),
-                HighlightCode("1.3 ", Color(0xFF00a9ff)),
-                HighlightCode("0.3 ", Color(0xFF00a9ff)),
-                HighlightCode("0.1 ", Color(0xFF00a9ff)),
-                HighlightCode(".Unspecified", Color(0xFFe48def)),
-                HighlightCode("letterSpacing in Text of jetpack Compose", Color(0xFF05B80D)),
-            ),
-            lambdaFun = { LetterSpacing() },
-            code ="""
-@Composable
-fun LetterSpacing(){
-    LazyColumn(
-        modifier = Modifier.fillMaxSize(),
-    ) {
-        val text = "letterSpacing in Text of jetpack Compose"
-
-        item {
-            Column(
-                modifier = Modifier
-                    .padding(16.dp)
-                    .fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                Text (
-                    text = text+" [default]",
-                    letterSpacing = TextUnit.Unspecified, 
-                )
-                Text (
-                    text = text+" [1.3sp]",
-                    letterSpacing = 1.3 .sp,
-                )
-                Text (
-                    text = text+" [0.1sp]",
-                    letterSpacing = 0.1 .sp,
-                )
-                Text (
-                    text = text+" [0.3em]",
-                    letterSpacing = 0.3 .em,
-                )
-
-            }
-        }
-    }
-}
-                
-            """.trimIndent(),
-            links = listOf(
-                TextClickLink(
-                    text = "Больше информации смотрите ",
-                    textUrl = "\uD83D\uDCD6 Developers. Стиль текста",
-                    url = "https://developer.android.com/develop/ui/compose/text/style-text?hl=ru"
-                ),
-                TextClickLink(
-                    text = "Больше информации смотрите ",
-                    textUrl = "\uD83D\uDCD6 Developers. letterSpacing",
-                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/text/TextStyle#letterSpacing()"
-                ),
-            ),
-        ),
-
-        ExampleCode(
-            id = 9,
-            title = "Высота строки",
-            comment = """
-Параметр |lineHeight| определяет высоту каждой строки путем добавления дополнительного пространства к верху первой строки, верху и низу последней строки.         
-               
-            """.trimIndent(),
-            highlightCode = highCodeList + listOf(
-                HighlightCode("TextLineHeight", Color(0xFFffc530)),
-                HighlightCode("lineHeight =", Color(0xFF3CEE0A)),
-                HighlightCode("2.0 ", Color(0xFF2DB8FF)),
-                HighlightCode("1.0 ", Color(0xFF2DB8FF)),
-                HighlightCode("16", Color(0xFF2DB8FF)),
-                HighlightCode("5", Color(0xFF2DB8FF)),
-                HighlightCode("1. ", Color(0xFF2DB8FF)),
-                HighlightCode(".repeat", Color(0xFFF5996B)),
-            ),
-            lambdaFun = { TextLineHeight() },
-            code = """
-@Composable
-fun TextLineHeight() {
-
-    val text = "Text in jetpack Compose."
-
-    val padding = 16.dp
-
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxWidth()
-            .border(1 .dp, MaterialTheme.colorScheme.onBackground)
-            .padding(padding),
-    ) {
-        item {
-            Column(
-                verticalArrangement = Arrangement.spacedBy(padding)
-            ) {
-                Text(
-                    text = (text + " (default) ").repeat(5),
-                )
-
-                Text(
-                    text = (text + " (lineHeight = 2.0em) ").repeat(5),
-                    lineHeight = 2.0 .em,
-                )
-
-                Text(
-                    text = (text + " (lineHeight = 1.0em) ").repeat(5),
-                    lineHeight = 1.0 .em,
-                )
-            }
-
-        }
-
-    }
-
-}
-            """.trimIndent(),
-            links = listOf(
-                TextClickLink(
-                    text = "Больше информации смотрите ",
-                    textUrl = "\uD83D\uDCD6 Developers. LineHeightStyle",
-                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/text/style/LineHeightStyle"
-                ),
-            ),
-
-            ),
 
 
         ExampleCode(
@@ -541,6 +508,66 @@ fun ExampleFontSize() {
     }
 }
             """.trimIndent()
+        ),
+
+        ExampleCode(
+            title = "Коэффициент масштабирования",
+            comment = """
+Приложения должны масштабировать текст до размера, указанного пользователями в системных настройках. Это особенно важно для пользователей с нарушениями зрения.
+
+Для этого можно использовать коэффициент масштабирования LocalDensity.current.|fontScale|
+             
+Рекомендовано определить свойство |fontSize| внутри объекта |Typography|, чтобы обеспечить единообразие во всем приложении.             
+
+            """.trimIndent(),
+            highlightCode = highCodeList + listOf(
+                HighlightCode("FontScale", Color(0xFFffc530)),
+                HighlightCode(".scaledSp", Color(0xFFffc530)),
+                HighlightCode("Масштаб текущего размера шрифта:", Color(0xFF05B80D)),
+                HighlightCode(" scaledSp", Color(0xFF05B80D)),
+                HighlightCode(".current", Color(0xFF05B80D)),
+                HighlightCode("LocalDensity", Color(0xFFe48def)),
+                HighlightCode(".fontScale", Color(0xFF3CEE0A)),
+                HighlightCode("return", Color(0xFFB84E18)),
+                HighlightCode("this", Color(0xFFB84E18)),
+
+                ),
+            lambdaFun = { FontScale() },
+
+            code ="""
+@Composable
+fun FontScale(
+    fontSizeSp:Int = 20  //non scaled font size
+) {
+    Text(
+        text = "Масштаб текущего размера шрифта: ${'$'}{LocalDensity.current.fontScale}",
+        fontSize = fontSizeSp. scaledSp()
+    )
+}
+
+@Composable
+fun Int.scaledSp(): TextUnit {
+    val value: Int = this
+    return with(LocalDensity.current) {
+        val fontScale = this.fontScale
+        val textSize = value * fontScale
+        textSize.sp
+    }
+}
+                
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Доступность в Jetpack Compose ",
+                    textUrl = "\uD83D\uDCD6 Семантика в Compose ",
+                    url = "https://developer.android.com/develop/ui/compose/accessibility?hl=ru#custom-actions"
+                ),
+                TextClickLink(
+                    text = "Текущие предпочтения пользователя относительно коэффициента масштабирования шрифтов.",
+                    textUrl = "\uD83D\uDCD6 Developers. FontScaling ",
+                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/unit/FontScaling"
+                ),
+            ),
         ),
 
         ExampleCode(
@@ -988,6 +1015,145 @@ fun TextFontWeight() {
             ),
 
             ),
+
+        ExampleCode(
+            title = "Отступы между символами",
+            comment = """
+Параметр |letterSpacing| задает расстояние между символами для текста. Расстояние, так как и размер шрифта, представлено классом |TextUnit| и определяется с помощью единиц |sp| или |em| 
+                
+            """.trimIndent(),
+            highlightCode = highCodeList + listOf(
+                HighlightCode("LetterSpacing", Color(0xFFffc530)),
+                HighlightCode("letterSpacing =", Color(0xFF3CEE0A)),
+                HighlightCode("16", Color(0xFF00a9ff)),
+                HighlightCode("1.3 ", Color(0xFF00a9ff)),
+                HighlightCode("0.3 ", Color(0xFF00a9ff)),
+                HighlightCode("0.1 ", Color(0xFF00a9ff)),
+                HighlightCode(".Unspecified", Color(0xFFe48def)),
+                HighlightCode("letterSpacing in Text of jetpack Compose", Color(0xFF05B80D)),
+            ),
+            lambdaFun = { LetterSpacing() },
+            code ="""
+@Composable
+fun LetterSpacing(){
+    LazyColumn(
+        modifier = Modifier.fillMaxSize(),
+    ) {
+        val text = "letterSpacing in Text of jetpack Compose"
+
+        item {
+            Column(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                Text (
+                    text = text+" [default]",
+                    letterSpacing = TextUnit.Unspecified, 
+                )
+                Text (
+                    text = text+" [1.3sp]",
+                    letterSpacing = 1.3 .sp,
+                )
+                Text (
+                    text = text+" [0.1sp]",
+                    letterSpacing = 0.1 .sp,
+                )
+                Text (
+                    text = text+" [0.3em]",
+                    letterSpacing = 0.3 .em,
+                )
+
+            }
+        }
+    }
+}
+                
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Больше информации смотрите ",
+                    textUrl = "\uD83D\uDCD6 Developers. Стиль текста",
+                    url = "https://developer.android.com/develop/ui/compose/text/style-text?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Больше информации смотрите ",
+                    textUrl = "\uD83D\uDCD6 Developers. letterSpacing",
+                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/text/TextStyle#letterSpacing()"
+                ),
+            ),
+        ),
+
+        ExampleCode(
+            id = 9,
+            title = "Высота строки",
+            comment = """
+Параметр |lineHeight| определяет высоту каждой строки путем добавления дополнительного пространства к верху первой строки, верху и низу последней строки.         
+               
+            """.trimIndent(),
+            highlightCode = highCodeList + listOf(
+                HighlightCode("TextLineHeight", Color(0xFFffc530)),
+                HighlightCode("lineHeight =", Color(0xFF3CEE0A)),
+                HighlightCode("2.0 ", Color(0xFF2DB8FF)),
+                HighlightCode("1.0 ", Color(0xFF2DB8FF)),
+                HighlightCode("16", Color(0xFF2DB8FF)),
+                HighlightCode("5", Color(0xFF2DB8FF)),
+                HighlightCode("1. ", Color(0xFF2DB8FF)),
+                HighlightCode(".repeat", Color(0xFFF5996B)),
+            ),
+            lambdaFun = { TextLineHeight() },
+            code = """
+@Composable
+fun TextLineHeight() {
+
+    val text = "Text in jetpack Compose."
+
+    val padding = 16.dp
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .border(1 .dp, MaterialTheme.colorScheme.onBackground)
+            .padding(padding),
+    ) {
+        item {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(padding)
+            ) {
+                Text(
+                    text = (text + " (default) ").repeat(5),
+                )
+
+                Text(
+                    text = (text + " (lineHeight = 2.0em) ").repeat(5),
+                    lineHeight = 2.0 .em,
+                )
+
+                Text(
+                    text = (text + " (lineHeight = 1.0em) ").repeat(5),
+                    lineHeight = 1.0 .em,
+                )
+            }
+
+        }
+
+    }
+
+}
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Больше информации смотрите ",
+                    textUrl = "\uD83D\uDCD6 Developers. LineHeightStyle",
+                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/text/style/LineHeightStyle"
+                ),
+            ),
+
+            ),
+
+
+
 
         ExampleCode(
             id =  7,
@@ -2009,363 +2175,6 @@ fun BackgroundDriver(
 
         ),
 
-        ExampleCode(
-            title = "Декорации для текста",
-            comment = """
-Параметр |textDecoration| позволять задать декорации для текста. Данный параметр принимает объект класса |TextDecoration|, который предоставляет несколько встроенных значений:
-
- |LineThrough| - зачеркивает текст
- |Underline| - подчеркивает текст
- |None| - отсутствие декораций (по умолчанию)
- 
-Для декораций можно использовать и модификатор |Modifier.drawBehind|, который позволяет выполнять операции |DrawScope| за составным содержимым, отображаемым на экране.
-
-Чтобы создать пунктирную линию,необходимо вызвать метод |dashPathEffect|() экземпляра |PathEffect| и передать ему массив чисел с плавающей запятой, а также смещение в указанном массиве. 
-
-Числа с плавающей запятой обозначают интервалы «включения» и «выключения» в строке в пикселях. 
-
-Интервалы должны содержать четное количество записей (минимум 2 значения). 
-
-Четные индексы указывают интервалы «включения», а нечетные индексы представляют интервалы «выключения». 
-
-                        
-                
-            """.trimIndent(),
-            highlightCode = listOf(
-                HighlightCode("DecorationExampleText", Color(0xFFffc530)),
-                HighlightCode("16.", Color(0xFF00BCD4)),
-                HighlightCode("strokeWidth =", Color(0xFF00BCD4)),
-                HighlightCode("start =", Color(0xFF00BCD4)),
-                HighlightCode("end =", Color(0xFF00BCD4)),
-                HighlightCode("pathEffect =", Color(0xFF00BCD4)),
-                HighlightCode("0f", Color(0xFF00BCD4)),
-                HighlightCode("textDecoration =", Color(0xFF3CEE0A)),
-                HighlightCode(".Underline", Color(0xFFe48def)),
-                HighlightCode(".LineThrough", Color(0xFFe48def)),
-                HighlightCode(".None", Color(0xFFe48def)),
-                HighlightCode(".Yellow", Color(0xFFe48def)),
-                HighlightCode(".Red", Color(0xFFe48def)),
-                HighlightCode("size.height", Color(0xFFe48def)),
-                HighlightCode("size.width", Color(0xFFe48def)),
-                HighlightCode(".toPx", Color(0xFFF5996B)),
-                HighlightCode(".drawBehind", Color(0xFFF5996B)),
-
-                ),
-            lambdaFun = { DecorationExampleText() },
-            code ="""
-@Composable
-fun DecorationExampleText(){
-    Column(
-        modifier = Modifier
-            .padding(16.dp)
-            .verticalScroll(rememberScrollState())
-            .fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-        var outText = "TextDecoration in jetpack Compose."
-
-        Text(
-            text = "1.${'$'}outText (None)",
-            textDecoration = TextDecoration.None
-        )
-
-        Text(
-            text = "2.${'$'}outText (LineThrough)",
-            textDecoration = TextDecoration.LineThrough
-        )
-
-        Text(
-            text = "3.${'$'}outText (Underline)",
-            textDecoration = TextDecoration.Underline
-        )
-
-//одновременное подчеркивание и зачеркивание текста
-        Text(
-            text = "4.${'$'}outText (Underline + LineThrough)",
-            textDecoration = TextDecoration.Underline +
-                    TextDecoration.LineThrough,
-//  можно и так:
-//            textDecoration = TextDecoration.combine(
-//                listOf(
-//                    TextDecoration.Underline,
-//                    TextDecoration.LineThrough
-//                )
-//            )
-        )
-
-
-        outText = "Decoration for Text in jetpack Compose."
-        val modifierUnderline = Modifier.drawBehind {
-            val strokeWidthPx = 1.dp.toPx()
-            val verticalOffset = size.height - 3.sp.toPx()
-            drawLine(
-                color = Color.Red,
-                strokeWidth = strokeWidthPx,
-                start = Offset(0f, verticalOffset),
-                end = Offset(size.width, verticalOffset)
-            )
-        }
-        Text(
-            text = "5.${'$'}outText ",
-            modifier = modifierUnderline,
-        )
-
-        var modifierLineThrough = Modifier.drawBehind {
-            val strokeWidthPx = 1.dp.toPx()
-            val verticalOffset = size.height/2
-            drawLine(
-                color = Color.Red,
-                strokeWidth = strokeWidthPx,
-                start = Offset(0f, verticalOffset),
-                end = Offset(size.width - 5.dp.toPx(), verticalOffset)
-            )
-        }
-        Text(
-            text = "6.${'$'}outText ",
-            modifier = modifierLineThrough,
-        )
-
-        modifierLineThrough = Modifier
-            .drawBehind {
-                val strokeWidthPx = 1.dp.toPx()
-                drawLine(
-                    color = Color.Yellow,
-                    strokeWidth = strokeWidthPx,
-                    start = Offset(0f, 0f),
-                    end = Offset(size.width, size.height)
-                )
-            }
-            .drawBehind {
-                val strokeWidthPx = 1.dp.toPx()
-                drawLine(
-                    color = Color.Yellow,
-                    strokeWidth = strokeWidthPx,
-                    start = Offset(0f, size.height),
-                    end = Offset(size.width, 0f)
-                )
-            }
-        Text(
-            text = "7.${'$'}outText ",
-            modifier = modifierLineThrough,
-        )
-
-        val modifierDashline = Modifier.drawBehind {
-            val strokeWidthPx = 1.dp.toPx()
-            val verticalOffset = size.height - 3.sp.toPx()
-            drawLine(
-                color = Color.Red,
-                strokeWidth = strokeWidthPx,
-                pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f)),
-                start = Offset(0f, verticalOffset),
-                end = Offset(size.width - 5.dp.toPx(), verticalOffset)
-            )
-        }
-
-        Text(
-            text = "8.${'$'}outText ",
-            modifier = modifierDashline,
-        )
-
-        val modifierIntervalsline = Modifier.drawBehind {
-            val strokeWidthPx = 1.dp.toPx()
-            val verticalOffset = size.height - 3.sp.toPx()
-            drawLine(
-                color = Color.Cyan,
-                strokeWidth = strokeWidthPx,
-                start = Offset(0f, verticalOffset),
-                end = Offset(size.width - 5.dp.toPx(), verticalOffset),
-                pathEffect = PathEffect.dashPathEffect(
-                    intervals = floatArrayOf(
-                        10f.dp.toPx(),
-                        2f.dp.toPx(),
-                        2f.dp.toPx(),
-                        2f.dp.toPx()
-                    ),
-                    phase = 0f
-                )
-
-            )
-        }
-
-        Text(
-            text = "9.${'$'}outText ",
-            modifier = modifierIntervalsline,
-        )
-
-    }
-
-}
-            """.trimIndent()
-        ),
-
-
-
-        ExampleCode(
-            title = "Текст с рамкой",
-            comment = """
-Модификатор |border| - самый простой способ для создания рамки для текста.                
-
-Для создания рамки можно использовать и модификатор |Modifier.drawBehind|, который позволяет выполнять операции |DrawScope| за составным содержимым, отображаемым на экране.
-
-            """.trimIndent(),
-            highlightCode = listOf(
-                HighlightCode("BorderExampleText", Color(0xFFffc530)),
-                HighlightCode(".Bold", Color(0xFF00BCD4)),
-                HighlightCode("textDecoration =", Color(0xFF3CEE0A)),
-            ),
-            lambdaFun = { BorderExampleText() },
-            code ="""
-@Composable
-fun BorderExampleText(
-) {
-    val outText = "Border for Text in jetpack Compose."
-
-    val corner = 8.dp
-
-    val style = LocalTextStyle.current.merge(
-        TextStyle(
-            fontSize = 20.sp,
-            color = Color.White,
-            lineHeight = 30.sp,
-            textAlign = TextAlign.Center,
-            fontFamily = FontFamily.Serif,
-        )
-    )
-
-    val modifier = Modifier
-        .background(Color(0xFF9C27B0))
-
-    Column(
-        modifier = Modifier
-            .padding(8.dp)
-            .verticalScroll(rememberScrollState())
-            .fillMaxWidth()
-            .background(Color.DarkGray)
-            .padding(8.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-
-    ) {
-        Text(
-            text = "1.${'$'}outText",
-            modifier = modifier
-                .border(
-                    width = 2.dp,
-                    color = Color.Cyan,
-                )
-                .padding(8.dp),
-            style = style,
-        )
-
-        Text(
-            text = "2.${'$'}outText",
-            modifier = modifier
-                .border(
-                    width = 2.dp,
-                    color = Color.Cyan,
-                    shape = CutCornerShape(corner) //углы срезаны
-                )
-                .padding(8.dp),
-            style = style,
-        )
-
-        Text(
-            text = "3.${'$'}outText",
-            modifier = Modifier
-                .graphicsLayer {
-                    shadowElevation = 8.dp.toPx()
-                    shape = CutCornerShape(corner) //углы срезаны
-                    clip = true //!!! обрезание всего, что вне формы
-                }
-                .border(
-                    width = 2.dp,
-                    color = Color.Cyan,
-                    shape = CutCornerShape(corner) //углы срезаны
-                )
-                .background(Color(0xFF9C27B0))
-                .padding(8.dp),
-            style = style,
-        )
-        Text(
-            text = "4.${'$'}outText",
-            modifier = modifier
-                .border(
-                    width = 2.dp,
-                    color = Color.Cyan,
-                    shape = RoundedCornerShape(corner) //углы закруглены
-                )
-                .padding(8.dp),
-            style = style,
-        )
-
-        Text(
-            text = "5.${'$'}outText",
-            modifier = Modifier
-                .graphicsLayer {
-                    shadowElevation = 8.dp.toPx()
-                    shape = RoundedCornerShape(corner)
-                    clip = true //!!! обрезание всего, что вне формы
-                }
-                .border(
-                    width = 2.dp,
-                    color = Color.Cyan,
-                    shape = RoundedCornerShape(corner) //углы закруглены
-                )
-                .background(Color(0xFF9C27B0))
-                .padding(8.dp),
-            style = style,
-        )
-
-        Text(
-            text = "6.${'$'}outText",
-            modifier = Modifier
-                .drawBehind {
-                    drawRoundRect(
-                        Color(0xFF9C27B0),
-                        cornerRadius = CornerRadius(corner.toPx()),
-                    )
-                }
-                .border(
-                    width = 2.dp,
-                    color = Color.Cyan,
-                    shape = RoundedCornerShape(corner) //углы закруглены
-                )
-                .padding(8.dp),
-            style = style,
-        )
-
-        Text(
-            text = "7.${'$'}outText",
-            modifier = Modifier
-                .graphicsLayer {
-                    shadowElevation = 8.dp.toPx()
-                    shape = RoundedCornerShape(corner)
-                    clip = true //!!! обрезание всего, что вне формы
-                }
-                .background(Color(0xFF9C27B0))
-                .drawBehind {
-//рисует границы прямоугольника с закруглёнными углами
-                    drawRoundRect(
-                        color = Color.Cyan,
-                        cornerRadius = CornerRadius(corner.toPx()),
-                        style = Stroke(
-                            width = 4.dp.toPx(),
-                            pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f))
-                        )
-                    )
-
-                }
-                .padding(8.dp),
-            style = style,
-        )
-
-    }
-}
-            """.trimIndent()
-        ),
-
-
-
 
         ExampleCode(
             id = 5,
@@ -3222,6 +3031,365 @@ fun SimpleLimit() {
             ),
 
         ExampleCode(
+            title = "Декорации для текста",
+            comment = """
+Параметр |textDecoration| позволять задать декорации для текста. Данный параметр принимает объект класса |TextDecoration|, который предоставляет несколько встроенных значений:
+
+ |LineThrough| - зачеркивает текст
+ |Underline| - подчеркивает текст
+ |None| - отсутствие декораций (по умолчанию)
+ 
+Для декораций можно использовать и модификатор |Modifier.drawBehind|, который позволяет выполнять операции |DrawScope| за составным содержимым, отображаемым на экране.
+
+Чтобы создать пунктирную линию,необходимо вызвать метод |dashPathEffect|() экземпляра |PathEffect| и передать ему массив чисел с плавающей запятой, а также смещение в указанном массиве. 
+
+Числа с плавающей запятой обозначают интервалы «включения» и «выключения» в строке в пикселях. 
+
+Интервалы должны содержать четное количество записей (минимум 2 значения). 
+
+Четные индексы указывают интервалы «включения», а нечетные индексы представляют интервалы «выключения». 
+
+                        
+                
+            """.trimIndent(),
+            highlightCode = listOf(
+                HighlightCode("DecorationExampleText", Color(0xFFffc530)),
+                HighlightCode("16.", Color(0xFF00BCD4)),
+                HighlightCode("strokeWidth =", Color(0xFF00BCD4)),
+                HighlightCode("start =", Color(0xFF00BCD4)),
+                HighlightCode("end =", Color(0xFF00BCD4)),
+                HighlightCode("pathEffect =", Color(0xFF00BCD4)),
+                HighlightCode("0f", Color(0xFF00BCD4)),
+                HighlightCode("textDecoration =", Color(0xFF3CEE0A)),
+                HighlightCode(".Underline", Color(0xFFe48def)),
+                HighlightCode(".LineThrough", Color(0xFFe48def)),
+                HighlightCode(".None", Color(0xFFe48def)),
+                HighlightCode(".Yellow", Color(0xFFe48def)),
+                HighlightCode(".Red", Color(0xFFe48def)),
+                HighlightCode("size.height", Color(0xFFe48def)),
+                HighlightCode("size.width", Color(0xFFe48def)),
+                HighlightCode(".toPx", Color(0xFFF5996B)),
+                HighlightCode(".drawBehind", Color(0xFFF5996B)),
+
+                ),
+            lambdaFun = { DecorationExampleText() },
+            code ="""
+@Composable
+fun DecorationExampleText(){
+    Column(
+        modifier = Modifier
+            .padding(16.dp)
+            .verticalScroll(rememberScrollState())
+            .fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        var outText = "TextDecoration in jetpack Compose."
+
+        Text(
+            text = "1.${'$'}outText (None)",
+            textDecoration = TextDecoration.None
+        )
+
+        Text(
+            text = "2.${'$'}outText (LineThrough)",
+            textDecoration = TextDecoration.LineThrough
+        )
+
+        Text(
+            text = "3.${'$'}outText (Underline)",
+            textDecoration = TextDecoration.Underline
+        )
+
+//одновременное подчеркивание и зачеркивание текста
+        Text(
+            text = "4.${'$'}outText (Underline + LineThrough)",
+            textDecoration = TextDecoration.Underline +
+                    TextDecoration.LineThrough,
+//  можно и так:
+//            textDecoration = TextDecoration.combine(
+//                listOf(
+//                    TextDecoration.Underline,
+//                    TextDecoration.LineThrough
+//                )
+//            )
+        )
+
+
+        outText = "Decoration for Text in jetpack Compose."
+        val modifierUnderline = Modifier.drawBehind {
+            val strokeWidthPx = 1.dp.toPx()
+            val verticalOffset = size.height - 3.sp.toPx()
+            drawLine(
+                color = Color.Red,
+                strokeWidth = strokeWidthPx,
+                start = Offset(0f, verticalOffset),
+                end = Offset(size.width, verticalOffset)
+            )
+        }
+        Text(
+            text = "5.${'$'}outText ",
+            modifier = modifierUnderline,
+        )
+
+        var modifierLineThrough = Modifier.drawBehind {
+            val strokeWidthPx = 1.dp.toPx()
+            val verticalOffset = size.height/2
+            drawLine(
+                color = Color.Red,
+                strokeWidth = strokeWidthPx,
+                start = Offset(0f, verticalOffset),
+                end = Offset(size.width - 5.dp.toPx(), verticalOffset)
+            )
+        }
+        Text(
+            text = "6.${'$'}outText ",
+            modifier = modifierLineThrough,
+        )
+
+        modifierLineThrough = Modifier
+            .drawBehind {
+                val strokeWidthPx = 1.dp.toPx()
+                drawLine(
+                    color = Color.Yellow,
+                    strokeWidth = strokeWidthPx,
+                    start = Offset(0f, 0f),
+                    end = Offset(size.width, size.height)
+                )
+            }
+            .drawBehind {
+                val strokeWidthPx = 1.dp.toPx()
+                drawLine(
+                    color = Color.Yellow,
+                    strokeWidth = strokeWidthPx,
+                    start = Offset(0f, size.height),
+                    end = Offset(size.width, 0f)
+                )
+            }
+        Text(
+            text = "7.${'$'}outText ",
+            modifier = modifierLineThrough,
+        )
+
+        val modifierDashline = Modifier.drawBehind {
+            val strokeWidthPx = 1.dp.toPx()
+            val verticalOffset = size.height - 3.sp.toPx()
+            drawLine(
+                color = Color.Red,
+                strokeWidth = strokeWidthPx,
+                pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f)),
+                start = Offset(0f, verticalOffset),
+                end = Offset(size.width - 5.dp.toPx(), verticalOffset)
+            )
+        }
+
+        Text(
+            text = "8.${'$'}outText ",
+            modifier = modifierDashline,
+        )
+
+        val modifierIntervalsline = Modifier.drawBehind {
+            val strokeWidthPx = 1.dp.toPx()
+            val verticalOffset = size.height - 3.sp.toPx()
+            drawLine(
+                color = Color.Cyan,
+                strokeWidth = strokeWidthPx,
+                start = Offset(0f, verticalOffset),
+                end = Offset(size.width - 5.dp.toPx(), verticalOffset),
+                pathEffect = PathEffect.dashPathEffect(
+                    intervals = floatArrayOf(
+                        10f.dp.toPx(),
+                        2f.dp.toPx(),
+                        2f.dp.toPx(),
+                        2f.dp.toPx()
+                    ),
+                    phase = 0f
+                )
+
+            )
+        }
+
+        Text(
+            text = "9.${'$'}outText ",
+            modifier = modifierIntervalsline,
+        )
+
+    }
+
+}
+            """.trimIndent()
+        ),
+
+
+
+        ExampleCode(
+            title = "Текст с рамкой",
+            comment = """
+Модификатор |border| - самый простой способ для создания рамки для текста.                
+
+Для создания рамки можно использовать и модификатор |Modifier.drawBehind|, который позволяет выполнять операции |DrawScope| за составным содержимым, отображаемым на экране.
+
+            """.trimIndent(),
+            highlightCode = listOf(
+                HighlightCode("BorderExampleText", Color(0xFFffc530)),
+                HighlightCode(".Bold", Color(0xFF00BCD4)),
+                HighlightCode("textDecoration =", Color(0xFF3CEE0A)),
+            ),
+            lambdaFun = { BorderExampleText() },
+            code ="""
+@Composable
+fun BorderExampleText(
+) {
+    val outText = "Border for Text in jetpack Compose."
+
+    val corner = 8.dp
+
+    val style = LocalTextStyle.current.merge(
+        TextStyle(
+            fontSize = 20.sp,
+            color = Color.White,
+            lineHeight = 30.sp,
+            textAlign = TextAlign.Center,
+            fontFamily = FontFamily.Serif,
+        )
+    )
+
+    val modifier = Modifier
+        .background(Color(0xFF9C27B0))
+
+    Column(
+        modifier = Modifier
+            .padding(8.dp)
+            .verticalScroll(rememberScrollState())
+            .fillMaxWidth()
+            .background(Color.DarkGray)
+            .padding(8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+
+    ) {
+        Text(
+            text = "1.${'$'}outText",
+            modifier = modifier
+                .border(
+                    width = 2.dp,
+                    color = Color.Cyan,
+                )
+                .padding(8.dp),
+            style = style,
+        )
+
+        Text(
+            text = "2.${'$'}outText",
+            modifier = modifier
+                .border(
+                    width = 2.dp,
+                    color = Color.Cyan,
+                    shape = CutCornerShape(corner) //углы срезаны
+                )
+                .padding(8.dp),
+            style = style,
+        )
+
+        Text(
+            text = "3.${'$'}outText",
+            modifier = Modifier
+                .graphicsLayer {
+                    shadowElevation = 8.dp.toPx()
+                    shape = CutCornerShape(corner) //углы срезаны
+                    clip = true //!!! обрезание всего, что вне формы
+                }
+                .border(
+                    width = 2.dp,
+                    color = Color.Cyan,
+                    shape = CutCornerShape(corner) //углы срезаны
+                )
+                .background(Color(0xFF9C27B0))
+                .padding(8.dp),
+            style = style,
+        )
+        Text(
+            text = "4.${'$'}outText",
+            modifier = modifier
+                .border(
+                    width = 2.dp,
+                    color = Color.Cyan,
+                    shape = RoundedCornerShape(corner) //углы закруглены
+                )
+                .padding(8.dp),
+            style = style,
+        )
+
+        Text(
+            text = "5.${'$'}outText",
+            modifier = Modifier
+                .graphicsLayer {
+                    shadowElevation = 8.dp.toPx()
+                    shape = RoundedCornerShape(corner)
+                    clip = true //!!! обрезание всего, что вне формы
+                }
+                .border(
+                    width = 2.dp,
+                    color = Color.Cyan,
+                    shape = RoundedCornerShape(corner) //углы закруглены
+                )
+                .background(Color(0xFF9C27B0))
+                .padding(8.dp),
+            style = style,
+        )
+
+        Text(
+            text = "6.${'$'}outText",
+            modifier = Modifier
+                .drawBehind {
+                    drawRoundRect(
+                        Color(0xFF9C27B0),
+                        cornerRadius = CornerRadius(corner.toPx()),
+                    )
+                }
+                .border(
+                    width = 2.dp,
+                    color = Color.Cyan,
+                    shape = RoundedCornerShape(corner) //углы закруглены
+                )
+                .padding(8.dp),
+            style = style,
+        )
+
+        Text(
+            text = "7.${'$'}outText",
+            modifier = Modifier
+                .graphicsLayer {
+                    shadowElevation = 8.dp.toPx()
+                    shape = RoundedCornerShape(corner)
+                    clip = true //!!! обрезание всего, что вне формы
+                }
+                .background(Color(0xFF9C27B0))
+                .drawBehind {
+//рисует границы прямоугольника с закруглёнными углами
+                    drawRoundRect(
+                        color = Color.Cyan,
+                        cornerRadius = CornerRadius(corner.toPx()),
+                        style = Stroke(
+                            width = 4.dp.toPx(),
+                            pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f))
+                        )
+                    )
+
+                }
+                .padding(8.dp),
+            style = style,
+        )
+
+    }
+}
+            """.trimIndent()
+        ),
+
+
+
+
+
+        ExampleCode(
             id =  10,
             title = "Стилизация текста",
             comment = """
@@ -3849,7 +4017,7 @@ fun ShadowDriver(){
 
         ExampleCode(
             id = 3,
-            title = "Маштабирование",
+            title = "Трансформация текста",
             comment = """
 Modifier.|graphicsLayer|  применяет преобразования к составным объектам.                
             """.trimIndent(),
@@ -4506,6 +4674,391 @@ Examples:
 }
             """.trimIndent()
         ),
+
+
+        ExampleCode(
+            title = "Маштабирование текста",
+            comment = """
+Для определения размера шрифта всегда используйте |sp|.
+
+ Если ваш дизайн предполагает, что весь текст всегда должен быть виден, а размер шрифта варьируется в зависимости от предпочтений пользователя, необходимо обеспечить |скроллинг|.
+     
+|Скроллинг| («просматривание; прокрутка») — форма представления информации, при которой содержимое (текст, изображение) двигается (прокручивается) в вертикальном или горизонтальном направлении.
+                  
+При использовании изображения, которое несет определенную информацию, необходимо назначить текстовое описание для параметра |contentDescription|, которое описывает изображение. Оно будет прочитано программами чтения с экрана, когда они столкнутся с картинкой.                   
+ 
+Не везде есть смысл использовать |contentDescription|. Чисто декоративные изображения, которые не имеют значения, должны иметь значение |@null|.
+
+           |Обнаружение всех жестов|
+
+Вместо обработки необработанных событий указателя вы можете прослушивать определенные жесты и реагировать соответствующим образом. 
+
+|AwaitPointerEventScope| предоставляет методы для прослушивания:
+ 
+ 1) |detectTapGestures| : нажатие, касание, двойное касание, долгое нажатие
+
+ 2) |detectHorizontalDragGestures|, 
+    |detectVerticalDragGestures|, 
+    |detectDragGestures|, 
+    |detectDragGesturesAfterLongPress| : перетаскивание
+
+
+ 3) |detectTransformGestures| : трансформация, преобразование
+ 
+ Это детекторы верхнего уровня, поэтому вы не можете добавить несколько детекторов в один модификатор |pointerInput|.
+  
+ Следующий фрагмент обнаруживает только касания, а не перетаскивания.
+
+Внутри метод обнаружения TapGestures блокирует сопрограмму, и второй детектор никогда не достигается. 
+
+Если вам нужно добавить более одного прослушивателя жестов в компонуемый объект, используйте вместо этого отдельные экземпляры модификатора |pointerInput|
+                        
+           |Обработка событий|
+Жесты начинаются с события перемещения указателя вниз. 
+
+Завершение жеста можно определить методом |awaitEachGesture|.
+ 
+Метод |awaitEachGesture| перезапускает содержащий блок, когда все указатели подняты, указывая, что жест завершен.                        
+
+           |Идентифицирование жестов|
+Существует набор методов, которые помогают идентифицировать общие части жестов:
+                        
+|awaitFirstDown| - Приостановите работу до тех пор, пока указатель не опустится
+
+|waitForUpOrCancellation|  - подождите, пока все указатели поднимутся                      
+
+   Ннизкоуровневый прослушиватель перетаскивания
+
+|awaitTouchSlopOrCancellation| - приостанавливается до тех пор, пока указатель не достигнет точки касания 
+
+|awaitDragOrCancellation| - приостанавливается до тех пор, пока не произойдет первое событие перетаскивания
+
+Если только по горизонтали:
+|awaitHorizontalTouchSlopOrCancellation|,|awaitHorizontalDragOrCancellation|
+
+Если только по вертикали:
+|awaitVerticalTouchSlopOrCancellation|,|awaitVerticalDragOrCancellation|
+
+|awaitLongPressOrCancellation| - Приостановите действие до тех пор, пока не произойдет долгое нажатие                       
+
+Если модификатор |Transformable| или методы обнаружения |TransformGestures| не обеспечивают достаточно детального управления для вашего варианта использования, вы можете прослушивать необработанные события и применять к ним вычисления при помощи методов:
+|calculateCentroid|, |calculateCentroidSize|, |calculatePan|, |calculateRotation|, |and calculateZoom|
+                        
+           |Использование событий|
+Если более чем одному составному объекту назначен обработчик жестов, эти обработчики не должны конфликтовать.
+                        
+Жесты, включенные в готовые компоненты, и общие модификаторы жестов обрабатывают жесты и сообщают родительскому элементу, что на этот жест больше нельзя реагировать.
+
+Если вы пишете свой собственный жест, вам придется обрабатывать события вручную используя метов |PointerInputChange.consume|
+                        
+           |Распространение событий|
+Изменения указателя передаются каждому составному объекту, к которому он попадает.
+                        
+События указателя проходят через каждый из этих компонуемых объектов в три «прохода»:
+
+1)|Initial pass| : На начальном этапе событие течет от верхней части дерева пользовательского интерфейса к нижней. Этот поток позволяет родителю перехватить событие до того, как дочерний элемент сможет его использовать. 
+
+ Например, всплывающие подсказки должны перехватывать длительное нажатие, а не передавать их своим детям.
+
+2)|Main pass| :  На главном проходе событие течет от конечных узлов дерева пользовательского интерфейса до корня дерева пользовательского интерфейса. 
+
+На этом этапе вы обычно используете жесты и является этапом по умолчанию при прослушивании событий. Обработка жестов на этом проходе означает, что конечные узлы имеют приоритет над своими родительскими узлами, что является наиболее логичным поведением для большинства жестов.
+
+
+3)|Final pass| :   На последнем проходе событие еще раз передается от вершины дерева пользовательского интерфейса к конечным узлам. Этот поток позволяет элементам, расположенным выше в стеке, реагировать на событие, полученное их родителем. 
+
+  Например, кнопка убирает индикацию пульсации, когда нажатие превращается в перетаскивание ее прокручиваемого родительского элемента.
+
+В коде вы можете указать интересующий вас проход:
+
+           |Обработка нажатий|
+Любой компонуемый UI-элемент можно сделать «кликабельным», т.е добавить возможность, при нажатии на него, выполнять определенные Вами действий (аналог кнопки Button).
+
+Для этого используется модификатор |clickable|.
+
+|clickable| существует двух видов:
+ - со стандартной визуализацией нажатия, где положение нажатия не имеет значения для обработки этого события.
+ 
+ - с возможностью дополнительного поведения |InteractionSource| и |indication|
+
+|clickable| — это часто используемый модификатор, который заставляет компонуемый элемент реагировать на нажатия или щелчки. 
+
+При использовании кликабельного модификатора |важно| указать метку доступности.
+
+Параметры функции:
+
+|enabled|: указывает, будет ли доступен компонент для нажатия. 
+
+|onClickLabel|: задает метку, с помощью которой можно быстро обратиться к компоненту.
+
+|role|: объект типа Role?, который устанавливает тип визуального элемента.
+
+|onClick|: функция типа () -> Unit, которая обрабатывает нажатие.
+           
+     
+            """.trimIndent(),
+            nameFun = "",
+            highlightCode = highCodeList + listOf(
+                HighlightCode("OutSipmleArticle", Color(0xFFffc530)),
+                HighlightCode("fontSize", Color(0xFF3CEE0A)),
+                HighlightCode("initialValue", Color(0xFF3CEE0A)),
+                HighlightCode("targetValue", Color(0xFF3CEE0A)),
+                HighlightCode("10f", Color(0xFF5EADD6)),
+                HighlightCode("170f", Color(0xFF5EADD6)),
+                HighlightCode("//", Color(0xFF3CEE0A)),
+            ),
+            lambdaFun = {
+                OutSipmleArticle(
+                    sizeFontText = 18,
+                    isNormalStyle = true,
+                    isColorBackground = false,
+                    isColorBorder = true,
+                    isShapeLarge = false,
+                    isTextCenter = false
+                )
+            },
+            code = """
+@Composable
+fun OutSipmleArticle(
+    title: String = "Адаптация UI/UX для людей с проблемами зрения",
+    article: String = ""${'"'}
+   Для определения размера шрифта всегда используйте |sp|.
+      ...        
+               ""${'"'}.trimIndent(),
+    sizeFontText: Int = 18,     //: TextUnit = 18.sp
+    isNormalStyle: Boolean = true,
+    isColorBackground: Boolean = false,
+    isColorBorder: Boolean = false,
+    isShapeLarge: Boolean = false,
+    isTextCenter: Boolean = false,
+) {
+
+    val colorBackground = MaterialTheme.colorScheme.tertiaryContainer
+
+    Column(
+        Modifier
+            .fillMaxSize()
+            .background(colorBackground),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text="Маштабирование текста",
+            modifier= Modifier
+                .padding(8.dp)
+                .background(Color.DarkGray),
+            fontSize=23.sp,
+            fontWeight = FontWeight.Bold,
+            color= Color.Green,
+
+            )
+
+        // set scale transformation states
+        var scale by remember {
+            mutableFloatStateOf(1f)
+        }
+
+        val context = LocalContext.current
+
+        val coroutineScope = rememberCoroutineScope()
+
+        val state = rememberTransformableState { zoomChange,
+                                                 offsetChange,
+                                                 rotationChange ->
+            scale = max(
+                a = scale * zoomChange,
+                b = 0.5f
+            )
+        }
+
+        val sizeTitle = ((sizeFontText + 2) * scale).sp
+        val sizeFirstArticle = ((sizeFontText + 6) * scale).sp
+        val sizeArticle = (sizeFontText * scale).sp
+
+        val color = MaterialTheme.colorScheme.outline
+
+        val annotatedString = buildAnnotatedString {
+
+            withStyle(
+                style = ParagraphStyle(
+                    lineHeight = sizeTitle,
+                    textAlign = TextAlign.Center
+                )
+            ) {
+                withStyle(
+                    style = SpanStyle(
+                        fontSize = sizeTitle,
+                        fontWeight = FontWeight.Bold,
+                    )
+                ) {
+                    append(title)
+                }
+
+            }
+
+            withStyle(
+                style = ParagraphStyle(
+                    lineHeight = sizeArticle
+                )
+            ) {
+//Первый символ статьи
+                withStyle(
+                    style = SpanStyle(
+                        color = Color.Red,
+                        fontSize = sizeFirstArticle,
+                        fontFamily = FontFamily.Cursive,
+                        fontWeight = FontWeight.Bold,
+                    )
+                ) {
+                    append(article[0])
+                }
+
+                val remainder = article.substring(1)
+
+//разбивка статьи на фрагменты, разделенные символом "|"
+                val messageArrayList = remainder.split("|")
+
+                if (messageArrayList.size < 2) append(remainder)
+                else {
+                    messageArrayList.forEachIndexed { index, s ->
+                        if (index % 2 != 0) {
+                            withStyle(
+                                style = SpanStyle(
+                                    color = color,
+                                    fontWeight = FontWeight.Bold,
+                                )
+                            ) {
+                                append(s)
+                            }
+
+                        } else {
+                            append(s)
+                        }
+                    }
+
+                }
+
+            }
+        }
+
+        Column(
+            Modifier
+                .fillMaxWidth()
+                .weight(1f)
+                //прослушивание событий мультитач-преобразования
+                .transformable(state = state)
+                .verticalScroll(rememberScrollState())
+                //двойной щелчок для масштабирования
+                .pointerInput(Unit) {
+                    detectTapGestures(
+                        onDoubleTap = {
+                            Toast
+                                .makeText(
+                                    context, "Double click ",
+                                    Toast.LENGTH_SHORT
+                                )
+                                .show()
+                            if (scale == 1f) {
+                                coroutineScope.launch {
+                                    state.animateZoomBy(1.5f)
+                                }
+                            } else {
+                                scale = 1f
+                            }
+                        }
+                    )
+                }
+                .fillMaxSize()
+                .border(1.dp, Color.DarkGray),
+        ) {
+            Text(
+                text = annotatedString,
+                style = if (isNormalStyle) MaterialTheme.typography.bodyMedium   //labelLarge  bodyLarge
+                else MaterialTheme.typography.bodySmall,
+                fontSize = sizeArticle,
+                color = when {
+                    isColorBackground -> MaterialTheme.colorScheme.background  //по умолчанию Color.Unspecified
+                    else -> MaterialTheme.colorScheme.onTertiaryContainer
+                },
+                modifier = Modifier
+                    .padding(top = dimensionResource(id = R.dimen.padding_medium))
+                    .fillMaxWidth()
+                    .alpha(if (isNormalStyle) 1.0f else 0.6f)
+                    .clip(
+                        shape = when {
+                            isShapeLarge -> RoundedCornerShape(dimensionResource(id = R.dimen.roundedCornerCicle))
+                            else -> RoundedCornerShape(5.dp)
+                        }
+                    )
+                    .background(
+                        color = when {
+                            isColorBackground -> MaterialTheme.colorScheme.primary
+                            else -> MaterialTheme.colorScheme.tertiaryContainer  //fon
+                        }
+                    )
+                    .border(
+                        width = 1.dp,
+                        color = when {
+                            isColorBorder -> MaterialTheme.colorScheme.primary
+                            else -> MaterialTheme.colorScheme.tertiaryContainer  //fon
+                        },
+                        shape = when {
+                            isShapeLarge -> RoundedCornerShape(dimensionResource(id = R.dimen.roundedCornerCicle))
+                            else -> RoundedCornerShape(5.dp)
+                        }
+                    )
+                    .padding(all = dimensionResource(id = R.dimen.padding_small)),
+                textAlign = if (isTextCenter) {
+                    TextAlign.Center
+                } else {
+                    TextAlign.Left
+                }
+
+            )
+
+        }
+
+    }
+}
+                
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Больше информации смотрите ",
+                    textUrl = "\uD83D\uDCD6 Developers. Стиль текста",
+                    url = "https://developer.android.com/develop/ui/compose/text/style-text?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Больше информации смотрите ",
+                    textUrl = "\uD83D\uDCD6 Developers. AnnotatedString",
+                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/text/AnnotatedString"
+                ),
+                TextClickLink(
+                    text = "Конфигурация стиля абзаца  ",
+                    textUrl = "\uD83D\uDCD6 Developers. ParagraphStyle",
+                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/text/ParagraphStyle"
+                ),
+                TextClickLink(
+                    text = "Понимание  жестов  ",
+                    textUrl = "Developers. Understand gestures",
+                    url="https://developer.android.com/jetpack/compose/touch-input/pointer-input/understand-gestures"
+                ),
+                TextClickLink(
+                    text = "Коснитесь и нажмите  ",
+                    textUrl ="Android Developers. Tap and press",
+                    url ="https://developer.android.com/jetpack/compose/touch-input/pointer-input/tap-and-press"
+                ),
+                TextClickLink(
+                    text = "Обработка взаимодействия с пользователем   ",
+                    textUrl = "Developers. Handling interactions",
+                    url="https://developer.android.com/jetpack/compose/touch-input/user-interactions/handling-interactions"
+                ),
+            ),
+
+
+            ),
+
+
+
 
         ExampleCode(
             id = 3,
