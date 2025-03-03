@@ -43,6 +43,7 @@ import com.pvmprog.mytextwithcompose.ui.examples.SimpleWithPadding
 import com.pvmprog.mytextwithcompose.ui.examples.Simple
 import com.pvmprog.mytextwithcompose.ui.examples.SimpleStringResource
 import com.pvmprog.mytextwithcompose.ui.examples.SimpleAlignJustify
+import com.pvmprog.mytextwithcompose.ui.examples.StyleDraver
 import com.pvmprog.mytextwithcompose.ui.examples.TextAlignedHeight
 import com.pvmprog.mytextwithcompose.ui.examples.TextAnnotatedStringClickLink
 import com.pvmprog.mytextwithcompose.ui.examples.TextBuildAnnotatedString
@@ -144,10 +145,29 @@ fun Simple() {
 
         ExampleCode(
             id = 1,
-            title = "Текст с отступом",
+            title = "Модификаторы",
             comment = """
-Используйте Modifier.|padding| для установки отступов.
+Параметр |modifier| содержат огромное количество методов, которые позволяют декорировать  какой-либо |compose|-объект, в частности |Text|. 
+
+Модификаторы позволяют:
+ 1)|измененять внешний вид| составного объекта (размер, макет, поведение );
+ 
+ 2)|добавлять информацию|, например метки доступности;
+ 
+ 3)|обрабатывать ввод пользователя|;
+ 
+ 4)|добавлять высокоуровневые взаимодействия|, например сделать элемент кликабельным, прокручиваемым, перетаскиваемым или масштабируемым. 
+
+По умолчанию макеты, представленные в |Compose|, обертывают свои дочерние элементы.
+
+Это означает, что свойства родителя передаются его дочерным элементам. 
+
+Свойства дочерных элементов можно переназначить.
+                
+Modifier.|padding| используется для установки отступов.
+
 Варианты отступов:
+
 1)|!от каждой стороны по отдельности|:
 fun Modifier.|padding|(
    |start|: Dp = 0.dp, 
@@ -155,15 +175,18 @@ fun Modifier.|padding|(
    |end|: Dp = 0.dp, 
    |bottom|: Dp = 0.dp
 ): Modifier
+
 2)|!по вертикали и по горизонтали|:
 fun Modifier.|padding|(
     |horizontal|: Dp = 0.dp, 
     |vertical|: Dp = 0.dp
 ): Modifier
+
 3)|!от всех четырех сторон|:
 fun Modifier.|padding|(
     |all|: Dp
 ): Modifier
+
 4)|!в виде объекта PaddingValues|:
 fun Modifier.|padding|(
     |paddingValues|: PaddingValues
@@ -201,6 +224,11 @@ fun Modifier.|padding|(
                     text = "Больше информации смотрите в ",
                     textUrl = "\uD83D\uDCD6 Compose modifiers ",
                     url = "https://developer.android.com/develop/ui/compose/modifiers?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Библиотека «Jetpack Compose» для начинающего Android-разработчика ",
+                    textUrl = "\uD83D\uDCD6 Habr. Разработка под Android. Kotlin. Jetpack Compose. ",
+                    url = "https://habr.com/ru/articles/757572/"
                 ),
             ),
             highlightCode = highCodeList + listOf(
@@ -962,9 +990,9 @@ fun TextFontWeight() {
             ),
 
         ExampleCode(
-            title = "Отступы",
+            title = "Межсимвольный отступ",
             comment = """
-Параметр |letterSpacing| задает расстояние между символами для текста. Расстояние, так как и размер шрифта, представлено классом |TextUnit| и определяется с помощью единиц |sp| или |em| 
+Параметр |letterSpacing| задает интервал между символами для текста. Расстояние, так как и размер шрифта, представлено классом |TextUnit| и определяется с помощью единиц |sp| или |em| 
                 
             """.trimIndent(),
             highlightCode = highCodeList + listOf(
@@ -3057,7 +3085,7 @@ AGSL |не поддерживает| директивы препроцессор
 
         ExampleCode(
             id = 19,
-            title = "Ограничение строк",
+            title = "Усечение текста",
             comment = """
 |overflow| определяет, как будет обрабатываться текст при его выходе за границы контейнера. 
 
@@ -3623,7 +3651,7 @@ fun GeneralStylization(){
                  
             """.trimIndent(),
             highlightCode = highCodeList + listOf(
-                HighlightCode("TextStyleIndent", Color(0xFFffc530)),
+                HighlightCode("StyleDraver", Color(0xFFffc530)),
                 HighlightCode("overflow", Color(0xFF3CEE0A)),
                 HighlightCode("maxLines", Color(0xFF3CEE0A)),
                 HighlightCode("textIndent = ", Color(0xFF00a9ff)),
@@ -3634,28 +3662,30 @@ fun GeneralStylization(){
                 HighlightCode("5", Color(0xFF00a9ff)),
                 HighlightCode("lineHeight = ", Color(0xFF00a9ff)),
             ),
-            lambdaFun = { TextStyleIndent() },
+            lambdaFun = { StyleDraver() },
             code ="""
 @Composable
 fun TextStyleIndent(
     text: String = "Абзац - малоисследованный компонент литературной формы, имеющий композиционное, сюжетное и тематическое значение.\n" +
             "Выделение фразы в особый абзац усиливает падающий на неё смысловой акцент и способствует правильному и быстрому восприятию текста.",
+    modifier: Modifier = Modifier,
     textStyle: TextStyle = TextStyle(
         textAlign = TextAlign.Justify,
         lineHeight = 20.sp,
-    )
-){
-    Text(
-        text = text,
-        style = textStyle.merge(
-            textIndent = TextIndent(
-                firstLine = 24.sp,
-                restLine = 5.sp
-            )
+        baselineShift = BaselineShift(1.5F),
+        textIndent = TextIndent(
+            firstLine = 24.sp,
+            restLine = 5.sp
         )
     )
+){
+    Text (
+        text = text,
+        modifier = modifier,
+        style = textStyle
+        )
+
 }
-                
             """.trimIndent(),
             links = listOf(
                 TextClickLink(
