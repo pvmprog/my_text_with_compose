@@ -1,11 +1,18 @@
 package com.pvmprog.mytextwithcompose.data.locale
 
 import android.os.Build
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.style.LineBreak
+import androidx.compose.ui.unit.dp
 import com.pvmprog.mytextwithcompose.data.locale.DataHighCode.highCodeList
 import com.pvmprog.mytextwithcompose.data.model.ExampleCode
 import com.pvmprog.mytextwithcompose.data.model.HighlightCode
@@ -27,10 +34,12 @@ import com.pvmprog.mytextwithcompose.ui.examples.GeneralStylization
 import com.pvmprog.mytextwithcompose.ui.examples.GeometricTransform
 import com.pvmprog.mytextwithcompose.ui.examples.GradientDriver
 import com.pvmprog.mytextwithcompose.ui.examples.GradientOverview
+import com.pvmprog.mytextwithcompose.ui.examples.GraphicsLayerTextDriver
 import com.pvmprog.mytextwithcompose.ui.examples.ImageBrush
 import com.pvmprog.mytextwithcompose.ui.examples.TextFontWeight
 import com.pvmprog.mytextwithcompose.ui.examples.ItalicText
 import com.pvmprog.mytextwithcompose.ui.examples.LetterSpacing
+import com.pvmprog.mytextwithcompose.ui.examples.LineBreakText
 import com.pvmprog.mytextwithcompose.ui.examples.SimpleLimit
 import com.pvmprog.mytextwithcompose.ui.examples.MultipleStylesInText
 import com.pvmprog.mytextwithcompose.ui.examples.OutSipmleArticle
@@ -55,6 +64,7 @@ import com.pvmprog.mytextwithcompose.ui.examples.TextFontFamily
 import com.pvmprog.mytextwithcompose.ui.examples.TextLineHeight
 import com.pvmprog.mytextwithcompose.ui.examples.TextStyleIndent
 import com.pvmprog.mytextwithcompose.ui.examples.TypographyStyles
+import com.pvmprog.mytextwithcompose.ui.service.RadioButtonRow
 
 object DataCodeUI {
     val codeUI: List<ExampleCode> = listOf(
@@ -113,6 +123,11 @@ object DataCodeUI {
                     textUrl = "\uD83D\uDCD6 Type scale",
                     url = "https://m3.material.io/styles/typography/type-scale-tokens"
                 ),
+                TextClickLink(
+                    text = "Библиотека «Jetpack Compose» для начинающего Android-разработчика ",
+                    textUrl = "\uD83D\uDCD6 Habr. Разработка под Android. Kotlin. Jetpack Compose. ",
+                    url = "https://habr.com/ru/articles/757572/"
+                ),
 
                 ),
             highlightCode = highCodeList + listOf(
@@ -163,6 +178,28 @@ fun Simple() {
 Это означает, что свойства родителя передаются его дочерным элементам. 
 
 Свойства дочерных элементов можно переназначить.
+
+Некоторые модификаторы:
+ |padding| - установка отступов по одной или нескольким сторонам;
+ |offset| - сдвиг содержимого компонента по горизонтали и вертикали;              
+ |background| - цвет или градиент цвета для фона компонуемого;
+ |border| - рамка компонуемого;
+ |fillMaxSize| - все доступное пространства или ее часть;
+ |fillMaxWidth| - все доступное пространство по |ширине| или ее часть;
+ |fillMaxHeight| - все доступное пространство по |высоте| или ее часть;
+ |requiredSize| - ширина и высота в dp |независимо| от входящих ограничений;
+ |requiredWidth|  - ширина в dp |независимо| от входящих ограничений;
+ |requiredHeight| - высота в dp |независимо| от входящих ограничений;
+ |size| - ширина и высота в dp. Входные ограничения могут изменить размер;
+ |width| - - ширина содержимого в |dp|. Входные ограничения могут изменить размер;
+ |height| - высота содержимого в |dp|. Входные ограничения могут изменить размер;
+ |weight| - модификатор веса, позволяет изменять размер в пределах родительского элемента;
+ |aspectRatio| - определение ширины или высоты в соответствии с указанным соотношением сторон;
+ |animateContentSize| - анимация при изменении размера контента; 
+ 
+ и много других...
+
+****************************
                 
 Modifier.|padding| используется для установки отступов.
 
@@ -221,14 +258,14 @@ fun Modifier.|padding|(
             """.trimIndent(),
             links = listOf(
                 TextClickLink(
-                    text = "Больше информации смотрите в ",
+                    text = "Больше информации смотрите ",
                     textUrl = "\uD83D\uDCD6 Compose modifiers ",
                     url = "https://developer.android.com/develop/ui/compose/modifiers?hl=ru"
                 ),
                 TextClickLink(
-                    text = "Библиотека «Jetpack Compose» для начинающего Android-разработчика ",
-                    textUrl = "\uD83D\uDCD6 Habr. Разработка под Android. Kotlin. Jetpack Compose. ",
-                    url = "https://habr.com/ru/articles/757572/"
+                    text = "Больше информации смотрите ",
+                    textUrl = "\uD83D\uDCD6  Вevelopers. Android. animateContentSize ",
+                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/Modifier#(androidx.compose.ui.Modifier).animateContentSize(androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function2)"
                 ),
             ),
             highlightCode = highCodeList + listOf(
@@ -3499,14 +3536,11 @@ fun BorderExampleText(
         ),
 
 
-
-
-
         ExampleCode(
-            id =  10,
+            id = 19,
             title = "Стилизация текста",
             comment = """
-Свойство |style| позволяет расширить настройки стиля текста, например тень, отступ от начала текста, направление текста и т. д.
+Свойство |style| позволяет расширить настройки по стилизации текста, например тень, абзац текста, направление текста и т. д.
 
 Свойство |style| предоставлно классом :
 |TextStyle|( |!
@@ -3585,66 +3619,18 @@ fun BorderExampleText(
     |hyphens|: Настройка переносов.
     
     |textMotion|: Размещение текстовых символов, оптимизация для анимированного или статического текста.
-
-
-            """.trimIndent(),
-            highlightCode = highCodeList +  listOf(
-                HighlightCode("GeneralStylization", Color(0xFFffc530)),
-                HighlightCode("16", Color(0xFF00a9ff)),
-                HighlightCode("20", Color(0xFF00a9ff)),
-                HighlightCode("letterSpacing = 0.1", Color(0xFF00a9ff)),
-                HighlightCode("textDecoration = ", Color(0xFF00a9ff)),
-                HighlightCode("fontStyle = ", Color(0xFF00a9ff)),
-                HighlightCode("fontWeight = ", Color(0xFF00a9ff)),
-                HighlightCode("style = ", Color(0xFF3CEE0A)),
-            ),
-            lambdaFun = { GeneralStylization() },
-            code ="""
-@Composable
-fun GeneralStylization(){
-    Text (
-        text = "Text in jetpack Compose",
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp),
-        style = TextStyle(
-            color = Color.Blue,
-            fontSize = 20.sp,
-            fontFamily = FontFamily.Monospace,
-            fontWeight = FontWeight.W800,
-            fontStyle = FontStyle.Italic,
-            letterSpacing = 0.1.em,
-            background = Color.LightGray,
-            textAlign = TextAlign.Center,
-            textDecoration = TextDecoration.Underline
-        ),
-    )
-
-}
                 
-            """.trimIndent(),
-            links = listOf(
-                TextClickLink(
-                    text = "Больше информации смотрите ",
-                    textUrl = "\uD83D\uDCD6 Developers. Стиль текста",
-                    url = "https://developer.android.com/develop/ui/compose/text/style-text?hl=ru"
-                ),
-                TextClickLink(
-                    text = "Jetpack Compose: стилизация текста ",
-                    textUrl = "\uD83D\uDCD6 alexzh.com",
-                    url = "https://alexzh.com/jetpack-compose-styling-text/"
-                ),
-            ),
+  |!Свойства для изменения интервала внутри текста|:
 
-            ),
+|letterSpacing|: установка интервала между буквами
 
-        ExampleCode(
-            id = 19,
-            title = "Абзац текста",
-            comment = """
-|TextStyle| через параметр |textIndent| задает отступ, применяемый к первой строке и остальным строкам.
+|lineHeight|: установка интервала между строками
 
-Конструктор:
+|baselineShift|: изменение степени смещения текста вверх по сравнению с текущей базовой линией
+
+|padding|: установка интервалов между абзацами                
+                
+|textIndent|: задает отступ, применяемый к первой строке и остальным строкам.
  |!TextIndent|(firstLine: TextUnit, restLine: TextUnit)
   |firstLine| - величина отступа первой строки;
   |restLine|  - величина отступа, примененных к каждой строке, кроме первой.
@@ -3694,12 +3680,18 @@ fun TextStyleIndent(
                     url = "https://developer.android.com/develop/ui/compose/text/style-text?hl=ru"
                 ),
                 TextClickLink(
-                    text = "Больше информации смотрите ",
+                    text = "Jetpack Compose: стилизация текста ",
+                    textUrl = "\uD83D\uDCD6 alexzh.com",
+                    url = "https://alexzh.com/jetpack-compose-styling-text/"
+                ),
+                TextClickLink(
+                    text = "Абзац текста ",
                     textUrl = "\uD83D\uDCD6 Developers. TextIndent",
                     url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/text/style/TextIndent"
                 ),
             ),
         ),
+
         ExampleCode(
             title = "Геометрические трансформации",
             comment = """
@@ -3709,9 +3701,9 @@ fun TextStyleIndent(
     |!skewX|: Float = 0.0f
 ), где                        
 
-|scaleX| указывает на увеличение текста. Если значение меньше 1.0f, то текст сжимается, если больше - то увеличивается.
+ |scaleX| указывает на увеличение текста. Если значение меньше 1.0f, то текст сжимается, если больше - то увеличивается.
 
-|skewX| указывает на сдвиг текста. Например, точка с координатами (x, y), будет трансформирована в точку (x + y * skewX, y). Значение по умолчанию - 0.0f.                        
+ |skewX| указывает на сдвиг текста. Например, точка с координатами (x, y), будет трансформирована в точку (x + y * skewX, y). Значение по умолчанию - 0.0f.                        
                 
             """.trimIndent(),
             highlightCode = highCodeList + listOf(
@@ -3758,175 +3750,6 @@ fun GeometricTransform(){
                     text = "Геометрическое преобразование текста. ",
                     textUrl = "\uD83D\uDCD6 Developers. TextGeometricTransform",
                     url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/text/style/TextGeometricTransform"
-                ),
-            ),
-        ),
-        ExampleCode(
-            title = "Направление текста",
-            comment = """
-Параметр |textDirection| определяет алгоритм, который будет использоваться при определении направления текста.
-
-Возможные значения:
- 
- |Content|: направление текста зависит от первого направляющего символа в соответствии с алгоритмом Unicode Bidirectional Algorithm
- 
- |ContentOrLtr|: направление текста зависит от первого направляющего символа в соответствии с алгоритмом Unicode Bidirectional Algorithm, либо представляет направление слева направо
- 
- |ContentOrRtl|: направление текста зависит от первого направляющего символа в соответствии с алгоритмом Unicode Bidirectional Algorithm, либо представляет направление справа налево
- 
- |Ltr|: текс направлен слева направо
- 
- |Rtl|: текст направлен справо налево
- 
- |Unspecified|: Это представляет собой неустановленное значение, обычную замену «null», когда требуется примитивное значение.
-                     
-                
-            """.trimIndent(),
-            highlightCode = highCodeList + listOf(
-                HighlightCode("DirectionExampleText", Color(0xFFffc530)),
-                HighlightCode("textDirection =", Color(0xFF3CEE0A)),
-                HighlightCode("25", Color(0xFF00a9ff)),
-                HighlightCode("16", Color(0xFF00a9ff)),
-                HighlightCode(".Unspecified", Color(0xFFe48def)),
-                HighlightCode(".Content", Color(0xFFe48def)),
-                HighlightCode(".ContentOrLtr", Color(0xFFe48def)),
-                HighlightCode(".ContentOrRtl", Color(0xFFe48def)),
-                HighlightCode(".Rtl", Color(0xFFe48def)),
-                HighlightCode(".Ltr", Color(0xFFe48def)),
-            ),
-            lambdaFun = { DirectionExampleText() },
-            code ="""
-@Composable
-fun DirectionExampleText(){
-    LazyColumn(
-        modifier = Modifier.fillMaxSize(),
-    ) {
-        val text = "TextDirection in jetpack Compose"
-        val modifier = Modifier.fillMaxWidth()
-        val style = TextStyle(
-            fontSize = 25.sp,
-            fontFamily = FontFamily.Serif,
-        )
-
-        item {
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                Text (
-                    text = text+" (Unspecified)",
-                    modifier = modifier,.Unspecified
-                    style = style.merge(
-                        textDirection = TextDirection
-                    )
-                )
-                Text (
-                    text = text+" (Content)",
-                    modifier = modifier,
-                    style = style.merge(
-                        textDirection = TextDirection.Content
-                    )
-                )
-                Text (
-                    text = text+" (ContentOrLtr)",
-                    modifier = modifier,
-                    style = style.merge(
-                        textDirection = TextDirection.ContentOrLtr
-                    )
-                )
-                Text (
-                    text = text+" (ContentOrRtl)",
-                    modifier = modifier,
-                    style = style.merge(
-                        textDirection = TextDirection.ContentOrRtl
-                    )
-                )
-                Text (
-                    text = text+" (Rtl)",
-                    modifier = modifier,
-                    style = style.merge(
-                        textDirection = TextDirection.Rtl
-                    )
-                )
-                Text (
-                    text = text+" (Ltr)",
-                    modifier = modifier,
-                    style = style.merge(
-                        textDirection = TextDirection.Ltr
-                    )
-                )
-
-            }
-        }
-    }
-
-}
-                
-            """.trimIndent(),
-            links = listOf(
-                TextClickLink(
-                    text = "Больше информации смотрите ",
-                    textUrl = "\uD83D\uDCD6 Developers. Стиль текста",
-                    url = "https://developer.android.com/develop/ui/compose/text/style-text?hl=ru"
-                ),
-                TextClickLink(
-                    text = "Алгоритм, который будет использоваться при определении направления текста. ",
-                    textUrl = "\uD83D\uDCD6 Developers. TextDirection",
-                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/text/style/TextDirection"
-                ),
-            ),
-        ),
-
-        ExampleCode(
-            title = "",
-            comment = """
-            """.trimIndent(),
-            highlightCode = highCodeList + listOf(
-                HighlightCode("TextStyleIndent", Color(0xFFffc530)),
-                HighlightCode("overflow", Color(0xFF3CEE0A)),
-                HighlightCode("lineHeight = ", Color(0xFF00a9ff)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
-            ),
-            lambdaFun = {  },
-            code ="""
-            """.trimIndent(),
-            links = listOf(
-                TextClickLink(
-                    text = "Больше информации смотрите ",
-                    textUrl = "\uD83D\uDCD6 Developers. Стиль текста",
-                    url = "https://developer.android.com/develop/ui/compose/text/style-text?hl=ru"
-                ),
-                TextClickLink(
-                    text = "Больше информации смотрите ",
-                    textUrl = "\uD83D\uDCD6 Developers. TextIndent",
-                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/text/style/TextIndent"
-                ),
-            ),
-        ),
-        ExampleCode(
-            title = "",
-            comment = """
-            """.trimIndent(),
-            highlightCode = highCodeList + listOf(
-                HighlightCode("TextStyleIndent", Color(0xFFffc530)),
-                HighlightCode("overflow", Color(0xFF3CEE0A)),
-                HighlightCode("lineHeight = ", Color(0xFF00a9ff)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
-            ),
-            lambdaFun = {  },
-            code ="""
-            """.trimIndent(),
-            links = listOf(
-                TextClickLink(
-                    text = "Больше информации смотрите ",
-                    textUrl = "\uD83D\uDCD6 Developers. Стиль текста",
-                    url = "https://developer.android.com/develop/ui/compose/text/style-text?hl=ru"
-                ),
-                TextClickLink(
-                    text = "Больше информации смотрите ",
-                    textUrl = "\uD83D\uDCD6 Developers. TextIndent",
-                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/text/style/TextIndent"
                 ),
             ),
         ),
@@ -4129,12 +3952,322 @@ fun ShadowDriver(){
 
         ),
 
+        ExampleCode(
+            title = "Направление текста",
+            comment = """
+Параметр |textDirection| определяет алгоритм, который будет использоваться при определении направления текста.
+
+Возможные значения:
+ 
+ |Content|: направление текста зависит от первого направляющего символа в соответствии с алгоритмом Unicode Bidirectional Algorithm
+ 
+ |ContentOrLtr|: направление текста зависит от первого направляющего символа в соответствии с алгоритмом Unicode Bidirectional Algorithm, либо представляет направление слева направо
+ 
+ |ContentOrRtl|: направление текста зависит от первого направляющего символа в соответствии с алгоритмом Unicode Bidirectional Algorithm, либо представляет направление справа налево
+ 
+ |Ltr|: текс направлен слева направо
+ 
+ |Rtl|: текст направлен справо налево
+ 
+ |Unspecified|: Это представляет собой неустановленное значение, обычную замену «null», когда требуется примитивное значение.
+                     
+                
+            """.trimIndent(),
+            highlightCode = highCodeList + listOf(
+                HighlightCode("DirectionExampleText", Color(0xFFffc530)),
+                HighlightCode("textDirection =", Color(0xFF3CEE0A)),
+                HighlightCode("25", Color(0xFF00a9ff)),
+                HighlightCode("16", Color(0xFF00a9ff)),
+                HighlightCode(".Unspecified", Color(0xFFe48def)),
+                HighlightCode(".Content", Color(0xFFe48def)),
+                HighlightCode(".ContentOrLtr", Color(0xFFe48def)),
+                HighlightCode(".ContentOrRtl", Color(0xFFe48def)),
+                HighlightCode(".Rtl", Color(0xFFe48def)),
+                HighlightCode(".Ltr", Color(0xFFe48def)),
+            ),
+            lambdaFun = { DirectionExampleText() },
+            code ="""
+@Composable
+fun DirectionExampleText(){
+    LazyColumn(
+        modifier = Modifier.fillMaxSize(),
+    ) {
+        val text = "TextDirection in jetpack Compose"
+        val modifier = Modifier.fillMaxWidth()
+        val style = TextStyle(
+            fontSize = 25.sp,
+            fontFamily = FontFamily.Serif,
+        )
+
+        item {
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                Text (
+                    text = text+" (Unspecified)",
+                    modifier = modifier,.Unspecified
+                    style = style.merge(
+                        textDirection = TextDirection
+                    )
+                )
+                Text (
+                    text = text+" (Content)",
+                    modifier = modifier,
+                    style = style.merge(
+                        textDirection = TextDirection.Content
+                    )
+                )
+                Text (
+                    text = text+" (ContentOrLtr)",
+                    modifier = modifier,
+                    style = style.merge(
+                        textDirection = TextDirection.ContentOrLtr
+                    )
+                )
+                Text (
+                    text = text+" (ContentOrRtl)",
+                    modifier = modifier,
+                    style = style.merge(
+                        textDirection = TextDirection.ContentOrRtl
+                    )
+                )
+                Text (
+                    text = text+" (Rtl)",
+                    modifier = modifier,
+                    style = style.merge(
+                        textDirection = TextDirection.Rtl
+                    )
+                )
+                Text (
+                    text = text+" (Ltr)",
+                    modifier = modifier,
+                    style = style.merge(
+                        textDirection = TextDirection.Ltr
+                    )
+                )
+
+            }
+        }
+    }
+
+}
+                
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Больше информации смотрите ",
+                    textUrl = "\uD83D\uDCD6 Developers. Стиль текста",
+                    url = "https://developer.android.com/develop/ui/compose/text/style-text?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Алгоритм, который будет использоваться при определении направления текста. ",
+                    textUrl = "\uD83D\uDCD6 Developers. TextDirection",
+                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/text/style/TextDirection"
+                ),
+            ),
+        ),
+
+        ExampleCode(
+            title = "Перенос строки",
+            comment = """
+|LineBreak| представляет собой конфигурацию для переноса строки, предлагая несколько пресетов для различных вариантов использования:
+
+ |Simple| - базовый, быстрый для разрыва строки.
+ 
+ |Heading| - более мягкие правила переноса, подходящие для коротких текстов, таких как заголовки или узкие газетные колонки.
+  
+ |Paragraph| -  более медленный и качественный перенос строк для улучшения читаемости.
+
+Если мягкий перенос включен и ширина текста превышает ширину его контейнера, в текст вставляются разрывы строк, чтобы разделить его на несколько строк.
+
+Существует ряд параметров, которые влияют на то, как вставляются разрывы строк. 
+
+Например, алгоритм для разрыва строки может быть изменен на алгоритм с улучшенной читаемостью за счет скорости. 
+
+Другим примером является строгость, которая в некоторых языках определяет, какие символы могут появляться в начале строки.
+     
+ LineBreak.|Strategy| - стратегия, используемая для разрыва строки.
+
+ LineBreak.|Strictness| - описывает строгость переноса строки, определяя, перед какими символами могут быть вставлены разрывы строк.
+
+ LineBreak.|WordBreak| - описывает, как разрывы строк должны вставляться в слова.     
+            
+            """.trimIndent(),
+            highlightCode = highCodeList + listOf(
+                HighlightCode("LineBreakText", Color(0xFFffc530)),
+                HighlightCode("lineBreak =", Color(0xFF3CEE0A)),
+                HighlightCode("0", Color(0xFF00a9ff)),
+                HighlightCode("1", Color(0xFF00a9ff)),
+                HighlightCode("2", Color(0xFF00a9ff)),
+                HighlightCode("4", Color(0xFF00a9ff)),
+                HighlightCode("6", Color(0xFF00a9ff)),
+                HighlightCode("strategy =", Color(0xFF00a9ff)),
+                HighlightCode("strictness =", Color(0xFF00a9ff)),
+                HighlightCode("wordBreak =", Color(0xFF00a9ff)),
+                HighlightCode("Simple ", Color(0xFF05B80D)),
+                HighlightCode("Balanced ", Color(0xFF05B80D)),
+                HighlightCode("HighQuality ", Color(0xFF05B80D)),
+                HighlightCode("rememberScrollState", Color(0xFF05B80D)),
+                HighlightCode("RadioButtonRow", Color(0xFF05B80D)),
+
+                HighlightCode(".Paragraph", Color(0xFFe48def)),
+                HighlightCode(".Simple", Color(0xFFe48def)),
+                HighlightCode(".Balanced", Color(0xFFe48def)),
+                HighlightCode(".HighQuality", Color(0xFFe48def)),
+                HighlightCode(".Default", Color(0xFFe48def)),
+                HighlightCode(".tertiaryContainer", Color(0xFFe48def)),
+            ),
+
+            lambdaFun = { LineBreakText() },
+            code ="""
+@Composable
+fun LineBreakText(){
+
+    val strategy: List<String> = remember {
+        listOf(
+            "Simple ",
+            "Balanced",
+            "HighQuality ",
+        )
+    }
+
+    var idStrategy by remember { mutableIntStateOf(1) }
+
+    Column(
+        modifier = Modifier
+            .background(MaterialTheme.colorScheme.tertiaryContainer)
+            .padding(16.dp)
+            .fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        Text (
+            text = "Text wrapping",
+            style = TextStyle(
+                fontSize = 24.sp,
+                lineBreak = LineBreak(
+                    strategy = LineBreak.Strategy.Simple,
+                    strictness = LineBreak.Strictness.Strict,
+                    wordBreak = LineBreak.WordBreak.Default
+                )
+            )
+        )
+
+        Text (
+            text = "John really likes cream cake. I like chocolate ice cream the most. Maria likes milkshake with cake.",
+            style = TextStyle(
+                fontSize = 20.sp,
+                lineBreak = LineBreak.Paragraph.copy(
+                    strategy = when (idStrategy) {
+                        0 -> LineBreak.Strategy.Simple
+                        1 -> LineBreak.Strategy.Balanced
+                        else -> LineBreak.Strategy.HighQuality
+                    },
+                    strictness = LineBreak.Strictness.Default,
+                    wordBreak = LineBreak.WordBreak.Default
+                )
+            )
+        )
+
+
+        Column(
+            modifier = Modifier
+                .padding(16.dp)
+                .verticalScroll(rememberScrollState())
+                .fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            RadioButtonRow(idStrategy,strategy,{idStrategy = it})
+
+        }
+
+
+    }
+
+
+}
+                
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Больше информации смотрите ",
+                    textUrl = "\uD83D\uDCD6 Developers. Стиль текста",
+                    url = "https://developer.android.com/develop/ui/compose/text/style-text?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Больше информации смотрите ",
+                    textUrl = "\uD83D\uDCD6 Developers. LineBreak",
+                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/text/style/LineBreak"
+                ),
+            ),
+        ),
+
+        ExampleCode(
+            title = "Модификатор графики\nВращение, перемещение",
+            comment = """
+Modifier.|graphicsLayer| — модификатор, который превращает содержимое составного рисунка в слой рисования. 
+
+Слой предоставляет несколько различных функций, таких как:
+
+ 1.|Изоляция| инструкций рисования. Инструкции рисования, записанные как часть слоя, могут эффективно перевыдаваться конвейером рендеринга без повторного выполнения кода приложения.
+     
+ 2.|Преобразования|, которые применяются ко всем инструкциям рисования, содержащимся в слое.
+ 
+ 3.|Растеризация| для возможностей композиции. Когда слой растрируется, выполняются его инструкции по рисованию, и выходные данные сохраняются во внеэкранном буфере. Создание такого буфера для последующих кадров выполняется быстрее, чем выполнение отдельных инструкций, но при применении таких преобразований, как масштабирование или вращение, он будет вести себя как растровое изображение.                
+ 
+ Для вращения используются параметры:               
+ |rotationX| для вращения по горизонтали, 
+ |rotationY| для вращения по вертикали,
+ |rotationZ| для вращения по оси Z.
+  
+ Значение указывается в градусах (0–360).   
+                      
+|transformOrigin| указывает точку, относительно которой происходят преобразования. 
+
+По умолчанию точка отсчета находится по центру с координатами (0,5f, 0,5f). 
+
+Если начало координат переместить в точку (0f, 0f), преобразования начнутся с верхнего левого угла составного объекта.
+
+                      
+                 
+            """.trimIndent(),
+            highlightCode = highCodeList + listOf(
+                HighlightCode("GraphicsLayerTextDriver", Color(0xFFffc530)),
+                HighlightCode("overflow", Color(0xFF3CEE0A)),
+                HighlightCode("lineHeight = ", Color(0xFF00a9ff)),
+                HighlightCode("//", Color(0xFF3CEE0A)),
+            ),
+            lambdaFun = { GraphicsLayerTextDriver() },
+            code ="""
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Больше информации смотрите ",
+                    textUrl = "\uD83D\uDCD6 Developers. Стиль текста",
+                    url = "https://developer.android.com/develop/ui/compose/text/style-text?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Больше информации смотрите ",
+                    textUrl = "\uD83D\uDCD6 Developers. TextIndent",
+                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/text/style/TextIndent"
+                ),
+            ),
+        ),
 
         ExampleCode(
             id = 3,
-            title = "Трансформация текста",
+            title = "Модификатор графики\nТрансформация",
             comment = """
-Modifier.|graphicsLayer|  применяет преобразования к составным объектам.                
+Modifier.|graphicsLayer|  применяет преобразования к составным объектам.
+                
+ Для маштабирования используются параметры:               
+  |ScaleX| и |ScaleY| увеличивают или сжимают содержимое в горизонтальном или вертикальном направлении соответственно. 
+  
+  Значение 1,0f указывает на отсутствие изменений в масштабе, значение 0,5f означает половину размера.
+                        
+                
             """.trimIndent(),
             links = listOf(
                 TextClickLink(
