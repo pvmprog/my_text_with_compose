@@ -244,6 +244,11 @@
     <td><img src="screenshots/screenshot403.jpg" width=270 height=520></td>
     <td><img src="screenshots/screenshot404.jpg" width=270 height=520></td>
   </tr>   
+  <tr>
+    <td><img src="screenshots/screenshot501.jpg" width=270 height=520></td>
+    <td><img src="screenshots/screenshot502.jpg" width=270 height=520></td>
+  </tr>
+   
  </table>
 
 
