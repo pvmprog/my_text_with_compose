@@ -1,18 +1,10 @@
 package com.pvmprog.mytextwithcompose.data.locale
 
 import android.os.Build
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.text.style.LineBreak
-import androidx.compose.ui.unit.dp
 import com.pvmprog.mytextwithcompose.data.locale.DataHighCode.highCodeList
 import com.pvmprog.mytextwithcompose.data.model.ExampleCode
 import com.pvmprog.mytextwithcompose.data.model.HighlightCode
@@ -21,6 +13,7 @@ import com.pvmprog.mytextwithcompose.ui.examples.AnimationBgGradient
 import com.pvmprog.mytextwithcompose.ui.examples.AnimationSizeText
 import com.pvmprog.mytextwithcompose.ui.examples.SimpleAlign
 import com.pvmprog.mytextwithcompose.ui.examples.AnnotatedHtmlString
+import com.pvmprog.mytextwithcompose.ui.examples.AnnotatedPushStyleAndUrl
 import com.pvmprog.mytextwithcompose.ui.examples.BackgroundDriver
 import com.pvmprog.mytextwithcompose.ui.examples.BorderExampleText
 import com.pvmprog.mytextwithcompose.ui.examples.BoxCenterLambdaFun
@@ -30,7 +23,6 @@ import com.pvmprog.mytextwithcompose.ui.examples.DrawAnimeScaleAText
 import com.pvmprog.mytextwithcompose.ui.examples.DrawTextCanvas
 import com.pvmprog.mytextwithcompose.ui.examples.ExampleFontSize
 import com.pvmprog.mytextwithcompose.ui.examples.FontScale
-import com.pvmprog.mytextwithcompose.ui.examples.GeneralStylization
 import com.pvmprog.mytextwithcompose.ui.examples.GeometricTransform
 import com.pvmprog.mytextwithcompose.ui.examples.GradientDriver
 import com.pvmprog.mytextwithcompose.ui.examples.GradientOverview
@@ -41,7 +33,7 @@ import com.pvmprog.mytextwithcompose.ui.examples.ItalicText
 import com.pvmprog.mytextwithcompose.ui.examples.LetterSpacing
 import com.pvmprog.mytextwithcompose.ui.examples.LineBreakText
 import com.pvmprog.mytextwithcompose.ui.examples.SimpleLimit
-import com.pvmprog.mytextwithcompose.ui.examples.MultipleStylesInText
+import com.pvmprog.mytextwithcompose.ui.examples.AnnotatedStylesInText
 import com.pvmprog.mytextwithcompose.ui.examples.OutSipmleArticle
 import com.pvmprog.mytextwithcompose.ui.examples.ScaleDraver
 import com.pvmprog.mytextwithcompose.ui.examples.SemanticsText
@@ -53,18 +45,14 @@ import com.pvmprog.mytextwithcompose.ui.examples.Simple
 import com.pvmprog.mytextwithcompose.ui.examples.SimpleStringResource
 import com.pvmprog.mytextwithcompose.ui.examples.SimpleAlignJustify
 import com.pvmprog.mytextwithcompose.ui.examples.StyleDraver
-import com.pvmprog.mytextwithcompose.ui.examples.TextAlignedHeight
-import com.pvmprog.mytextwithcompose.ui.examples.TextAnnotatedStringClickLink
-import com.pvmprog.mytextwithcompose.ui.examples.TextBuildAnnotatedString
-import com.pvmprog.mytextwithcompose.ui.examples.TextAnnotatedParagraph
-import com.pvmprog.mytextwithcompose.ui.examples.TextBuildAnnotatedString3
+import com.pvmprog.mytextwithcompose.ui.examples.AnnotatedWithAddStyle
+import com.pvmprog.mytextwithcompose.ui.examples.AnnotatedParagraph
+import com.pvmprog.mytextwithcompose.ui.examples.AnnotatedBaseLineShift
 import com.pvmprog.mytextwithcompose.ui.examples.TextColorAny
 import com.pvmprog.mytextwithcompose.ui.examples.TextFontFamalyAlternate
 import com.pvmprog.mytextwithcompose.ui.examples.TextFontFamily
 import com.pvmprog.mytextwithcompose.ui.examples.TextLineHeight
-import com.pvmprog.mytextwithcompose.ui.examples.TextStyleIndent
 import com.pvmprog.mytextwithcompose.ui.examples.TypographyStyles
-import com.pvmprog.mytextwithcompose.ui.service.RadioButtonRow
 
 object DataCodeUI {
     val codeUI: List<ExampleCode> = listOf(
@@ -327,6 +315,11 @@ fun SimpleWithPadding() {
                     text = "Больше информации смотрите в ",
                     textUrl = "\uD83D\uDCD6 Ресурсы в Compose",
                     url = "https://developer.android.com/develop/ui/compose/resources?hl=ru#strings"
+                ),
+                TextClickLink(
+                    text = "Строковые ресурсы ",
+                    textUrl = "\uD83D\uDCD6 Developers. String resource",
+                    url = "https://developer.android.com/guide/topics/resources/string-resource?hl=ru"
                 ),
             ),
             highlightCode = highCodeList + listOf(
@@ -1368,7 +1361,6 @@ fun SimpleAlignJustify() {
                 HighlightCode(".Polite", Color(0xFFe48def)),
                 HighlightCode("talkback_generation", Color(0xFFe48def)),
                 HighlightCode("Justify", Color(0xFFe48def)),
-                HighlightCode(".verticalScroll", Color(0xFFd27749)),
                 HighlightCode("20", Color(0xFF00a9ff)),
                 HighlightCode("16", Color(0xFF00a9ff)),
                 HighlightCode("1..50", Color(0xFF00a9ff)),
@@ -3692,67 +3684,6 @@ fun TextStyleIndent(
             ),
         ),
 
-        ExampleCode(
-            title = "Геометрические трансформации",
-            comment = """
-Параметр |TextGeometricTransform| задает геометрические трансформации текста с помощью объекта 
-|TextGeometricTransform|(
-    |!scaleX|: Float = 1.0f, 
-    |!skewX|: Float = 0.0f
-), где                        
-
- |scaleX| указывает на увеличение текста. Если значение меньше 1.0f, то текст сжимается, если больше - то увеличивается.
-
- |skewX| указывает на сдвиг текста. Например, точка с координатами (x, y), будет трансформирована в точку (x + y * skewX, y). Значение по умолчанию - 0.0f.                        
-                
-            """.trimIndent(),
-            highlightCode = highCodeList + listOf(
-                HighlightCode("GeometricTransform", Color(0xFFffc530)),
-                HighlightCode("TextGeometricTransform", Color(0xFF3CEE0A)),
-                HighlightCode("1", Color(0xFF00a9ff)),
-                HighlightCode("30", Color(0xFF00a9ff)),
-                HighlightCode("2", Color(0xFF00a9ff)),
-                HighlightCode("6", Color(0xFF00a9ff)),
-                HighlightCode("scaleX =", Color(0xFF00a9ff)),
-                HighlightCode("skewX =", Color(0xFF00a9ff)),
-                HighlightCode(".Cursive", Color(0xFFe48def)),
-            ),
-            lambdaFun = { GeometricTransform() },
-            code ="""
-@Composable
-fun GeometricTransform(){
-    Text (
-        text = "Text in jetpack Compose",
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp),
-        style = TextStyle(
-            fontSize = 30.sp,
-            textAlign = TextAlign.Center,
-            fontFamily = FontFamily.Cursive,
-            textGeometricTransform = TextGeometricTransform(
-                scaleX = 2f,
-                skewX = 1.2f
-            )
-        )
-    )
-
-}
-                
-            """.trimIndent(),
-            links = listOf(
-                TextClickLink(
-                    text = "Больше информации смотрите ",
-                    textUrl = "\uD83D\uDCD6 Developers. Стиль текста",
-                    url = "https://developer.android.com/develop/ui/compose/text/style-text?hl=ru"
-                ),
-                TextClickLink(
-                    text = "Геометрическое преобразование текста. ",
-                    textUrl = "\uD83D\uDCD6 Developers. TextGeometricTransform",
-                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/text/style/TextGeometricTransform"
-                ),
-            ),
-        ),
 
         ExampleCode(
             id =  10,
@@ -4205,6 +4136,69 @@ fun LineBreakText(){
         ),
 
         ExampleCode(
+            title = "Геометрические трансформации",
+            comment = """
+Параметр |TextGeometricTransform| задает геометрические трансформации текста с помощью объекта 
+|TextGeometricTransform|(
+    |!scaleX|: Float = 1.0f, 
+    |!skewX|: Float = 0.0f
+), где                        
+
+ |scaleX| указывает на увеличение текста. Если значение меньше 1.0f, то текст сжимается, если больше - то увеличивается.
+
+ |skewX| указывает на сдвиг текста. Например, точка с координатами (x, y), будет трансформирована в точку (x + y * skewX, y). Значение по умолчанию - 0.0f.                        
+                
+            """.trimIndent(),
+            highlightCode = highCodeList + listOf(
+                HighlightCode("GeometricTransform", Color(0xFFffc530)),
+                HighlightCode("TextGeometricTransform", Color(0xFF3CEE0A)),
+                HighlightCode("1", Color(0xFF00a9ff)),
+                HighlightCode("30", Color(0xFF00a9ff)),
+                HighlightCode("2", Color(0xFF00a9ff)),
+                HighlightCode("6", Color(0xFF00a9ff)),
+                HighlightCode("scaleX =", Color(0xFF00a9ff)),
+                HighlightCode("skewX =", Color(0xFF00a9ff)),
+                HighlightCode(".Cursive", Color(0xFFe48def)),
+            ),
+            lambdaFun = { GeometricTransform() },
+            code ="""
+@Composable
+fun GeometricTransform(){
+    Text (
+        text = "Text in jetpack Compose",
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        style = TextStyle(
+            fontSize = 30.sp,
+            textAlign = TextAlign.Center,
+            fontFamily = FontFamily.Cursive,
+            textGeometricTransform = TextGeometricTransform(
+                scaleX = 2f,
+                skewX = 1.2f
+            )
+        )
+    )
+
+}
+                
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Больше информации смотрите ",
+                    textUrl = "\uD83D\uDCD6 Developers. Стиль текста",
+                    url = "https://developer.android.com/develop/ui/compose/text/style-text?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Геометрическое преобразование текста. ",
+                    textUrl = "\uD83D\uDCD6 Developers. TextGeometricTransform",
+                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/text/style/TextGeometricTransform"
+                ),
+            ),
+        ),
+
+
+        ExampleCode(
             title = "Модификатор графики\nВращение, перемещение",
             comment = """
 Modifier.|graphicsLayer| — модификатор, который превращает содержимое составного рисунка в слой рисования. 
@@ -4235,12 +4229,134 @@ Modifier.|graphicsLayer| — модификатор, который превра
             """.trimIndent(),
             highlightCode = highCodeList + listOf(
                 HighlightCode("GraphicsLayerTextDriver", Color(0xFFffc530)),
-                HighlightCode("overflow", Color(0xFF3CEE0A)),
-                HighlightCode("lineHeight = ", Color(0xFF00a9ff)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
+                HighlightCode("15f", Color(0xFF00a9ff)),
+                HighlightCode("52f", Color(0xFF00a9ff)),
+                HighlightCode("0f", Color(0xFF00a9ff)),
+                HighlightCode("15f", Color(0xFF00a9ff)),
+                HighlightCode("0.5f", Color(0xFF00a9ff)),
+                HighlightCode("40f", Color(0xFF00a9ff)),
+                HighlightCode("20f", Color(0xFF00a9ff)),
+                HighlightCode("min = 150", Color(0xFF00a9ff)),
+                HighlightCode("1.", Color(0xFF00a9ff)),
+                HighlightCode("0xff0000ff", Color(0xFF00a9ff)),
+                HighlightCode("0xfffcce36", Color(0xFF00a9ff)),
+                HighlightCode("0xffff0000", Color(0xFF00a9ff)),
+                HighlightCode("2f", Color(0xFF00a9ff)),
+                HighlightCode("6f", Color(0xFF00a9ff)),
+                HighlightCode("0f", Color(0xFF00a9ff)),
+                HighlightCode("0f", Color(0xFF00a9ff)),
+                HighlightCode("0f", Color(0xFF00a9ff)),
+                HighlightCode(".graphicsLayer", Color(0xFF3CEE0A)),
+                HighlightCode("rotationX", Color(0xFFe48def)),
+                HighlightCode("rotationY", Color(0xFFe48def)),
+                HighlightCode("rotationZ", Color(0xFFe48def)),
+                HighlightCode("transformOrigin", Color(0xFFe48def)),
+                HighlightCode(".floatValue", Color(0xFFe48def)),
+                HighlightCode("translationX", Color(0xFFe48def)),
+                HighlightCode("translationY", Color(0xFFe48def)),
             ),
             lambdaFun = { GraphicsLayerTextDriver() },
             code ="""
+@Composable
+fun GraphicsLayerTextDriver(){
+    val padding = dimensionResource(
+        id = R.dimen.padding_medium
+    )
+
+    val layerRotationX = remember {
+        mutableFloatStateOf(15f)
+    }
+    val layerRotationY = remember {
+        mutableFloatStateOf(52f)
+    }
+    val layerRotationZ = remember {
+        mutableFloatStateOf(0f)
+    }
+    val layerOriginX = remember {
+        mutableFloatStateOf(0.5f)
+    }
+    val layerOriginY = remember {
+        mutableFloatStateOf(0.5f)
+    }
+
+    val layerTranslationX = remember {
+        mutableFloatStateOf(40f)
+    }
+
+    val layerTranslationY = remember {
+        mutableFloatStateOf(20f)
+    }
+
+
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .border(1.dp, Color.White)
+                .background(Color(0xff0000ff))
+                .heightIn(min = 150.dp)
+                .padding(padding),
+            contentAlignment = Alignment.Center
+        ) {
+
+            MessageShadow(
+                message = stringResource(R.string.hello_world),
+                style = TextStyle(
+                    textAlign = TextAlign.Center,
+                    fontFamily = Alice,
+                    fontSize = 45.sp,
+                    lineHeight = 55.sp,
+                    color = Color(0xfffcce36),
+                    shadow = Shadow(
+                        color = Color(0xffff0000),
+                        offset = Offset(2f, 6f), //смещение тени
+                        blurRadius = 2f  //размытие
+                    )
+                ),
+                modifier = Modifier
+                    .padding(16.dp)
+                    .graphicsLayer {
+                        this.transformOrigin = TransformOrigin(
+                            layerOriginX.floatValue,
+                            layerOriginY.floatValue
+                        )
+                        this.rotationX = layerRotationX.floatValue
+                        this.rotationY = layerRotationY.floatValue
+                        this.rotationZ = layerRotationZ.floatValue
+
+                        this.translationX = layerTranslationX.value.dp.toPx()
+                        this.translationY = layerTranslationY.value.dp.toPx()
+
+                    }
+                    .fillMaxWidth(),
+            )
+
+        }
+        Column(
+            modifier = Modifier
+                .padding(16.dp)
+                .verticalScroll(rememberScrollState())
+                .fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(padding)
+        ) {
+            SliderSimple("rotat.X ", layerRotationX, 0f, 360f)
+            SliderSimple("rotat.Y ", layerRotationY, 0f, 360f)
+            SliderSimple("rotat.Z ", layerRotationZ, 0f, 360f)
+            SliderSimple("OriginX ", layerOriginX, 0f, 1f)
+            SliderSimple("OriginY ", layerOriginY, 0f, 1f)
+            SliderSimple("trans.X ", layerTranslationX, 0f, 100f)
+            SliderSimple("trans.Y ", layerTranslationY, 0f, 100f)
+        }
+    }
+
+
+}
+                
             """.trimIndent(),
             links = listOf(
                 TextClickLink(
@@ -4260,9 +4376,8 @@ Modifier.|graphicsLayer| — модификатор, который превра
             id = 3,
             title = "Модификатор графики\nТрансформация",
             comment = """
-Modifier.|graphicsLayer|  применяет преобразования к составным объектам.
-                
- Для маштабирования используются параметры:               
+ Modifier.|graphicsLayer|  применяет преобразования к составным объектам.
+Для маштабирования используются параметры:               
   |ScaleX| и |ScaleY| увеличивают или сжимают содержимое в горизонтальном или вертикальном направлении соответственно. 
   
   Значение 1,0f указывает на отсутствие изменений в масштабе, значение 0,5f означает половину размера.
@@ -4285,15 +4400,103 @@ Modifier.|graphicsLayer|  применяет преобразования к с�
             nameFun = "",
             highlightCode = highCodeList + listOf(
                 HighlightCode("ScaleDraver", Color(0xFFffc530)),
-                HighlightCode("fontSize", Color(0xFF3CEE0A)),
-                HighlightCode("initialValue", Color(0xFF3CEE0A)),
-                HighlightCode("targetValue", Color(0xFF3CEE0A)),
-                HighlightCode("10f", Color(0xFF5EADD6)),
-                HighlightCode("170f", Color(0xFF5EADD6)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
+                HighlightCode("ScaleText", Color(0xFFffc530)),
+                HighlightCode("1f", Color(0xFF5EADD6)),
+                HighlightCode("0.5f", Color(0xFF5EADD6)),
+                HighlightCode("0.1f", Color(0xFF5EADD6)),
+                HighlightCode("3f", Color(0xFF5EADD6)),
+                HighlightCode("id =", Color(0xFF5EADD6)),
+                HighlightCode("min = 150", Color(0xFF5EADD6)),
+                HighlightCode("1.", Color(0xFF5EADD6)),
+                HighlightCode("22", Color(0xFF5EADD6)),
+                HighlightCode("remember", Color(0xFF05B80D)),
+                HighlightCode("SliderSimple", Color(0xFF05B80D)),
+                HighlightCode("LazyColumn", Color(0xFF05B80D)),
+                HighlightCode(".graphicsLayer", Color(0xFF3CEE0A)),
+                HighlightCode(".scaleX", Color(0xFFe48def)),
+                HighlightCode(".scaleY", Color(0xFFe48def)),
+                HighlightCode(".floatValue", Color(0xFFe48def)),
             ),
             lambdaFun = { ScaleDraver() },
             code = """
+@Composable
+fun ScaleText(
+    scaleX: Float = 1f,
+    scaleY: Float = 1f,
+){
+    val text = stringResource(
+        id = R.string.hello_world
+    )
+
+    val padding = dimensionResource(
+        id = R.dimen.padding_medium
+    )
+    Box(
+        modifier = Modifier
+            .padding(padding)
+            .fillMaxWidth()
+            .border(1.dp, MaterialTheme.colorScheme.onBackground)
+            .widthIn(min = 150.dp)
+            .padding(padding),
+        contentAlignment = Alignment.Center
+    ) {
+        Text (
+            text = text + "\n (${'$'}{scaleX},${'$'}{scaleY})",
+            modifier = Modifier
+                .padding(padding)
+                .graphicsLayer {
+                    this.scaleX = scaleX
+                    this.scaleY = scaleY
+                },
+            textAlign = TextAlign.Center,
+            fontSize = 22.sp,
+        )
+
+    }
+
+}
+                
+                
+@Composable
+fun ScaleDraver(){
+    val padding = dimensionResource(
+        id = R.dimen.padding_medium
+    )
+
+    val scaleX = remember {
+        mutableFloatStateOf(0.5f)
+    }
+    val scaleY = remember {
+        mutableFloatStateOf(0.5f)
+    }
+    Column(
+        modifier = Modifier
+            .fillMaxWidth(),
+    ) {
+        ScaleText(scaleX.floatValue,scaleY.floatValue)
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(padding),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            item {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(padding)
+                ) {
+                    SliderSimple("scaleX", scaleX, 0.1f, 3f)
+
+                    SliderSimple("scaleY", scaleY, 0.1f, 3f)
+
+                }
+
+            }
+
+        }
+    }
+}
+                
             """.trimIndent()
         ),
 
@@ -4302,7 +4505,7 @@ Modifier.|graphicsLayer|  применяет преобразования к с�
         ExampleCode(
             id = 13,
             title = "Аннотированная строка.  \n" +
-                    "Часть 1.",
+                    "withStyle",
             comment = """
 Аннотированная строка |AnnotatedString| строка позволяет разбить текст на сегменты, каждый из которых имеет свою собственную стилизацию.
 
@@ -4321,7 +4524,7 @@ Modifier.|graphicsLayer|  применяет преобразования к с�
 
  |text|: текст, который будет отображаться.
     
- |spanStyles|: предоставляет возможность стилизовать текстовый диапазон.
+ |spanStyles|: предоставляет возможность стилизовать текстовый диапазон. Мы можем изменить атрибуты шрифта, цвета, а также добавить текстовые украшения и т. д. 
    
  |paragraphStyles|: определяющий стили абзацев для определенной части текста. Каждый ParagraphStyle с диапазоном определяет абзац текста. Требуется, чтобы диапазоны абзацев не пересекались друг с другом. Если между указанными диапазонами абзацев есть пробелы, между ними будет создан абзац по умолчанию.
                 
@@ -4353,17 +4556,19 @@ class SpanStyle(
                 HighlightCode("16", Color(0xFF2DB8FF)),
                 HighlightCode("10", Color(0xFF2DB8FF)),
                 HighlightCode(".Italic", Color(0xFFe48def)),
+                HighlightCode(".Cyan", Color(0xFFe48def)),
+                HighlightCode(".Red", Color(0xFFe48def)),
             ),
             lambdaFun = {
                 BoxCenterLambdaFun(
-                    lambdaFun = { MultipleStylesInText(fontSize = 40) },
+                    lambdaFun = { AnnotatedStylesInText(fontSize = 40) },
                     modifier = Modifier
                         .fillMaxSize()
                 )
             },
             code ="""
 @Composable
-fun MultipleStylesInText(
+fun AnnotatedStylesInText(
     fontSize:Int = 32,
     style:SpanStyle = SpanStyle(
         fontSize = fontSize.sp,
@@ -4406,6 +4611,7 @@ fun MultipleStylesInText(
                 append("ompose")
             }
 
+
         },
         modifier = modifier,
         lineHeight = (fontSize+10).sp,
@@ -4441,13 +4647,18 @@ fun BoxCenterLambdaFun(
                     textUrl = "\uD83D\uDCD6 Developers. AnnotatedString",
                     url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/text/AnnotatedString"
                 ),
+                TextClickLink(
+                    text = "Несколько стилей в тексте ",
+                    textUrl = "\uD83D\uDCD6 Developers. Figma. AnnotatedString",
+                    url = "https://developer.android.com/develop/ui/compose/tooling/relay/multiple-styles-in-text?hl=ru"
+                ),
             ),
 
         ),
         ExampleCode(
             id = 14,
             title = "Аннотированная строка.  \n" +
-                    "Часть 2.",
+                    "ParagraphStyle",
             comment = """
 |ParagraphStyle| - конфигурация стиля для абзаца. Разница между |SpanStyle| и |ParagraphStyle| заключается в том, что |ParagraphStyle| можно применить ко всему абзацу, а |SpanStyle| можно применить на уровне символа. 
 
@@ -4455,12 +4666,18 @@ fun BoxCenterLambdaFun(
                 
             """.trimIndent(),
             highlightCode =  highCodeList +  listOf(
-                HighlightCode("TextAnnotatedParagraph", Color(0xFFffc530)),
+                HighlightCode("AnnotatedParagraph", Color(0xFFffc530)),
+                HighlightCode("40", Color(0xFF2DB8FF)),
+                HighlightCode("16", Color(0xFF2DB8FF)),
+                HighlightCode(".Red", Color(0xFFe48def)),
+                HighlightCode(".Bold", Color(0xFFe48def)),
+                HighlightCode(".Cursive", Color(0xFFe48def)),
+                HighlightCode(".Green", Color(0xFFe48def)),
                 HighlightCode("buildAnnotatedString", Color(0xFF3CEE0A)),
             ),
             lambdaFun = {
                 BoxCenterLambdaFun(
-                    lambdaFun = { TextAnnotatedParagraph() },
+                    lambdaFun = { AnnotatedParagraph() },
                     modifier = Modifier
                         .fillMaxSize()
                 )
@@ -4468,7 +4685,7 @@ fun BoxCenterLambdaFun(
 
             code ="""
 @Composable
-fun TextAnnotatedParagraph(
+fun AnnotatedParagraph(
     fontSize:Int = 40,
 ) {
     val annotatedString = buildAnnotatedString {
@@ -4545,46 +4762,75 @@ fun TextAnnotatedParagraph(
         ExampleCode(
             id = 15,
             title = "Аннотированная строка.  \n" +
-                    "Часть 3.",
+                    "LinkAnnotation.Url",
             comment = """
-Метод |pushStyle| применяет |SpanStyle| или |ParagraphStyle| ко всему добавляемому тексту до тех пор, пока не будет вызван метод |pop|.                
+            Аннотация |LinkAnnotation.Url|() содержит строку |URL|. При нажатии на текст, к которому прикреплена эта аннотация, приложение попытается открыть |URL| с помощью |androidx.compose.ui.platform.UriHandler|. 
+
+            |!withLink(
+                LinkAnnotation.Url(
+                    url = "https://developer.android.com/jetpack/compose",
+                    styles = TextLinkStyles(
+                        style = SpanStyle(
+                            color = Color.Blue,
+                            letterSpacing = 1.5.sp,
+                            textDecoration = TextDecoration.Underline,
+                        )
+                    )
+                ){
+                    val url = (it as LinkAnnotation.Url).url
+                    uriHandler.openUri(url)
+                }
+            ) {
+                append("Детальнее здесь...")
+            }|
+                 
+            Можно использовать и несколько ссылок в одной строке.                 
+                 
+            В примере будем использовать метод |pushStyle|, который применяет |SpanStyle| или |ParagraphStyle| ко всему добавляемому тексту до тех пор, пока не будет вызван метод |pop|.
+                
             """.trimIndent(),
             highlightCode = listOf(
-                HighlightCode("TextShadow", Color(0xFFffc530)),
-                HighlightCode("pushStyle", Color.Cyan),
-                HighlightCode("pop", Color.Cyan),
-                HighlightCode("text ", Color.Cyan),
-                HighlightCode("color", Color.Cyan),
-                HighlightCode("onClick", Color.Cyan),
-                HighlightCode("textDecoration", Color.Cyan),
-                HighlightCode("modifier", Color.Cyan),
-                HighlightCode("horizontalAlignment", Color.Cyan),
-                HighlightCode("textAlign", Color.Cyan),
-                HighlightCode("fontFamily", Color.Cyan),
-                HighlightCode("fontWeight", Color.Cyan),
-                HighlightCode("style", Color.Cyan),
-                HighlightCode("SpanStyle", Color.Yellow),
-                HighlightCode("withStyle", Color.Yellow),
-                HighlightCode("pushStringAnnotation", Color(0xFF3CEE0A)),
-                HighlightCode("tag", Color.Yellow),
-                HighlightCode("annotation", Color.Yellow),
+                HighlightCode("AnnotatedPushStyleAndUrl", Color(0xFFffc530)),
+                HighlightCode("18", Color(0xFF2DB8FF)),
+                HighlightCode("16", Color(0xFF2DB8FF)),
+                HighlightCode("30", Color(0xFF2DB8FF)),
+                HighlightCode("url = ", Color(0xFF2DB8FF)),
+                HighlightCode("letterSpacing = 1.5", Color(0xFF2DB8FF)),
+                HighlightCode("textDecoration =", Color(0xFF2DB8FF)),
+                HighlightCode("lineHeight = 48", Color(0xFF2DB8FF)),
+                HighlightCode(".Red", Color(0xFFe48def)),
+                HighlightCode(".Blue", Color(0xFFe48def)),
+                HighlightCode(".Magenta", Color(0xFFe48def)),
+                HighlightCode(".Bold", Color(0xFFe48def)),
+                HighlightCode(".Cursive", Color(0xFFe48def)),
+                HighlightCode(".Green", Color(0xFFe48def)),
+                HighlightCode(".Normal", Color(0xFFe48def)),
+                HighlightCode("LocalUriHandler", Color(0xFFe48def)),
+                HighlightCode(".Underline", Color(0xFFe48def)),
+                HighlightCode(".url", Color(0xFFe48def)),
                 HighlightCode("buildAnnotatedString", Color(0xFF3CEE0A)),
-                HighlightCode("uriHandler", Color(0xFFF06134)),
-                HighlightCode("ClickableText", Color(0xFF3CEE0A)),
-                HighlightCode("append", Color(0xFF3CEE0A)),
-                HighlightCode("withStyle", Color(0xFF3CEE0A)),
-                HighlightCode("ParagraphStyle", Color(0xFF3CEE0A)),
-                HighlightCode("annotatedLinkString", Color(0xFFD44EEB)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
+                HighlightCode("current", Color(0xFF05B80D)),
+                HighlightCode(" as ", Color(0xFFF5996B)),
             ),
-            lambdaFun = { TextAnnotatedStringClickLink() },
+            lambdaFun = {
+                BoxCenterLambdaFun(
+                    lambdaFun = { AnnotatedPushStyleAndUrl() },
+                    modifier = Modifier
+                        .fillMaxSize()
+                )
+            },
             code ="""
-               
+@Composable
+fun AnnotatedPushStyleAndUrl(){
+
+    val uriHandler = LocalUriHandler.current
+
     val annotatedLinkString = buildAnnotatedString {
 
         withStyle(
             style = SpanStyle(
                 fontSize = 18.sp,
+                color = Color.Black,
                 fontWeight = FontWeight.Normal,
             )
         ) {
@@ -4614,81 +4860,129 @@ fun TextAnnotatedParagraph(
             append("Compose")
         }
 
-        pushStringAnnotation(
-            tag = "URL",
-            annotation = "https://developer.android.com/jetpack/compose"
-        )
-
         //Переход на новую строку с выравниванием по центру
         withStyle(
             style = ParagraphStyle(
                 textAlign = TextAlign.Center
             )
         ) {
-            withStyle(
-                style = SpanStyle(
-                    color = Color.Blue,
-                    fontFamily = FontFamily.SansSerif,
-                    textDecoration = TextDecoration.Underline,
-                    fontSize = 18.sp
-                )
+
+            withLink(
+                LinkAnnotation.Url(
+                    url = "https://developer.android.com/jetpack/compose",
+                    styles = TextLinkStyles(
+                        style = SpanStyle(
+                            color = Color.Blue,
+                            letterSpacing = 1.5.sp,
+                            textDecoration = TextDecoration.Underline,
+                        )
+                    )
+                ){
+                    val url = (it as LinkAnnotation.Url).url
+                    uriHandler.openUri(url)
+                }
             ) {
                 append("Детальнее здесь...")
             }
+
         }
 
-        pop()
-
-
     }
 
-    val uriHandler = LocalUriHandler.current
-
-    Column(
+    Text (
+        text = annotatedLinkString,
+        lineHeight = 48.sp,
         modifier = Modifier
-            .fillMaxWidth()
-            .background(Color.White),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        ClickableText(
-            text = annotatedLinkString,
-            modifier = Modifier
-                .padding(16.dp),
-            onClick = {
-                annotatedLinkString
-                    .getStringAnnotations("URL", it, it)
-                    .firstOrNull()?.let { stringAnnotation ->
-                        uriHandler.openUri(stringAnnotation.item)
-                    }
-            }
-        )
+            .background(Color.White)
+            .padding(16.dp)
+    )
 
-    }
-            """.trimIndent()
+}
+
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Больше информации смотрите ",
+                    textUrl = "\uD83D\uDCD6 Developers. Стиль текста",
+                    url = "https://developer.android.com/develop/ui/compose/text/style-text?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Больше информации смотрите ",
+                    textUrl = "\uD83D\uDCD6 Developers. AnnotatedString",
+                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/text/AnnotatedString"
+                ),
+                TextClickLink(
+                    text = "LinkAnnotation.Url  ",
+                    textUrl = "\uD83D\uDCD6 Developers. ",
+                    url = "https://developer.android.com.acc.wang/reference/kotlin/androidx/compose/ui/text/LinkAnnotation.Url"
+                ),
+            ),
+
         ),
         ExampleCode(
             id = 16,
             title = "Аннотированная строка.  \n" +
-                    "Часть 4.",
+                    "addStyle",
+            comment = """
+Метод |addStyle| вместе с |append| также позволяет создавать |AnnotatedString|.                        
+
+buildAnnotatedString {
+    append("Hello")
+    // push green text style 
+    pushStyle(SpanStyle(color = Color.Green))
+    // append new text, this text will be rendered as green
+    append(" World")
+    // pop the green style
+    pop()
+    // append a string without style
+    append("!")
+    // then style the last added word as red, exclamation mark will be red
+    addStyle(
+       SpanStyle(color = Color.Red), 
+       start = "Hello World".length, 
+       end = this.length
+    )
+
+    toAnnotatedString()
+}
+
+            """.trimIndent(),
+            lambdaFun = {
+                BoxCenterLambdaFun(
+                    lambdaFun = {
+                        BoxCenterLambdaFun(
+                            lambdaFun = { AnnotatedWithAddStyle() },
+                            modifier = Modifier
+                                .fillMaxSize()
+                        )
+
+                    },
+                    modifier = Modifier
+                        .fillMaxSize()
+                )
+            },
             highlightCode = listOf(
-                HighlightCode("TextShadow", Color(0xFFffc530)),
-                HighlightCode("text ", Color.Cyan),
-                HighlightCode("color", Color.Cyan),
-                HighlightCode("modifier", Color.Cyan),
-                HighlightCode("horizontalAlignment", Color.Cyan),
-                HighlightCode("fontFamily", Color.Cyan),
-                HighlightCode("style", Color.Cyan),
-                HighlightCode("SpanStyle", Color.Yellow),
-                HighlightCode("start", Color.Yellow),
-                HighlightCode("end", Color.Yellow),
+                HighlightCode("AnnotatedWithAddStyle", Color(0xFFffc530)),
                 HighlightCode("buildAnnotatedString", Color(0xFF3CEE0A)),
                 HighlightCode("addStyle", Color(0xFF3CEE0A)),
-                HighlightCode("append", Color(0xFF3CEE0A)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
+                HighlightCode("start = ", Color(0xFF2DB8FF)),
+                HighlightCode("end = ", Color(0xFF2DB8FF)),
+                HighlightCode("0", Color(0xFF2DB8FF)),
+                HighlightCode("1", Color(0xFF2DB8FF)),
+                HighlightCode("2", Color(0xFF2DB8FF)),
+                HighlightCode("3", Color(0xFF2DB8FF)),
+                HighlightCode("4", Color(0xFF2DB8FF)),
+                HighlightCode("5", Color(0xFF2DB8FF)),
+                HighlightCode("6", Color(0xFF2DB8FF)),
+                HighlightCode(".Red", Color(0xFFe48def)),
+                HighlightCode(".Blue", Color(0xFFe48def)),
+                HighlightCode(".Magenta", Color(0xFFe48def)),
+                HighlightCode(".Bold", Color(0xFFe48def)),
+                HighlightCode(".Cursive", Color(0xFFe48def)),
             ),
-            lambdaFun = { TextBuildAnnotatedString() },
             code ="""
-fun TextBuildAnnotatedString() {
+@Composable
+fun AnnotatedWithAddStyle() {
 
     val annotatedString = buildAnnotatedString {
 
@@ -4731,44 +5025,73 @@ fun TextBuildAnnotatedString() {
         )
     }
 
-    Column(
+    Text (
+        annotatedString,
         modifier = Modifier
-            .fillMaxWidth()
-            .background(Color.White),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            annotatedString,
-            modifier = Modifier
-                .padding(16.dp)
-        )
-    }
+            .background(Color.White)
+            .padding(16.dp)
+    )
 
-            """.trimIndent()
+}
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Больше информации смотрите ",
+                    textUrl = "\uD83D\uDCD6 Developers. Стиль текста",
+                    url = "https://developer.android.com/develop/ui/compose/text/style-text?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Больше информации смотрите ",
+                    textUrl = "\uD83D\uDCD6 Developers. AnnotatedString",
+                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/text/AnnotatedString"
+                ),
+                TextClickLink(
+                    text = "AnnotatedString.Builder ",
+                    textUrl = "\uD83D\uDCD6 Developers. ",
+                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder"
+                ),
+            ),
+
         ),
 
         ExampleCode(
             id = 17,
             title = "Аннотированная строка.  \n" +
-                    "Часть 5.",
+                    "BaselineShift",
+            comment = """
+Параметр |baselineShift| SpanStyle определяет величинну, на которую текст смещается вверх или вниз относительно текущей |базовой линии|.                
+            """.trimIndent(),
             highlightCode = listOf(
-                HighlightCode("TextShadow", Color(0xFFffc530)),
-                HighlightCode("text ", Color.Cyan),
-                HighlightCode("color ", Color.Cyan),
-                HighlightCode("textAlign", Color.Cyan),
-                HighlightCode("fontWeight", Color.Cyan),
-                HighlightCode("fontSize", Color.Cyan),
-                HighlightCode("baselineShift", Color.Cyan),
-                HighlightCode("style", Color.Cyan),
-                HighlightCode("SpanStyle", Color.Yellow),
+                HighlightCode("AnnotatedBaseLineShift", Color(0xFFffc530)),
                 HighlightCode("buildAnnotatedString", Color(0xFF3CEE0A)),
-                HighlightCode("append", Color(0xFF3CEE0A)),
-                HighlightCode("withStyle", Color(0xFF3CEE0A)),
-                HighlightCode("ParagraphStyle", Color(0xFF3CEE0A)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
+                HighlightCode("baselineShift", Color(0xFF3CEE0A)),
+                HighlightCode("0.70f", Color(0xFF2DB8FF)),
+                HighlightCode("60", Color(0xFF2DB8FF)),
+                HighlightCode("20", Color(0xFF2DB8FF)),
+                HighlightCode("28", Color(0xFF2DB8FF)),
+                HighlightCode("26", Color(0xFF2DB8FF)),
+                HighlightCode("16", Color(0xFF2DB8FF)),
+                HighlightCode("10", Color(0xFF2DB8FF)),
+                HighlightCode("50", Color(0xFF2DB8FF)),
+                HighlightCode(".primary", Color(0xFFe48def)),
+                HighlightCode(".outline", Color(0xFFe48def)),
+                HighlightCode(".Cyan", Color(0xFFe48def)),
+                HighlightCode(".Bold", Color(0xFFe48def)),
+                HighlightCode(".Cursive", Color(0xFFe48def)),
+                HighlightCode(".Superscript", Color(0xFFe48def)),
+                HighlightCode(".Subscript", Color(0xFFe48def)),
             ),
-            lambdaFun = { TextBuildAnnotatedString3() },
+            lambdaFun = {
+                BoxCenterLambdaFun(
+                    lambdaFun = { AnnotatedBaseLineShift() },
+                    modifier = Modifier
+                        .fillMaxSize()
+                )
+            },
+
             code ="""
+@Composable
+fun AnnotatedBaseLineShift() {
     val colorHour = MaterialTheme.colorScheme.primary
     val colorMin = MaterialTheme.colorScheme.outline
     val annotatedString = buildAnnotatedString {
@@ -4787,7 +5110,13 @@ fun TextBuildAnnotatedString() {
             ) {
                 append("18")
             }
-            append(" часов")
+            withStyle(
+                style = SpanStyle(
+                    baselineShift = BaselineShift(+0.70f)
+                )
+            ) {
+                append(" часов ")
+            }
         }
 
         withStyle(
@@ -4821,21 +5150,41 @@ fun TextBuildAnnotatedString() {
         ) {
             withStyle(
                 style = SpanStyle(
-                    color = Color.Red,
+                    background = Color.Black,
+                    color = Color.Cyan,
                     fontWeight = FontWeight.Bold,
                     fontSize = 20.sp,
                 )
             ) {
                 append("${'$'}")
+                pushStyle(SpanStyle(fontSize = 28.sp))
+                append("0.99")
+                pop()
+
             }
+        }
+        withStyle(
+            style = ParagraphStyle(
+                textAlign = TextAlign.Center,
+
+                )
+        ) {
             withStyle(
                 style = SpanStyle(
                     color = Color.Red,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 28.sp,
+                    fontFamily = FontFamily.Cursive,
+                    fontSize = 26.sp,
                 )
             ) {
-                append("0.99")
+                append("Price")
+            }
+
+
+            withStyle(SpanStyle(baselineShift = BaselineShift.Superscript, fontSize = 10.sp)) {
+                append("2")
+                withStyle(SpanStyle(baselineShift = BaselineShift.Subscript)) {
+                    append("4")
+                }
             }
         }
 
@@ -4847,17 +5196,69 @@ fun TextBuildAnnotatedString() {
             .padding(16.dp)
     )
 
-            """.trimIndent()
+}
+
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Больше информации смотрите ",
+                    textUrl = "\uD83D\uDCD6 Developers. Стиль текста",
+                    url = "https://developer.android.com/develop/ui/compose/text/style-text?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Больше информации смотрите ",
+                    textUrl = "\uD83D\uDCD6 Developers. AnnotatedString",
+                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/text/AnnotatedString"
+                ),
+                TextClickLink(
+                    text = "AnnotatedString.Builder ",
+                    textUrl = "\uD83D\uDCD6 Developers. ",
+                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder"
+                ),
+                TextClickLink(
+                    text = "Смещение текста относительно базовой линии ",
+                    textUrl = "\uD83D\uDCD6 Developers. BaselineShift ",
+                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/text/style/BaselineShift"
+                ),
+            ),
+
         ),
         ExampleCode(
             id = 18,
             title = "Аннотированная строка.  \n" +
-                    "Часть 6.",
+                    "HTML-разметка",
             comment = """
-HTML со ссылками в тексте                
+Стилизация с помощью |HTML|-разметки. AnnotatedString.|fromHtml|() преобразует строку htmlText в AnnotatedString
+ 
+Поддерживаются следующие элементы HTML:
+    Жирный: <|b|>
+    Курсив: <|i|>, <|cite|>, <|dfn|>, <|em|>
+    Увеличение текста на 25 %: <|big|>
+    Текст на 20% меньше: <|small|>
+    Установка свойств шрифта: <|font face="font_family" color="hex_color"|>. Примеры возможных семейств шрифтов включают monospace , serif и sans_serif .
+    Установка семейства моноширинных шрифтов: <|tt|>
+    Зачеркивание: <|s|>, <|strike|>, <|del|>
+    Подчеркнуть: <|u|>
+    Надстрочный индекс: <|sup|>
+    Индекс: <|sub|>
+    Точки списка: <|ul|>, <|li|>
+    Разрывы строк: <|br|>
+    Подразделение: <|div|>
+    Стиль CSS: <|span style="color|background_color|text-decoration"|>
+    Параграфы: <|p dir="rtl | ltr» style="…"|>               
+
+Пример:
+<h2>Здравствуй, друг!</h2>
+
+<p>
+ Создавайте  <big><b>отличные</b></big> приложения <br>  
+ <small>с помощью</small> <br> 
+ <a href="https://developer.android.com/compose">Jetpack Compose</a>
+</p>
+
             """.trimIndent(),
             highlightCode = listOf(
-                HighlightCode("TextShadow", Color(0xFFffc530)),
+                HighlightCode("AnnotatedHtmlString", Color(0xFFffc530)),
                 HighlightCode("https://www.android.com", Color(0xFFBAF576)),
                 HighlightCode("fromHtml", Color(0xFFFF9800)),
                 HighlightCode("AnnotatedString", Color(0xFF3CEE0A)),
@@ -4878,49 +5279,43 @@ HTML со ссылками в тексте
                 HighlightCode("<li>", Color(0xFF1DDBF3)),
                 HighlightCode("</li>", Color(0xFF1DDBF3)),
             ),
-            lambdaFun = { AnnotatedHtmlString() },
+            lambdaFun = {
+                BoxCenterLambdaFun(
+                    lambdaFun = { AnnotatedHtmlString() },
+                    modifier = Modifier
+                        .fillMaxSize()
+                )
+            },
+
             code ="""
-@Composable
-fun AnnotatedHtmlString(
-    modifier: Modifier = Modifier,
-    htmlText: String = ""${'"'}
- <h1>Text in Jetpack Compose</h1>
-
- <p>
-  Simple <b>MVVM</b> 
-  <a href="https://www.android.com">App</a> 
-  to demonstrate text output in Jetpack Compose.
- </p>
-
-Examples:
-<ul>
- <li> Sizes and padding;</li>
- <li> Text and background color;</li>
- <li> Text alignment;</li>
- <li> Font usage;</li>
- <li> Text annotation;</li>
- <li> Text frame, underline and borders;</li>
- <li> Text animation.</li>
-</ul>
-           ""${'"'}.trimIndent(),
-) {
-
-    val textFromHtml = AnnotatedString.fromHtml(
-        htmlString = htmlText,
-        linkStyles = TextLinkStyles(
-            style = SpanStyle(
-                textDecoration = TextDecoration.Underline,
-                fontStyle = FontStyle.Italic,
-                color = Color.Blue
-            )
-        )
-    )
-    Text(
-        text = textFromHtml,
-        modifier = modifier
-    )
-}
-            """.trimIndent()
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Больше информации смотрите ",
+                    textUrl = "\uD83D\uDCD6 Developers. Стиль текста",
+                    url = "https://developer.android.com/develop/ui/compose/text/style-text?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Больше информации смотрите ",
+                    textUrl = "\uD83D\uDCD6 Developers. AnnotatedString",
+                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/text/AnnotatedString"
+                ),
+                TextClickLink(
+                    text = "AnnotatedString.Builder ",
+                    textUrl = "\uD83D\uDCD6 Developers. ",
+                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Builder"
+                ),
+                TextClickLink(
+                    text = "Преобразование строки с тегами HTML в AnnotatedString ",
+                    textUrl = "\uD83D\uDCD6 Developers. AnnotatedString.Companion ",
+                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/text/AnnotatedString.Companion"
+                ),
+                TextClickLink(
+                    text = "Стилизация с помощью HTML-разметки ",
+                    textUrl = "\uD83D\uDCD6 Developers. AnnotatedString.Companion ",
+                    url = "https://developer.android.com/guide/topics/resources/string-resource#StylingWithHTML"
+                ),
+            ),
         ),
 
 

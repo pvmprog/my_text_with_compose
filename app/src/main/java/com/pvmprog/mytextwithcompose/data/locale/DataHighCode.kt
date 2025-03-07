@@ -1,12 +1,6 @@
 package com.pvmprog.mytextwithcompose.data.locale
 
-import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.RepeatMode
-import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.rememberInfiniteTransition
-import androidx.compose.animation.core.tween
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.withStyle
 import com.pvmprog.mytextwithcompose.data.model.HighlightCode
 
 object DataHighCode {
@@ -26,6 +20,7 @@ object DataHighCode {
         HighlightCode(".border", Color(0xFFF5996B)),
         HighlightCode("items", Color(0xFFF5996B)),
         HighlightCode("withStyle", Color(0xFFF5996B)),
+        HighlightCode("verticalScroll", Color(0xFFF5996B)),
 
 
 
@@ -64,6 +59,7 @@ object DataHighCode {
         HighlightCode("Hello, World!", Color(0xFF05B80D)),
         HighlightCode("rememberInfiniteTransition", Color(0xFF05B80D)),
         HighlightCode("animateFloat", Color(0xFF05B80D)),
+        HighlightCode("rememberScrollState", Color(0xFF05B80D)),
 
 
 /*
@@ -86,6 +82,7 @@ object DataHighCode {
         HighlightCode("text =", Color(0xFF00a9ff)),
         HighlightCode("fontSize =", Color(0xFF00a9ff)),
         HighlightCode("style = ", Color(0xFF00a9ff)),
+        HighlightCode("styles = ", Color(0xFF00a9ff)),
         HighlightCode("modifier =", Color(0xFF00a9ff)),
         HighlightCode("color =", Color(0xFF2DB8FF)),
         HighlightCode("textAlign =", Color(0xFF2DB8FF)),
@@ -97,6 +94,7 @@ object DataHighCode {
         HighlightCode("animation = ", Color(0xFF2DB8FF)),
         HighlightCode("repeatMode =", Color(0xFF2DB8FF)),
         HighlightCode("easing = ", Color(0xFF2DB8FF)),
+        HighlightCode("id = ", Color(0xFF2DB8FF)),
 
                 /*
                         HighlightCode("textMeasurer =", Color(0xFF2DB8FF)),

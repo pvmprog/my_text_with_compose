@@ -3,6 +3,7 @@ package com.pvmprog.mytextwithcompose.ui.examples
 import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -21,8 +22,7 @@ import androidx.compose.ui.unit.sp
 import com.pvmprog.mytextwithcompose.ui.theme.MyTextWithComposeTheme
 
 @Composable
-@Preview("Light Theme",showBackground = true)
-fun TextBuildAnnotatedString() {
+fun AnnotatedWithAddStyle() {
 
     val annotatedString = buildAnnotatedString {
 
@@ -65,19 +65,32 @@ fun TextBuildAnnotatedString() {
         )
     }
 
-    Column(
+    Text(
+        annotatedString,
         modifier = Modifier
-            .fillMaxWidth()
-            .background(Color.White),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            annotatedString,
-            modifier = Modifier
-                .padding(16.dp)
-        )
-    }
+            .background(Color.White)
+            .padding(16.dp)
+    )
 
+}
+
+
+@Preview("Light Theme",showBackground = true)
+@Preview("Dark Theme", showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun  AnnotatedWithAddStylePreview() {
+    MyTextWithComposeTheme {
+        Surface(
+            color = MaterialTheme.colorScheme.background
+        ) {
+            BoxCenterLambdaFun(
+                lambdaFun = { AnnotatedWithAddStyle() },
+                modifier = Modifier
+                    .fillMaxSize()
+            )
+        }
+
+    }
 }
 
 

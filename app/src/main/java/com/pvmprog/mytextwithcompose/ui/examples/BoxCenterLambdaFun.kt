@@ -36,7 +36,7 @@ fun BoxCenterLambdaFunPreview() {
         ) {
             BoxCenterLambdaFun(
                 lambdaFun = {
-                    TextAnnotatedParagraph()
+                    AnnotatedParagraph()
 //                    MultipleStylesInText(fontSize = 40)
                             },
                 modifier = Modifier
