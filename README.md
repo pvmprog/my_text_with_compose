@@ -241,6 +241,18 @@
     <td><img src="screenshots/screenshot402.jpg" width=270 height=520></td>
   </tr>
   <tr>
+    <td><img src="screenshots/screenshot605.jpg" width=270 height=520></td>
+    <td><img src="screenshots/screenshot606.jpg" width=270 height=520></td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/screenshot601.jpg" width=270 height=520></td>
+    <td><img src="screenshots/screenshot602.jpg" width=270 height=520></td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/screenshot603.jpg" width=270 height=520></td>
+    <td><img src="screenshots/screenshot604.jpg" width=270 height=520></td>
+  </tr>
+  <tr>
     <td><img src="screenshots/screenshot403.jpg" width=270 height=520></td>
     <td><img src="screenshots/screenshot404.jpg" width=270 height=520></td>
   </tr>   
