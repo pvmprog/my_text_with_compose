@@ -3,6 +3,10 @@ package com.pvmprog.mytextwithcompose.data.locale
 import android.os.Build
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.pvmprog.mytextwithcompose.data.locale.DataHighCode.highCodeList
@@ -11,6 +15,11 @@ import com.pvmprog.mytextwithcompose.data.model.HighlightCode
 import com.pvmprog.mytextwithcompose.data.model.TextClickLink
 import com.pvmprog.mytextwithcompose.ui.examples.AnimationBgGradient
 import com.pvmprog.mytextwithcompose.ui.examples.AnimationSizeText
+import com.pvmprog.mytextwithcompose.ui.examples.AnimationVisibility
+import com.pvmprog.mytextwithcompose.ui.examples.AnimationVisibilityContent
+import com.pvmprog.mytextwithcompose.ui.examples.AnimationVisibilityExpend
+import com.pvmprog.mytextwithcompose.ui.examples.AnimationVisibilityScale
+import com.pvmprog.mytextwithcompose.ui.examples.AnimationVisibilitySlade
 import com.pvmprog.mytextwithcompose.ui.examples.SimpleAlign
 import com.pvmprog.mytextwithcompose.ui.examples.AnnotatedHtmlString
 import com.pvmprog.mytextwithcompose.ui.examples.AnnotatedPushStyleAndUrl
@@ -5259,25 +5268,9 @@ fun AnnotatedBaseLineShift() {
             """.trimIndent(),
             highlightCode = listOf(
                 HighlightCode("AnnotatedHtmlString", Color(0xFFffc530)),
-                HighlightCode("https://www.android.com", Color(0xFFBAF576)),
-                HighlightCode("fromHtml", Color(0xFFFF9800)),
                 HighlightCode("AnnotatedString", Color(0xFF3CEE0A)),
-                HighlightCode("Text(", Color(0xFF3CEE0A)),
-                HighlightCode("@Composable", Color(0xFF3CEE0A)),
-                HighlightCode("htmlString", Color(0xFFD857F5)),
-                HighlightCode("linkStyles", Color(0xFFD857F5)),
-                HighlightCode("<h1>", Color(0xFF1DDBF3)),
-                HighlightCode("</h1>", Color(0xFF1DDBF3)),
-                HighlightCode("<p>", Color(0xFF1DDBF3)),
-                HighlightCode("</p>", Color(0xFF1DDBF3)),
-                HighlightCode("<b>", Color(0xFF1DDBF3)),
-                HighlightCode("</b>", Color(0xFF1DDBF3)),
-                HighlightCode("<a", Color(0xFF1DDBF3)),
-                HighlightCode("</a>", Color(0xFF1DDBF3)),
-                HighlightCode("<ul>", Color(0xFF1DDBF3)),
-                HighlightCode("</ul>", Color(0xFF1DDBF3)),
-                HighlightCode("<li>", Color(0xFF1DDBF3)),
-                HighlightCode("</li>", Color(0xFF1DDBF3)),
+                HighlightCode(".fromHtml", Color(0xFF3CEE0A)),
+                HighlightCode("16", Color(0xFF1DDBF3)),
             ),
             lambdaFun = {
                 BoxCenterLambdaFun(
@@ -5288,6 +5281,58 @@ fun AnnotatedBaseLineShift() {
             },
 
             code ="""
+@Composable
+fun AnnotatedHtmlString(
+    modifier: Modifier = Modifier,
+    htmlText: String = ""${'"'}
+<h2>Здравствуй, друг!</h2>
+
+<p>
+ Создавайте  <big><b>отличные</b></big> приложения <br>  
+ <small>с помощью</small> <br> 
+ <a href="https://developer.android.com/compose">Jetpack Compose</a>
+</p>
+
+<p >
+ Поднимите свою повседневную жизнь <br> 
+ <big><font face="monospace" color="#3CEE0A"> на новый уровень</font></big> <br> 
+ <small>с помощью</small> <br> 
+ искусственного интеллекта <br> 
+  <a href="https://www.android.com/ai/#gemini"> 
+    <font face="cursive">Google</font>
+  </a>
+</p>
+           ""${'"'}.trimIndent(),
+) {
+
+    val textFromHtml = AnnotatedString.fromHtml(
+        htmlString = htmlText,
+        linkStyles = TextLinkStyles(
+            style = SpanStyle(
+                textDecoration = TextDecoration.Underline,
+                fontStyle = FontStyle.Italic,
+                fontSize = 30.sp,
+                color = Color.Cyan,
+                letterSpacing = 2.sp,
+            )
+        )
+    )
+    LazyColumn {
+        item {
+            Text (
+                text = textFromHtml,
+                color = Color.Yellow,
+                textAlign = TextAlign.Center,
+                lineHeight = 48.sp,
+                modifier = modifier
+                    .background(Color.Black)
+                    .padding(16.dp)
+            )
+
+        }
+    }
+}
+                
             """.trimIndent(),
             links = listOf(
                 TextClickLink(
@@ -5702,6 +5747,429 @@ fun OutSipmleArticle(
 
 
 
+        ExampleCode(
+            id = 20,
+            title = "AnimatedVisibility",
+            comment = """
+Анимация появление и исчезновение с помощью |AnimatedVisibility|.
+
+var visible by remember {
+    mutableStateOf(true)
+}
+// Анимированная видимость в конечном итоге удалит элемент из композиции после завершения анимации.
+|AnimatedVisibility|(visible) {
+    // your composable here
+    // ...
+}          
+      
+      
+@Composable
+public fun ColumnScope.AnimatedVisibility(
+    visible: Boolean,
+    modifier: Modifier = Modifier,
+    |enter|: EnterTransition = |fadeIn|() + expandVertically(),
+    |exit|: ExitTransition = |fadeOut|() + shrinkVertically(),
+    label: String = "AnimatedVisibility",
+    content: @Composable() (AnimatedVisibilityScope.() -> Unit)
+): Unit
+
+Переход можно настроить, указав |EnterTransition| и |ExitTransition|
+
+|FadeIn| и |FadeOut| - плавно увеличивает содержимое перехода от указанного начального значения альфы (т. е. initialAlpha) до 1f, используя предоставленный |animationSpec|. 
+
+Значение |initialAlpha| по умолчанию равно |0f|, а значение |spring| используется по умолчанию.
+
+|!fun fadeIn(
+    animationSpec: FiniteAnimationSpec<Float> = spring(stiffness = Spring.StiffnessMediumLow),
+    initialAlpha: Float = 0.0f
+): EnterTransition|              
+  
+Например:
+  enter = fadeIn(
+     initialAlpha = 0.3f,
+     animationSpec = tween(durationMillis = 2000, easing = LinearOutSlowInEasing)
+  )              
+              
+Функция |tween| имеет три параметра:
+
+    |durationMillis| — продолжительность анимации в миллисекундах;
+
+    |delayMillis| — |задержка| в миллисекундах, которая будет выполняться |до запуска| анимации;
+
+    |easing| — кривая смягчения, по которой будет выполняться анимация.
+
+|Easing| — это характеристика, которая заставляет элементы двигаться так, будто естественные силы, такие как трение, гравитация и масса, работают. 
+
+Easing позволяет анимированным элементам ускоряться и замедляться с разной скоростью.
+
+В Jetpack Compose доступны следующие easing:
+
+ |FastOutSlowInEasing| - быстрое начало медленное завершение
+
+ |LinearOutSlowInEasing| - медленное начало и медленное завершение
+
+ |FastOutLinearInEasing| - медленное начало быстрое завершение
+
+ |LinearEasing| - начало и завершение с ускорением
+
+ |CubicBezierEasing| - позволяет реализовать свою собственную кривую смягчения. Данный easing основан на кривой Безье, которая строится по четырём точкам.
+
+
+      
+      
+            """.trimIndent(),
+            highlightCode = listOf(
+                HighlightCode("AnimationVisibilityContent ", Color(0xFFffc530)),
+                HighlightCode("initialValue", Color(0xFF3CEE0A)),
+                HighlightCode("16", Color(0xFF5EADD6)),
+            ),
+            lambdaFun = {
+                var expanded by remember {
+                    mutableStateOf(false)
+                }
+                AnimationVisibilityContent(
+                    expanded = expanded,
+                    onClick = { expanded = !expanded }
+                )
+            },
+            code ="""
+/*
+ 
+var expanded by remember {
+   mutableStateOf(false)
+}
+AnimationVisibilityContent(
+   expanded = expanded,
+   onClick = { expanded = !expanded }
+)
+*/                
+@Composable
+fun AnimationVisibilityContent ( 
+    enter: EnterTransition =  fadeIn() + expandVertically(), 
+    exit: ExitTransition = fadeOut() + shrinkVertically(),   
+    color: Color = Color.Unspecified,
+    expanded: Boolean = false,
+    onClick: () -> Unit = {},
+    modifier: Modifier = Modifier
+){
+    Box(
+        modifier = modifier,
+        contentAlignment = Alignment.Center
+    ){
+        Card(
+            modifier = Modifier
+                .padding(16.dp)
+                .aspectRatio(1f), //height = width
+            onClick = onClick
+        ) {
+            Column(
+                modifier = Modifier
+                    .padding(8.dp)
+                    .fillMaxSize(),
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Image(
+                    modifier = Modifier
+                        .background(color = color, shape = RoundedCornerShape(20.dp))
+                        .padding(8.dp)
+                        .weight(1f),
+                    painter = painterResource(id = R.drawable.my_cat),
+                    contentDescription = "My cat",
+                    contentScale = ContentScale.Crop
+                )
+                AnimatedVisibility(
+                    visible = expanded,
+                    enter = enter,
+                    exit = exit
+                ) {
+                    Text(
+                        text = "Myuka",
+                        fontSize = 50.sp,
+                        fontFamily = FontFamily.Cursive
+                    )
+                }
+            }
+        }
+
+    }
+
+}
+                
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Анимации играют важную роль в современном мобильном приложении, обеспечивая плавный и понятный пользовательский интерфейс.  ",
+                    textUrl = "\uD83D\uDCD6 Developers. Animations in Compose",
+                    url = "https://developer.android.com/develop/ui/compose/animation/introduction"
+                ),
+                TextClickLink(
+                    text = "Модификаторы анимации и составные элементы  ",
+                    textUrl = "\uD83D\uDCD6 Developers. Animation. Composables modifiers",
+                    url = "https://developer.android.com/develop/ui/compose/animation/composables-modifiers?hl=ru"
+                ),
+                TextClickLink(
+                    text = "fadeIn  ",
+                    textUrl = "\uD83D\uDCD6 Developers. Animation. Composables modifiers",
+                    url = "https://developer.android.com/reference/kotlin/androidx/compose/animation/package-summary#fadeIn(androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Float)"
+                ),
+
+            ),
+
+        ),
+
+        ExampleCode(
+            id = 20,
+            title = "Animated Slade",
+            comment = """
+|SladeIn|, |SladeOut| обеспечивает скольжение в контенте перехода от начального смещения, определенного в initialOffset, к IntOffset(0, 0). Направление скольжения можно контролировать, настраивая initialOffset. Положительное значение x означает скольжение справа налево, тогда как отрицательное значение x будет скользить контент вправо. Аналогично положительные и отрицательные значения y соответствуют скольжению вверх и вниз соответственно.
+
+Если скольжение требуется только по горизонтали или вертикали, а не по обеим осям, рассмотрите возможность использования |slideInHorizontally| или |slideInVertically|.
+
+|initialOffset| — это лямбда, которая принимает полный размер контента и возвращает смещение. Это позволяет определить смещение пропорционально полному размеру или как абсолютное значение.
+                
+|slideInHorizontally| скользит по содержимому по горизонтали, от начального смещения, определенного в |initialOffsetX|, до |0| пикселей. 
+
+Направление скольжения можно контролировать, настраивая |initialOffsetX|. Положительное значение означает скольжение справа налево, тогда как отрицательное значение будет скользить содержимое слева направо.
+
+|initialOffsetX| — это лямбда, которая берет полную ширину содержимого и возвращает смещение. Это позволяет определить начальное смещение пропорционально полному размеру или как абсолютное значение. По умолчанию возвращается половина отрицательной ширины, что смещает содержимое влево на половину его ширины и скользит вправо.
+
+|slideInVertically| скользит по содержимому вертикально, от начального смещения, определенного в initialOffsetY, до 0 в пикселях. Направление скольжения можно контролировать, настраивая initialOffsetY. Положительное начальное смещение означает скольжение вверх, тогда как отрицательное значение будет скользить вниз.
+
+initialOffsetY — это лямбда, которая берет полную высоту содержимого и возвращает смещение. Это позволяет определить начальное смещение пропорционально полной высоте или как абсолютное значение. По умолчанию возвращается половина отрицательной высоты, что смещает содержимое вверх на половину его высоты и скользит вниз.            ""${'"'}.trimIndent(),
+                
+                
+            """.trimIndent(),
+            highlightCode = listOf(
+                HighlightCode("AnimationVisibility", Color(0xFFffc530)),
+                HighlightCode("initialValue", Color(0xFF3CEE0A)),
+                HighlightCode("16", Color(0xFF5EADD6)),
+            ),
+            lambdaFun = { AnimationVisibilitySlade() },
+            code ="""
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Анимации играют важную роль в современном мобильном приложении, обеспечивая плавный и понятный пользовательский интерфейс.  ",
+                    textUrl = "\uD83D\uDCD6 Developers. Animations in Compose",
+                    url = "https://developer.android.com/develop/ui/compose/animation/introduction"
+                ),
+                TextClickLink(
+                    text = "Модификаторы анимации и составные элементы  ",
+                    textUrl = "\uD83D\uDCD6 Developers. Animation. Composables modifiers",
+                    url = "https://developer.android.com/develop/ui/compose/animation/composables-modifiers?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Скольжение ",
+                    textUrl = "\uD83D\uDCD6 Developers. Animation. slideIn",
+                    url = "https://developer.android.com/reference/kotlin/androidx/compose/animation/package-summary#slideIn(androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function1)"
+                ),
+                TextClickLink(
+                    text = "Скольжение по вертикали  ",
+                    textUrl = "\uD83D\uDCD6 Developers. Animation. slideInVertically",
+                    url = "https://developer.android.com/reference/kotlin/androidx/compose/animation/package-summary#slideInVertically(androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function1)"
+                ),
+                TextClickLink(
+                    text = "Скольжение по горизонтали  ",
+                    textUrl = "\uD83D\uDCD6 Developers. Animation. slideInHorizontally",
+                    url = "https://developer.android.com/reference/kotlin/androidx/compose/animation/package-summary#slideInHorizontally(androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function1)"
+                ),
+
+                ),
+
+            ),
+
+
+        ExampleCode(
+            id = 20,
+            title = "Animated Scale",
+            comment = """
+|scaleIn| масштабирует содержимое по мере его появления от начального масштаба (определенного в |initialScale|) до |1f|. 
+
+fun scaleIn(
+    |animationSpec|: FiniteAnimationSpec<Float> = spring(stiffness = Spring.StiffnessMediumLow),
+    |initialScale|: Float = 0.0f,
+    |transformOrigin|: TransformOrigin = TransformOrigin.Center
+): EnterTransition
+            
+|transformOrigin| определяет точку поворота в виде доли от общего размера. TransformOrigin.|Center| по умолчанию. 
+
+|scaleIn| можно использовать в сочетании с любым другим типом |EnterTransition| с использованием оператора плюс (например, scaleIn() + slideInHorizontally())
+
+Примечание: масштаб применяется до слайда. Это означает, что при использовании slideIn/slideOut с scaleIn/scaleOut необходимо учитывать величину масштабирования при скольжении.
+
+Масштабирование изменит визуальное представление содержимого, но не повлияет на размер макета. 
+
+|scaleIn| можно комбинировать с |expandIn|/|expandHorizontally|/|expandVertically| для координации изменения размера макета при масштабировании.            
+
+|scaleOut| масштабирует содержимое выходного перехода от |1f| до целевого масштаба, определенного в |targetScale|. 
+
+|transformOrigin| определяет точку поворота в виде доли от общего размера. По умолчанию это |TransformOrigin.Center|. 
+
+|scaleOut| можно использовать в сочетании с любым другим типом |ExitTransition| с помощью оператора плюс (например, scaleOut() + fadeOut())
+
+Примечание: масштаб применяется до слайда. Это означает, что при использовании |slideIn|/|slideOut| с |scaleIn|/|scaleOut| необходимо учитывать величину масштабирования при скольжении.
+
+Масштабирование изменит визуальное представление содержимого, но не повлияет на размер макета. 
+
+|scaleOut| можно комбинировать с |shrinkOut|/|shrinkHorizontally|/|shrinkVertically| для скоординированной анимации изменения размера макета.
+
+                 """.trimIndent(),
+            highlightCode = listOf(
+                HighlightCode("AnimationVisibility", Color(0xFFffc530)),
+                HighlightCode("initialValue", Color(0xFF3CEE0A)),
+                HighlightCode("16", Color(0xFF5EADD6)),
+            ),
+            lambdaFun = { AnimationVisibilityScale(it) },
+            code ="""
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Анимации играют важную роль в современном мобильном приложении, обеспечивая плавный и понятный пользовательский интерфейс.  ",
+                    textUrl = "\uD83D\uDCD6 Developers. Animations in Compose",
+                    url = "https://developer.android.com/develop/ui/compose/animation/introduction"
+                ),
+                TextClickLink(
+                    text = "Модификаторы анимации и составные элементы  ",
+                    textUrl = "\uD83D\uDCD6 Developers. Animation. Composables modifiers",
+                    url = "https://developer.android.com/develop/ui/compose/animation/composables-modifiers?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Маштабирование  ",
+                    textUrl = "\uD83D\uDCD6 Developers. Animation. scaleIn",
+                    url = "https://developer.android.com/reference/kotlin/androidx/compose/animation/package-summary#scaleIn(androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Float,androidx.compose.ui.graphics.TransformOrigin)"
+                ),
+
+                ),
+
+            ),
+
+
+        ExampleCode(
+            title = "Animated Expand",
+            comment = """
+|expandIn| расширяет границы клипа отображаемого контента от размера |initialSize| до полного размера. 
+
+fun expandIn(
+    |animationSpec|: FiniteAnimationSpec<IntSize> = spring(
+            stiffness = Spring.StiffnessMediumLow,
+            visibilityThreshold = IntSize.VisibilityThreshold
+        ),
+    |expandFrom|: Alignment = Alignment.BottomEnd,
+    |clip|: Boolean = true,
+    |initialSize|: (fullSize: IntSize) -> IntSize = { IntSize(0, 0) }
+): EnterTransition
+
+|expandFrom| управляет тем, какая часть контента будет показана первой. По умолчанию границы клипа анимируются от |IntSize(0, 0)| до полного размера, начиная с показа нижнего правого угла (или нижнего левого угла в макетах RTL) контента, до полного показа всего контента по мере увеличения размера.
+
+Примечание: |expandIn| анимирует границы контента. Это изменение границ также приведет к анимации других макетов, зависящих от этого размера.
+
+|initialSize| — это лямбда, которая принимает полный размер контента и возвращает начальный размер границ контента. Это допускает не только абсолютный размер, но и начальный размер, пропорциональный размеру контента.
+
+|clip| определяет, следует ли обрезать контент за пределами анимированных границ. По умолчанию |clip| имеет значение |true|, что показывает только контент в анимированных границах.
+
+Для расширения только по горизонтали или вертикали можно использовать |expandHorizontally|, |expandVertically|.
+                
+            """.trimIndent(),
+            highlightCode = listOf(
+                HighlightCode("AnimationVisibilityExpend", Color(0xFFffc530)),
+                HighlightCode("initialValue", Color(0xFF3CEE0A)),
+                HighlightCode("16", Color(0xFF5EADD6)),
+            ),
+            lambdaFun = { AnimationVisibilityExpend(it)  },
+            code ="""
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Анимации играют важную роль в современном мобильном приложении, обеспечивая плавный и понятный пользовательский интерфейс.  ",
+                    textUrl = "\uD83D\uDCD6 Developers. Animations in Compose",
+                    url = "https://developer.android.com/develop/ui/compose/animation/introduction"
+                ),
+                TextClickLink(
+                    text = "Модификаторы анимации и составные элементы  ",
+                    textUrl = "\uD83D\uDCD6 Developers. Animation. Composables modifiers",
+                    url = "https://developer.android.com/develop/ui/compose/animation/composables-modifiers?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Расширение границ  ",
+                    textUrl = "\uD83D\uDCD6 Developers. Animation. Expend",
+                    url = "https://developer.android.com/reference/kotlin/androidx/compose/animation/package-summary#expandIn(androidx.compose.animation.core.FiniteAnimationSpec,androidx.compose.ui.Alignment,kotlin.Boolean,kotlin.Function1)"
+                ),
+
+                ),
+
+            ),
+
+        ExampleCode(
+            id = 20,
+            title = "AnimatedVisibility",
+            comment = """
+
+                
+            """.trimIndent(),
+            highlightCode = listOf(
+                HighlightCode("AnimationVisibility", Color(0xFFffc530)),
+                HighlightCode("initialValue", Color(0xFF3CEE0A)),
+                HighlightCode("16", Color(0xFF5EADD6)),
+            ),
+            lambdaFun = { AnimationVisibility() },
+            code ="""
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Больше информации смотрите ",
+                    textUrl = "\uD83D\uDCD6 Developers. Стиль текста",
+                    url = "https://developer.android.com/develop/ui/compose/text/style-text?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Анимации играют важную роль в современном мобильном приложении, обеспечивая плавный и понятный пользовательский интерфейс.  ",
+                    textUrl = "\uD83D\uDCD6 Developers. Animations in Compose",
+                    url = "https://developer.android.com/develop/ui/compose/animation/introduction"
+                ),
+                TextClickLink(
+                    text = "Модификаторы анимации и составные элементы  ",
+                    textUrl = "\uD83D\uDCD6 Developers. Animation. Composables modifiers",
+                    url = "https://developer.android.com/develop/ui/compose/animation/composables-modifiers?hl=ru"
+                ),
+
+                ),
+
+            ),
+        ExampleCode(
+            id = 20,
+            title = "AnimatedVisibility",
+            comment = """
+
+                
+            """.trimIndent(),
+            highlightCode = listOf(
+                HighlightCode("AnimationVisibility", Color(0xFFffc530)),
+                HighlightCode("initialValue", Color(0xFF3CEE0A)),
+                HighlightCode("16", Color(0xFF5EADD6)),
+            ),
+            lambdaFun = { AnimationVisibility() },
+            code ="""
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Больше информации смотрите ",
+                    textUrl = "\uD83D\uDCD6 Developers. Стиль текста",
+                    url = "https://developer.android.com/develop/ui/compose/text/style-text?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Анимации играют важную роль в современном мобильном приложении, обеспечивая плавный и понятный пользовательский интерфейс.  ",
+                    textUrl = "\uD83D\uDCD6 Developers. Animations in Compose",
+                    url = "https://developer.android.com/develop/ui/compose/animation/introduction"
+                ),
+                TextClickLink(
+                    text = "Модификаторы анимации и составные элементы  ",
+                    textUrl = "\uD83D\uDCD6 Developers. Animation. Composables modifiers",
+                    url = "https://developer.android.com/develop/ui/compose/animation/composables-modifiers?hl=ru"
+                ),
+
+                ),
+
+            ),
 
         ExampleCode(
             id = 3,
@@ -5955,150 +6423,6 @@ fun DrawAnimeScaleAText(
 
 
 
-        ExampleCode(
-            id = 20,
-            title = "",
-            highlightCode = listOf(
-                HighlightCode("AnnotatedString", Color(0xFF3CEE0A)),
-                HighlightCode("SpanStyle", Color(0xFF3CEE0A)),
-                HighlightCode("TextLinkStyles", Color(0xFF3CEE0A)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
-            ),
-            lambdaFun = {  },
-            code ="""
-            """.trimIndent()
-        ),
-        ExampleCode(
-            id = 21,
-            title = "",
-            highlightCode = listOf(
-                HighlightCode("AnnotatedString", Color(0xFF3CEE0A)),
-                HighlightCode("SpanStyle", Color(0xFF3CEE0A)),
-                HighlightCode("TextLinkStyles", Color(0xFF3CEE0A)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
-            ),
-            lambdaFun = {  },
-            code ="""
-            """.trimIndent()
-        ),
-        ExampleCode(
-            id = 22,
-            title = "",
-            highlightCode = listOf(
-                HighlightCode("AnnotatedString", Color(0xFF3CEE0A)),
-                HighlightCode("SpanStyle", Color(0xFF3CEE0A)),
-                HighlightCode("TextLinkStyles", Color(0xFF3CEE0A)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
-            ),
-            lambdaFun = {  },
-            code ="""
-            """.trimIndent()
-        ),
-        ExampleCode(
-            id = 23,
-            title = "",
-            highlightCode = listOf(
-                HighlightCode("AnnotatedString", Color(0xFF3CEE0A)),
-                HighlightCode("SpanStyle", Color(0xFF3CEE0A)),
-                HighlightCode("TextLinkStyles", Color(0xFF3CEE0A)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
-            ),
-            lambdaFun = {  },
-            code ="""
-            """.trimIndent()
-        ),
-        ExampleCode(
-            id = 24,
-            title = "",
-            highlightCode = listOf(
-                HighlightCode("AnnotatedString", Color(0xFF3CEE0A)),
-                HighlightCode("SpanStyle", Color(0xFF3CEE0A)),
-                HighlightCode("TextLinkStyles", Color(0xFF3CEE0A)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
-            ),
-            lambdaFun = {  },
-            code ="""
-            """.trimIndent()
-        ),
-        ExampleCode(
-            id = 25,
-            title = "",
-            highlightCode = listOf(
-                HighlightCode("AnnotatedString", Color(0xFF3CEE0A)),
-                HighlightCode("SpanStyle", Color(0xFF3CEE0A)),
-                HighlightCode("TextLinkStyles", Color(0xFF3CEE0A)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
-            ),
-            lambdaFun = {  },
-            code ="""
-            """.trimIndent()
-        ),
-        ExampleCode(
-            id = 26,
-            title = "",
-            highlightCode = listOf(
-                HighlightCode("AnnotatedString", Color(0xFF3CEE0A)),
-                HighlightCode("SpanStyle", Color(0xFF3CEE0A)),
-                HighlightCode("TextLinkStyles", Color(0xFF3CEE0A)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
-            ),
-            lambdaFun = {  },
-            code ="""
-            """.trimIndent()
-        ),
-        ExampleCode(
-            id = 27,
-            title = "",
-            highlightCode = listOf(
-                HighlightCode("AnnotatedString", Color(0xFF3CEE0A)),
-                HighlightCode("SpanStyle", Color(0xFF3CEE0A)),
-                HighlightCode("TextLinkStyles", Color(0xFF3CEE0A)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
-            ),
-            lambdaFun = {  },
-            code ="""
-            """.trimIndent()
-        ),
-        ExampleCode(
-            id = 28,
-            title = "",
-            highlightCode = listOf(
-                HighlightCode("AnnotatedString", Color(0xFF3CEE0A)),
-                HighlightCode("SpanStyle", Color(0xFF3CEE0A)),
-                HighlightCode("TextLinkStyles", Color(0xFF3CEE0A)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
-            ),
-            lambdaFun = {  },
-            code ="""
-            """.trimIndent()
-        ),
-        ExampleCode(
-            id = 29,
-            title = "",
-            highlightCode = listOf(
-                HighlightCode("AnnotatedString", Color(0xFF3CEE0A)),
-                HighlightCode("SpanStyle", Color(0xFF3CEE0A)),
-                HighlightCode("TextLinkStyles", Color(0xFF3CEE0A)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
-            ),
-            lambdaFun = {  },
-            code ="""
-            """.trimIndent()
-        ),
-        ExampleCode(
-            id = 30,
-            title = "",
-            highlightCode = listOf(
-                HighlightCode("AnnotatedString", Color(0xFF3CEE0A)),
-                HighlightCode("SpanStyle", Color(0xFF3CEE0A)),
-                HighlightCode("TextLinkStyles", Color(0xFF3CEE0A)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
-            ),
-            lambdaFun = {  },
-            code ="""
-            """.trimIndent()
-        ),
 
-
-    )
+        )
 }
