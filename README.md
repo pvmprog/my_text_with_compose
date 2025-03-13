@@ -301,18 +301,6 @@
    **************************************************
 </p>
 <p align="center">
-    <img src="screenshots/anime_v2.gif" alt="Start screen" />
-</p>
-<p align="center">
-   **************************************************
-</p>
-<p align="center">
-    <img src="screenshots/anime_v3.gif" alt="Start screen" />
-</p>
-<p align="center">
-   **************************************************
-</p>
-<p align="center">
     <img src="screenshots/anime_v4.gif" alt="Start screen" />
 </p>
 <p align="center">
@@ -326,6 +314,18 @@
 </p>
 <p align="center">
     <img src="screenshots/anime_v6.gif" alt="Start screen" />
+</p>
+<p align="center">
+   **************************************************
+</p>
+<p align="center">
+    <img src="screenshots/anime_v2.gif" alt="Start screen" />
+</p>
+<p align="center">
+   **************************************************
+</p>
+<p align="center">
+    <img src="screenshots/anime_v3.gif" alt="Start screen" />
 </p>
 <p align="center">
    **************************************************
