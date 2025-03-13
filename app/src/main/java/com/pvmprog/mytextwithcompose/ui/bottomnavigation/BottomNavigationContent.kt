@@ -23,7 +23,8 @@ fun BottomNavigationContent(
     indexExample: Int = 0,
     itemList: List<ExampleCode> = DataCodeUI.codeUI,
     onNext: (Int) -> Unit = {},
-    heightMinDp:Int = 200
+    heightMinDp:Int = 200,
+    onIntentClicked: (String) -> Unit ={}
 
     ) {
     Box(modifier = modifier) {
@@ -42,7 +43,8 @@ fun BottomNavigationContent(
                     indexExample = indexExample,
                     itemList = itemList,
                     onNext = onNext,
-                    heightMinDp = heightMinDp
+                    heightMinDp = heightMinDp,
+                    onIntentClicked = onIntentClicked,
                 )
             }
             AnimatedVisibility(

@@ -1,6 +1,8 @@
 package com.pvmprog.mytextwithcompose.ui
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -8,6 +10,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.pvmprog.mytextwithcompose.ui.bottomnavigation.getListBottomItem
 import com.pvmprog.mytextwithcompose.ui.screens.GreetingScreen
@@ -26,7 +29,8 @@ Screen width sizes
 fun MainScreen(
     isExpanded:Boolean = false,
     minSizeScreenDp: Int = 300,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onIntentClicked: (String) -> Unit ={}
 ){
 
     val viewModel: AppViewModel = hiltViewModel()
@@ -64,8 +68,10 @@ fun MainScreen(
                 viewModel.updateSelectedIndex(selectedIndexExample)
             },
             modifier = modifier,
-            heightMinDp  = minSizeScreenDp
+            heightMinDp  = minSizeScreenDp,
+            onIntentClicked = onIntentClicked,
 
-        )
+
+            )
     }
 }

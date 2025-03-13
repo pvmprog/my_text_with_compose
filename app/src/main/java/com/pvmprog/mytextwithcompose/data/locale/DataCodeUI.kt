@@ -14,7 +14,10 @@ import com.pvmprog.mytextwithcompose.data.model.ExampleCode
 import com.pvmprog.mytextwithcompose.data.model.HighlightCode
 import com.pvmprog.mytextwithcompose.data.model.TextClickLink
 import com.pvmprog.mytextwithcompose.ui.examples.AnimationBgGradient
+import com.pvmprog.mytextwithcompose.ui.examples.AnimationChildren
+import com.pvmprog.mytextwithcompose.ui.examples.AnimationContent
 import com.pvmprog.mytextwithcompose.ui.examples.AnimationSizeText
+import com.pvmprog.mytextwithcompose.ui.examples.AnimationTransition
 import com.pvmprog.mytextwithcompose.ui.examples.AnimationVisibility
 import com.pvmprog.mytextwithcompose.ui.examples.AnimationVisibilityContent
 import com.pvmprog.mytextwithcompose.ui.examples.AnimationVisibilityExpend
@@ -133,6 +136,7 @@ object DataCodeUI {
                 HighlightCode("1", Color(0xFF2DB8FF)),
 
                 ),
+            nameFun = "Simples.kt#L48-L63",
             lambdaFun =  @Composable { Simple() },
             code ="""
 @Composable
@@ -266,36 +270,18 @@ fun Modifier.|padding|(
                 ),
             ),
             highlightCode = highCodeList + listOf(
-                HighlightCode("SimpleWithPadding", Color(0xFFffc530)),
-                HighlightCode("1", Color(0xFF2DB8FF)),
-                HighlightCode("6", Color(0xFF2DB8FF)),
+                HighlightCode("16", Color(0xFF2DB8FF)),
                 HighlightCode(".padding ", Color(0xFF3CEE0A)),
 
                 ),
             lambdaFun = { SimpleWithPadding() },
-
+            nameFun = "Simples.kt#L66-L85",
             code ="""
-@Composable
-fun SimpleWithPadding() {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-        contentAlignment = Alignment.Center
-    ) {
-        Column(
-            modifier = Modifier
-                .border(1.dp, MaterialTheme.colorScheme.onBackground)
-        ) {
             Text (
                 text = "Hello, World!",
                 modifier = Modifier
                     .padding(16.dp)
             )
-        }
-
-    }
-
-}
             """.trimIndent()
         ),
 
@@ -332,7 +318,6 @@ fun SimpleWithPadding() {
                 ),
             ),
             highlightCode = highCodeList + listOf(
-                HighlightCode("SimpleStringResource", Color(0xFFffc530)),
                 HighlightCode("31", Color(0xFF2DB8FF)),
                 HighlightCode(".day_of_month", Color(0xFFe48def)),
                 HighlightCode("January", Color(0xFFFFEB3B)),
@@ -342,15 +327,13 @@ fun SimpleWithPadding() {
                 HighlightCode("dimensionResource ", Color(0xFF3CEE0A)),
             ),
             lambdaFun = { SimpleStringResource() },
+            nameFun = "Simples.kt#L99-L134",
             code ="""
-@Composable
-fun SimpleStringResource() {
-
     val text1 = stringResource (
         id = R.string.hello_world
     )
 
-//позиционное форматирование
+    //позиционное форматирование
     val text2 = stringResource(
         id = R.string.day_of_month, "January", 31
     )
@@ -376,7 +359,6 @@ fun SimpleStringResource() {
             Text (text = text2)
         }
     }
-
 
 }
             """.trimIndent()
@@ -417,9 +399,7 @@ fun SimpleStringResource() {
                 ),
             ),
 
-            nameFun = "",
             highlightCode = highCodeList + listOf(
-                HighlightCode("ExampleFontSize", Color(0xFFffc530)),
                 HighlightCode("fontSize ", Color(0xFF3CEE0A)),
                 HighlightCode(".Unspecified", Color(0xFFe48def)),
                 HighlightCode("(default)", Color(0xFF05B80D)),
@@ -428,33 +408,12 @@ fun SimpleStringResource() {
                 HighlightCode("(15.sp)", Color(0xFF05B80D)),
                 HighlightCode("20", Color(0xFF00a9ff)),
                 HighlightCode("3", Color(0xFF00a9ff)),
-                HighlightCode("1", Color(0xFF00a9ff)),
-                HighlightCode("5", Color(0xFF00a9ff)),
+                HighlightCode("15", Color(0xFF00a9ff)),
                 HighlightCode(".em", Color(0xFFe48def)),
             ),
             lambdaFun = { ExampleFontSize() },
+            nameFun = "ExampleFontSize.kt",
             code = """
-@Composable
-fun ExampleFontSize() {
-    val text= stringResource(
-        id = R.string.hello_world
-    )
-
-    val padding = dimensionResource(
-        id = R.dimen.padding_medium
-    )
-
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxWidth()
-            .border(1.dp, MaterialTheme.colorScheme.onBackground)
-            .padding(padding),
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        item {
-            Column(
-                verticalArrangement = Arrangement.spacedBy(padding)
-            ) {
                 Text ( 
                     text = text + "(default)",
                     fontSize = TextUnit.Unspecified
@@ -473,10 +432,6 @@ fun ExampleFontSize() {
                         fontSize = 15.sp,
                     )
                 )
-            }
-        }
-    }
-}
             """.trimIndent()
         ),
 
@@ -492,7 +447,6 @@ LocalDensity.current.|fontScale| является маштабным коэфф�
 
             """.trimIndent(),
             highlightCode = highCodeList + listOf(
-                HighlightCode("FontScale", Color(0xFFffc530)),
                 HighlightCode(".nonScaledSp", Color(0xFFffc530)),
                 HighlightCode("Масштаб текущего размера шрифта:", Color(0xFF05B80D)),
                 HighlightCode(" nonScaledSp", Color(0xFF05B80D)),
@@ -508,20 +462,9 @@ LocalDensity.current.|fontScale| является маштабным коэфф�
 
                 ),
             lambdaFun = { FontScale() },
-
+            nameFun = "FontScale.kt",
             code ="""
-@Composable
-fun FontScale(
-    fontSizeSp:Int = 20
-) {
-    Column(
-        modifier = Modifier
-            .padding(16.dp)
-            .verticalScroll(rememberScrollState())
-            .fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
+        //...        
         Text(
             text = "Масштаб шрифта : ${'$'}{LocalDensity.current.fontScale}",
             textDecoration = TextDecoration.Underline,
@@ -548,25 +491,17 @@ fun FontScale(
             textAlign = TextAlign.Center,
             fontSize = 4.6.em
         )
-        Text(
-            modifier = Modifier
-                .fillMaxWidth(),
-            text = stringResource(R.string.comment_font_scale),
-            textAlign = TextAlign.Justify,
-        )
+        //...
 
-    }
-}
-
-@Composable
-fun Int.nonScaledSp(): TextUnit {
-    val value: Int = this
-    return with(LocalDensity.current) {
-        val fontScale = this.fontScale
-        val textSize = value / fontScale
-        textSize.sp
-    }
-}
+        @Composable
+        fun Int.nonScaledSp(): TextUnit {
+            val value: Int = this
+            return with(LocalDensity.current) {
+                val fontScale = this.fontScale
+                val textSize = value / fontScale
+                textSize.sp
+            }
+        }
             """.trimIndent(),
             links = listOf(
                 TextClickLink(
@@ -5818,7 +5753,7 @@ Easing позволяет анимированным элементам уско
       
       
             """.trimIndent(),
-            highlightCode = listOf(
+            highlightCode = highCodeList + listOf(
                 HighlightCode("AnimationVisibilityContent ", Color(0xFFffc530)),
                 HighlightCode("initialValue", Color(0xFF3CEE0A)),
                 HighlightCode("16", Color(0xFF5EADD6)),
@@ -5940,7 +5875,7 @@ initialOffsetY — это лямбда, которая берет полную �
                 
                 
             """.trimIndent(),
-            highlightCode = listOf(
+            highlightCode = highCodeList + listOf(
                 HighlightCode("AnimationVisibility", Color(0xFFffc530)),
                 HighlightCode("initialValue", Color(0xFF3CEE0A)),
                 HighlightCode("16", Color(0xFF5EADD6)),
@@ -6015,7 +5950,7 @@ fun scaleIn(
 |scaleOut| можно комбинировать с |shrinkOut|/|shrinkHorizontally|/|shrinkVertically| для скоординированной анимации изменения размера макета.
 
                  """.trimIndent(),
-            highlightCode = listOf(
+            highlightCode = highCodeList + listOf(
                 HighlightCode("AnimationVisibility", Color(0xFFffc530)),
                 HighlightCode("initialValue", Color(0xFF3CEE0A)),
                 HighlightCode("16", Color(0xFF5EADD6)),
@@ -6071,7 +6006,7 @@ fun expandIn(
 Для расширения только по горизонтали или вертикали можно использовать |expandHorizontally|, |expandVertically|.
                 
             """.trimIndent(),
-            highlightCode = listOf(
+            highlightCode = highCodeList + listOf(
                 HighlightCode("AnimationVisibilityExpend", Color(0xFFffc530)),
                 HighlightCode("initialValue", Color(0xFF3CEE0A)),
                 HighlightCode("16", Color(0xFF5EADD6)),
@@ -6102,24 +6037,173 @@ fun expandIn(
 
         ExampleCode(
             id = 20,
-            title = "AnimatedVisibility",
+            title = "Animation of a child",
             comment = """
+Модификатор |animateEnterExit| может использоваться для любых прямых или косвенных потомков |AnimatedVisibility| для создания анимации входа/выхода, отличной от той, что указана в |AnimatedVisibility|. 
 
+Визуальный эффект этих потомков будет комбинацией анимации |AnimatedVisibility| и их собственных анимаций входа/выхода.
                 
             """.trimIndent(),
-            highlightCode = listOf(
+            highlightCode = highCodeList + listOf(
+                HighlightCode("AnimationChildren", Color(0xFFffc530)),
+                HighlightCode(".animateEnterExit(", Color(0xFF3CEE0A)),
+                HighlightCode("16", Color(0xFF5EADD6)),
+            ),
+            lambdaFun = { AnimationChildren(it) },
+            code ="""
+@Composable
+fun AnimationChildren(
+    isScreenExpanded: Boolean = false,
+) {
+    var visible by remember { mutableStateOf(true) }
+    val aspectModifier = if (isScreenExpanded) Modifier.aspectRatio(1.5f)
+    else Modifier.aspectRatio(1f)
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+            .clickable { visible = !visible },
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        Text("Click me...")
+        AnimatedVisibility(
+            visible = visible,
+            enter = fadeIn(),
+            exit = fadeOut()
+        ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.Black),
+                contentAlignment = Alignment.Center
+            ) {
+                Box(
+                    modifier = aspectModifier
+                        .animateEnterExit(
+                            enter = slideInVertically(),
+                            exit = slideOutVertically()
+                        )
+                        .clip(RoundedCornerShape(10.dp)),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.bg2),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .alpha(0.9f)
+                            .fillMaxSize(),
+                        contentScale = ContentScale.Crop,
+                    )
+                    Image(
+                        painter = painterResource(id = R.drawable.earth),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .padding(16.dp)
+                            .size(150.dp)
+                            .animateEnterExit(
+                                enter = scaleIn(
+                                    animationSpec = tween(1000, easing = LinearOutSlowInEasing)
+                                ) + expandVertically(expandFrom = Alignment.CenterVertically),
+                                exit = scaleOut(
+                                    animationSpec = tween(1000, easing = LinearOutSlowInEasing)
+                                ) + shrinkVertically(shrinkTowards = Alignment.CenterVertically)
+                            ),
+                        contentScale = ContentScale.Crop,
+                    )
+                    Box(
+                        modifier = aspectModifier,
+                        contentAlignment = Alignment.BottomCenter
+                    ) {
+                        Text(
+                            text = "Hello, World!",
+                            color = Color.Cyan,
+                            fontWeight = FontWeight.ExtraBold,
+                            modifier = Modifier
+                                .padding(16.dp)
+                                .animateEnterExit(
+                                    // Slide in/out the rounded rect
+                                    enter = expandIn(
+                                        animationSpec = tween(1000, easing = LinearOutSlowInEasing),
+                                        expandFrom = Alignment.BottomStart
+                                    ) {
+                                        IntSize(50, 50) //
+                                    },
+                                    exit = scaleOut() + shrinkVertically(shrinkTowards = Alignment.CenterVertically)
+                                ),
+                            fontSize = 45.sp,
+                            lineHeight = 45.sp,
+                            textAlign = TextAlign.Center,
+                            fontFamily = FontFamily.Cursive,
+                        )
+
+                    }
+
+                }
+            }
+        }
+
+    }
+
+}
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Анимации играют важную роль в современном мобильном приложении, обеспечивая плавный и понятный пользовательский интерфейс.  ",
+                    textUrl = "\uD83D\uDCD6 Developers. Animations in Compose",
+                    url = "https://developer.android.com/develop/ui/compose/animation/introduction"
+                ),
+                TextClickLink(
+                    text = "Модификаторы анимации и составные элементы  ",
+                    textUrl = "\uD83D\uDCD6 Developers. Animation. Composables modifiers",
+                    url = "https://developer.android.com/develop/ui/compose/animation/composables-modifiers?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Модификатор animateEnterExit ",
+                    textUrl = "\uD83D\uDCD6 Developers. animateEnterExit",
+                    url = "https://developer.android.com/reference/kotlin/androidx/compose/animation/AnimatedVisibilityScope#(androidx.compose.ui.Modifier).animateEnterExit(androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.String)"
+                ),
+
+                ),
+
+            ),
+        ExampleCode(
+            title = "Пользовательская анимация",
+            comment = """
+Через свойство |transition|, внутри лямбда-выражения для |AnimatedVisibility|, можно добавить пользовательские эффекты анимации.
+  
+var visible by remember { mutableStateOf(true) }
+
+AnimatedVisibility(
+    visible = visible,
+    enter = fadeIn(),
+    exit = fadeOut()
+) { 
+    val background by transition.animateColor(label = "color") { state ->
+        if (state == EnterExitState.Visible) Color.Blue else Color.Gray
+    }
+    Box(
+        modifier = Modifier
+            .size(128.dp)
+            .background(background)
+    )
+}                
+
+
+            """.trimIndent(),
+            highlightCode = highCodeList +  listOf(
                 HighlightCode("AnimationVisibility", Color(0xFFffc530)),
                 HighlightCode("initialValue", Color(0xFF3CEE0A)),
                 HighlightCode("16", Color(0xFF5EADD6)),
             ),
-            lambdaFun = { AnimationVisibility() },
+            lambdaFun = { AnimationTransition() },
             code ="""
             """.trimIndent(),
             links = listOf(
                 TextClickLink(
-                    text = "Больше информации смотрите ",
-                    textUrl = "\uD83D\uDCD6 Developers. Стиль текста",
-                    url = "https://developer.android.com/develop/ui/compose/text/style-text?hl=ru"
+                    text = "Анимация на основе значений ",
+                    textUrl = "\uD83D\uDCD6 Developers.  animate*AsState",
+                    url = "https://developer.android.com/develop/ui/compose/animation/value-based?hl=ru#updatetransition"
                 ),
                 TextClickLink(
                     text = "Анимации играют важную роль в современном мобильном приложении, обеспечивая плавный и понятный пользовательский интерфейс.  ",
@@ -6136,25 +6220,154 @@ fun expandIn(
 
             ),
         ExampleCode(
-            id = 20,
-            title = "AnimatedVisibility",
+            title = "AnimatedContent",
             comment = """
+|AnimatedContent| анимирует свое содержимое по мере его изменения в зависимости от целевого состояния.
+ 
+ Row {
+     var count by remember { mutableIntStateOf(0) }
+     Button(onClick = { count++ }) {
+         Text("Add")
+     }
+     AnimatedContent(
+         targetState = count,
+         label = "animated content"
+     ) { targetCount ->
+         // Make sure to use `targetCount`, not `count`.
+         Text(text = "Count: ${'$'}targetCount")
+     }
+ }
+ 
+ По умолчанию исходное содержимое исчезает, а затем появляется целевое содержимое (это поведение называется |сквозным исчезновением|). 
+ 
+ Вы можете настроить это поведение анимации, указав объект |ContentTransform| в |transitionSpec|
+ 
+ Вы можете создать |ContentTransform| , объединив |EnterTransition| с |ExitTransition| используя функцию |togetherWith|. 
+ 
+ Вы можете применить |SizeTransform| к |ContentTransform| , присоединив его с помощью функции |using| . 
+ 
+ AnimatedContent(
+     targetState = count,
+     transitionSpec = {
+         if (targetState > initialState) {
+             slideInVertically { height -> height } + fadeIn() togetherWith
+                 slideOutVertically { height -> -height } + fadeOut()
+         } else {
+             slideInVertically { height -> -height } + fadeIn() togetherWith
+                 slideOutVertically { height -> height } + fadeOut()
+         }.using(
+             SizeTransform(clip = false)
+         )
+     }, label = "animated content"
+ ) { targetCount ->
+     Text(text = "${'$'}targetCount")
+ }
+ 
+|EnterTransition| определяет, как должно выглядеть целевое содержимое, а |ExitTransition| определяет, как должно исчезнуть исходное содержимое. 
 
-                
+В дополнение ко всем функциям |EnterTransition| и |ExitTransition| доступным для |AnimatedVisibility| , |AnimatedContent| предлагает |slideIntoContainer| и |slideOutOfContainer| . Это удобные альтернативы |slideInHorizontally|/|Vertically| и |slideOutHorizontally|/|Vertically| , которые вычисляют расстояние слайда на основе размеров исходного содержимого и целевого содержимого содержимого AnimatedContent .
+
+|SizeTransform| определяет, как размер должен анимироваться между исходным и целевым содержимым. При создании анимации у вас есть доступ как к начальному, так и к целевому размеру. 
+
+|SizeTransform| также контролирует, должно ли содержимое обрезаться до размера компонента во время анимации. 
+ 
+var expanded by remember { mutableStateOf(false) }
+Surface(
+    color = MaterialTheme.colorScheme.primary,
+    onClick = { expanded = !expanded }
+) {
+    AnimatedContent(
+        targetState = expanded,
+        transitionSpec = {
+            fadeIn(animationSpec = tween(150, 150)) togetherWith
+                fadeOut(animationSpec = tween(150)) using
+                SizeTransform { initialSize, targetSize ->
+                    if (targetState) {
+                        keyframes {
+                            IntSize(targetSize.width, initialSize.height) at 150
+                            durationMillis = 300
+                        }
+                    } else {
+                        keyframes {
+                            IntSize(initialSize.width, targetSize.height) at 150
+                            durationMillis = 300
+                        }
+                    }
+                }
+        }, label = "size transform"
+    ) { targetExpanded ->
+        if (targetExpanded) {
+            Expanded()
+        } else {
+            ContentIcon()
+        }
+    }
+} 
             """.trimIndent(),
-            highlightCode = listOf(
+            highlightCode = highCodeList +  listOf(
                 HighlightCode("AnimationVisibility", Color(0xFFffc530)),
-                HighlightCode("initialValue", Color(0xFF3CEE0A)),
+                HighlightCode("AnimatedContent", Color(0xFF3CEE0A)),
                 HighlightCode("16", Color(0xFF5EADD6)),
             ),
-            lambdaFun = { AnimationVisibility() },
+            lambdaFun = { AnimationContent() },
             code ="""
+            var count by remember { mutableIntStateOf(0) }
+            //....
+                
+            AnimatedContent(
+                targetState = count,
+                label = "animated content"
+            ) { targetCount ->
+                // Make sure to use `targetCount`, not `count`.
+                Text (text = "${'$'}targetCount")
+            }
+
+            AnimatedContent(
+                targetState = count,
+                transitionSpec = {
+            // Сравните входящее число с предыдущим числом.
+                    if (targetState > initialState) {
+            // Если целевое число больше, оно скользит вверх и постепенно исчезает.
+            // в то время как начальное (меньшее) число скользит вверх и исчезает.
+                        slideInVertically { height -> height } + fadeIn() togetherWith
+                                slideOutVertically { height -> -height } + fadeOut()
+                    } else {
+            // Если целевое число меньше, оно опускается вниз и постепенно увеличивается.
+            // в то время как начальное число скользит вниз и исчезает.
+                        slideInVertically { height -> -height } + fadeIn() togetherWith
+                                slideOutVertically { height -> height } + fadeOut()
+                    }.using(
+            // Отключите обрезку, так как плавное появление/исчезновение должно
+            // отображаться вне границ.
+                        SizeTransform(clip = false)
+                    )
+                }, label = "animated counter"
+            ) { targetCount ->
+                Text (text = "${'$'}targetCount")
+            }
+           
+           // ...
+
+           Row(
+               verticalAlignment = Alignment.CenterVertically,
+               horizontalArrangement = Arrangement.spacedBy(16.dp)
+           ) {
+               Button(onClick = { count++ }) {
+                   Text("Add")
+               }
+               Button(onClick = { count-- }) {
+                   Text("Subb")
+               }
+           }
+           
+           // ...            
+                
             """.trimIndent(),
             links = listOf(
                 TextClickLink(
-                    text = "Больше информации смотрите ",
-                    textUrl = "\uD83D\uDCD6 Developers. Стиль текста",
-                    url = "https://developer.android.com/develop/ui/compose/text/style-text?hl=ru"
+                    text = "Анимация на основе значений ",
+                    textUrl = "\uD83D\uDCD6 Developers.  animate*AsState",
+                    url = "https://developer.android.com/develop/ui/compose/animation/value-based?hl=ru#updatetransition"
                 ),
                 TextClickLink(
                     text = "Анимации играют важную роль в современном мобильном приложении, обеспечивая плавный и понятный пользовательский интерфейс.  ",
@@ -6175,9 +6388,15 @@ fun expandIn(
             id = 3,
             title = "Рисование текста на холсте",
             comment = """
-Нарисовать текст вручную можно с DrawScope.|drawText|()
+Функция |Canvas| позволяет рисовать фигуры на холсте приложения.
 
-Чтобы нарисовать текст, создайте |TextMeasurer| с помощью |rememberTextMeasurer| и вызовите |drawText|
+|!@Composable
+public fun Canvas(
+    modifier: Modifier, 
+    onDraw: DrawScope.() -> Unit
+): Unit|
+                
+Нарисовать текст можно с DrawScope.|drawText|(). Для этого необходимо создать |TextMeasurer| с помощью |rememberTextMeasurer| и вызвать |drawText|
                  
 val textMeasurer = rememberTextMeasurer()
 
@@ -6325,6 +6544,25 @@ fun DrawTextCanvas(
             id = 3,
             title = "Маштабирование на холсте",
             comment = """
+Функция DrawScope.|withTransform()| позволяет применить к рисункам несколько преобразований.
+
+|withTransform()| создает и применяет одно преобразование, объединяющее все желаемые изменения. 
+ 
+Использование |withTransform|() более эффективно, чем выполнение вложенных вызовов отдельных преобразований, поскольку все преобразования выполняются вместе в одной операции, вместо того, чтобы Compose вычислял и сохранял каждое из вложенных преобразований.
+                
+Canvas(modifier = Modifier.fillMaxSize()) {
+    withTransform({
+        translate(left = size.width / 5F)
+        rotate(degrees = 45F)
+    }) {
+        drawRect(
+            color = Color.Gray,
+            topLeft = Offset(x = size.width / 3F, y = size.height / 3F),
+            size = size / 3F
+        )
+    }
+}
+                
             """.trimIndent(),
             links = listOf(
                 TextClickLink(
@@ -6338,9 +6576,9 @@ fun DrawTextCanvas(
                     url = "https://developer.android.com/develop/ui/compose/animation/introduction"
                 ),
                 TextClickLink(
-                    text = "Коллекция быстрых руководств ",
-                    textUrl = "\uD83D\uDCD6 Отображать текст",
-                    url = "https://developer.android.com/develop/ui/compose/quick-guides/collections/display-text?hl=ru"
+                    text = "androidx. compose. ui. graphics. drawscope ",
+                    textUrl = "\uD83D\uDCD6 Developers graphics drawscope",
+                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/graphics/drawscope/package-summary"
                 ),
             ),
 

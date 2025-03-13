@@ -1,7 +1,9 @@
 package com.pvmprog.mytextwithcompose
 
 import android.content.Context
+import android.content.Intent
 import android.content.res.Resources
+import android.net.Uri
 import android.os.Bundle
 import android.util.TypedValue
 import androidx.activity.ComponentActivity
@@ -14,6 +16,7 @@ import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import com.pvmprog.mytextwithcompose.ui.MainScreen
 import com.pvmprog.mytextwithcompose.ui.screens.Examplescreen
 import com.pvmprog.mytextwithcompose.ui.screens.GreetingScreen
@@ -173,8 +176,16 @@ class MainActivity : ComponentActivity() {
                     MainScreen(
                         isExpanded = isExpanded,
                         minSizeScreenDp = minSizeScreenDp,
-                        modifier = Modifier.fillMaxSize()
-                    )
+                        modifier = Modifier.fillMaxSize(),
+                        onIntentClicked = {
+                            ContextCompat.startActivity(
+                                this,
+                                Intent(Intent.ACTION_VIEW, Uri.parse(it)),
+                                null
+                            )
+                        },
+
+                        )
 
                 }
             }

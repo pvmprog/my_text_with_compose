@@ -1,12 +1,15 @@
 package com.pvmprog.mytextwithcompose.ui
 
+import android.content.Intent
 import android.content.res.Configuration
+import android.net.Uri
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.content.ContextCompat
 import com.pvmprog.mytextwithcompose.data.locale.DataCodeUI
 import com.pvmprog.mytextwithcompose.data.model.ExampleCode
 import com.pvmprog.mytextwithcompose.ui.bottomnavigation.BootomItem
@@ -25,7 +28,8 @@ fun MainNavigationScreen(
     itemList: List<ExampleCode> = DataCodeUI.codeUI,
     onNext: (Int) -> Unit = {},
     modifier: Modifier = Modifier,
-    heightMinDp:Int = 200
+    heightMinDp:Int = 200,
+    onIntentClicked: (String) -> Unit ={}
 
 ){
    if (isExpanded){
@@ -38,7 +42,8 @@ fun MainNavigationScreen(
            itemList = itemList,
            onNext = onNext,
            modifier= modifier,
-           heightMinDp = heightMinDp - 50
+           heightMinDp = heightMinDp - 50,
+           onIntentClicked = onIntentClicked,
 
        )
    } else{
@@ -51,7 +56,9 @@ fun MainNavigationScreen(
            itemList = itemList,
            onNext = onNext,
            modifier= modifier,
-           heightMinDp = heightMinDp
+           heightMinDp = heightMinDp,
+           onIntentClicked = onIntentClicked,
+
 
            )
    }
