@@ -144,34 +144,48 @@
    
    <img src="screenshots/screenshot104.jpg">
 
+<p align="center">
    **************************************************
+</p>
 
    <img src="screenshots/screenshot105.jpg">
 
+<p align="center">
    **************************************************
+</p>
 
    <img src="screenshots/screenshot106.jpg">
 
+<p align="center">
    **************************************************
+</p>
    Двойной клик отображает выбранный раздел во весь экран
    
    <img src="screenshots/screenshot1071.jpg">
 
+<p align="center">
    **************************************************
+</p>
    
    <img src="screenshots/screenshot1072.jpg">
 
+<p align="center">
    **************************************************
+</p>
 
    Клавишей "<b>+</b>" можно увеличить размер шрифта для более комфортного просмотра 
    <img src="screenshots/screenshot1073.jpg">
 
+<p align="center">
    **************************************************
+</p>
    Клавишей "<b>-</b>" можно меньшить размер шрифта для более комфортного просмотра 
    
    <img src="screenshots/screenshot1074.jpg">
 
+<p align="center">
    **************************************************
+</p>
    
 </p>
 
@@ -207,11 +221,17 @@
   </tr>
  </table>
 
+<p align="center">
    **************************************************
+</p>
+
    <img src="screenshots/anime_agsl_water.gif">
    <img src="screenshots/anime_agsl_disco.gif">
    <img src="screenshots/anime_agsl_silex.gif">
+
+<p align="center">
    **************************************************
+</p>
 
 
 
@@ -265,35 +285,51 @@
  </table>
 
 
+<p align="center">
    **************************************************
+</p>
 <p align="center">
     <img src="screenshots/anime_v1.gif" alt="Start screen" />
 </p>
-   **************************************************
 <p align="center">
-    <img src="screenshots/anime_v2.gif" alt="Start screen" />
-</p>
    **************************************************
-<p align="center">
-    <img src="screenshots/anime_v3.gif" alt="Start screen" />
 </p>
-   **************************************************
-<p align="center">
-    <img src="screenshots/anime_v4.gif" alt="Start screen" />
-</p>
-   **************************************************
-<p align="center">
-    <img src="screenshots/anime_v5.gif" alt="Start screen" />
-</p>
-   **************************************************
-<p align="center">
-    <img src="screenshots/anime_v6.gif" alt="Start screen" />
-</p>
-   **************************************************
 <p align="center">
     <img src="screenshots/anime_v7.gif" alt="Start screen" />
 </p>
+<p align="center">
    **************************************************
+</p>
+<p align="center">
+    <img src="screenshots/anime_v2.gif" alt="Start screen" />
+</p>
+<p align="center">
+   **************************************************
+</p>
+<p align="center">
+    <img src="screenshots/anime_v3.gif" alt="Start screen" />
+</p>
+<p align="center">
+   **************************************************
+</p>
+<p align="center">
+    <img src="screenshots/anime_v4.gif" alt="Start screen" />
+</p>
+<p align="center">
+   **************************************************
+</p>
+<p align="center">
+    <img src="screenshots/anime_v5.gif" alt="Start screen" />
+</p>
+<p align="center">
+   **************************************************
+</p>
+<p align="center">
+    <img src="screenshots/anime_v6.gif" alt="Start screen" />
+</p>
+<p align="center">
+   **************************************************
+</p>
 
     
 
