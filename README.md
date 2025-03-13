@@ -53,6 +53,7 @@
     <img src="screenshots/video_text_in_compose.gif" alt="Start screen" />
 </p>
 
+
 <p align="center">
    **************************************************
 </p>
@@ -264,6 +265,35 @@
  </table>
 
 
+   **************************************************
+<p align="center">
+    <img src="screenshots/anime_v1.gif" alt="Start screen" />
+</p>
+   **************************************************
+<p align="center">
+    <img src="screenshots/anime_v2.gif" alt="Start screen" />
+</p>
+   **************************************************
+<p align="center">
+    <img src="screenshots/anime_v3.gif" alt="Start screen" />
+</p>
+   **************************************************
+<p align="center">
+    <img src="screenshots/anime_v4.gif" alt="Start screen" />
+</p>
+   **************************************************
+<p align="center">
+    <img src="screenshots/anime_v5.gif" alt="Start screen" />
+</p>
+   **************************************************
+<p align="center">
+    <img src="screenshots/anime_v6.gif" alt="Start screen" />
+</p>
+   **************************************************
+<p align="center">
+    <img src="screenshots/anime_v7.gif" alt="Start screen" />
+</p>
+   **************************************************
 
     
 
