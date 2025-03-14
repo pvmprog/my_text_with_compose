@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.sp
 import com.pvmprog.mytextwithcompose.ui.theme.MyTextWithComposeTheme
 
 @Composable
-fun AnimationSizeText(
+fun AnimationInfiniteTransition(
     text: String ="Ш Б",
 ){
 
@@ -70,7 +70,7 @@ fun AnimationSizeTextPreview() {
         Surface(
             color = MaterialTheme.colorScheme.background
         ) {
-            AnimationSizeText()
+            AnimationInfiniteTransition()
         }
 
     }

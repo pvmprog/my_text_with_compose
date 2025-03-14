@@ -16,13 +16,16 @@ import com.pvmprog.mytextwithcompose.data.model.TextClickLink
 import com.pvmprog.mytextwithcompose.ui.examples.AnimationBgGradient
 import com.pvmprog.mytextwithcompose.ui.examples.AnimationChildren
 import com.pvmprog.mytextwithcompose.ui.examples.AnimationContent
-import com.pvmprog.mytextwithcompose.ui.examples.AnimationSizeText
+import com.pvmprog.mytextwithcompose.ui.examples.AnimationContentSize
+import com.pvmprog.mytextwithcompose.ui.examples.AnimationCrossfade
+import com.pvmprog.mytextwithcompose.ui.examples.AnimationInfiniteTransition
 import com.pvmprog.mytextwithcompose.ui.examples.AnimationTransition
-import com.pvmprog.mytextwithcompose.ui.examples.AnimationVisibility
 import com.pvmprog.mytextwithcompose.ui.examples.AnimationVisibilityContent
 import com.pvmprog.mytextwithcompose.ui.examples.AnimationVisibilityExpend
 import com.pvmprog.mytextwithcompose.ui.examples.AnimationVisibilityScale
 import com.pvmprog.mytextwithcompose.ui.examples.AnimationVisibilitySlade
+import com.pvmprog.mytextwithcompose.ui.examples.Animation_AsState
+import com.pvmprog.mytextwithcompose.ui.examples.Animation_AsStateRepeatable
 import com.pvmprog.mytextwithcompose.ui.examples.SimpleAlign
 import com.pvmprog.mytextwithcompose.ui.examples.AnnotatedHtmlString
 import com.pvmprog.mytextwithcompose.ui.examples.AnnotatedPushStyleAndUrl
@@ -517,98 +520,6 @@ LocalDensity.current.|fontScale| является маштабным коэфф�
             ),
         ),
 
-        ExampleCode(
-            id = 3,
-            title = "Анимация размера",
-            comment = """
-Экземпляр |InfiniteTransition| используется для управления дочерними анимациями.
-
-    val infiniteTransition = rememberInfiniteTransition()
-
-Для анимации размера шрифта необходимо создать дочернюю анимацию типа |float|, как часть |InfiniteTransition|.
-
-val size by
-    infiniteTransition.animateFloat(
-        |initialValue| = 10f, |! Начальный размер шрифта| 
-        |targetValue| = 120f, |! Конечный размер шрифта|
-        animationSpec =
-        infiniteRepeatable(
-            |!// Бесконечное повторение анимации длительностью 10000 мс с использованием кривой замедления LinearOutSlowInEasing|
-            animation = tween(10000, easing = LinearEasing),
-            |!// После каждой итерации анимации (т. е. каждые 10000 мс) анимация будет начинаться  реверсном порядке, т.е. с [targetValue]|
-            repeatMode = RepeatMode.Reverse
-        )
-    )
-     
-            """.trimIndent(),
-            links = listOf(
-                TextClickLink(
-                    text = "Больше информации смотрите в ",
-                    textUrl = "\uD83D\uDCD6 Стиль текста",
-                    url = "https://developer.android.com/develop/ui/compose/text/style-text?hl=ru"
-                ),
-                TextClickLink(
-                    text = "Анимации в Compose",
-                    textUrl = "\uD83D\uDCD6 Animations in Compose ",
-                    url = "https://developer.android.com/develop/ui/compose/animation/introduction"
-                ),
-            ),
-
-            nameFun = "",
-            highlightCode = highCodeList + listOf(
-                HighlightCode("AnimationSizeText", Color(0xFFffc530)),
-                HighlightCode("fontSize", Color(0xFF3CEE0A)),
-                HighlightCode("initialValue", Color(0xFF3CEE0A)),
-                HighlightCode("targetValue", Color(0xFF3CEE0A)),
-                HighlightCode("10F", Color(0xFF5EADD6)),
-                HighlightCode("170f", Color(0xFF5EADD6)),
-                HighlightCode("20000", Color(0xFF5EADD6)),
-                HighlightCode("Ш Б", Color(0xFF05B80D)),
-                HighlightCode("ExtraBold", Color(0xFFe48def)),
-
-            ),
-            lambdaFun = { AnimationSizeText() },
-            code = """
-@Composable
-fun AnimationSizeText(
-    text: String ="Ш Б",
-){
-
-    // Создает экземпляр [InfiniteTransition] для управления дочерними анимациями
-    val infiniteTransition = rememberInfiniteTransition()
-
-    // Создает дочернюю анимацию типа float
-    val size by
-    infiniteTransition.animateFloat(
-        initialValue = 10f,
-        targetValue = 170f,
-        animationSpec =
-        infiniteRepeatable(
-    // Бесконечное повторение анимации 
-            animation = tween(20000, easing = LinearEasing),
-            repeatMode = RepeatMode.Reverse
-        )
-    )
-
-
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.Black),
-        contentAlignment = Alignment.Center
-    ) {
-        Text (
-            text = text,
-            fontSize = size.sp,
-            color = Color.White,
-            fontWeight = FontWeight.ExtraBold
-            )
-    }
-
-}
-                
-            """.trimIndent()
-        ),
 
         ExampleCode(
             id = 4,
@@ -6163,6 +6074,16 @@ fun AnimationChildren(
                     textUrl = "\uD83D\uDCD6 Developers. animateEnterExit",
                     url = "https://developer.android.com/reference/kotlin/androidx/compose/animation/AnimatedVisibilityScope#(androidx.compose.ui.Modifier).animateEnterExit(androidx.compose.animation.EnterTransition,androidx.compose.animation.ExitTransition,kotlin.String)"
                 ),
+                TextClickLink(
+                    text = "Загрузка изображений ",
+                    textUrl = "\uD83D\uDCD6 Developers. Graphics. Images. Loading",
+                    url = "https://developer.android.com/develop/ui/compose/graphics/images/loading?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Настройка изображения ",
+                    textUrl = "\uD83D\uDCD6 Developers. Graphics. Images. Customize",
+                    url = "https://developer.android.com/develop/ui/compose/graphics/images/customize?hl=ru"
+                ),
 
                 ),
 
@@ -6385,7 +6306,359 @@ Surface(
             ),
 
         ExampleCode(
-            id = 3,
+            title = "Animated Crossfade",
+            comment = """
+|Crossfade| анимирует переход между двумя макетами с помощью анимации плавного перехода. При переключении значения, переданного current параметру, содержимое переключается с помощью плавной анимации.                
+            """.trimIndent(),
+            highlightCode = highCodeList +  listOf(
+                HighlightCode("AnimationVisibility", Color(0xFFffc530)),
+                HighlightCode("AnimatedContent", Color(0xFF3CEE0A)),
+                HighlightCode("16", Color(0xFF5EADD6)),
+            ),
+            lambdaFun = { AnimationCrossfade() },
+            code ="""
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Анимация на основе значений ",
+                    textUrl = "\uD83D\uDCD6 Developers.  animate*AsState",
+                    url = "https://developer.android.com/develop/ui/compose/animation/value-based?hl=ru#updatetransition"
+                ),
+                TextClickLink(
+                    text = "Анимации играют важную роль в современном мобильном приложении, обеспечивая плавный и понятный пользовательский интерфейс.  ",
+                    textUrl = "\uD83D\uDCD6 Developers. Animations in Compose",
+                    url = "https://developer.android.com/develop/ui/compose/animation/introduction"
+                ),
+                TextClickLink(
+                    text = "Модификаторы анимации и составные элементы  ",
+                    textUrl = "\uD83D\uDCD6 Developers. Animation. Composables modifiers",
+                    url = "https://developer.android.com/develop/ui/compose/animation/composables-modifiers?hl=ru"
+                ),
+
+                ),
+
+            ),
+        ExampleCode(
+            title = "Анимация размера контента",
+            comment = """
+Модификатор |animateContentSize| анимирует изменение размера контента.                
+            """.trimIndent(),
+            highlightCode = highCodeList +  listOf(
+                HighlightCode("animateContentSize", Color(0xFF3CEE0A)),
+                HighlightCode("1", Color(0xFF5EADD6)),
+                HighlightCode("6", Color(0xFF5EADD6)),
+                HighlightCode("4", Color(0xFF5EADD6)),
+                HighlightCode("maxLines =", Color(0xFF5EADD6)),
+                HighlightCode("overflow =", Color(0xFF5EADD6)),
+                HighlightCode("onClick =", Color(0xFF5EADD6)),
+                HighlightCode("2", Color(0xFF5EADD6)),
+                HighlightCode("Достоинства Jetpack Compose:", Color(0xFF05B80D)),
+                HighlightCode("Card", Color(0xFF05B80D)),
+                HighlightCode("MAX_VALUE", Color(0xFFe48def)),
+                HighlightCode("Ellipsis", Color(0xFFe48def)),
+            ),
+            nameFun = "AnimationContentSize.kt",
+            lambdaFun = { AnimationContentSize() },
+            code ="""
+    var expanded by remember { mutableStateOf(false) }
+
+    LazyColumn {
+        item {
+            Card(
+                modifier = Modifier
+                    .border(1.dp, MaterialTheme.colorScheme.onBackground)
+                    .padding(16.dp),
+                onClick = { expanded = !expanded }
+            ) {
+                Text (
+                    text = ""${'"'}
+    Достоинства Jetpack Compose:
+    ...
+                    ""${'"'}.trimIndent(),
+                    modifier = Modifier
+                        .padding(4.dp)
+                        .fillMaxWidth()
+                        .animateContentSize(),
+                    maxLines = if (expanded) Int.MAX_VALUE
+                    else 2,
+                    overflow = TextOverflow.Ellipsis,
+
+                )
+            }
+        }
+    }
+                
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Анимация на основе значений ",
+                    textUrl = "\uD83D\uDCD6 Developers.  animate*AsState",
+                    url = "https://developer.android.com/develop/ui/compose/animation/value-based?hl=ru#updatetransition"
+                ),
+                TextClickLink(
+                    text = "Анимации играют важную роль в современном мобильном приложении, обеспечивая плавный и понятный пользовательский интерфейс.  ",
+                    textUrl = "\uD83D\uDCD6 Developers. Animations in Compose",
+                    url = "https://developer.android.com/develop/ui/compose/animation/introduction"
+                ),
+                TextClickLink(
+                    text = "Модификаторы анимации и составные элементы  ",
+                    textUrl = "\uD83D\uDCD6 Developers. Animation. Composables modifiers",
+                    url = "https://developer.android.com/develop/ui/compose/animation/composables-modifiers?hl=ru"
+                ),
+
+                ),
+
+            ),
+
+        ExampleCode(
+            title = "Анимация значений",
+            comment = """
+Функции |animate*AsState| — это простейшие API-интерфейсы анимации в Compose для анимации одного значения. Вы указываете только целевое значение (или конечное значение), и API запускает анимацию от текущего значения до указанного значения.
+
+Не нужно создавать экземпляр какого-либо класса анимации или обрабатывать прерывания. Под капотом объект анимации (а именно, экземпляр Animatable ) будет создан и запомнен в месте вызова с первым целевым значением в качестве начального значения. С этого момента каждый раз, когда вы указываете этому составному элементу другое целевое значение, автоматически запускается анимация для достижения этого значения. Если в полете уже есть анимация, она начинается с текущего значения (и скорости) и анимируется в направлении целевого значения. Во время анимации этот составной объект перекомпоновывается и возвращает обновленное значение анимации каждый кадр.
+
+В стандартной комплектации |Compose| предоставляет функции |animate*AsState| для 
+|Float| , |Color| , |Dp| , |Size| , |Offset| , |Rect| , |Int| , |IntOffset| и |IntSize| . 
+
+Вы можете легко добавить поддержку других типов данных, предоставив |TwoWayConverter| для |animateValueAsState| , который принимает универсальный тип.
+
+Вы можете настроить характеристики анимации, предоставив |AnimationSpec|.
+                
+            """.trimIndent(),
+            highlightCode = highCodeList + listOf(
+                HighlightCode("Animation_AsState", Color(0xFFffc530)),
+                HighlightCode("animateIntAsState", Color(0xFF3CEE0A)),
+                HighlightCode("animateColorAsState", Color(0xFF3CEE0A)),
+                HighlightCode("50", Color(0xFF5EADD6)),
+                HighlightCode("2", Color(0xFF5EADD6)),
+                HighlightCode("1", Color(0xFF5EADD6)),
+                HighlightCode("4", Color(0xFF5EADD6)),
+                HighlightCode("16", Color(0xFF5EADD6)),
+                HighlightCode("durationMillis = 800", Color(0xFF5EADD6)),
+                HighlightCode("maxLines =", Color(0xFF5EADD6)),
+                HighlightCode("overflow =", Color(0xFF5EADD6)),
+                HighlightCode("onClick =", Color(0xFF5EADD6)),
+                HighlightCode("easing =", Color(0xFF5EADD6)),
+                HighlightCode("targetValue =", Color(0xFF5EADD6)),
+                HighlightCode("label =", Color(0xFF5EADD6)),
+                HighlightCode("Функции animate*AsState ...", Color(0xFF05B80D)),
+                HighlightCode("Card", Color(0xFF05B80D)),
+                HighlightCode("FastOutSlowInEasing", Color(0xFFe48def)),
+                HighlightCode("Ellipsis", Color(0xFFe48def)),
+                HighlightCode("secondary", Color(0xFFe48def)),
+                ),
+            nameFun = "Animation_AsState.kt",
+            lambdaFun = { Animation_AsState() },
+            code = """
+@Composable
+fun Animation_AsState(){
+
+    var expanded by remember { mutableStateOf(false) }
+
+    val maxLines: Int by animateIntAsState(
+        targetValue = if (expanded) 50 else 2,
+        animationSpec = tween(durationMillis = 800, easing = FastOutSlowInEasing),
+        label = "maxLines"
+    )
+
+    val color by animateColorAsState(
+        targetValue = if (expanded) MaterialTheme.colorScheme.secondary
+        else MaterialTheme.colorScheme.background,
+        label = "",
+    )
+
+    LazyColumn {
+        item {
+            Card(
+                modifier = Modifier
+                    .border(1.dp, MaterialTheme.colorScheme.onBackground)
+                    .background(color)
+                    .padding(16.dp),
+                onClick = { expanded = !expanded }
+            ) {
+                Text (
+                    text = ""${'"'}
+ Функции animate*AsState ... 
+                    ""${'"'}.trimIndent(),
+                    modifier = Modifier
+                        .padding(4.dp)
+                        .fillMaxWidth(),
+                    maxLines = maxLines,
+                    overflow = TextOverflow.Ellipsis,
+
+                    )
+            }
+        }
+    }
+}
+                
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Анимация на основе значений  ",
+                    textUrl = "\uD83D\uDCD6 Developers. Animation. Value",
+                    url = "https://developer.android.com/develop/ui/compose/animation/value-based?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Анимация с помощью параметра AnimationSpec  ",
+                    textUrl = "\uD83D\uDCD6 Developers. Animation. Customize",
+                    url = "https://developer.android.com/develop/ui/compose/animation/customize?hl=ru#animationspec"
+                ),
+                TextClickLink(
+                    text = "Анимации в Compose",
+                    textUrl = "\uD83D\uDCD6 Animations in Compose ",
+                    url = "https://developer.android.com/develop/ui/compose/animation/introduction"
+                ),
+            ),
+
+        ),
+
+        ExampleCode(
+            title = "Повторение анимации",
+            comment = """
+|repeatable| многократно запускает анимацию на основе продолжительности (например, tween или keyframes ), пока не достигнет указанного количества итераций. 
+
+Вы можете передать параметр |repeatMode| , чтобы указать, должна ли анимация повторяться, начиная с начала ( RepeatMode.|Restart| ) или с конца ( RepeatMode.|Reverse| )
+
+            """.trimIndent(),
+            highlightCode = highCodeList + listOf(
+                HighlightCode("Animation_AsState", Color(0xFFffc530)),
+                HighlightCode("animateIntAsState", Color(0xFF3CEE0A)),
+                HighlightCode("animateColorAsState", Color(0xFF3CEE0A)),
+                HighlightCode("50", Color(0xFF5EADD6)),
+                HighlightCode("2", Color(0xFF5EADD6)),
+                HighlightCode("1", Color(0xFF5EADD6)),
+                HighlightCode("4", Color(0xFF5EADD6)),
+                HighlightCode("16", Color(0xFF5EADD6)),
+                HighlightCode("durationMillis = 800", Color(0xFF5EADD6)),
+                HighlightCode("maxLines =", Color(0xFF5EADD6)),
+                HighlightCode("overflow =", Color(0xFF5EADD6)),
+                HighlightCode("onClick =", Color(0xFF5EADD6)),
+                HighlightCode("easing =", Color(0xFF5EADD6)),
+                HighlightCode("targetValue =", Color(0xFF5EADD6)),
+                HighlightCode("label =", Color(0xFF5EADD6)),
+                HighlightCode("Функции animate*AsState ...", Color(0xFF05B80D)),
+                HighlightCode("Card", Color(0xFF05B80D)),
+                HighlightCode("FastOutSlowInEasing", Color(0xFFe48def)),
+                HighlightCode("Ellipsis", Color(0xFFe48def)),
+                HighlightCode("secondary", Color(0xFFe48def)),
+            ),
+            nameFun = "Animation_AsStateRepeatable.kt",
+            lambdaFun = { Animation_AsStateRepeatable() },
+            code = """
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Анимация на основе значений  ",
+                    textUrl = "\uD83D\uDCD6 Developers. Animation. Value",
+                    url = "https://developer.android.com/develop/ui/compose/animation/value-based?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Анимация с помощью параметра AnimationSpec  ",
+                    textUrl = "\uD83D\uDCD6 Developers. Animation. Customize",
+                    url = "https://developer.android.com/develop/ui/compose/animation/customize?hl=ru#animationspec"
+                ),
+                TextClickLink(
+                    text = "Анимации в Compose",
+                    textUrl = "\uD83D\uDCD6 Animations in Compose ",
+                    url = "https://developer.android.com/develop/ui/compose/animation/introduction"
+                ),
+            ),
+
+            ),
+        ExampleCode(
+            title = "Бесконечная анимация",
+            comment = """
+Экземпляр |InfiniteTransition| создает бесконечно повторяющуюся анимацию. Используется для управления дочерними анимациями.
+
+    val infiniteTransition = rememberInfiniteTransition()
+
+Для анимации размера шрифта необходимо создать дочернюю анимацию типа |float|, как часть |InfiniteTransition|.
+
+val size by
+    infiniteTransition.animateFloat(
+        |initialValue| = 10f, |! Начальный размер шрифта| 
+        |targetValue| = 120f, |! Конечный размер шрифта|
+        animationSpec =
+        infiniteRepeatable(
+            |!// Бесконечное повторение анимации длительностью 10000 мс с использованием кривой замедления LinearOutSlowInEasing|
+            animation = tween(10000, easing = LinearEasing),
+            |!// После каждой итерации анимации (т. е. каждые 10000 мс) анимация будет начинаться  реверсном порядке, т.е. с [targetValue]|
+            repeatMode = RepeatMode.Reverse
+        )
+    )
+     
+            """.trimIndent(),
+            nameFun = "AnimationInfiniteTransition.kt",
+            highlightCode = highCodeList + listOf(
+                HighlightCode("AnimationInfiniteTransition", Color(0xFFffc530)),
+                HighlightCode("fontSize", Color(0xFF3CEE0A)),
+                HighlightCode("initialValue", Color(0xFF3CEE0A)),
+                HighlightCode("targetValue", Color(0xFF3CEE0A)),
+                HighlightCode("10F", Color(0xFF5EADD6)),
+                HighlightCode("170f", Color(0xFF5EADD6)),
+                HighlightCode("20000", Color(0xFF5EADD6)),
+                HighlightCode("Ш Б", Color(0xFF05B80D)),
+                HighlightCode("ExtraBold", Color(0xFFe48def)),
+
+                ),
+            lambdaFun = { AnimationInfiniteTransition() },
+            code = """
+@Composable
+fun AnimationInfiniteTransition(
+    text: String ="Ш Б",
+){
+
+    // Создает экземпляр [InfiniteTransition] для управления дочерними анимациями
+    val infiniteTransition = rememberInfiniteTransition()
+
+    // Создает дочернюю анимацию типа float
+    val size by
+    infiniteTransition.animateFloat(
+        initialValue = 10f,
+        targetValue = 170f,
+        animationSpec =
+        infiniteRepeatable(
+    // Бесконечное повторение анимации 
+            animation = tween(20000, easing = LinearEasing),
+            repeatMode = RepeatMode.Reverse
+        )
+    )
+
+
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.Black),
+        contentAlignment = Alignment.Center
+    ) {
+        Text (
+            text = text,
+            fontSize = size.sp,
+            color = Color.White,
+            fontWeight = FontWeight.ExtraBold
+            )
+    }
+
+}
+                
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Больше информации смотрите в ",
+                    textUrl = "\uD83D\uDCD6 Стиль текста",
+                    url = "https://developer.android.com/develop/ui/compose/text/style-text?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Анимации в Compose",
+                    textUrl = "\uD83D\uDCD6 Animations in Compose ",
+                    url = "https://developer.android.com/develop/ui/compose/animation/introduction"
+                ),
+            ),
+
+            ),
+
+        ExampleCode(
             title = "Рисование текста на холсте",
             comment = """
 Функция |Canvas| позволяет рисовать фигуры на холсте приложения.

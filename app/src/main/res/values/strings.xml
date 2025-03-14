@@ -26,4 +26,6 @@
     <string name="welcome_html"> Hello, %1$s! &lt;br> You have &lt;b>%2$d new messages&lt;/b>.</string>
     <string name="welcome_to_b_android_b"><![CDATA[Welcome to <b>Android</b>!]]></string>
 
+    <string name="temperature">t = %1$d °C</string>
+
 </resources>

@@ -160,13 +160,9 @@ fun AnimationContent() {
                         }, label = "size transform"
                     ) { targetExpanded ->
                         if (targetExpanded) {
-                            ExpandedText(
-                                { expanded = !expanded },
-                            )
+                            ExpandedText()
                         } else {
-                            ContentIcon(
-                                { expanded = !expanded },
-                            )
+                            ContentIcon()
                         }
                     }
                 }
@@ -178,14 +174,12 @@ fun AnimationContent() {
     }
 }
 @Composable
-fun ContentIcon(
-    onClick: () -> Unit = {},
+private fun ContentIcon(
     color: Color = MaterialTheme.colorScheme.primary
 ){
     Row(
         modifier = Modifier
             .background(color)
-            .clickable { onClick() }
             .padding(16.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
@@ -203,14 +197,12 @@ fun ContentIcon(
 }
 
 @Composable
-fun ExpandedText(
-    onClick: () -> Unit = {},
+private fun ExpandedText(
     color: Color = MaterialTheme.colorScheme.outlineVariant
 ){
     Column(
         modifier = Modifier
             .background(color)
-            .clickable { onClick() }
             .fillMaxWidth()
     ) {
         Row(
