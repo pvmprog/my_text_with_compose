@@ -56,7 +56,6 @@ fun CodeScreen(
         modifier = modifier
             .background(MaterialTheme.colorScheme.secondaryContainer),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
     ) {
         Row(
             modifier = modifier

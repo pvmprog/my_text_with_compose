@@ -53,7 +53,7 @@ import com.pvmprog.mytextwithcompose.ui.theme.MyTextWithComposeTheme
 fun AnimationChildren(
     isScreenExpanded: Boolean = false,
 ) {
-    var visible by remember { mutableStateOf(true) }
+    var visible by remember { mutableStateOf(false) }
     val aspectModifier = if (isScreenExpanded) Modifier.aspectRatio(1.5f)
     else Modifier.aspectRatio(1f)
     Column(

@@ -189,7 +189,7 @@ fun Examplescreen(
         Surface(
             modifier = Modifier
                 .padding(it)
-                .fillMaxSize(),
+                .fillMaxWidth(),
             color = MaterialTheme.colorScheme.background
         ) {
 
@@ -206,21 +206,13 @@ fun Examplescreen(
 
 //Code
                 2 -> {
-                    LazyColumn(
+                    CodeScreen(
                         modifier = Modifier
-                            .fillMaxSize()
-                    ) {
-                        item {
-                            CodeScreen(
-                                modifier = Modifier
-                                    .fillMaxWidth(),
-                                item = example,
-                                fontSizeCode = fontSizeCode,
-                                onIntentClicked = onIntentClicked,
-                            )
-
-                        }
-                    }
+                            .fillMaxWidth(),
+                        item = example,
+                        fontSizeCode = fontSizeCode,
+                        onIntentClicked = onIntentClicked,
+                    )
                 }
 
 //theory+link

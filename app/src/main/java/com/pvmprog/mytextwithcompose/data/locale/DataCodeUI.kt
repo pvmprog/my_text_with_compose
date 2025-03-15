@@ -439,89 +439,6 @@ fun Modifier.|padding|(
         ),
 
         ExampleCode(
-            title = "Масштаб шрифта",
-            comment = """
-LocalDensity.current.|fontScale| является маштабным коэффициентом шрифта, который может установить пользователь в настройках смартфона. Приложения должны масштабировать текст до размера, указанного пользователями в системных настройках. Это особенно важно для пользователей с нарушениями зрения.
-
-Величина свойства |fontSize| должна быть в масштабируемых пикселях |sp|             
-             
-Рекомендовано определить свойство |fontSize| внутри объекта |Typography|, чтобы обеспечить единообразие во всем приложении.
-
-
-            """.trimIndent(),
-            highlightCode = highCodeList + listOf(
-                HighlightCode(".nonScaledSp", Color(0xFFffc530)),
-                HighlightCode("Масштаб текущего размера шрифта:", Color(0xFF05B80D)),
-                HighlightCode(" nonScaledSp", Color(0xFF05B80D)),
-                HighlightCode(".current", Color(0xFF05B80D)),
-                HighlightCode("LocalDensity", Color(0xFFe48def)),
-                HighlightCode(".Justify", Color(0xFFe48def)),
-                HighlightCode(".fontScale", Color(0xFF3CEE0A)),
-                HighlightCode("return", Color(0xFFB84E18)),
-                HighlightCode("20", Color(0xFF00a9ff)),
-                HighlightCode("16", Color(0xFF00a9ff)),
-                HighlightCode("this", Color(0xFFB84E18)),
-                HighlightCode(".em", Color(0xFFe48def)),
-
-                ),
-            lambdaFun = { FontScale() },
-            nameFun = "FontScale.kt",
-            code ="""
-        //...        
-        Text(
-            text = "Масштаб шрифта : ${'$'}{LocalDensity.current.fontScale}",
-            textDecoration = TextDecoration.Underline,
-            fontSize = fontSizeSp.sp
-        )
-        Text(
-            modifier = Modifier
-                .fillMaxWidth(),
-            text = "Text [fontSize = 20sp]\n зависит от маштаба",
-            textAlign = TextAlign.Center,
-            fontSize = fontSizeSp.sp
-        )
-        Text(
-            modifier = Modifier
-                .fillMaxWidth(),
-            text = "Text [fontSize = 20nonScaledSp()]\n не зависит от маштаба",
-            textAlign = TextAlign.Center,
-            fontSize = fontSizeSp. nonScaledSp()
-        )
-        Text(
-            modifier = Modifier
-                .fillMaxWidth(),
-            text = "Text [fontSize = 4.6em]\n не зависит от маштаба",
-            textAlign = TextAlign.Center,
-            fontSize = 4.6.em
-        )
-        //...
-
-        @Composable
-        fun Int.nonScaledSp(): TextUnit {
-            val value: Int = this
-            return with(LocalDensity.current) {
-                val fontScale = this.fontScale
-                val textSize = value / fontScale
-                textSize.sp
-            }
-        }
-            """.trimIndent(),
-            links = listOf(
-                TextClickLink(
-                    text = "Доступность в Jetpack Compose ",
-                    textUrl = "\uD83D\uDCD6 Семантика в Compose ",
-                    url = "https://developer.android.com/develop/ui/compose/accessibility?hl=ru#custom-actions"
-                ),
-                TextClickLink(
-                    text = "Текущие предпочтения пользователя относительно коэффициента масштабирования шрифтов.",
-                    textUrl = "\uD83D\uDCD6 Developers. FontScaling ",
-                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/unit/FontScaling"
-                ),
-            ),
-        ),
-
-
-        ExampleCode(
             id = 4,
             title = "Типографика Material 3",
             comment = """
@@ -1166,148 +1083,6 @@ fun SimpleAlignJustify() {
             ),
 
             ),
-
-        ExampleCode(
-            id = 1,
-            title = "Доступность текста",
-            comment = """
-Свойство |liveRegion| из модификатора блока |semantics| используется для уведомления об изменениях состояния |Composable| 
-
-Это может быть полезно для людей с ограниченым зрением.
-
-Активная область указывает службам доступности, что они должны автоматически уведомлять пользователя об изменениях в описании или тексте содержимого узла или в описаниях или тексте содержимого дочерних узлов. 
-
-Например, в случае активности |!TalkBack| программа чтения с экрана прочтет сообщение вслух.
-
-|TalkBack| – это программа чтения с экрана от |Google|, предустановленная на устройствах |Android|. Она позволяет управлять устройством, не смотря на экран.                
-                
-Можно использовать один из двух вариантов для |liveRegion|:
-
- LiveRegionMode.|Polite| - режим региона в реальном времени, указывающий, что службы специальных возможностей должны объявлять об изменениях в этом узле;
-
- LiveRegionMode.|Assertive| - режим региона в реальном времени, указывающий, что службы специальных возможностей должны прерывать текущую речь, чтобы немедленно объявить об изменениях в этом узле.
-
- 
- Ключевые шаги по улучшению доступности приложения |Compose|:
-
-1)|!Учитывайте минимальные размеры сенсорных объектов|. Убедитесь, что кликабельные и интерактивные элементы имеют размер не менее |48| dp. Это соответствует рекомендациям по доступности |Material Design|.
-
-2)|!Добавьте метки кликов! . Опишите поведение щелчка с помощью модификатора |clickable| или модификатора |semantics| , если у вас нет прямого доступа к |clickable| .
-
-3)|!Опишите визуальные элементы| . Используйте параметр |contentDescription| для текстового описания значков и изображений. Установите для |contentDescription| значение |null| для декоративных элементов.
-
-4)|!Определить заголовки| . Используйте свойство модификатора |semantics| , чтобы пометить элементы как заголовки для упрощения навигации.
-
-5)|!Управляйте порядком обхода| . Используйте |isTraversalGroup| , чтобы отметить группы элементов, которые следует читать вместе. Используйте |traversalIndex| для дальнейшей настройки порядка элементов в этих группах.
-
-
-            """.trimIndent(),
-            highlightCode = highCodeList + listOf(
-                HighlightCode("SemanticsText", Color(0xFFffc530)),
-                HighlightCode("@Preview", Color(0xFFb2c231)),
-                HighlightCode("Измененный текст", Color(0xFF05B80D)),
-                HighlightCode("remember ", Color(0xFF05B80D)),
-                HighlightCode("rememberScrollState", Color(0xFF05B80D)),
-                HighlightCode("Генерация числа случайным образом", Color(0xFF05B80D)),
-                HighlightCode("Generation", Color(0xFF05B80D)),
-                HighlightCode("bodySmall", Color(0xFFe48def)),
-                HighlightCode("liveRegion =", Color(0xFFe48def)),
-                HighlightCode("contentDescription =", Color(0xFFe48def)),
-                HighlightCode(".Polite", Color(0xFFe48def)),
-                HighlightCode("talkback_generation", Color(0xFFe48def)),
-                HighlightCode("Justify", Color(0xFFe48def)),
-                HighlightCode("20", Color(0xFF00a9ff)),
-                HighlightCode("16", Color(0xFF00a9ff)),
-                HighlightCode("1..50", Color(0xFF00a9ff)),
-                HighlightCode(".semantics", Color(0xFF3CEE0A)),
-
-                ),
-            lambdaFun = { SemanticsText() },
-
-            code ="""
-@Composable
-fun SemanticsText(){
-
-    var changingText by remember {
-        mutableStateOf("Измененный текст")
-    }
-
-    Column(
-        modifier = Modifier
-            .padding(16.dp)
-            .verticalScroll(rememberScrollState())
-            .fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-        Text(
-            text = changingText,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.semantics {
-                liveRegion = LiveRegionMode.Polite
-                contentDescription = changingText
-            }
-        )
-
-        Button(
-            modifier = Modifier
-                .padding(all = 16.dp),
-            onClick = {},
-            shape = RoundedCornerShape(20.dp)
-        ) {
-            Text(
-                modifier = Modifier
-                    .clickable(
-                        onClickLabel = "Генерация числа случайным образом",
-                        onClick = {
-                            val num = (1..50).random()
-                            changingText = num.toString()
-                        }
-                    ),
-                text = "Generation",
-                style = MaterialTheme.typography.bodySmall,
-            )
-
-        }
-
-        Text(
-            text = stringResource(R.string.talkback_generation),
-            modifier = Modifier.fillMaxWidth(),
-            textAlign = TextAlign.Justify,
-        )
-
-    }
-
-}
-            """.trimIndent(),
-            links = listOf(
-                TextClickLink(
-                    text = "Доступность в Jetpack Compose ",
-                    textUrl = "\uD83D\uDCD6 Семантика в Compose ",
-                    url = "https://developer.android.com/develop/ui/compose/accessibility?hl=ru#custom-actions"
-                ),
-                TextClickLink(
-                    text = "Ключевые шаги по улучшению доступности Compose\n ",
-                    textUrl = "\uD83D\uDCD6 Developers. Key steps ",
-                    url = "https://developer.android.com/develop/ui/compose/accessibility/key-steps?hl=ru#add-click-labels"
-                ),
-                TextClickLink(
-                    text = "Больше информации смотрите в ",
-                    textUrl = "\uD83D\uDCD6 Developers. LiveRegionMode",
-                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/semantics/LiveRegionMode"
-                ),
-                TextClickLink(
-                    text = "Адаптируем Android-приложение для незрячих людей.  ",
-                    textUrl = "\uD83D\uDCD6 https://habr.com/...",
-                    url = "https://habr.com/ru/companies/surfstudio/articles/694622/"
-                ),
-                TextClickLink(
-                    text = "Больше информации смотрите в ",
-                    textUrl = "\uD83D\uDCD6 Developers. Accessibility",
-                    url = "https://developer.android.com/develop/ui/compose/accessibility/semantics?hl=ru"
-                ),
-            ),
-        ),
 
 
         ExampleCode(
@@ -6931,6 +6706,231 @@ fun DrawAnimeScaleAText(
                 
             """.trimIndent()
         ),
+
+        ExampleCode(
+            id = 1,
+            title = "Доступность текста",
+            comment = """
+Свойство |liveRegion| из модификатора блока |semantics| используется для уведомления об изменениях состояния |Composable| 
+
+Это может быть полезно для людей с ограниченым зрением.
+
+Активная область указывает службам доступности, что они должны автоматически уведомлять пользователя об изменениях в описании или тексте содержимого узла или в описаниях или тексте содержимого дочерних узлов. 
+
+Например, в случае активности |!TalkBack| программа чтения с экрана прочтет сообщение вслух.
+
+|TalkBack| – это программа чтения с экрана от |Google|, предустановленная на устройствах |Android|. Она позволяет управлять устройством, не смотря на экран.                
+                
+Можно использовать один из двух вариантов для |liveRegion|:
+
+ LiveRegionMode.|Polite| - режим региона в реальном времени, указывающий, что службы специальных возможностей должны объявлять об изменениях в этом узле;
+
+ LiveRegionMode.|Assertive| - режим региона в реальном времени, указывающий, что службы специальных возможностей должны прерывать текущую речь, чтобы немедленно объявить об изменениях в этом узле.
+
+ 
+ Ключевые шаги по улучшению доступности приложения |Compose|:
+
+1)|!Учитывайте минимальные размеры сенсорных объектов|. Убедитесь, что кликабельные и интерактивные элементы имеют размер не менее |48| dp. Это соответствует рекомендациям по доступности |Material Design|.
+
+2)|!Добавьте метки кликов! . Опишите поведение щелчка с помощью модификатора |clickable| или модификатора |semantics| , если у вас нет прямого доступа к |clickable| .
+
+3)|!Опишите визуальные элементы| . Используйте параметр |contentDescription| для текстового описания значков и изображений. Установите для |contentDescription| значение |null| для декоративных элементов.
+
+4)|!Определить заголовки| . Используйте свойство модификатора |semantics| , чтобы пометить элементы как заголовки для упрощения навигации.
+
+5)|!Управляйте порядком обхода| . Используйте |isTraversalGroup| , чтобы отметить группы элементов, которые следует читать вместе. Используйте |traversalIndex| для дальнейшей настройки порядка элементов в этих группах.
+
+
+            """.trimIndent(),
+            highlightCode = highCodeList + listOf(
+                HighlightCode("SemanticsText", Color(0xFFffc530)),
+                HighlightCode("@Preview", Color(0xFFb2c231)),
+                HighlightCode("Измененный текст", Color(0xFF05B80D)),
+                HighlightCode("remember ", Color(0xFF05B80D)),
+                HighlightCode("rememberScrollState", Color(0xFF05B80D)),
+                HighlightCode("Генерация числа случайным образом", Color(0xFF05B80D)),
+                HighlightCode("Generation", Color(0xFF05B80D)),
+                HighlightCode("bodySmall", Color(0xFFe48def)),
+                HighlightCode("liveRegion =", Color(0xFFe48def)),
+                HighlightCode("contentDescription =", Color(0xFFe48def)),
+                HighlightCode(".Polite", Color(0xFFe48def)),
+                HighlightCode("talkback_generation", Color(0xFFe48def)),
+                HighlightCode("Justify", Color(0xFFe48def)),
+                HighlightCode("20", Color(0xFF00a9ff)),
+                HighlightCode("16", Color(0xFF00a9ff)),
+                HighlightCode("1..50", Color(0xFF00a9ff)),
+                HighlightCode(".semantics", Color(0xFF3CEE0A)),
+
+                ),
+            lambdaFun = { SemanticsText() },
+
+            code ="""
+@Composable
+fun SemanticsText(){
+
+    var changingText by remember {
+        mutableStateOf("Измененный текст")
+    }
+
+    Column(
+        modifier = Modifier
+            .padding(16.dp)
+            .verticalScroll(rememberScrollState())
+            .fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        Text(
+            text = changingText,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.semantics {
+                liveRegion = LiveRegionMode.Polite
+                contentDescription = changingText
+            }
+        )
+
+        Button(
+            modifier = Modifier
+                .padding(all = 16.dp),
+            onClick = {},
+            shape = RoundedCornerShape(20.dp)
+        ) {
+            Text(
+                modifier = Modifier
+                    .clickable(
+                        onClickLabel = "Генерация числа случайным образом",
+                        onClick = {
+                            val num = (1..50).random()
+                            changingText = num.toString()
+                        }
+                    ),
+                text = "Generation",
+                style = MaterialTheme.typography.bodySmall,
+            )
+
+        }
+
+        Text(
+            text = stringResource(R.string.talkback_generation),
+            modifier = Modifier.fillMaxWidth(),
+            textAlign = TextAlign.Justify,
+        )
+
+    }
+
+}
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Доступность в Jetpack Compose ",
+                    textUrl = "\uD83D\uDCD6 Семантика в Compose ",
+                    url = "https://developer.android.com/develop/ui/compose/accessibility?hl=ru#custom-actions"
+                ),
+                TextClickLink(
+                    text = "Ключевые шаги по улучшению доступности Compose\n ",
+                    textUrl = "\uD83D\uDCD6 Developers. Key steps ",
+                    url = "https://developer.android.com/develop/ui/compose/accessibility/key-steps?hl=ru#add-click-labels"
+                ),
+                TextClickLink(
+                    text = "Больше информации смотрите в ",
+                    textUrl = "\uD83D\uDCD6 Developers. LiveRegionMode",
+                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/semantics/LiveRegionMode"
+                ),
+                TextClickLink(
+                    text = "Адаптируем Android-приложение для незрячих людей.  ",
+                    textUrl = "\uD83D\uDCD6 https://habr.com/...",
+                    url = "https://habr.com/ru/companies/surfstudio/articles/694622/"
+                ),
+                TextClickLink(
+                    text = "Больше информации смотрите в ",
+                    textUrl = "\uD83D\uDCD6 Developers. Accessibility",
+                    url = "https://developer.android.com/develop/ui/compose/accessibility/semantics?hl=ru"
+                ),
+            ),
+        ),
+
+        ExampleCode(
+            title = "Масштаб шрифта",
+            comment = """
+LocalDensity.current.|fontScale| является маштабным коэффициентом шрифта, который может установить пользователь в настройках смартфона. Приложения должны масштабировать текст до размера, указанного пользователями в системных настройках. Это особенно важно для пользователей с нарушениями зрения.
+
+Величина свойства |fontSize| должна быть в масштабируемых пикселях |sp|             
+             
+Рекомендовано определить свойство |fontSize| внутри объекта |Typography|, чтобы обеспечить единообразие во всем приложении.
+
+
+            """.trimIndent(),
+            highlightCode = highCodeList + listOf(
+                HighlightCode(".nonScaledSp", Color(0xFFffc530)),
+                HighlightCode("Масштабный коэф.", Color(0xFF05B80D)),
+                HighlightCode(" nonScaledSp", Color(0xFF05B80D)),
+                HighlightCode(".current", Color(0xFF05B80D)),
+                HighlightCode("LocalDensity", Color(0xFFe48def)),
+                HighlightCode(".Justify", Color(0xFFe48def)),
+                HighlightCode(".fontScale", Color(0xFF3CEE0A)),
+                HighlightCode("return", Color(0xFFB84E18)),
+                HighlightCode("18.", Color(0xFF00a9ff)),
+                HighlightCode("16", Color(0xFF00a9ff)),
+                HighlightCode("this", Color(0xFFB84E18)),
+                HighlightCode(".em", Color(0xFFe48def)),
+
+                ),
+            lambdaFun = { FontScale() },
+            nameFun = "FontScale.kt",
+            code ="""
+        //...        
+        Text(
+            text = "Масштабный коэф. : ${'$'}{LocalDensity.current.fontScale}",
+            textDecoration = TextDecoration.Underline,
+            fontSize = 18.sp
+        )
+        Text(
+            modifier = Modifier
+                .fillMaxWidth(),
+            text = "Text [fontSize = 18sp]\n зависит от маштаба",
+            textAlign = TextAlign.Center,
+            fontSize = 18.sp
+        )
+        Text(
+            modifier = Modifier
+                .fillMaxWidth(),
+            text = "Text [fontSize = 18nonScaledSp()]\n не зависит от маштаба",
+            textAlign = TextAlign.Center,
+            fontSize = 18. nonScaledSp()
+        )
+        Text(
+            modifier = Modifier
+                .fillMaxWidth(),
+            text = "Text [fontSize = 4.6em]\n не зависит от маштаба",
+            textAlign = TextAlign.Center,
+            fontSize = 4.6.em
+        )
+        //...
+
+        @Composable
+        fun Int.nonScaledSp(): TextUnit {
+            val value: Int = this
+            return with(LocalDensity.current) {
+                val fontScale = this.fontScale
+                val textSize = value / fontScale
+                textSize.sp
+            }
+        }
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Доступность в Jetpack Compose ",
+                    textUrl = "\uD83D\uDCD6 Семантика в Compose ",
+                    url = "https://developer.android.com/develop/ui/compose/accessibility?hl=ru#custom-actions"
+                ),
+                TextClickLink(
+                    text = "Текущие предпочтения пользователя относительно коэффициента масштабирования шрифтов.",
+                    textUrl = "\uD83D\uDCD6 Developers. FontScaling ",
+                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/unit/FontScaling"
+                ),
+            ),
+        ),
+
 
 
 
