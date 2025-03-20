@@ -1,7 +1,6 @@
-package com.pvmprog.mytextwithcompose.data.locale
+package com.pvmprog.mytextwithcompose.ui.service.translate_old
 
 import androidx.compose.ui.graphics.Color
-import com.pvmprog.mytextwithcompose.data.model.HighlightCode
 
 object DataHighCode {
     val highCodeList = listOf(

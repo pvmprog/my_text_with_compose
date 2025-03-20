@@ -1,8 +1,7 @@
-package com.pvmprog.mytextwithcompose.ui.service
+package com.pvmprog.mytextwithcompose.ui.service.translate_old
 
 import android.content.res.Configuration
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -32,12 +31,11 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.pvmprog.mytextwithcompose.R
-import com.pvmprog.mytextwithcompose.data.model.HighlightCode
 import com.pvmprog.mytextwithcompose.ui.theme.Cabin
 import com.pvmprog.mytextwithcompose.ui.theme.MyTextWithComposeTheme
 
 @Composable
-fun OutTextCode(
+fun OutTextCodeOld(
     message: String,
     highlight: List<HighlightCode> = listOf(),
     style: TextStyle = MaterialTheme.typography.labelSmall,
@@ -245,7 +243,7 @@ fun OutTextCode(
 @Composable
 fun OutTextCodePreview() {
     MyTextWithComposeTheme {
-        OutTextCode(
+        OutTextCodeOld(
             message = """
 import java.text.SimpleDateFormat
 import java.util.*                

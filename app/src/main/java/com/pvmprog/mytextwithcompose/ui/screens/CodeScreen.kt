@@ -6,7 +6,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -15,7 +14,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -35,7 +33,9 @@ import com.pvmprog.mytextwithcompose.data.Constants.defaultFontSizeCode
 import com.pvmprog.mytextwithcompose.data.Constants.githubExamples
 import com.pvmprog.mytextwithcompose.data.locale.DataCodeUI
 import com.pvmprog.mytextwithcompose.data.model.ExampleCode
-import com.pvmprog.mytextwithcompose.ui.service.OutTextCode
+import com.pvmprog.mytextwithcompose.ui.service.tranlate_new.HighlightColor
+import com.pvmprog.mytextwithcompose.ui.service.tranlate_new.OutTextCodeNew
+import com.pvmprog.mytextwithcompose.ui.service.translate_old.OutTextCodeOld
 import com.pvmprog.mytextwithcompose.ui.theme.MyTextWithComposeTheme
 
 @Composable
@@ -86,11 +86,20 @@ fun CodeScreen(
             )
         }
         Spacer(modifier = spacerModifier)
-        OutTextCode(
+/*
+        OutTextCodeOld(
             message = item.code,
             highlight = item.highlightCode,
             fontSizeCode = fontSizeCode.sp
         )
+
+ */
+        OutTextCodeNew(
+            message = DataCodeUI.codeUI[0].code,
+            listName = DataCodeUI.codeUI[0].highlightName,
+            fontSizeCode = fontSizeCode.sp,
+        )
+
     }
 }
 @Preview("Light Theme", showBackground = true)

@@ -1,4 +1,4 @@
-package com.pvmprog.mytextwithcompose.data.model
+package com.pvmprog.mytextwithcompose.ui.service.translate_old
 
 import androidx.compose.ui.graphics.Color
 

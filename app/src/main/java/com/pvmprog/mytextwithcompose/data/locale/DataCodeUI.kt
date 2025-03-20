@@ -9,9 +9,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.pvmprog.mytextwithcompose.data.locale.DataHighCode.highCodeList
+import com.pvmprog.mytextwithcompose.ui.service.translate_old.DataHighCode.highCodeList
 import com.pvmprog.mytextwithcompose.data.model.ExampleCode
-import com.pvmprog.mytextwithcompose.data.model.HighlightCode
+import com.pvmprog.mytextwithcompose.ui.service.translate_old.HighlightCode
 import com.pvmprog.mytextwithcompose.data.model.TextClickLink
 import com.pvmprog.mytextwithcompose.ui.examples.AnimationBgGradient
 import com.pvmprog.mytextwithcompose.ui.examples.AnimationChildren
@@ -68,6 +68,7 @@ import com.pvmprog.mytextwithcompose.ui.examples.TextFontFamalyAlternate
 import com.pvmprog.mytextwithcompose.ui.examples.TextFontFamily
 import com.pvmprog.mytextwithcompose.ui.examples.TextLineHeight
 import com.pvmprog.mytextwithcompose.ui.examples.TypographyStyles
+import com.pvmprog.mytextwithcompose.ui.service.tranlate_new.HighlightColor
 
 object DataCodeUI {
     val codeUI: List<ExampleCode> = listOf(
@@ -139,6 +140,9 @@ object DataCodeUI {
                 HighlightCode("1", Color(0xFF2DB8FF)),
 
                 ),
+            highlightName = listOf(
+                HighlightColor("Simple",11)
+            ),
             nameFun = "Simples.kt#L48-L63",
             lambdaFun =  @Composable { Simple() },
             code ="""
@@ -277,6 +281,9 @@ fun Modifier.|padding|(
                 HighlightCode(".padding ", Color(0xFF3CEE0A)),
 
                 ),
+            highlightName = listOf(
+                HighlightColor("SimpleWithPadding",11)
+            ),
             lambdaFun = { SimpleWithPadding() },
             nameFun = "Simples.kt#L66-L85",
             code ="""
@@ -328,6 +335,9 @@ fun Modifier.|padding|(
                 HighlightCode(".hello_world", Color(0xFFe48def)),
                 HighlightCode("stringResource ", Color(0xFF3CEE0A)),
                 HighlightCode("dimensionResource ", Color(0xFF3CEE0A)),
+            ),
+            highlightName = listOf(
+                HighlightColor("SimpleStringResource",11)
             ),
             lambdaFun = { SimpleStringResource() },
             nameFun = "Simples.kt#L99-L134",
@@ -508,7 +518,6 @@ fun Modifier.|padding|(
                 ),
             ),
 
-            nameFun = "",
             highlightCode = highCodeList + listOf(
                 HighlightCode("TypographyStyles", Color(0xFFffc530)),
                 HighlightCode(".displayLarge", Color(0xFF3CEE0A)),
@@ -547,6 +556,10 @@ fun Modifier.|padding|(
                 HighlightCode(".name", Color(0xFFe48def)),
                 HighlightCode(".style", Color(0xFFe48def)),
                 HighlightCode("typography", Color(0xFF39A79C)),
+            ),
+            nameFun = "TypographyStyles.kt",
+            highlightName = listOf(
+                HighlightColor("TypographyStyles",11)
             ),
             lambdaFun = { TypographyStyles() },
             code = """
@@ -623,6 +636,10 @@ fun TypographyStyles() {
                 HighlightCode("1", Color(0xFF00BCD4)),
                 HighlightCode("fontStyle", Color(0xFF3CEE0A)),
             ),
+            highlightName = listOf(
+                HighlightColor("ItalicText",11)
+            ),
+            nameFun = "Simples.kt#L138-L175",
             lambdaFun = { ItalicText() },
             code ="""
 @Composable
@@ -719,6 +736,10 @@ fun ItalicText() {
                 HighlightCode(".W900", Color(0xFF00BCD4)),
                 HighlightCode("//", Color(0xFF3CEE0A)),
             ),
+            highlightName = listOf(
+                HighlightColor("TextFontWeight",11)
+            ),
+            nameFun = "Simples.kt#L177-L240",
             lambdaFun = { TextFontWeight() },
             code ="""
 @Composable
@@ -807,6 +828,10 @@ fun TextFontWeight() {
                 HighlightCode(".Unspecified", Color(0xFFe48def)),
                 HighlightCode("letterSpacing in Text of jetpack Compose", Color(0xFF05B80D)),
             ),
+            highlightName = listOf(
+                HighlightColor("LetterSpacing",11)
+            ),
+            nameFun = "LetterSpacing.kt",
             lambdaFun = { LetterSpacing() },
             code ="""
 @Composable
@@ -877,6 +902,10 @@ fun LetterSpacing(){
                 HighlightCode("1. ", Color(0xFF2DB8FF)),
                 HighlightCode(".repeat", Color(0xFFF5996B)),
             ),
+            highlightName = listOf(
+                HighlightColor("TextLineHeight",11)
+            ),
+            nameFun = "TextLineHeight.kt",
             lambdaFun = { TextLineHeight() },
             code = """
 @Composable
@@ -959,6 +988,10 @@ fun TextLineHeight() {
                 HighlightCode("textAlign", Color(0xFF3CEE0A)),
                 HighlightCode("//", Color(0xFF3CEE0A)),
             ),
+            highlightName = listOf(
+                HighlightColor("SimpleAlign",11)
+            ),
+            nameFun = "Simples.kt#L242-L289",
             lambdaFun = { SimpleAlign() },
             code ="""
 @Composable
@@ -1037,6 +1070,10 @@ TextAlign.|!Justify| равномерно растягивает текст по
                 HighlightCode(".Justify", Color(0xFF3CEE0A)),
                 HighlightCode("//", Color(0xFF3CEE0A)),
             ),
+            highlightName = listOf(
+                HighlightColor("SimpleAlignJustify",11)
+            ),
+            nameFun = "Simples.kt#L291-L324",
             lambdaFun = { SimpleAlignJustify() },
             code ="""
 @Composable
@@ -1135,6 +1172,11 @@ fun SimpleAlignJustify() {
                 HighlightCode("fontFamily =", Color(0xFF3CEE0A)),
                 HighlightCode("//", Color(0xFF3CEE0A)),
             ),
+            highlightName = listOf(
+                HighlightColor("TextFontFamily",11)
+            ),
+
+            nameFun = "TextFontFamily.kt",
             lambdaFun = { TextFontFamily() },
             code ="""
 @Composable
@@ -1267,6 +1309,10 @@ fun TextFontFamily() {
                 HighlightCode("fontFamily", Color(0xFF3CEE0A)),
                 HighlightCode("//", Color(0xFF3CEE0A)),
             ),
+            highlightName = listOf(
+                HighlightColor("TextFontFamalyAlternate",11)
+            ),
+            nameFun = "Simples.kt#L79-L190",
             lambdaFun = { TextFontFamalyAlternate() },
             code ="""
 /*
