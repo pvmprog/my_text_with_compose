@@ -153,20 +153,45 @@ fun translationCode(
         do {
             var ind = codeStr.indexOf(keyword,endInd)
             if (ind != -1) {
-                startInd = ind + 3
-                endInd = startInd
+                ind = ind + 3
+                startInd = ind
+                endInd = ind
+                //  определение названия переменной names
+                var isStart = false
+                do{
+                    ind ++
+                    if (codeStr[ind].isLetterOrDigit()) {
+                        if (!isStart) startInd = ind
+                        isStart = true
+                    }
+                    else if (isStart) break
+                } while (ind < codeStr.length)
+                endInd = ind
+                strVal = codeStr.substring(startInd,endInd)
+                //очищаем название переменной
+                codeStr = codeStr.replaceRange(startInd,endInd,(" ").repeat(endInd-startInd))
+
+                //ищем = и очищаем его
                 ind = codeStr.indexOf('=',endInd)
                 if (ind != -1) {
                     endInd = ind + 1
                     strVal = codeStr.substring(startInd,endInd)
-//                    println("clr name_variable:  $strVal")
-                    codeStr = codeStr.replaceRange(startInd,endInd,(" ").repeat(endInd-startInd))
+                    var n = strVal.indexOf("\n")
+                    if (n == -1){
+                        println("clr name_variable:  $strVal")
+//                       codeStr = codeStr.replaceRange(startInd,endInd,(" ").repeat(endInd-startInd))
+                        n = endInd - 1
+                        codeStr = codeStr.replaceRange(n,endInd," ")
+                    } else{
+                        endInd = startInd + n
+                    }
                 }
             }
 
         } while(ind >= 0)
 
     }
+
 
 
 
@@ -183,7 +208,7 @@ fun translationCode(
                 do{
                     ind --
                     startInd = ind
-                    if (!codeStr[ind].isLetter()) {
+                    if (!codeStr[ind].isLetterOrDigit()) {
                         if (k_space == 0) continue
                         else break
                     }
@@ -203,7 +228,7 @@ fun translationCode(
 
     }
 
-    fun find_fun(idColor1:Int = 4,idColor2:Int = 5,idColor3:Int = 10){
+    fun find_fun(idColor1:Int = 4,idColor2:Int = 5,idColor3:Int = 10,idColor4:Int = 11){
         endInd = 0
         do {
             var ind = codeStr.indexOf('(',endInd)
@@ -220,7 +245,7 @@ fun translationCode(
                         break
                     }
 
-                    if (!codeStr[ind].isLetter()) {
+                    if (!codeStr[ind].isLetterOrDigit()) {
                         if (k_space == 0) continue
                         else break
                     }
@@ -228,21 +253,28 @@ fun translationCode(
                         k_space = 1
                     }
                 } while (ind>=0)
+                val start = startInd - 3
+                val isNameMyFun = if (start >= 0){
+                    if (codeStr.substring(start,start+4) == "fun ") true
+                    else false
+                } else false
                 startInd ++
                 endInd --
                 if (startInd < endInd){
                     strVal = codeStr.substring(startInd,endInd)
-                    if (strVal.substring(0,3) !="fun"){
-                        var idColor = if (strVal[0].isUpperCase()) idColor1
-                        else idColor2
-                        listWhile.forEach(){
-                            if (strVal == it) idColor = idColor3 //белый цвет
-                        }
-                        println("fun: $strVal $idColor")
-                        itemsCode.add(ItemFromCode(startInd,endInd,idColor,strVal))
-                        codeStr = codeStr.replaceRange(startInd,endInd,(" ").repeat(endInd-startInd))
 
+                    var idColor = if (strVal[0].isUpperCase()) idColor1
+                    else idColor2
+
+                    listWhile.forEach(){
+                        if (strVal == it) idColor = idColor3 //белый цвет
                     }
+
+                    if (isNameMyFun) idColor = idColor4
+
+//                    println("fun: $strVal $idColor")
+                    itemsCode.add(ItemFromCode(startInd,endInd,idColor,strVal))
+                    codeStr = codeStr.replaceRange(startInd,endInd,(" ").repeat(endInd-startInd))
 
                 }
                 endInd ++
@@ -334,9 +366,6 @@ fun translationCode(
 //Поиск "  ...  "
 //    println("Поиск значения строки color=2")
     find_str_value(2)
-
-//    println("Поиск my name")
-    find_keywords(names)
 
 
 //    println("Удаление (val/var) названий переменных")

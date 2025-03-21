@@ -95,9 +95,8 @@ fun CodeScreen(
 
  */
         OutTextCodeNew(
-            message = DataCodeUI.codeUI[0].code,
-            listName = DataCodeUI.codeUI[0].highlightName,
-            fontSizeCode = fontSizeCode.sp,
+            message = item.code,
+            fontSizeCode = fontSizeCode,
         )
 
     }

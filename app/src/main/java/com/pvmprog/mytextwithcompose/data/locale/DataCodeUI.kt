@@ -134,18 +134,20 @@ object DataCodeUI {
                 ),
 
                 ),
+/*
             highlightCode = highCodeList + listOf(
                 HighlightCode("Simple", Color(0xFFffc530)),
                 HighlightCode("Text", Color(0xFF3CEE0A)),
                 HighlightCode("1", Color(0xFF2DB8FF)),
-
                 ),
-            highlightName = listOf(
-                HighlightColor("Simple",11)
-            ),
+
+ */
             nameFun = "Simples.kt#L48-L63",
             lambdaFun =  @Composable { Simple() },
             code ="""
+/*
+   Пример использования функции Text(...)
+*/                
 @Composable
 fun Simple() {
     Box(
@@ -276,14 +278,6 @@ fun Modifier.|padding|(
                     url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/Modifier#(androidx.compose.ui.Modifier).animateContentSize(androidx.compose.animation.core.FiniteAnimationSpec,kotlin.Function2)"
                 ),
             ),
-            highlightCode = highCodeList + listOf(
-                HighlightCode("16", Color(0xFF2DB8FF)),
-                HighlightCode(".padding ", Color(0xFF3CEE0A)),
-
-                ),
-            highlightName = listOf(
-                HighlightColor("SimpleWithPadding",11)
-            ),
             lambdaFun = { SimpleWithPadding() },
             nameFun = "Simples.kt#L66-L85",
             code ="""
@@ -326,18 +320,6 @@ fun Modifier.|padding|(
                     textUrl = "\uD83D\uDCD6 Developers. String resource",
                     url = "https://developer.android.com/guide/topics/resources/string-resource?hl=ru"
                 ),
-            ),
-            highlightCode = highCodeList + listOf(
-                HighlightCode("31", Color(0xFF2DB8FF)),
-                HighlightCode(".day_of_month", Color(0xFFe48def)),
-                HighlightCode("January", Color(0xFFFFEB3B)),
-                HighlightCode("id =", Color(0xFF00a9ff)),
-                HighlightCode(".hello_world", Color(0xFFe48def)),
-                HighlightCode("stringResource ", Color(0xFF3CEE0A)),
-                HighlightCode("dimensionResource ", Color(0xFF3CEE0A)),
-            ),
-            highlightName = listOf(
-                HighlightColor("SimpleStringResource",11)
             ),
             lambdaFun = { SimpleStringResource() },
             nameFun = "Simples.kt#L99-L134",
@@ -412,18 +394,6 @@ fun Modifier.|padding|(
                 ),
             ),
 
-            highlightCode = highCodeList + listOf(
-                HighlightCode("fontSize ", Color(0xFF3CEE0A)),
-                HighlightCode(".Unspecified", Color(0xFFe48def)),
-                HighlightCode("(default)", Color(0xFF05B80D)),
-                HighlightCode("(20.sp)", Color(0xFF05B80D)),
-                HighlightCode("(3.em)", Color(0xFF05B80D)),
-                HighlightCode("(15.sp)", Color(0xFF05B80D)),
-                HighlightCode("20", Color(0xFF00a9ff)),
-                HighlightCode("3", Color(0xFF00a9ff)),
-                HighlightCode("15", Color(0xFF00a9ff)),
-                HighlightCode(".em", Color(0xFFe48def)),
-            ),
             lambdaFun = { ExampleFontSize() },
             nameFun = "ExampleFontSize.kt",
             code = """
@@ -517,50 +487,7 @@ fun Modifier.|padding|(
                     url = "https://developer.android.com/develop/ui/compose/designsystems/material3?hl=ru"
                 ),
             ),
-
-            highlightCode = highCodeList + listOf(
-                HighlightCode("TypographyStyles", Color(0xFFffc530)),
-                HighlightCode(".displayLarge", Color(0xFF3CEE0A)),
-                HighlightCode(".displayMedium", Color(0xFF3CEE0A)),
-                HighlightCode(".displaySmall", Color(0xFF3CEE0A)),
-                HighlightCode(".headlineLarge", Color(0xFF3CEE0A)),
-                HighlightCode(".headlineMedium", Color(0xFF3CEE0A)),
-                HighlightCode(".headlineSmall", Color(0xFF3CEE0A)),
-                HighlightCode(".titleLarge", Color(0xFF3CEE0A)),
-                HighlightCode(".titleMedium", Color(0xFF3CEE0A)),
-                HighlightCode(".titleSmall", Color(0xFF3CEE0A)),
-                HighlightCode(".bodyLarge", Color(0xFF3CEE0A)),
-                HighlightCode(".bodyMedium", Color(0xFF3CEE0A)),
-                HighlightCode(".bodySmall", Color(0xFF3CEE0A)),
-                HighlightCode(".labelLarge", Color(0xFF3CEE0A)),
-                HighlightCode(".labelMedium", Color(0xFF3CEE0A)),
-                HighlightCode(".labelSmall", Color(0xFF3CEE0A)),
-
-                HighlightCode("DisplayLarge", Color(0xFFe48def)),
-                HighlightCode("DisplayMedium", Color(0xFFe48def)),
-                HighlightCode("DisplaySmall", Color(0xFFe48def)),
-                HighlightCode("HeadlineLarge", Color(0xFFe48def)),
-                HighlightCode("HeadlineMedium", Color(0xFFe48def)),
-                HighlightCode("HeadlineSmall", Color(0xFFe48def)),
-                HighlightCode("TitleLarge", Color(0xFFe48def)),
-                HighlightCode("TitleMedium", Color(0xFFe48def)),
-                HighlightCode("TitleSmall", Color(0xFFe48def)),
-                HighlightCode("BodyLarge", Color(0xFFe48def)),
-                HighlightCode("BodyMedium", Color(0xFFe48def)),
-                HighlightCode("BodySmall", Color(0xFFe48def)),
-                HighlightCode("LabelLarge", Color(0xFFe48def)),
-                HighlightCode("LabelMedium", Color(0xFFe48def)),
-                HighlightCode("LabelSmall", Color(0xFFe48def)),
-
-                HighlightCode("16", Color(0xFF2DB8FF)),
-                HighlightCode(".name", Color(0xFFe48def)),
-                HighlightCode(".style", Color(0xFFe48def)),
-                HighlightCode("typography", Color(0xFF39A79C)),
-            ),
             nameFun = "TypographyStyles.kt",
-            highlightName = listOf(
-                HighlightColor("TypographyStyles",11)
-            ),
             lambdaFun = { TypographyStyles() },
             code = """
 data class TypographyStyle(
@@ -627,18 +554,6 @@ fun TypographyStyles() {
  FontStyle.|Normal|  - стандартный шрифт.
                 
             """.trimIndent(),
-            highlightCode = highCodeList + listOf(
-                HighlightCode("ItalicText", Color(0xFFffc530)),
-                HighlightCode(".Normal", Color(0xFFe48def)),
-                HighlightCode(".Italic", Color(0xFFe48def)),
-                HighlightCode("(Italic)", Color(0xFF05B80D)),
-                HighlightCode("(Normal)", Color(0xFF05B80D)),
-                HighlightCode("1", Color(0xFF00BCD4)),
-                HighlightCode("fontStyle", Color(0xFF3CEE0A)),
-            ),
-            highlightName = listOf(
-                HighlightColor("ItalicText",11)
-            ),
             nameFun = "Simples.kt#L138-L175",
             lambdaFun = { ItalicText() },
             code ="""
@@ -724,21 +639,6 @@ fun ItalicText() {
                           
                 
             """.trimIndent(),
-            highlightCode = highCodeList + listOf(
-                HighlightCode("TextFontWeight", Color(0xFFffc530)),
-                HighlightCode("fontWeight", Color(0xFF3CEE0A)),
-                HighlightCode(".Bold", Color(0xFF00BCD4)),
-                HighlightCode(".Normal", Color(0xFF00BCD4)),
-                HighlightCode(".ExtraBold", Color(0xFF00BCD4)),
-                HighlightCode(".Light", Color(0xFF00BCD4)),
-                HighlightCode(".W100", Color(0xFF00BCD4)),
-                HighlightCode(".W300", Color(0xFF00BCD4)),
-                HighlightCode(".W900", Color(0xFF00BCD4)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
-            ),
-            highlightName = listOf(
-                HighlightColor("TextFontWeight",11)
-            ),
             nameFun = "Simples.kt#L177-L240",
             lambdaFun = { TextFontWeight() },
             code ="""
@@ -818,19 +718,6 @@ fun TextFontWeight() {
 Параметр |letterSpacing| задает интервал между символами для текста. Расстояние, так как и размер шрифта, представлено классом |TextUnit| и определяется с помощью единиц |sp| или |em| 
                 
             """.trimIndent(),
-            highlightCode = highCodeList + listOf(
-                HighlightCode("LetterSpacing", Color(0xFFffc530)),
-                HighlightCode("letterSpacing =", Color(0xFF3CEE0A)),
-                HighlightCode("16", Color(0xFF00a9ff)),
-                HighlightCode("1.3 ", Color(0xFF00a9ff)),
-                HighlightCode("0.3 ", Color(0xFF00a9ff)),
-                HighlightCode("0.1 ", Color(0xFF00a9ff)),
-                HighlightCode(".Unspecified", Color(0xFFe48def)),
-                HighlightCode("letterSpacing in Text of jetpack Compose", Color(0xFF05B80D)),
-            ),
-            highlightName = listOf(
-                HighlightColor("LetterSpacing",11)
-            ),
             nameFun = "LetterSpacing.kt",
             lambdaFun = { LetterSpacing() },
             code ="""
@@ -892,19 +779,6 @@ fun LetterSpacing(){
 Параметр |lineHeight| определяет высоту каждой строки путем добавления дополнительного пространства к верху первой строки, верху и низу последней строки.         
                
             """.trimIndent(),
-            highlightCode = highCodeList + listOf(
-                HighlightCode("TextLineHeight", Color(0xFFffc530)),
-                HighlightCode("lineHeight =", Color(0xFF3CEE0A)),
-                HighlightCode("2.0 ", Color(0xFF2DB8FF)),
-                HighlightCode("1.0 ", Color(0xFF2DB8FF)),
-                HighlightCode("16", Color(0xFF2DB8FF)),
-                HighlightCode("5", Color(0xFF2DB8FF)),
-                HighlightCode("1. ", Color(0xFF2DB8FF)),
-                HighlightCode(".repeat", Color(0xFFF5996B)),
-            ),
-            highlightName = listOf(
-                HighlightColor("TextLineHeight",11)
-            ),
             nameFun = "TextLineHeight.kt",
             lambdaFun = { TextLineHeight() },
             code = """
@@ -980,17 +854,6 @@ fun TextLineHeight() {
  |!Right|: выравнивание текста по правому краю контейнера                        
                 
             """.trimIndent(),
-            highlightCode = highCodeList + listOf(
-                HighlightCode("LongText", Color(0xFFffc530)),
-                HighlightCode(".Left", Color(0xFF00BCD4)),
-                HighlightCode(".Center", Color(0xFF00BCD4)),
-                HighlightCode(".Right", Color(0xFF00BCD4)),
-                HighlightCode("textAlign", Color(0xFF3CEE0A)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
-            ),
-            highlightName = listOf(
-                HighlightColor("SimpleAlign",11)
-            ),
             nameFun = "Simples.kt#L242-L289",
             lambdaFun = { SimpleAlign() },
             code ="""
@@ -1065,14 +928,6 @@ fun SimpleAlign() {
 TextAlign.|!Justify| равномерно растягивает текст по всей ширине контейнера.
 
             """.trimIndent(),
-            highlightCode = highCodeList + listOf(
-                HighlightCode("TextAlignJustify", Color(0xFFffc530)),
-                HighlightCode(".Justify", Color(0xFF3CEE0A)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
-            ),
-            highlightName = listOf(
-                HighlightColor("SimpleAlignJustify",11)
-            ),
             nameFun = "Simples.kt#L291-L324",
             lambdaFun = { SimpleAlignJustify() },
             code ="""
@@ -1162,20 +1017,6 @@ fun SimpleAlignJustify() {
 
                 
             """.trimIndent(),
-            highlightCode = highCodeList +  listOf(
-                HighlightCode("TextFontFamily", Color(0xFFffc530)),
-                HighlightCode(".Serif", Color.Yellow),
-                HighlightCode(".SansSerif", Color.Yellow),
-                HighlightCode(".Cursive", Color.Yellow),
-                HighlightCode(".Monospace", Color.Yellow),
-                HighlightCode(".Default", Color.Yellow),
-                HighlightCode("fontFamily =", Color(0xFF3CEE0A)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
-            ),
-            highlightName = listOf(
-                HighlightColor("TextFontFamily",11)
-            ),
-
             nameFun = "TextFontFamily.kt",
             lambdaFun = { TextFontFamily() },
             code ="""
@@ -1304,14 +1145,6 @@ fun TextFontFamily() {
 )|
                    
             """.trimIndent(),
-            highlightCode = highCodeList + listOf(
-                HighlightCode("TextFontFamalyAlternate", Color(0xFFffc530)),
-                HighlightCode("fontFamily", Color(0xFF3CEE0A)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
-            ),
-            highlightName = listOf(
-                HighlightColor("TextFontFamalyAlternate",11)
-            ),
             nameFun = "Simples.kt#L79-L190",
             lambdaFun = { TextFontFamalyAlternate() },
             code ="""
@@ -1575,11 +1408,6 @@ fun TextFontFamalyAlternate() {
                 ),
             ),
 
-            highlightCode = highCodeList + listOf(
-                HighlightCode("TextColorAny", Color(0xFFffc530)),
-                HighlightCode("color = ", Color(0xFF3CEE0A)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
-            ),
             lambdaFun = { TextColorAny() },
             code ="""   
 @Composable
@@ -1815,11 +1643,6 @@ B_sRGB = 217 / 255 = 0,85
                 
                 
             """.trimIndent(),
-            highlightCode = highCodeList +  listOf(
-                HighlightCode("BackgroundDriver", Color(0xFFffc530)),
-                HighlightCode("color = ", Color(0xFF3CEE0A)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
-            ),
             lambdaFun = { BackgroundDriver() },
             code ="""
 @Composable
@@ -2073,13 +1896,6 @@ fun BackgroundDriver(
                 ),
             ),
 
-            highlightCode = highCodeList + listOf(
-                HighlightCode("GradientOverview", Color(0xFFffc530)),
-                HighlightCode("BackgroundWithBrush ", Color(0xFFffc530)),
-                HighlightCode("RadioButtonColumn ", Color(0xFFffc530)),
-                HighlightCode("brush = ", Color(0xFF3CEE0A)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
-            ),
             lambdaFun = { GradientOverview(it) },
             code ="""   
 
@@ -2296,12 +2112,6 @@ Easing позволяет анимированным элементам уско
 Используйте FinRepeatable для повторения заданного количества раз. 
 
             """.trimIndent(),
-            highlightCode = highCodeList + listOf(
-                HighlightCode("AnimationBgGradient", Color(0xFFffc530)),
-                HighlightCode(".animateFloat", Color(0xFF3CEE0A)),
-                HighlightCode(".animateColor", Color(0xFF3CEE0A)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
-            ),
             lambdaFun = { AnimationBgGradient() },
             code ="""
 @Composable
@@ -2446,10 +2256,6 @@ fun AnimationBgGradient(
 
                 
             """.trimIndent(),
-            highlightCode = highCodeList + listOf(
-                HighlightCode("GradientDriver", Color(0xFFffc530)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
-            ),
             lambdaFun = { GradientDriver(it) },
             code ="""
             """.trimIndent(),
@@ -2636,10 +2442,6 @@ C помощью шейдеров можно делать больше, чем �
                
                 
             """.trimIndent(),
-            highlightCode = highCodeList +  listOf(
-                HighlightCode("ShaderDemo", Color(0xFFffc530)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
-            ),
             lambdaFun = {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                     ShaderDriver()
@@ -2720,10 +2522,6 @@ C помощью шейдеров можно делать больше, чем �
 AGSL |не поддерживает| директивы препроцессора в стиле GLSL, такие как define и др.
 
             """.trimIndent(),
-            highlightCode = highCodeList +  listOf(
-                HighlightCode("ShaderDemo", Color(0xFFffc530)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
-            ),
             lambdaFun = {
                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                     ShaderAnimation()
@@ -2766,10 +2564,6 @@ AGSL |не поддерживает| директивы препроцессор
    фону, тексту и холсту.                 
    
             """.trimIndent(),
-            highlightCode = highCodeList +  listOf(
-                HighlightCode("ImageBrush", Color(0xFFffc530)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
-            ),
             lambdaFun = { ImageBrush()   },
             code ="""
             """.trimIndent(),
@@ -2806,11 +2600,6 @@ AGSL |не поддерживает| директивы препроцессор
   Текст, который выходит за пределы своих границ с помощью |Visible|, может быть обрезан другими модификаторами, такими как Modifier.|clipToBounds|
                 
             """.trimIndent(),
-            highlightCode = highCodeList + listOf(
-                HighlightCode("LongText", Color(0xFFffc530)),
-                HighlightCode("overflow", Color(0xFF3CEE0A)),
-                HighlightCode("maxLines", Color(0xFF3CEE0A)),
-            ),
             lambdaFun = { SimpleLimit() },
             code ="""
 @Composable
@@ -2870,26 +2659,6 @@ fun SimpleLimit() {
                         
                 
             """.trimIndent(),
-            highlightCode = listOf(
-                HighlightCode("DecorationExampleText", Color(0xFFffc530)),
-                HighlightCode("16.", Color(0xFF00BCD4)),
-                HighlightCode("strokeWidth =", Color(0xFF00BCD4)),
-                HighlightCode("start =", Color(0xFF00BCD4)),
-                HighlightCode("end =", Color(0xFF00BCD4)),
-                HighlightCode("pathEffect =", Color(0xFF00BCD4)),
-                HighlightCode("0f", Color(0xFF00BCD4)),
-                HighlightCode("textDecoration =", Color(0xFF3CEE0A)),
-                HighlightCode(".Underline", Color(0xFFe48def)),
-                HighlightCode(".LineThrough", Color(0xFFe48def)),
-                HighlightCode(".None", Color(0xFFe48def)),
-                HighlightCode(".Yellow", Color(0xFFe48def)),
-                HighlightCode(".Red", Color(0xFFe48def)),
-                HighlightCode("size.height", Color(0xFFe48def)),
-                HighlightCode("size.width", Color(0xFFe48def)),
-                HighlightCode(".toPx", Color(0xFFF5996B)),
-                HighlightCode(".drawBehind", Color(0xFFF5996B)),
-
-                ),
             lambdaFun = { DecorationExampleText() },
             code ="""
 @Composable
@@ -3047,11 +2816,6 @@ fun DecorationExampleText(){
 Для создания рамки можно использовать и модификатор |Modifier.drawBehind|, который позволяет выполнять операции |DrawScope| за составным содержимым, отображаемым на экране.
 
             """.trimIndent(),
-            highlightCode = listOf(
-                HighlightCode("BorderExampleText", Color(0xFFffc530)),
-                HighlightCode(".Bold", Color(0xFF00BCD4)),
-                HighlightCode("textDecoration =", Color(0xFF3CEE0A)),
-            ),
             lambdaFun = { BorderExampleText() },
             code ="""
 @Composable
@@ -3304,18 +3068,6 @@ fun BorderExampleText(
   |restLine|  - величина отступа, примененных к каждой строке, кроме первой.
                  
             """.trimIndent(),
-            highlightCode = highCodeList + listOf(
-                HighlightCode("StyleDraver", Color(0xFFffc530)),
-                HighlightCode("overflow", Color(0xFF3CEE0A)),
-                HighlightCode("maxLines", Color(0xFF3CEE0A)),
-                HighlightCode("textIndent = ", Color(0xFF00a9ff)),
-                HighlightCode("firstLine =", Color(0xFF00a9ff)),
-                HighlightCode("restLine =", Color(0xFF00a9ff)),
-                HighlightCode("20", Color(0xFF00a9ff)),
-                HighlightCode("24", Color(0xFF00a9ff)),
-                HighlightCode("5", Color(0xFF00a9ff)),
-                HighlightCode("lineHeight = ", Color(0xFF00a9ff)),
-            ),
             lambdaFun = { StyleDraver() },
             code ="""
 @Composable
@@ -3376,12 +3128,6 @@ fun TextStyleIndent(
 
                 
             """.trimIndent(),
-            highlightCode = highCodeList +  listOf(
-                HighlightCode("ShadowDriver", Color(0xFFffc530)),
-                HighlightCode("blurRadius", Color.Yellow),
-                HighlightCode("shadow =", Color(0xFF3CEE0A)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
-            ),
             lambdaFun = { ShadowDriver() },
             code ="""
 @Composable
@@ -3580,18 +3326,6 @@ fun ShadowDriver(){
                      
                 
             """.trimIndent(),
-            highlightCode = highCodeList + listOf(
-                HighlightCode("DirectionExampleText", Color(0xFFffc530)),
-                HighlightCode("textDirection =", Color(0xFF3CEE0A)),
-                HighlightCode("25", Color(0xFF00a9ff)),
-                HighlightCode("16", Color(0xFF00a9ff)),
-                HighlightCode(".Unspecified", Color(0xFFe48def)),
-                HighlightCode(".Content", Color(0xFFe48def)),
-                HighlightCode(".ContentOrLtr", Color(0xFFe48def)),
-                HighlightCode(".ContentOrRtl", Color(0xFFe48def)),
-                HighlightCode(".Rtl", Color(0xFFe48def)),
-                HighlightCode(".Ltr", Color(0xFFe48def)),
-            ),
             lambdaFun = { DirectionExampleText() },
             code ="""
 @Composable
@@ -3702,31 +3436,6 @@ fun DirectionExampleText(){
  LineBreak.|WordBreak| - описывает, как разрывы строк должны вставляться в слова.     
             
             """.trimIndent(),
-            highlightCode = highCodeList + listOf(
-                HighlightCode("LineBreakText", Color(0xFFffc530)),
-                HighlightCode("lineBreak =", Color(0xFF3CEE0A)),
-                HighlightCode("0", Color(0xFF00a9ff)),
-                HighlightCode("1", Color(0xFF00a9ff)),
-                HighlightCode("2", Color(0xFF00a9ff)),
-                HighlightCode("4", Color(0xFF00a9ff)),
-                HighlightCode("6", Color(0xFF00a9ff)),
-                HighlightCode("strategy =", Color(0xFF00a9ff)),
-                HighlightCode("strictness =", Color(0xFF00a9ff)),
-                HighlightCode("wordBreak =", Color(0xFF00a9ff)),
-                HighlightCode("Simple ", Color(0xFF05B80D)),
-                HighlightCode("Balanced ", Color(0xFF05B80D)),
-                HighlightCode("HighQuality ", Color(0xFF05B80D)),
-                HighlightCode("rememberScrollState", Color(0xFF05B80D)),
-                HighlightCode("RadioButtonRow", Color(0xFF05B80D)),
-
-                HighlightCode(".Paragraph", Color(0xFFe48def)),
-                HighlightCode(".Simple", Color(0xFFe48def)),
-                HighlightCode(".Balanced", Color(0xFFe48def)),
-                HighlightCode(".HighQuality", Color(0xFFe48def)),
-                HighlightCode(".Default", Color(0xFFe48def)),
-                HighlightCode(".tertiaryContainer", Color(0xFFe48def)),
-            ),
-
             lambdaFun = { LineBreakText() },
             code ="""
 @Composable
@@ -3825,17 +3534,6 @@ fun LineBreakText(){
  |skewX| указывает на сдвиг текста. Например, точка с координатами (x, y), будет трансформирована в точку (x + y * skewX, y). Значение по умолчанию - 0.0f.                        
                 
             """.trimIndent(),
-            highlightCode = highCodeList + listOf(
-                HighlightCode("GeometricTransform", Color(0xFFffc530)),
-                HighlightCode("TextGeometricTransform", Color(0xFF3CEE0A)),
-                HighlightCode("1", Color(0xFF00a9ff)),
-                HighlightCode("30", Color(0xFF00a9ff)),
-                HighlightCode("2", Color(0xFF00a9ff)),
-                HighlightCode("6", Color(0xFF00a9ff)),
-                HighlightCode("scaleX =", Color(0xFF00a9ff)),
-                HighlightCode("skewX =", Color(0xFF00a9ff)),
-                HighlightCode(".Cursive", Color(0xFFe48def)),
-            ),
             lambdaFun = { GeometricTransform() },
             code ="""
 @Composable
@@ -3903,34 +3601,6 @@ Modifier.|graphicsLayer| — модификатор, который превра
                       
                  
             """.trimIndent(),
-            highlightCode = highCodeList + listOf(
-                HighlightCode("GraphicsLayerTextDriver", Color(0xFFffc530)),
-                HighlightCode("15f", Color(0xFF00a9ff)),
-                HighlightCode("52f", Color(0xFF00a9ff)),
-                HighlightCode("0f", Color(0xFF00a9ff)),
-                HighlightCode("15f", Color(0xFF00a9ff)),
-                HighlightCode("0.5f", Color(0xFF00a9ff)),
-                HighlightCode("40f", Color(0xFF00a9ff)),
-                HighlightCode("20f", Color(0xFF00a9ff)),
-                HighlightCode("min = 150", Color(0xFF00a9ff)),
-                HighlightCode("1.", Color(0xFF00a9ff)),
-                HighlightCode("0xff0000ff", Color(0xFF00a9ff)),
-                HighlightCode("0xfffcce36", Color(0xFF00a9ff)),
-                HighlightCode("0xffff0000", Color(0xFF00a9ff)),
-                HighlightCode("2f", Color(0xFF00a9ff)),
-                HighlightCode("6f", Color(0xFF00a9ff)),
-                HighlightCode("0f", Color(0xFF00a9ff)),
-                HighlightCode("0f", Color(0xFF00a9ff)),
-                HighlightCode("0f", Color(0xFF00a9ff)),
-                HighlightCode(".graphicsLayer", Color(0xFF3CEE0A)),
-                HighlightCode("rotationX", Color(0xFFe48def)),
-                HighlightCode("rotationY", Color(0xFFe48def)),
-                HighlightCode("rotationZ", Color(0xFFe48def)),
-                HighlightCode("transformOrigin", Color(0xFFe48def)),
-                HighlightCode(".floatValue", Color(0xFFe48def)),
-                HighlightCode("translationX", Color(0xFFe48def)),
-                HighlightCode("translationY", Color(0xFFe48def)),
-            ),
             lambdaFun = { GraphicsLayerTextDriver() },
             code ="""
 @Composable
@@ -4074,25 +3744,6 @@ fun GraphicsLayerTextDriver(){
             ),
 
             nameFun = "",
-            highlightCode = highCodeList + listOf(
-                HighlightCode("ScaleDraver", Color(0xFFffc530)),
-                HighlightCode("ScaleText", Color(0xFFffc530)),
-                HighlightCode("1f", Color(0xFF5EADD6)),
-                HighlightCode("0.5f", Color(0xFF5EADD6)),
-                HighlightCode("0.1f", Color(0xFF5EADD6)),
-                HighlightCode("3f", Color(0xFF5EADD6)),
-                HighlightCode("id =", Color(0xFF5EADD6)),
-                HighlightCode("min = 150", Color(0xFF5EADD6)),
-                HighlightCode("1.", Color(0xFF5EADD6)),
-                HighlightCode("22", Color(0xFF5EADD6)),
-                HighlightCode("remember", Color(0xFF05B80D)),
-                HighlightCode("SliderSimple", Color(0xFF05B80D)),
-                HighlightCode("LazyColumn", Color(0xFF05B80D)),
-                HighlightCode(".graphicsLayer", Color(0xFF3CEE0A)),
-                HighlightCode(".scaleX", Color(0xFFe48def)),
-                HighlightCode(".scaleY", Color(0xFFe48def)),
-                HighlightCode(".floatValue", Color(0xFFe48def)),
-            ),
             lambdaFun = { ScaleDraver() },
             code = """
 @Composable
@@ -4226,15 +3877,6 @@ class SpanStyle(
 Класс |Builder| для |AnnotatedString| позволяет создавать |AnnotatedString| с использованием таких методов, как |append| и |addStyle|.                        
                 
             """.trimIndent(),
-            highlightCode = highCodeList +  listOf(
-                HighlightCode("MultipleStylesInText", Color(0xFFffc530)),
-                HighlightCode("32", Color(0xFF2DB8FF)),
-                HighlightCode("16", Color(0xFF2DB8FF)),
-                HighlightCode("10", Color(0xFF2DB8FF)),
-                HighlightCode(".Italic", Color(0xFFe48def)),
-                HighlightCode(".Cyan", Color(0xFFe48def)),
-                HighlightCode(".Red", Color(0xFFe48def)),
-            ),
             lambdaFun = {
                 BoxCenterLambdaFun(
                     lambdaFun = { AnnotatedStylesInText(fontSize = 40) },
@@ -4341,16 +3983,6 @@ fun BoxCenterLambdaFun(
 После того, как часть текста отмечена |ParagraphStyle|, эта часть будет отделена от остального, как если бы был добавлен символ перевода строки.
                 
             """.trimIndent(),
-            highlightCode =  highCodeList +  listOf(
-                HighlightCode("AnnotatedParagraph", Color(0xFFffc530)),
-                HighlightCode("40", Color(0xFF2DB8FF)),
-                HighlightCode("16", Color(0xFF2DB8FF)),
-                HighlightCode(".Red", Color(0xFFe48def)),
-                HighlightCode(".Bold", Color(0xFFe48def)),
-                HighlightCode(".Cursive", Color(0xFFe48def)),
-                HighlightCode(".Green", Color(0xFFe48def)),
-                HighlightCode("buildAnnotatedString", Color(0xFF3CEE0A)),
-            ),
             lambdaFun = {
                 BoxCenterLambdaFun(
                     lambdaFun = { AnnotatedParagraph() },
@@ -4465,29 +4097,6 @@ fun AnnotatedParagraph(
             В примере будем использовать метод |pushStyle|, который применяет |SpanStyle| или |ParagraphStyle| ко всему добавляемому тексту до тех пор, пока не будет вызван метод |pop|.
                 
             """.trimIndent(),
-            highlightCode = listOf(
-                HighlightCode("AnnotatedPushStyleAndUrl", Color(0xFFffc530)),
-                HighlightCode("18", Color(0xFF2DB8FF)),
-                HighlightCode("16", Color(0xFF2DB8FF)),
-                HighlightCode("30", Color(0xFF2DB8FF)),
-                HighlightCode("url = ", Color(0xFF2DB8FF)),
-                HighlightCode("letterSpacing = 1.5", Color(0xFF2DB8FF)),
-                HighlightCode("textDecoration =", Color(0xFF2DB8FF)),
-                HighlightCode("lineHeight = 48", Color(0xFF2DB8FF)),
-                HighlightCode(".Red", Color(0xFFe48def)),
-                HighlightCode(".Blue", Color(0xFFe48def)),
-                HighlightCode(".Magenta", Color(0xFFe48def)),
-                HighlightCode(".Bold", Color(0xFFe48def)),
-                HighlightCode(".Cursive", Color(0xFFe48def)),
-                HighlightCode(".Green", Color(0xFFe48def)),
-                HighlightCode(".Normal", Color(0xFFe48def)),
-                HighlightCode("LocalUriHandler", Color(0xFFe48def)),
-                HighlightCode(".Underline", Color(0xFFe48def)),
-                HighlightCode(".url", Color(0xFFe48def)),
-                HighlightCode("buildAnnotatedString", Color(0xFF3CEE0A)),
-                HighlightCode("current", Color(0xFF05B80D)),
-                HighlightCode(" as ", Color(0xFFF5996B)),
-            ),
             lambdaFun = {
                 BoxCenterLambdaFun(
                     lambdaFun = { AnnotatedPushStyleAndUrl() },
@@ -4637,25 +4246,6 @@ buildAnnotatedString {
                         .fillMaxSize()
                 )
             },
-            highlightCode = listOf(
-                HighlightCode("AnnotatedWithAddStyle", Color(0xFFffc530)),
-                HighlightCode("buildAnnotatedString", Color(0xFF3CEE0A)),
-                HighlightCode("addStyle", Color(0xFF3CEE0A)),
-                HighlightCode("start = ", Color(0xFF2DB8FF)),
-                HighlightCode("end = ", Color(0xFF2DB8FF)),
-                HighlightCode("0", Color(0xFF2DB8FF)),
-                HighlightCode("1", Color(0xFF2DB8FF)),
-                HighlightCode("2", Color(0xFF2DB8FF)),
-                HighlightCode("3", Color(0xFF2DB8FF)),
-                HighlightCode("4", Color(0xFF2DB8FF)),
-                HighlightCode("5", Color(0xFF2DB8FF)),
-                HighlightCode("6", Color(0xFF2DB8FF)),
-                HighlightCode(".Red", Color(0xFFe48def)),
-                HighlightCode(".Blue", Color(0xFFe48def)),
-                HighlightCode(".Magenta", Color(0xFFe48def)),
-                HighlightCode(".Bold", Color(0xFFe48def)),
-                HighlightCode(".Cursive", Color(0xFFe48def)),
-            ),
             code ="""
 @Composable
 fun AnnotatedWithAddStyle() {
@@ -4737,26 +4327,6 @@ fun AnnotatedWithAddStyle() {
             comment = """
 Параметр |baselineShift| SpanStyle определяет величинну, на которую текст смещается вверх или вниз относительно текущей |базовой линии|.                
             """.trimIndent(),
-            highlightCode = listOf(
-                HighlightCode("AnnotatedBaseLineShift", Color(0xFFffc530)),
-                HighlightCode("buildAnnotatedString", Color(0xFF3CEE0A)),
-                HighlightCode("baselineShift", Color(0xFF3CEE0A)),
-                HighlightCode("0.70f", Color(0xFF2DB8FF)),
-                HighlightCode("60", Color(0xFF2DB8FF)),
-                HighlightCode("20", Color(0xFF2DB8FF)),
-                HighlightCode("28", Color(0xFF2DB8FF)),
-                HighlightCode("26", Color(0xFF2DB8FF)),
-                HighlightCode("16", Color(0xFF2DB8FF)),
-                HighlightCode("10", Color(0xFF2DB8FF)),
-                HighlightCode("50", Color(0xFF2DB8FF)),
-                HighlightCode(".primary", Color(0xFFe48def)),
-                HighlightCode(".outline", Color(0xFFe48def)),
-                HighlightCode(".Cyan", Color(0xFFe48def)),
-                HighlightCode(".Bold", Color(0xFFe48def)),
-                HighlightCode(".Cursive", Color(0xFFe48def)),
-                HighlightCode(".Superscript", Color(0xFFe48def)),
-                HighlightCode(".Subscript", Color(0xFFe48def)),
-            ),
             lambdaFun = {
                 BoxCenterLambdaFun(
                     lambdaFun = { AnnotatedBaseLineShift() },
@@ -4933,12 +4503,6 @@ fun AnnotatedBaseLineShift() {
 </p>
 
             """.trimIndent(),
-            highlightCode = listOf(
-                HighlightCode("AnnotatedHtmlString", Color(0xFFffc530)),
-                HighlightCode("AnnotatedString", Color(0xFF3CEE0A)),
-                HighlightCode(".fromHtml", Color(0xFF3CEE0A)),
-                HighlightCode("16", Color(0xFF1DDBF3)),
-            ),
             lambdaFun = {
                 BoxCenterLambdaFun(
                     lambdaFun = { AnnotatedHtmlString() },
@@ -5153,15 +4717,6 @@ fun AnnotatedHtmlString(
      
             """.trimIndent(),
             nameFun = "",
-            highlightCode = highCodeList + listOf(
-                HighlightCode("OutSipmleArticle", Color(0xFFffc530)),
-                HighlightCode("fontSize", Color(0xFF3CEE0A)),
-                HighlightCode("initialValue", Color(0xFF3CEE0A)),
-                HighlightCode("targetValue", Color(0xFF3CEE0A)),
-                HighlightCode("10f", Color(0xFF5EADD6)),
-                HighlightCode("170f", Color(0xFF5EADD6)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
-            ),
             lambdaFun = {
                 OutSipmleArticle(
                     sizeFontText = 18,
@@ -5485,11 +5040,6 @@ Easing позволяет анимированным элементам уско
       
       
             """.trimIndent(),
-            highlightCode = highCodeList + listOf(
-                HighlightCode("AnimationVisibilityContent ", Color(0xFFffc530)),
-                HighlightCode("initialValue", Color(0xFF3CEE0A)),
-                HighlightCode("16", Color(0xFF5EADD6)),
-            ),
             lambdaFun = {
                 var expanded by remember {
                     mutableStateOf(false)
@@ -5607,11 +5157,6 @@ initialOffsetY — это лямбда, которая берет полную �
                 
                 
             """.trimIndent(),
-            highlightCode = highCodeList + listOf(
-                HighlightCode("AnimationVisibility", Color(0xFFffc530)),
-                HighlightCode("initialValue", Color(0xFF3CEE0A)),
-                HighlightCode("16", Color(0xFF5EADD6)),
-            ),
             lambdaFun = { AnimationVisibilitySlade() },
             code ="""
             """.trimIndent(),
@@ -5682,11 +5227,6 @@ fun scaleIn(
 |scaleOut| можно комбинировать с |shrinkOut|/|shrinkHorizontally|/|shrinkVertically| для скоординированной анимации изменения размера макета.
 
                  """.trimIndent(),
-            highlightCode = highCodeList + listOf(
-                HighlightCode("AnimationVisibility", Color(0xFFffc530)),
-                HighlightCode("initialValue", Color(0xFF3CEE0A)),
-                HighlightCode("16", Color(0xFF5EADD6)),
-            ),
             lambdaFun = { AnimationVisibilityScale(it) },
             code ="""
             """.trimIndent(),
@@ -5738,11 +5278,6 @@ fun expandIn(
 Для расширения только по горизонтали или вертикали можно использовать |expandHorizontally|, |expandVertically|.
                 
             """.trimIndent(),
-            highlightCode = highCodeList + listOf(
-                HighlightCode("AnimationVisibilityExpend", Color(0xFFffc530)),
-                HighlightCode("initialValue", Color(0xFF3CEE0A)),
-                HighlightCode("16", Color(0xFF5EADD6)),
-            ),
             lambdaFun = { AnimationVisibilityExpend(it)  },
             code ="""
             """.trimIndent(),
@@ -5776,11 +5311,6 @@ fun expandIn(
 Визуальный эффект этих потомков будет комбинацией анимации |AnimatedVisibility| и их собственных анимаций входа/выхода.
                 
             """.trimIndent(),
-            highlightCode = highCodeList + listOf(
-                HighlightCode("AnimationChildren", Color(0xFFffc530)),
-                HighlightCode(".animateEnterExit(", Color(0xFF3CEE0A)),
-                HighlightCode("16", Color(0xFF5EADD6)),
-            ),
             lambdaFun = { AnimationChildren(it) },
             code ="""
 @Composable
@@ -5933,11 +5463,6 @@ AnimatedVisibility(
 
 
             """.trimIndent(),
-            highlightCode = highCodeList +  listOf(
-                HighlightCode("AnimationVisibility", Color(0xFFffc530)),
-                HighlightCode("initialValue", Color(0xFF3CEE0A)),
-                HighlightCode("16", Color(0xFF5EADD6)),
-            ),
             lambdaFun = { AnimationTransition() },
             code ="""
             """.trimIndent(),
@@ -6046,11 +5571,6 @@ Surface(
     }
 } 
             """.trimIndent(),
-            highlightCode = highCodeList +  listOf(
-                HighlightCode("AnimationVisibility", Color(0xFFffc530)),
-                HighlightCode("AnimatedContent", Color(0xFF3CEE0A)),
-                HighlightCode("16", Color(0xFF5EADD6)),
-            ),
             lambdaFun = { AnimationContent() },
             code ="""
             var count by remember { mutableIntStateOf(0) }
@@ -6131,11 +5651,6 @@ Surface(
             comment = """
 |Crossfade| анимирует переход между двумя макетами с помощью анимации плавного перехода. При переключении значения, переданного current параметру, содержимое переключается с помощью плавной анимации.                
             """.trimIndent(),
-            highlightCode = highCodeList +  listOf(
-                HighlightCode("AnimationVisibility", Color(0xFFffc530)),
-                HighlightCode("AnimatedContent", Color(0xFF3CEE0A)),
-                HighlightCode("16", Color(0xFF5EADD6)),
-            ),
             lambdaFun = { AnimationCrossfade() },
             code ="""
             """.trimIndent(),
@@ -6164,20 +5679,6 @@ Surface(
             comment = """
 Модификатор |animateContentSize| анимирует изменение размера контента.                
             """.trimIndent(),
-            highlightCode = highCodeList +  listOf(
-                HighlightCode("animateContentSize", Color(0xFF3CEE0A)),
-                HighlightCode("1", Color(0xFF5EADD6)),
-                HighlightCode("6", Color(0xFF5EADD6)),
-                HighlightCode("4", Color(0xFF5EADD6)),
-                HighlightCode("maxLines =", Color(0xFF5EADD6)),
-                HighlightCode("overflow =", Color(0xFF5EADD6)),
-                HighlightCode("onClick =", Color(0xFF5EADD6)),
-                HighlightCode("2", Color(0xFF5EADD6)),
-                HighlightCode("Достоинства Jetpack Compose:", Color(0xFF05B80D)),
-                HighlightCode("Card", Color(0xFF05B80D)),
-                HighlightCode("MAX_VALUE", Color(0xFFe48def)),
-                HighlightCode("Ellipsis", Color(0xFFe48def)),
-            ),
             nameFun = "AnimationContentSize.kt",
             lambdaFun = { AnimationContentSize() },
             code ="""
@@ -6246,28 +5747,6 @@ Surface(
 Вы можете настроить характеристики анимации, предоставив |AnimationSpec|.
                 
             """.trimIndent(),
-            highlightCode = highCodeList + listOf(
-                HighlightCode("Animation_AsState", Color(0xFFffc530)),
-                HighlightCode("animateIntAsState", Color(0xFF3CEE0A)),
-                HighlightCode("animateColorAsState", Color(0xFF3CEE0A)),
-                HighlightCode("50", Color(0xFF5EADD6)),
-                HighlightCode("2", Color(0xFF5EADD6)),
-                HighlightCode("1", Color(0xFF5EADD6)),
-                HighlightCode("4", Color(0xFF5EADD6)),
-                HighlightCode("16", Color(0xFF5EADD6)),
-                HighlightCode("durationMillis = 800", Color(0xFF5EADD6)),
-                HighlightCode("maxLines =", Color(0xFF5EADD6)),
-                HighlightCode("overflow =", Color(0xFF5EADD6)),
-                HighlightCode("onClick =", Color(0xFF5EADD6)),
-                HighlightCode("easing =", Color(0xFF5EADD6)),
-                HighlightCode("targetValue =", Color(0xFF5EADD6)),
-                HighlightCode("label =", Color(0xFF5EADD6)),
-                HighlightCode("Функции animate*AsState ...", Color(0xFF05B80D)),
-                HighlightCode("Card", Color(0xFF05B80D)),
-                HighlightCode("FastOutSlowInEasing", Color(0xFFe48def)),
-                HighlightCode("Ellipsis", Color(0xFFe48def)),
-                HighlightCode("secondary", Color(0xFFe48def)),
-                ),
             nameFun = "Animation_AsState.kt",
             lambdaFun = { Animation_AsState() },
             code = """
@@ -6342,28 +5821,6 @@ fun Animation_AsState(){
 Вы можете передать параметр |repeatMode| , чтобы указать, должна ли анимация повторяться, начиная с начала ( RepeatMode.|Restart| ) или с конца ( RepeatMode.|Reverse| )
 
             """.trimIndent(),
-            highlightCode = highCodeList + listOf(
-                HighlightCode("Animation_AsState", Color(0xFFffc530)),
-                HighlightCode("animateIntAsState", Color(0xFF3CEE0A)),
-                HighlightCode("animateColorAsState", Color(0xFF3CEE0A)),
-                HighlightCode("50", Color(0xFF5EADD6)),
-                HighlightCode("2", Color(0xFF5EADD6)),
-                HighlightCode("1", Color(0xFF5EADD6)),
-                HighlightCode("4", Color(0xFF5EADD6)),
-                HighlightCode("16", Color(0xFF5EADD6)),
-                HighlightCode("durationMillis = 800", Color(0xFF5EADD6)),
-                HighlightCode("maxLines =", Color(0xFF5EADD6)),
-                HighlightCode("overflow =", Color(0xFF5EADD6)),
-                HighlightCode("onClick =", Color(0xFF5EADD6)),
-                HighlightCode("easing =", Color(0xFF5EADD6)),
-                HighlightCode("targetValue =", Color(0xFF5EADD6)),
-                HighlightCode("label =", Color(0xFF5EADD6)),
-                HighlightCode("Функции animate*AsState ...", Color(0xFF05B80D)),
-                HighlightCode("Card", Color(0xFF05B80D)),
-                HighlightCode("FastOutSlowInEasing", Color(0xFFe48def)),
-                HighlightCode("Ellipsis", Color(0xFFe48def)),
-                HighlightCode("secondary", Color(0xFFe48def)),
-            ),
             nameFun = "Animation_AsStateRepeatable.kt",
             lambdaFun = { Animation_AsStateRepeatable() },
             code = """
@@ -6411,19 +5868,6 @@ val size by
      
             """.trimIndent(),
             nameFun = "AnimationInfiniteTransition.kt",
-            highlightCode = highCodeList + listOf(
-                HighlightCode("AnimationInfiniteTransition", Color(0xFFffc530)),
-                HighlightCode("fontSize", Color(0xFF3CEE0A)),
-                HighlightCode("initialValue", Color(0xFF3CEE0A)),
-                HighlightCode("targetValue", Color(0xFF3CEE0A)),
-                HighlightCode("10F", Color(0xFF5EADD6)),
-                HighlightCode("170f", Color(0xFF5EADD6)),
-                HighlightCode("20000", Color(0xFF5EADD6)),
-                HighlightCode("Ш Б", Color(0xFF05B80D)),
-                HighlightCode("ExtraBold", Color(0xFFe48def)),
-
-                ),
-            lambdaFun = { AnimationInfiniteTransition() },
             code = """
 @Composable
 fun AnimationInfiniteTransition(
@@ -6559,15 +6003,6 @@ TextMeasurer имеет внутренний кеш для оптимизаци�
             ),
 
             nameFun = "",
-            highlightCode = highCodeList + listOf(
-                HighlightCode("AnimationSizeText", Color(0xFFffc530)),
-                HighlightCode("fontSize", Color(0xFF3CEE0A)),
-                HighlightCode("initialValue", Color(0xFF3CEE0A)),
-                HighlightCode("targetValue", Color(0xFF3CEE0A)),
-                HighlightCode("10f", Color(0xFF5EADD6)),
-                HighlightCode("170f", Color(0xFF5EADD6)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
-            ),
             lambdaFun = { DrawTextCanvas() },
             code = """
 @Composable
@@ -6677,16 +6112,6 @@ Canvas(modifier = Modifier.fillMaxSize()) {
             ),
 
             nameFun = "",
-            highlightCode = highCodeList + listOf(
-                HighlightCode("DrawAnimeScaleAText", Color(0xFFffc530)),
-                HighlightCode("initialValue", Color(0xFF3CEE0A)),
-                HighlightCode("targetValue", Color(0xFF3CEE0A)),
-                HighlightCode("33f", Color(0xFF5EADD6)),
-                HighlightCode("1f", Color(0xFF5EADD6)),
-                HighlightCode("10000", Color(0xFF5EADD6)),
-                HighlightCode("18", Color(0xFF5EADD6)),
-                HighlightCode("//", Color(0xFF3CEE0A)),
-            ),
             lambdaFun = { DrawAnimeScaleAText() },
             code = """
 @Composable
@@ -6788,26 +6213,6 @@ fun DrawAnimeScaleAText(
 
 
             """.trimIndent(),
-            highlightCode = highCodeList + listOf(
-                HighlightCode("SemanticsText", Color(0xFFffc530)),
-                HighlightCode("@Preview", Color(0xFFb2c231)),
-                HighlightCode("Измененный текст", Color(0xFF05B80D)),
-                HighlightCode("remember ", Color(0xFF05B80D)),
-                HighlightCode("rememberScrollState", Color(0xFF05B80D)),
-                HighlightCode("Генерация числа случайным образом", Color(0xFF05B80D)),
-                HighlightCode("Generation", Color(0xFF05B80D)),
-                HighlightCode("bodySmall", Color(0xFFe48def)),
-                HighlightCode("liveRegion =", Color(0xFFe48def)),
-                HighlightCode("contentDescription =", Color(0xFFe48def)),
-                HighlightCode(".Polite", Color(0xFFe48def)),
-                HighlightCode("talkback_generation", Color(0xFFe48def)),
-                HighlightCode("Justify", Color(0xFFe48def)),
-                HighlightCode("20", Color(0xFF00a9ff)),
-                HighlightCode("16", Color(0xFF00a9ff)),
-                HighlightCode("1..50", Color(0xFF00a9ff)),
-                HighlightCode(".semantics", Color(0xFF3CEE0A)),
-
-                ),
             lambdaFun = { SemanticsText() },
 
             code ="""
@@ -6906,21 +6311,6 @@ LocalDensity.current.|fontScale| является маштабным коэфф�
 
 
             """.trimIndent(),
-            highlightCode = highCodeList + listOf(
-                HighlightCode(".nonScaledSp", Color(0xFFffc530)),
-                HighlightCode("Масштабный коэф.", Color(0xFF05B80D)),
-                HighlightCode(" nonScaledSp", Color(0xFF05B80D)),
-                HighlightCode(".current", Color(0xFF05B80D)),
-                HighlightCode("LocalDensity", Color(0xFFe48def)),
-                HighlightCode(".Justify", Color(0xFFe48def)),
-                HighlightCode(".fontScale", Color(0xFF3CEE0A)),
-                HighlightCode("return", Color(0xFFB84E18)),
-                HighlightCode("18.", Color(0xFF00a9ff)),
-                HighlightCode("16", Color(0xFF00a9ff)),
-                HighlightCode("this", Color(0xFFB84E18)),
-                HighlightCode(".em", Color(0xFFe48def)),
-
-                ),
             lambdaFun = { FontScale() },
             nameFun = "FontScale.kt",
             code ="""

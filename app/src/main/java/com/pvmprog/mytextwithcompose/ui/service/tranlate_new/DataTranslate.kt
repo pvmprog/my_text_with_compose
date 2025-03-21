@@ -27,7 +27,7 @@ object DataTranslate {
 
 
     val highColors = listOf(
-        Color.Yellow,           //0 комментарии
+        Color(0xFFFFEB3B),//0 комментарии
         Color(0xFF30cbff),//1 number value
         Color(0xFF53b23a),//2 string value " ... "
         Color(0xFF02a9ff),//3 параметры функции "text ="

@@ -37,6 +37,7 @@ import com.pvmprog.mytextwithcompose.ui.screens.CodeText
 import com.pvmprog.mytextwithcompose.ui.service.tranlate_new.DataTranslate.highColors
 import com.pvmprog.mytextwithcompose.ui.service.translate_old.HighlightCode
 import com.pvmprog.mytextwithcompose.ui.theme.Cabin
+import com.pvmprog.mytextwithcompose.ui.theme.Cormorantinfant
 import com.pvmprog.mytextwithcompose.ui.theme.MyTextWithComposeTheme
 
 @Composable
@@ -44,7 +45,7 @@ fun OutTextCodeNew(
     message: String,
     listName: List<HighlightColor> = listOf(),
     style: TextStyle = MaterialTheme.typography.labelSmall,
-    fontSizeCode: TextUnit = 18.sp,
+    fontSizeCode: Int = 18,
 ) {
     val listCode = translationCode(message,listName)
 
@@ -55,13 +56,16 @@ fun OutTextCodeNew(
             val end = it.endInd
             val nColor = it.highCodeInd
 
-            val color = if ((nColor > 0)&&(nColor < highColors.size)) highColors[nColor]
+            val color = if ((nColor >= 0)&&(nColor < highColors.size)) highColors[nColor]
             else Color(0xFFFFFFFF)
 
             addStyle(
                 style = SpanStyle(
                     color = color,
-                    fontSize = fontSizeCode
+                    fontSize = if (nColor != 0) (fontSizeCode - 2).sp
+                    else (fontSizeCode - 4).sp,
+                    fontFamily = if (nColor != 0) FontFamily.Default
+                    else Cormorantinfant
                 ),
                 start = start,
                 end = end
@@ -80,9 +84,8 @@ fun OutTextCodeNew(
 fun OutTextCodePreview() {
     MyTextWithComposeTheme {
         OutTextCodeNew(
-            message = DataCodeUI.codeUI[5].code,
-            listName = DataCodeUI.codeUI[5].highlightName,
-            fontSizeCode = 16.sp,
+            message = DataCodeUI.codeUI[0].code,
+            fontSizeCode = 16,
         )
     }
 }
