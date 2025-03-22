@@ -22,6 +22,7 @@ object DataTranslate {
 
     val listWhile = listOf(
         "listOf",
+        "Color",
         "spacedBy"
     )
 

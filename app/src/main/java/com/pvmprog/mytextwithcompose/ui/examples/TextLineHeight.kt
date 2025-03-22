@@ -20,7 +20,7 @@ import com.pvmprog.mytextwithcompose.ui.theme.MyTextWithComposeTheme
 @Composable
 fun TextLineHeight() {
 
-    val text = "Text in jetpack Compose."
+    val text = ("Text in jetpack Compose.").repeat(5)
 
     val padding = 16.dp
 
@@ -35,16 +35,16 @@ fun TextLineHeight() {
                 verticalArrangement = Arrangement.spacedBy(padding)
             ) {
                 Text(
-                    text = (text + " (default) ").repeat(5),
+                    text = " default \n\n" + text,
                 )
 
                 Text(
-                    text = (text + " (lineHeight = 2.0em) ").repeat(5),
+                    text = " lineHeight = 2.0.em \n\n" + text,
                     lineHeight = 2.0 .em,
                 )
 
                 Text(
-                    text = (text + " (lineHeight = 1.0em) ").repeat(5),
+                    text = " lineHeight = 1.0.em \n\n" + text,
                     lineHeight = 1.0 .em,
                 )
             }

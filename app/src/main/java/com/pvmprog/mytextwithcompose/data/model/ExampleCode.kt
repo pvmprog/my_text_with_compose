@@ -10,7 +10,6 @@ data class ExampleCode(
     val nameFun: String = "",
     val lambdaFun: @Composable (Boolean) -> Unit = @Composable{},
     val highlightCode: List<HighlightCode> = listOf(), //фрагмент кода программы, выделенный цветом
-    val highlightName: List<HighlightColor> = listOf(),
     val code: String = "",
     val comment: String = "",
     val links: List<TextClickLink> = listOf(),  //список ссылок

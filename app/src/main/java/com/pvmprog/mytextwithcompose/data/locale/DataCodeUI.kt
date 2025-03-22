@@ -150,6 +150,7 @@ object DataCodeUI {
 */                
 @Composable
 fun Simple() {
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -281,7 +282,7 @@ fun Modifier.|padding|(
             lambdaFun = { SimpleWithPadding() },
             nameFun = "Simples.kt#L66-L85",
             code ="""
-            Text (
+            Text(
                 text = "Hello, World!",
                 modifier = Modifier
                     .padding(16.dp)
@@ -325,16 +326,17 @@ fun Modifier.|padding|(
             nameFun = "Simples.kt#L99-L134",
             code ="""
     val text1 = stringResource (
-        id = R.string.hello_world
+        id = R.string.hello_world  //Hello, World!
     )
 
     //позиционное форматирование
     val text2 = stringResource(
         id = R.string.day_of_month, "January", 31
+        //There are %2${'$'}d days in %1${'$'}s
     )
 
     val padding = dimensionResource (
-        id = R.dimen.padding_medium
+        id = R.dimen.padding_medium  //16dp
     )
 
     Box(
@@ -350,8 +352,8 @@ fun Modifier.|padding|(
             verticalArrangement = Arrangement.spacedBy(padding),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text (text = text1)
-            Text (text = text2)
+            Text(text = text1)
+            Text(text = text2)
         }
     }
 
@@ -397,19 +399,19 @@ fun Modifier.|padding|(
             lambdaFun = { ExampleFontSize() },
             nameFun = "ExampleFontSize.kt",
             code = """
-                Text ( 
+                Text( 
                     text = text + "(default)",
                     fontSize = TextUnit.Unspecified
                 )
-                Text (
+                Text(
                     text = text + "(20.sp)",
                     fontSize = 20.sp
                 )
-                Text (
+                Text(
                     text = text + "(3.em)",
                     fontSize = 3.em
                 )
-                Text (
+                Text(
                     text = text + "(15.sp)",
                     style = TextStyle(
                         fontSize = 15.sp,
@@ -528,11 +530,11 @@ fun TypographyStyles() {
                     .fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                Text (
+                Text(
                     text = it.name,
                     style = it.style
                 )
-                Text (
+                Text(
                     text = "(${'$'}{it.style.fontSize})",
                 )
             }
@@ -582,11 +584,11 @@ fun ItalicText() {
             verticalArrangement = Arrangement.spacedBy(padding),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text (
+            Text(
                 text = text + " (Italic)",
                 fontStyle = FontStyle.Italic
             )
-            Text (
+            Text(
                 text = text + " (Normal)",
                 fontStyle = FontStyle.Normal
             )
@@ -663,37 +665,37 @@ fun TextFontWeight() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "${'$'}text (Normal)",
+            text = "${'$'}Text(Normal)",
             modifier = modifier,
             fontWeight = FontWeight.Normal
         )
         Text(
-            text = "${'$'}text (Bold)",
+            text = "${'$'}Text (Bold)",
             modifier = modifier,
             fontWeight = FontWeight.Bold
         )
         Text(
-            text = "${'$'}text (ExtraBold)",
+            text = "${'$'}Text (ExtraBold)",
             modifier = modifier,
             fontWeight = FontWeight.ExtraBold
         )
         Text(
-            text = "${'$'}text (Light)",
+            text = "${'$'}Text (Light)",
             modifier = modifier,
             fontWeight = FontWeight.Light
         )
         Text(
-            text = "${'$'}text (W100)",
+            text = "${'$'}Text (W100)",
             modifier = modifier,
             fontWeight = FontWeight.W100
         )
         Text(
-            text = "${'$'}text (W300)",
+            text = "${'$'}Text (W300)",
             modifier = modifier,
             fontWeight = FontWeight.W300
         )
         Text(
-            text = "${'$'}text (W900)",
+            text = "${'$'}Text (W900)",
             modifier = modifier,
             fontWeight = FontWeight.W900
         )
@@ -735,21 +737,21 @@ fun LetterSpacing(){
                     .fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                Text (
+                Text(
                     text = text+" [default]",
                     letterSpacing = TextUnit.Unspecified, 
                 )
-                Text (
-                    text = text+" [1.3sp]",
-                    letterSpacing = 1.3 .sp,
+                Text(
+                    text = text+" [1.3.sp]",
+                    letterSpacing = 1.3.sp,
                 )
-                Text (
-                    text = text+" [0.1sp]",
-                    letterSpacing = 0.1 .sp,
+                Text(
+                    text = text+" [0.1.sp]",
+                    letterSpacing = 0.1.sp,
                 )
-                Text (
-                    text = text+" [0.3em]",
-                    letterSpacing = 0.3 .em,
+                Text(
+                    text = text+" [0.3.em]",
+                    letterSpacing = 0.3.em,
                 )
 
             }
@@ -785,7 +787,7 @@ fun LetterSpacing(){
 @Composable
 fun TextLineHeight() {
 
-    val text = "Text in jetpack Compose."
+    val text = ("Text in jetpack Compose.").repeat(5)
 
     val padding = 16.dp
 
@@ -800,17 +802,17 @@ fun TextLineHeight() {
                 verticalArrangement = Arrangement.spacedBy(padding)
             ) {
                 Text(
-                    text = (text + " (default) ").repeat(5),
+                    text = " default \n\n" + text,
                 )
 
                 Text(
-                    text = (text + " (lineHeight = 2.0em) ").repeat(5),
-                    lineHeight = 2.0 .em,
+                    text = " lineHeight = 2.0.em \n\n" + text,
+                    lineHeight = 2.0.em,
                 )
 
                 Text(
-                    text = (text + " (lineHeight = 1.0em) ").repeat(5),
-                    lineHeight = 1.0 .em,
+                    text = " lineHeight = 1.0.em \n\n" + text,
+                    lineHeight = 1.0.em,
                 )
             }
 
@@ -1274,7 +1276,7 @@ fun TextFontFamalyAlternate() {
             val nameFont = it.nameFont
             val styleText = it.style
             Text(
-                text = "${'$'}text (${'$'}nameFont)",
+                text = "${'$'}Text(${'$'}nameFont)",
                 style = styleText
             )
 
@@ -1425,25 +1427,25 @@ fun TextColorAny() {
             Column(
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                Text (
+                Text(
                     text = "Контраст:17.08 (Отличный)",
                     color = Color(0xFFEBE0D9),
                     fontSize = 18.sp
                 )
 
-                Text (
+                Text(
                     text = "Контраст:5.44 (Хороший)",
                     color = Color.Red,
                     fontSize = 18.sp
                 )
 
-                Text (
+                Text(
                     text = "Контраст:4.16 (Плохой)",
                     color = colorResource(id = R.color.red700),
                     fontSize = 18.sp
                 )
 
-                Text (
+                Text(
                     text = "Контраст:2.14 (Плохой)",
 //Из целочисленных значений компонентов SRGB. Альфа необязательна
                     color = Color(
@@ -1455,13 +1457,13 @@ fun TextColorAny() {
                     fontSize = 18.sp
                 )
 
-                Text (
+                Text(
                     text = "Контраст:2.67 (Плохой)", //32-bit ARGB color
                     color = Color(0xFF993399),
                     fontSize = 18.sp
                 )
 
-                Text (
+                Text(
                     text = "Контраст:12.44 (Отличный)",
                     fontSize = 18.sp,
                     style = TextStyle(
@@ -1469,7 +1471,7 @@ fun TextColorAny() {
                     )
                 )
 
-                Text (
+                Text(
                     text = "Контраст:8.59 (Хороший)",
                     style = TextStyle(
                         color = Color.Yellow,
@@ -1478,7 +1480,7 @@ fun TextColorAny() {
                     fontSize = 18.sp,
                 )
 
-                Text (
+                Text(
                     text = "Контраст:16.40 (Отличный)",
                     modifier = Modifier
                         .background(Color(0xff22200d)),
@@ -1486,7 +1488,7 @@ fun TextColorAny() {
                     fontSize = 18.sp,
                 )
 
-                Text (
+                Text(
                     text = "Контраст:7.41 (Хороший)",
                     modifier = Modifier
                         .background(MaterialTheme.colorScheme.secondary),
@@ -1494,7 +1496,7 @@ fun TextColorAny() {
                     fontSize = 18.sp,
                 )
 
-                Text (
+                Text(
                     text = "Контраст:7.55 (Хороший)",
                     modifier = Modifier
                         .background(MaterialTheme.colorScheme.secondaryContainer),
@@ -1502,7 +1504,7 @@ fun TextColorAny() {
                     fontSize = 18.sp,
                 )
 
-                Text (
+                Text(
                     text = "Контраст:9.31 (Хороший)",
                     modifier = Modifier
                         .background(MaterialTheme.colorScheme.tertiaryContainer),
@@ -1510,7 +1512,7 @@ fun TextColorAny() {
                     fontSize = 18.sp,
                 )
 
-                Text (
+                Text(
                     text = "Контраст:21.00 (Отличный)",
                     modifier = Modifier
                         .background(Color(0xff000000)),
@@ -2673,23 +2675,23 @@ fun DecorationExampleText(){
         var outText = "TextDecoration in jetpack Compose."
 
         Text(
-            text = "1.${'$'}outText (None)",
+            text = "1.${'$'}outText(None)",
             textDecoration = TextDecoration.None
         )
 
         Text(
-            text = "2.${'$'}outText (LineThrough)",
+            text = "2.${'$'}outText(LineThrough)",
             textDecoration = TextDecoration.LineThrough
         )
 
         Text(
-            text = "3.${'$'}outText (Underline)",
+            text = "3.${'$'}outText(Underline)",
             textDecoration = TextDecoration.Underline
         )
 
 //одновременное подчеркивание и зачеркивание текста
         Text(
-            text = "4.${'$'}outText (Underline + LineThrough)",
+            text = "4.${'$'}outText(Underline + LineThrough)",
             textDecoration = TextDecoration.Underline +
                     TextDecoration.LineThrough,
 //  можно и так:
@@ -3085,7 +3087,7 @@ fun TextStyleIndent(
         )
     )
 ){
-    Text (
+    Text(
         text = text,
         modifier = modifier,
         style = textStyle
@@ -3346,42 +3348,42 @@ fun DirectionExampleText(){
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                Text (
+                Text(
                     text = text+" (Unspecified)",
                     modifier = modifier,.Unspecified
                     style = style.merge(
                         textDirection = TextDirection
                     )
                 )
-                Text (
+                Text(
                     text = text+" (Content)",
                     modifier = modifier,
                     style = style.merge(
                         textDirection = TextDirection.Content
                     )
                 )
-                Text (
+                Text(
                     text = text+" (ContentOrLtr)",
                     modifier = modifier,
                     style = style.merge(
                         textDirection = TextDirection.ContentOrLtr
                     )
                 )
-                Text (
+                Text(
                     text = text+" (ContentOrRtl)",
                     modifier = modifier,
                     style = style.merge(
                         textDirection = TextDirection.ContentOrRtl
                     )
                 )
-                Text (
+                Text(
                     text = text+" (Rtl)",
                     modifier = modifier,
                     style = style.merge(
                         textDirection = TextDirection.Rtl
                     )
                 )
-                Text (
+                Text(
                     text = text+" (Ltr)",
                     modifier = modifier,
                     style = style.merge(
@@ -3458,7 +3460,7 @@ fun LineBreakText(){
             .fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        Text (
+        Text(
             text = "Text wrapping",
             style = TextStyle(
                 fontSize = 24.sp,
@@ -3470,7 +3472,7 @@ fun LineBreakText(){
             )
         )
 
-        Text (
+        Text(
             text = "John really likes cream cake. I like chocolate ice cream the most. Maria likes milkshake with cake.",
             style = TextStyle(
                 fontSize = 20.sp,
@@ -3538,7 +3540,7 @@ fun LineBreakText(){
             code ="""
 @Composable
 fun GeometricTransform(){
-    Text (
+    Text(
         text = "Text in jetpack Compose",
         modifier = Modifier
             .fillMaxWidth()
@@ -3767,7 +3769,7 @@ fun ScaleText(
             .padding(padding),
         contentAlignment = Alignment.Center
     ) {
-        Text (
+        Text(
             text = text + "\n (${'$'}{scaleX},${'$'}{scaleY})",
             modifier = Modifier
                 .padding(padding)
@@ -4039,7 +4041,7 @@ fun AnnotatedParagraph(
         }
     }
 
-    Text (
+    Text(
         annotatedString,
         modifier = Modifier
             .padding(16.dp)
@@ -4174,7 +4176,7 @@ fun AnnotatedPushStyleAndUrl(){
 
     }
 
-    Text (
+    Text(
         text = annotatedLinkString,
         lineHeight = 48.sp,
         modifier = Modifier
@@ -4291,7 +4293,7 @@ fun AnnotatedWithAddStyle() {
         )
     }
 
-    Text (
+    Text(
         annotatedString,
         modifier = Modifier
             .background(Color.White)
@@ -4550,7 +4552,7 @@ fun AnnotatedHtmlString(
     )
     LazyColumn {
         item {
-            Text (
+            Text(
                 text = textFromHtml,
                 color = Color.Yellow,
                 textAlign = TextAlign.Center,
@@ -5581,7 +5583,7 @@ Surface(
                 label = "animated content"
             ) { targetCount ->
                 // Make sure to use `targetCount`, not `count`.
-                Text (text = "${'$'}targetCount")
+                Text(text = "${'$'}targetCount")
             }
 
             AnimatedContent(
@@ -5605,7 +5607,7 @@ Surface(
                     )
                 }, label = "animated counter"
             ) { targetCount ->
-                Text (text = "${'$'}targetCount")
+                Text(text = "${'$'}targetCount")
             }
            
            // ...
@@ -5692,7 +5694,7 @@ Surface(
                     .padding(16.dp),
                 onClick = { expanded = !expanded }
             ) {
-                Text (
+                Text(
                     text = ""${'"'}
     Достоинства Jetpack Compose:
     ...
@@ -5776,7 +5778,7 @@ fun Animation_AsState(){
                     .padding(16.dp),
                 onClick = { expanded = !expanded }
             ) {
-                Text (
+                Text(
                     text = ""${'"'}
  Функции animate*AsState ... 
                     ""${'"'}.trimIndent(),
@@ -5897,7 +5899,7 @@ fun AnimationInfiniteTransition(
             .background(Color.Black),
         contentAlignment = Alignment.Center
     ) {
-        Text (
+        Text(
             text = text,
             fontSize = size.sp,
             color = Color.White,
