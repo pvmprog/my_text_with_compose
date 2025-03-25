@@ -1,18 +1,35 @@
 package com.pvmprog.mytextwithcompose.ui.examples
 
 import android.content.res.Configuration
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateIntAsState
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleOut
+import androidx.compose.animation.shrinkVertically
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -23,6 +40,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
@@ -32,8 +50,10 @@ import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.inset
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.font.FontFamily
@@ -44,6 +64,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.pvmprog.mytextwithcompose.R
 import com.pvmprog.mytextwithcompose.ui.theme.MyTextWithComposeTheme
 
 @Composable
@@ -58,7 +79,7 @@ fun DrawTextCanvas(
 
     val styleCenter = TextStyle(
         color = Color.White,
-        fontSize = 24.sp,
+        fontSize = 30.sp,
         fontFamily = FontFamily.Cursive,
         fontWeight = FontWeight.Bold,
         textDecoration = TextDecoration.Underline
@@ -95,7 +116,7 @@ fun DrawTextCanvas(
             }
             .padding(8.dp)
             .graphicsLayer {
-                shadowElevation = 8.dp.toPx()
+                shadowElevation = corner.toPx()
                 shape = RoundedCornerShape(corner)
                 clip = true //!!! обрезание всего, что вне формы
             }
@@ -113,10 +134,10 @@ fun DrawTextCanvas(
 
             }
             .padding(8.dp),
-
         contentAlignment = Alignment.Center
     ){
         var ratio = 1f
+
         val maxBias = if (boxHeight>boxWidth) boxWidth/2
         else {
             ratio = 1.2f
@@ -145,8 +166,36 @@ fun DrawTextCanvas(
             }
         }
 
+        val enter = slideInVertically(animationSpec = tween(durationMillis = 2000)) { fullWidth ->
+            -fullWidth / 3
+        } + fadeIn(animationSpec = tween(durationMillis = 2000))
+
+        val exit = slideOutVertically() + shrinkVertically() + fadeOut() + scaleOut(targetScale = 1.2f)
+
+        val borderWidth = 4.dp
+
+        AnimatedVisibility(
+            visible = isOpen,
+            enter = enter,
+            exit = exit,
+        ) {
+        Image(
+            painter = painterResource(id = R.drawable.kotik2),
+            contentDescription = "",
+            contentScale = ContentScale.Fit,
+            alignment = Alignment.BottomCenter,
+            modifier = Modifier
+                .widthIn(max = maxBias)
+                .border(
+                    BorderStroke(borderWidth, Color.Green),
+                    RoundedCornerShape(16.dp)
+                )
+                .background(Color.Yellow)
+                .clip(RoundedCornerShape(16.dp))        )
     }
 
+
+    }
 
 
 
@@ -172,17 +221,10 @@ fun DrawOnCanvas(
         modifier = modifier
             .clickable { onClick() }
     ) {
-        val height = size.height
-        val width = size.width
-
-        val startX = 50f
-        val endX = width - 50f
-        var startY = 50f
-        var endY = startY
 
         fun drawMyLine(
-            start: Offset,
-            end: Offset,
+            start: Offset = Offset(0f,0f),
+            end: Offset = Offset(0f,0f),
             color: Color = Color.Yellow,
             strokeWidth:Float = 10f,
             intervals:Float = 10f,
@@ -224,8 +266,10 @@ fun DrawOnCanvas(
                 y = 30.dp.toPx()
             )
         )
-        val direct = if (state) -1
-        else 1
+
+        val direct = if (state) -1.5f
+        else 1f
+
 //размещение по центру
         drawText(
             textMeasurer = textMeasurer,
@@ -244,17 +288,9 @@ fun DrawOnCanvas(
             //Размер области DrawScope автоматически
             //уменьшается по горизонтали и по вертикали
 
-            val widthRect =  size.width
-            val heightRect = size.height / 2
-
-            val sizeInternalRect = Size(
-                width = widthRect,
-                height = heightRect
-            )
-
             inset(
                 left = 0f,
-                top = heightRect,
+                top = size.height / 2,
                 right = 0f,
                 bottom = 0f
             ) {
@@ -269,6 +305,7 @@ fun DrawOnCanvas(
                 )
 
                 val point1 = Offset(x = 0f, y = 0f)
+
                 val point2 = Offset(
                     x = size.width/2,
                     y = size.height/2 - bias.toPx()
@@ -293,14 +330,9 @@ fun DrawOnCanvas(
                     intervals = 5f
                 )
 
-
-
-
             }
 
-
         }
-
 
     }
 
