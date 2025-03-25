@@ -272,7 +272,7 @@ fun annotationKotlin(
                     strVal = codeStr.substring(startInd,endInd)
                     var n = strVal.indexOf("\n")
                     if (n == -1){
-                        println("clr name_variable:  $strVal")
+//                        println("clr name_variable:  $strVal")
 //                       codeStr = codeStr.replaceRange(startInd,endInd,(" ").repeat(endInd-startInd))
                         n = endInd - 1
                         codeStr = codeStr.replaceRange(n,endInd," ")
@@ -336,7 +336,7 @@ fun annotationKotlin(
                 do{
                     ind --
 
-                    if (codeStr[ind].isLetter()) {
+                    if (codeStr[ind].isLetterOrDigit()) {
                         startInd = ind
                         isName = true
                     }
@@ -366,7 +366,7 @@ fun annotationKotlin(
 
                         if (isNameMyFun) idColor = idColor4
 
-                        println("fun: $strVal $idColor")
+//                        println("fun: $strVal $idColor")
                         itemsCode.add(ItemFromCode(startInd,endInd,idColor,strVal))
                         codeStr = codeStr.replaceRange(startInd,endInd,(" ").repeat(endInd-startInd))
 
@@ -382,7 +382,7 @@ fun annotationKotlin(
 
 
     //idColor1 .name  idColor2 .name.
-    fun find_property(idColor1:Int = 6,idColor2:Int = 4,idColor3:Int = 10){
+    fun find_property(idColor1:Int = 6,idColor2:Int = 4,idColor3:Int = 10,idColor4:Int = 5){
         endInd = 0
         var idColor:Int
         var ind:Int
@@ -395,20 +395,26 @@ fun annotationKotlin(
                 //поиск следующих символов
                 do{
                     ind ++
-                    if (codeStr[ind] == 'W'){
-                        endInd = ind
-                    }
                     endInd = ind
                     idColor = idColor1
+                    if (codeStr[ind] == '{') {
+                        idColor = idColor4
+                        break
+                    }
                     if (codeStr[ind] == '.') {
                         idColor = if (isRes) idColor3
-                        else idColor2
+                        else {
+                            if (codeStr[ind-1] == 'p') idColor1
+                            else idColor2
+                        }
                         break
                     }
 
                     if (codeStr[ind] != '_'){
                         if (codeStr[ind] == ' ') break
-                        if (codeStr[ind] == ',') break
+                        if (codeStr[ind] == ',') {
+                            break
+                        }
                         if (!codeStr[ind].isLetterOrDigit()) break
                     }
                 } while (ind < codeStr.length-1)
@@ -483,7 +489,7 @@ fun annotationKotlin(
     find_fun(4,5)
 
 //    println("Поиск свойства color=6,4")
-    find_property(6,4)
+    find_property(6,4,10,5)
 
 //    println("Поиск keywords: val var if ... color=...")
     find_keywords(listKeyWords)

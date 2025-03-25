@@ -58,7 +58,7 @@ fun OutTextCodeNew(
 fun OutTextCodePreview() {
     MyTextWithComposeTheme {
         OutTextCodeNew(
-            message = DataCodeUI.codeUI[8].code,
+            message = DataCodeUI.codeUI[23].code,
             fontSizeCode = 16,
         )
     }

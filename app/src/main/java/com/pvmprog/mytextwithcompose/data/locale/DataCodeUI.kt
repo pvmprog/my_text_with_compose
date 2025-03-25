@@ -2705,7 +2705,7 @@ fun DecorationExampleText(){
 
 
         outText = "Decoration for Text in jetpack Compose."
-        val modifierUnderline = Modifier.drawBehind {
+        val modifierUnderline = Modifier.drawBehind{
             val strokeWidthPx = 1.dp.toPx()
             val verticalOffset = size.height - 3.sp.toPx()
             drawLine(
@@ -2720,7 +2720,7 @@ fun DecorationExampleText(){
             modifier = modifierUnderline,
         )
 
-        var modifierLineThrough = Modifier.drawBehind {
+        var modifierLineThrough = Modifier.drawBehind{
             val strokeWidthPx = 1.dp.toPx()
             val verticalOffset = size.height/2
             drawLine(
@@ -2736,7 +2736,7 @@ fun DecorationExampleText(){
         )
 
         modifierLineThrough = Modifier
-            .drawBehind {
+            .drawBehind{
                 val strokeWidthPx = 1.dp.toPx()
                 drawLine(
                     color = Color.Yellow,
@@ -2745,7 +2745,7 @@ fun DecorationExampleText(){
                     end = Offset(size.width, size.height)
                 )
             }
-            .drawBehind {
+            .drawBehind{
                 val strokeWidthPx = 1.dp.toPx()
                 drawLine(
                     color = Color.Yellow,
@@ -2759,7 +2759,7 @@ fun DecorationExampleText(){
             modifier = modifierLineThrough,
         )
 
-        val modifierDashline = Modifier.drawBehind {
+        val modifierDashline = Modifier.drawBehind{
             val strokeWidthPx = 1.dp.toPx()
             val verticalOffset = size.height - 3.sp.toPx()
             drawLine(
@@ -2776,7 +2776,7 @@ fun DecorationExampleText(){
             modifier = modifierDashline,
         )
 
-        val modifierIntervalsline = Modifier.drawBehind {
+        val modifierIntervalsline = Modifier.drawBehind{
             val strokeWidthPx = 1.dp.toPx()
             val verticalOffset = size.height - 3.sp.toPx()
             drawLine(
@@ -2877,7 +2877,7 @@ fun BorderExampleText(
         Text(
             text = "3.${'$'}outText",
             modifier = Modifier
-                .graphicsLayer {
+                .graphicsLayer{
                     shadowElevation = 8.dp.toPx()
                     shape = CutCornerShape(corner) //углы срезаны
                     clip = true //!!! обрезание всего, что вне формы
@@ -2906,7 +2906,7 @@ fun BorderExampleText(
         Text(
             text = "5.${'$'}outText",
             modifier = Modifier
-                .graphicsLayer {
+                .graphicsLayer{
                     shadowElevation = 8.dp.toPx()
                     shape = RoundedCornerShape(corner)
                     clip = true //!!! обрезание всего, что вне формы
@@ -2924,7 +2924,7 @@ fun BorderExampleText(
         Text(
             text = "6.${'$'}outText",
             modifier = Modifier
-                .drawBehind {
+                .drawBehind{
                     drawRoundRect(
                         Color(0xFF9C27B0),
                         cornerRadius = CornerRadius(corner.toPx()),
@@ -2942,13 +2942,13 @@ fun BorderExampleText(
         Text(
             text = "7.${'$'}outText",
             modifier = Modifier
-                .graphicsLayer {
+                .graphicsLayer{
                     shadowElevation = 8.dp.toPx()
                     shape = RoundedCornerShape(corner)
                     clip = true //!!! обрезание всего, что вне формы
                 }
                 .background(Color(0xFF9C27B0))
-                .drawBehind {
+                .drawBehind{
 //рисует границы прямоугольника с закруглёнными углами
                     drawRoundRect(
                         color = Color.Cyan,
@@ -3667,7 +3667,7 @@ fun GraphicsLayerTextDriver(){
                 ),
                 modifier = Modifier
                     .padding(16.dp)
-                    .graphicsLayer {
+                    .graphicsLayer{
                         this.transformOrigin = TransformOrigin(
                             layerOriginX.floatValue,
                             layerOriginY.floatValue
@@ -3773,7 +3773,7 @@ fun ScaleText(
             text = text + "\n (${'$'}{scaleX},${'$'}{scaleY})",
             modifier = Modifier
                 .padding(padding)
-                .graphicsLayer {
+                .graphicsLayer{
                     this.scaleX = scaleX
                     this.scaleY = scaleY
                 },
@@ -6002,6 +6002,11 @@ TextMeasurer имеет внутренний кеш для оптимизаци�
                     textUrl = "\uD83D\uDCD6 Отображать текст",
                     url = "https://developer.android.com/develop/ui/compose/quick-guides/collections/display-text?hl=ru"
                 ),
+                TextClickLink(
+                    text = "Как получить высоту или ширину элемента в Jetpack Compose ",
+                    textUrl = "\uD83D\uDCD6 Medium. How to get the Height or Width of an Element in Jetpack Compose",
+                    url = "https://medium.com/@vontonnie/how-to-get-the-height-or-width-of-an-element-in-jetpack-compose-8af04365d555"
+                ),
             ),
 
             nameFun = "",
@@ -6009,14 +6014,14 @@ TextMeasurer имеет внутренний кеш для оптимизаци�
             code = """
 @Composable
 fun DrawTextCanvas(
-    textToCenter: String = "Hello, World!"
+    textToCenter: String = "You have a letter!"
 ) {
     val styleCenter = TextStyle(
         color = Color.White,
         fontSize = 24.sp,
-        fontFamily = Alice,
+        fontFamily = FontFamily.Cursive,
         fontWeight = FontWeight.Bold,
-        textDecoration = TextDecoration.Underline
+//        textDecoration = TextDecoration.Underline
     )
 
     val textMeasurer = rememberTextMeasurer()
@@ -6024,6 +6029,7 @@ fun DrawTextCanvas(
     val textLayoutCenter = remember(textToCenter) {
         textMeasurer.measure(textToCenter, styleCenter)
     }
+
 
     Canvas(
         Modifier
@@ -6034,37 +6040,164 @@ fun DrawTextCanvas(
         val height = size.height
         val width = size.width
 
-        val startX = 0f
-        val endX = width
-        val startY = height / 2 + 50.dp.toPx()
-        val endY = startY
+        val startX = 50f
+        val endX = width - 50f
+        var startY = 50f
+        var endY = startY
+
+        fun drawMyLine(
+            start: Offset,
+            end: Offset,
+            color: Color = Color.Yellow,
+            strokeWidth:Float = 10f,
+            intervals:Float = 10f,
+            phase:Float = 10f,
+        ){
+            drawLine(
+                start = start,
+                end = end,
+                color = color,
+                strokeWidth = strokeWidth,
+                pathEffect = PathEffect.dashPathEffect(
+                    intervals = floatArrayOf(
+                        intervals.dp.toPx(),
+                        intervals.dp.toPx()
+                    ),
+                    phase = phase.dp.toPx()
+                )
+            )
+        }
 
 
-        drawLine(
-            start = Offset(x = startX, y = startY),
-            end = Offset(x = endX, y = endY),
-            color = Color.Yellow,
-            strokeWidth = 10f,
-            pathEffect = PathEffect.dashPathEffect(
-                intervals = floatArrayOf(
-                    10f.dp.toPx(),
-                    10f.dp.toPx()
-                ),
-                phase = 10f.dp.toPx()
+//рисуем прямоугольник по краям
+//всей области DrawScope
+        drawRect(
+            color = Color.Cyan,
+            size = size,
+            style = Stroke(
+                width = 2f.dp.toPx(),
             )
         )
+
+        drawMyLine(
+            start = Offset(x = startX, y = startY),
+            end =  Offset(x = endX, y = endY)
+        )
+
+        startY = height - 50f
+        endY = startY
+
+        drawMyLine(
+            start = Offset(x = startX, y = startY),
+            end =  Offset(x = endX, y = endY)
+        )
+
+
+
+        val widthRect =  size.minDimension - 50.dp.toPx()
+        val heightRect = size.minDimension - 150.dp.toPx()
+
+        val sizeRect = Size(
+            width = widthRect,
+            height = heightRect
+        )
+
+        val offsetX = width / 2 - widthRect / 2
+        val offsetY = height / 2 - heightRect / 2
+
+        drawRoundRect(
+            color = Color.Green,
+            size = sizeRect,
+            topLeft = Offset(
+                x = offsetX,
+                y = offsetY,
+            ),
+            style = Stroke(
+                width = 2f.dp.toPx(),
+//пунктирная линия
+                pathEffect = PathEffect.dashPathEffect(
+                    intervals = floatArrayOf(
+                        10f.dp.toPx(),
+                        10f.dp.toPx()
+                    ),
+                    phase = 0f
+                )
+            ),
+//закругление углов
+            cornerRadius = CornerRadius(
+                x = 30.dp.toPx(),
+                y = 30.dp.toPx()
+            )
+        )
+
 
 //размещение по центру
         drawText(
             textMeasurer = textMeasurer,
             text = textToCenter,
             style = styleCenter,
-//            topLeft = Offset(50.dp.toPx(),50.dp.toPx()),
             topLeft = Offset(
                 x = center.x - textLayoutCenter.size.width / 2,
                 y = center.y - textLayoutCenter.size.height / 2,
             ),
         )
+
+        val shift = 20.dp.toPx()
+//Перенос системы координат в позицию (offsetX,offsetY)
+        inset(
+            left = offsetX,
+            top = offsetY,
+            right = offsetX + widthRect,
+            bottom = offsetY + heightRect
+        ) {
+//Размер области DrawScope автоматически
+//уменьшается по горизонтали и по вертикали
+
+            val sizeInternalRect = Size(
+                width = widthRect - 2 * shift,
+                height = heightRect - 2 * shift
+            )
+
+            drawRect(
+                color = Color.Cyan,
+                topLeft = Offset(
+                    x = shift,
+                    y = shift,
+                ),
+                size = sizeInternalRect,
+                style = Stroke(
+                    width = 2f.dp.toPx(),
+                )
+            )
+
+            val point1 = Offset(x = shift, y = shift)
+            val point2 = Offset(
+                x = widthRect/2,
+                y = heightRect/2
+            )
+
+            drawMyLine(
+                start = point1,
+                end =  point2,
+                color = Color.Cyan,
+                intervals = 5f
+            )
+
+            val point3 = Offset(
+                x = widthRect - shift,
+                y = shift
+            )
+
+
+            drawMyLine(
+                start = point2,
+                end =  point3,
+                color = Color.Cyan,
+                intervals = 5f
+            )
+
+
+        }
 
     }
 }
