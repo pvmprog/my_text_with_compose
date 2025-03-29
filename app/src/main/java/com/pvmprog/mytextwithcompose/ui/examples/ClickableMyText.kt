@@ -215,7 +215,7 @@ private fun ExpandedText(){
         ContentIcon("Комментарий к примеру",true)
 
         Text(
-            text = "Для подсказки коснитесь на любой символ 'Х' для отображения буквы",
+            text = "Для подсказки коснитесь на любой символ '*' для отображения буквы",
             textAlign = TextAlign.Justify,
             letterSpacing = 1.3.sp,
             fontSize = 16.sp
