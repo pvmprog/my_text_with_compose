@@ -63,6 +63,10 @@ import com.pvmprog.mytextwithcompose.ui.examples.StyleDraver
 import com.pvmprog.mytextwithcompose.ui.examples.AnnotatedWithAddStyle
 import com.pvmprog.mytextwithcompose.ui.examples.AnnotatedParagraph
 import com.pvmprog.mytextwithcompose.ui.examples.AnnotatedBaseLineShift
+import com.pvmprog.mytextwithcompose.ui.examples.CircularIndicator
+import com.pvmprog.mytextwithcompose.ui.examples.ClickableMyText
+import com.pvmprog.mytextwithcompose.ui.examples.PieChart
+import com.pvmprog.mytextwithcompose.ui.examples.SelectableText
 import com.pvmprog.mytextwithcompose.ui.examples.TextColorAny
 import com.pvmprog.mytextwithcompose.ui.examples.TextFontFamalyAlternate
 import com.pvmprog.mytextwithcompose.ui.examples.TextFontFamily
@@ -2661,6 +2665,7 @@ fun SimpleLimit() {
                         
                 
             """.trimIndent(),
+            nameFun = "DecorationExampleText.kt",
             lambdaFun = { DecorationExampleText() },
             code ="""
 @Composable
@@ -2818,6 +2823,7 @@ fun DecorationExampleText(){
 Для создания рамки можно использовать и модификатор |Modifier.drawBehind|, который позволяет выполнять операции |DrawScope| за составным содержимым, отображаемым на экране.
 
             """.trimIndent(),
+            nameFun = "BorderExampleText.kt",
             lambdaFun = { BorderExampleText() },
             code ="""
 @Composable
@@ -3070,6 +3076,7 @@ fun BorderExampleText(
   |restLine|  - величина отступа, примененных к каждой строке, кроме первой.
                  
             """.trimIndent(),
+            nameFun = "StyleDraver.kt",
             lambdaFun = { StyleDraver() },
             code ="""
 @Composable
@@ -3130,6 +3137,7 @@ fun TextStyleIndent(
 
                 
             """.trimIndent(),
+            nameFun = "ShadowDriver.kt",
             lambdaFun = { ShadowDriver() },
             code ="""
 @Composable
@@ -3328,6 +3336,7 @@ fun ShadowDriver(){
                      
                 
             """.trimIndent(),
+            nameFun = "DirectionExampleText.kt",
             lambdaFun = { DirectionExampleText() },
             code ="""
 @Composable
@@ -3438,6 +3447,7 @@ fun DirectionExampleText(){
  LineBreak.|WordBreak| - описывает, как разрывы строк должны вставляться в слова.     
             
             """.trimIndent(),
+            nameFun = "LineBreakText.kt",
             lambdaFun = { LineBreakText() },
             code ="""
 @Composable
@@ -3536,6 +3546,7 @@ fun LineBreakText(){
  |skewX| указывает на сдвиг текста. Например, точка с координатами (x, y), будет трансформирована в точку (x + y * skewX, y). Значение по умолчанию - 0.0f.                        
                 
             """.trimIndent(),
+            nameFun = "GeometricTransform.kt",
             lambdaFun = { GeometricTransform() },
             code ="""
 @Composable
@@ -3603,6 +3614,7 @@ Modifier.|graphicsLayer| — модификатор, который превра
                       
                  
             """.trimIndent(),
+            nameFun = "GraphicsLayerTextDriver.kt",
             lambdaFun = { GraphicsLayerTextDriver() },
             code ="""
 @Composable
@@ -3745,7 +3757,7 @@ fun GraphicsLayerTextDriver(){
                 ),
             ),
 
-            nameFun = "",
+            nameFun = "ScaleDraver.kt",
             lambdaFun = { ScaleDraver() },
             code = """
 @Composable
@@ -3879,6 +3891,7 @@ class SpanStyle(
 Класс |Builder| для |AnnotatedString| позволяет создавать |AnnotatedString| с использованием таких методов, как |append| и |addStyle|.                        
                 
             """.trimIndent(),
+            nameFun = "AnnotatedStylesInText.kt",
             lambdaFun = {
                 BoxCenterLambdaFun(
                     lambdaFun = { AnnotatedStylesInText(fontSize = 40) },
@@ -3985,6 +3998,7 @@ fun BoxCenterLambdaFun(
 После того, как часть текста отмечена |ParagraphStyle|, эта часть будет отделена от остального, как если бы был добавлен символ перевода строки.
                 
             """.trimIndent(),
+            nameFun = "AnnotatedParagraph.kt",
             lambdaFun = {
                 BoxCenterLambdaFun(
                     lambdaFun = { AnnotatedParagraph() },
@@ -4099,6 +4113,7 @@ fun AnnotatedParagraph(
             В примере будем использовать метод |pushStyle|, который применяет |SpanStyle| или |ParagraphStyle| ко всему добавляемому тексту до тех пор, пока не будет вызван метод |pop|.
                 
             """.trimIndent(),
+            nameFun = "AnnotatedPushStyleAndUrl.kt",
             lambdaFun = {
                 BoxCenterLambdaFun(
                     lambdaFun = { AnnotatedPushStyleAndUrl() },
@@ -4234,6 +4249,7 @@ buildAnnotatedString {
 }
 
             """.trimIndent(),
+            nameFun = "AnnotatedWithAddStyle.kt",
             lambdaFun = {
                 BoxCenterLambdaFun(
                     lambdaFun = {
@@ -4329,6 +4345,7 @@ fun AnnotatedWithAddStyle() {
             comment = """
 Параметр |baselineShift| SpanStyle определяет величинну, на которую текст смещается вверх или вниз относительно текущей |базовой линии|.                
             """.trimIndent(),
+            nameFun = "AnnotatedBaseLineShift.kt",
             lambdaFun = {
                 BoxCenterLambdaFun(
                     lambdaFun = { AnnotatedBaseLineShift() },
@@ -4505,6 +4522,7 @@ fun AnnotatedBaseLineShift() {
 </p>
 
             """.trimIndent(),
+            nameFun = "AnnotatedHtmlString.kt",
             lambdaFun = {
                 BoxCenterLambdaFun(
                     lambdaFun = { AnnotatedHtmlString() },
@@ -4718,7 +4736,7 @@ fun AnnotatedHtmlString(
            
      
             """.trimIndent(),
-            nameFun = "",
+            nameFun = "OutSipmleArticle.kt",
             lambdaFun = {
                 OutSipmleArticle(
                     sizeFontText = 18,
@@ -5051,6 +5069,7 @@ Easing позволяет анимированным элементам уско
                     onClick = { expanded = !expanded }
                 )
             },
+            nameFun = "AnimationVisibilityContent.kt",
             code ="""
 /*
  
@@ -5160,6 +5179,7 @@ initialOffsetY — это лямбда, которая берет полную �
                 
             """.trimIndent(),
             lambdaFun = { AnimationVisibilitySlade() },
+            nameFun = "AnimationVisibilitySlade.kt",
             code ="""
             """.trimIndent(),
             links = listOf(
@@ -5230,6 +5250,7 @@ fun scaleIn(
 
                  """.trimIndent(),
             lambdaFun = { AnimationVisibilityScale(it) },
+            nameFun = "AnimationVisibilityScale.kt",
             code ="""
             """.trimIndent(),
             links = listOf(
@@ -5281,6 +5302,7 @@ fun expandIn(
                 
             """.trimIndent(),
             lambdaFun = { AnimationVisibilityExpend(it)  },
+            nameFun = "AnimationVisibilityExpend.kt",
             code ="""
             """.trimIndent(),
             links = listOf(
@@ -5314,6 +5336,7 @@ fun expandIn(
                 
             """.trimIndent(),
             lambdaFun = { AnimationChildren(it) },
+            nameFun = "AnimationChildren.kt",
             code ="""
 @Composable
 fun AnimationChildren(
@@ -5466,6 +5489,7 @@ AnimatedVisibility(
 
             """.trimIndent(),
             lambdaFun = { AnimationTransition() },
+            nameFun = "AnimationTransition.kt",
             code ="""
             """.trimIndent(),
             links = listOf(
@@ -5574,6 +5598,7 @@ Surface(
 } 
             """.trimIndent(),
             lambdaFun = { AnimationContent() },
+            nameFun = "AnimationContent.kt",
             code ="""
             var count by remember { mutableIntStateOf(0) }
             //....
@@ -6014,7 +6039,7 @@ TextMeasurer имеет внутренний кеш для оптимизаци�
                 ),
             ),
 
-            nameFun = "",
+            nameFun = "DrawTextCanvas.kt",
             lambdaFun = { DrawTextCanvas() },
             code = """
 @Composable
@@ -6290,6 +6315,82 @@ fun DrawOnCanvas(
                 
             """.trimIndent()
         ),
+
+        ExampleCode(
+            id = 3,
+            title = "Индикатор выполнения",
+            comment = """
+В этом примере |IndicatorArc| — это composable, который принимает значение прогресса выполнения от 0 до 100 и рисует круговой индикатор выполнения. 
+
+Значение прогресса от 0 до 100%
+                
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Графика в Compose ",
+                    textUrl = "\uD83D\uDCD6 Отображать текст",
+                    url = "https://developer.android.com/develop/ui/compose/graphics/draw/overview?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Анимации в Compose",
+                    textUrl = "\uD83D\uDCD6 Animations in Compose ",
+                    url = "https://developer.android.com/develop/ui/compose/animation/introduction"
+                ),
+                TextClickLink(
+                    text = "androidx. compose. ui. graphics. drawscope ",
+                    textUrl = "\uD83D\uDCD6 Developers graphics drawscope",
+                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/graphics/drawscope/package-summary"
+                ),
+            ),
+
+            lambdaFun = { CircularIndicator(it) },
+            nameFun = "CircularIndicator.kt",
+            code = """
+                
+            """.trimIndent()
+        ),
+        ExampleCode(
+            id = 3,
+            title = "Круговая диаграмма",
+            comment = """
+В этом примере |PieChart| — это composable, который принимает коллекцию закусок с показателями продажи и рисует круговую диаграмму. 
+                
+Круговая диаграмма используются для визуализации данных. Она проста в построении, понятна и смотрятся эффектно.
+
+Круговая диаграмма применяется для отражения структуры или доли показателя.
+
+Доли сравниваются по отношению к целому.
+                 
+Сумма долей в круговой диаграмме не должна быть больше или меньше 100%. 
+                
+Круговая диаграмма должна состоять не более чем из 3‒5 долей.
+                
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Графика в Compose ",
+                    textUrl = "\uD83D\uDCD6 Отображать текст",
+                    url = "https://developer.android.com/develop/ui/compose/graphics/draw/overview?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Что стоит учесть при построении круговых диаграмм",
+                    textUrl = "\uD83D\uDCD6 Netology.ru ",
+                    url = "https://netology.ru/blog/03-2021-krugovye-diagrammy"
+                ),
+                TextClickLink(
+                    text = "androidx. compose. ui. graphics. drawscope ",
+                    textUrl = "\uD83D\uDCD6 Developers graphics drawscope",
+                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/graphics/drawscope/package-summary"
+                ),
+            ),
+
+            lambdaFun = { PieChart(it) },
+            nameFun = "PieChart.kt",
+            code = """
+                
+            """.trimIndent()
+        ),
+
         ExampleCode(
             id = 3,
             title = "Маштабирование на холсте",
@@ -6332,8 +6433,8 @@ Canvas(modifier = Modifier.fillMaxSize()) {
                 ),
             ),
 
-            nameFun = "",
             lambdaFun = { DrawAnimeScaleAText() },
+            nameFun = "DrawAnimeScaleAText.kt",
             code = """
 @Composable
 fun DrawAnimeScaleAText(
@@ -6400,6 +6501,241 @@ fun DrawAnimeScaleAText(
         ),
 
         ExampleCode(
+            title = "Текст, доступный для выбора",
+            comment = """
+Компонуемый |SelectionContainer| обеспечивает доступность для выбора текста с возможностью копирования,выбранной части текста, в буфер обмена. По умолчанию составные элементы недоступны для выбора, что означает, что по умолчанию пользователи не могут выбирать и копировать текст из вашего приложения. 
+
+Чтобы включить выделение текста, вам необходимо обернуть текстовые элементы компонуемым |SelectionContainer|                        
+                
+            """.trimIndent(),
+            lambdaFun = { SelectableText()  },
+
+            code ="""
+
+            """.trimIndent(),
+            links = listOf(
+
+                TextClickLink(
+                    text = "Больше информации смотрите в ",
+                    textUrl = "\uD83D\uDCD6 Developers. Accessibility",
+                    url = "https://developer.android.com/develop/ui/compose/accessibility/semantics?hl=ru"
+                ),
+            ),
+        ),
+
+        ExampleCode(
+            title = "Получение позиции касания по тексту",
+            comment = """
+Модификатор |clickable| обеспечивает прослушивание кликов по тексту. Однако если вы хотите получить позицию щелчка внутри составного текста, в случае, когда у вас есть разные действия, основанные на разных частях текста, вам нужно вместо этого использовать |ClickableText|                        
+                
+            """.trimIndent(),
+            lambdaFun = { ClickableMyText()  },
+            nameFun = "ClickableMyText.kt",
+
+            code ="""
+@Composable
+fun ClickableMyText(
+    identification:String = "Филин",
+    comment:String = "\"Угукающая\" ночная птица",
+    char:Char = '*'
+) {
+    val identLen = identification.length
+    val comLen = comment.length
+    val corner = 8.dp
+
+
+    var expanded by remember { mutableStateOf(false) }
+
+    val letters = remember { Array(identLen,{ _ -> char}) }
+
+    var text by remember {
+        mutableStateOf(letters.toStr())
+    }
+
+    val applicationContext = LocalContext.current
+
+    val annotatedString = AnnotatedString(
+        text = text+ " " +comment,
+        spanStyles = listOf(
+            AnnotatedString.Range(
+                SpanStyle(
+                    color = Color.Yellow,
+                    fontStyle = FontStyle.Normal,
+                    fontFamily = FontFamily.Monospace,
+                    fontSize = 40.sp,
+                    letterSpacing = 25.sp
+                ),
+                0, identLen //Филин
+            ),
+            AnnotatedString.Range(
+                SpanStyle(
+                    color = Color.Cyan,
+                    fontSize = 15.sp
+                ),
+                identLen + 1, identLen + 1 + comLen  //Угукающая ночная птица
+            ),
+        ),
+
+        // создаем два абзаца
+        paragraphStyles = listOf(
+            AnnotatedString.Range(
+                ParagraphStyle(
+                    textAlign = TextAlign.Center
+                ),
+                0, identLen //Филин
+            ),
+            AnnotatedString.Range(
+                ParagraphStyle(
+                    textAlign = TextAlign.Center
+                ),
+                identLen + 1, identLen + 1 + comLen  //Угукающая ночная птица
+            ),
+        )
+    )
+
+    Column(
+        modifier = Modifier
+            .padding(16.dp)
+            .verticalScroll(rememberScrollState()),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        ClickableText(
+            text = annotatedString,
+            modifier = Modifier
+                .padding(16.dp)
+                .fillMaxWidth()
+                .graphicsLayer {
+                    shadowElevation = 8.dp.toPx()
+                    shape = RoundedCornerShape(corner)
+                    clip = true //!!! обрезание всего, что вне формы
+                }
+                .background(color = Color.Black)
+                .drawBehind {
+//рисует границы прямоугольника с закруглёнными углами
+                    drawRoundRect(
+                        color = Color.Cyan,
+                        cornerRadius = CornerRadius(corner.toPx()),
+                        style = Stroke(
+                            width = 4.dp.toPx(),
+                            pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f))
+                        )
+                    )
+
+                }
+                .padding(top = 32.dp,bottom = 32.dp),
+            onClick = { ind ->
+                if (ind < identLen){
+                    letters[ ind ] = identification[ ind ].uppercaseChar()
+                    text = letters.toStr()
+                    Toast.makeText(
+                        applicationContext,
+                        "${'$'}{ind+1} -th character is clicked",
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                }
+
+            }
+        )
+
+        Card(
+            modifier = Modifier
+                .border(1.dp, MaterialTheme.colorScheme.onBackground)
+                .padding(16.dp),
+            onClick = { expanded = !expanded }
+        ) {
+            Crossfade(
+                targetState = expanded,
+                label = "cross fade"
+            ) { state ->
+                when (state) {
+                    true -> ExpandedText()
+                    else -> ContentIcon()
+                }
+            }
+
+        }
+
+    }
+
+
+}
+
+@Composable
+private fun ContentIcon(
+    text: String = "Комментарий ...",
+    expanded: Boolean = false
+){
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically,
+
+        ) {
+        Text(
+            text = text,
+            modifier = Modifier
+                .weight(1f),
+            textAlign = TextAlign.Center,
+            fontSize = 18.sp
+        )
+        Icon(
+            imageVector = Icons.Default.ArrowDropDown,
+            contentDescription = "",
+            modifier = Modifier.rotate(if (expanded) 180F else 0f)
+        )
+    }
+}
+
+@Composable
+private fun ExpandedText(){
+    Column(
+        modifier = Modifier
+            .padding(4.dp)
+            .fillMaxWidth()
+    ) {
+        ContentIcon("Комментарий к примеру",true)
+
+        Text(
+            text = "Для подсказки коснитесь на любой символ 'Х' для отображения буквы",
+            textAlign = TextAlign.Justify,
+            letterSpacing = 1.3.sp,
+            fontSize = 16.sp
+
+        )
+    }
+}
+
+fun Array<Char>.toStr(): String {
+    val array: Array<Char> = this
+    var result = ""
+    array.forEach { result += it }
+    return result
+}
+                
+
+            """.trimIndent(),
+            links = listOf(
+
+                TextClickLink(
+                    text = "Больше информации смотрите в ",
+                    textUrl = "\uD83D\uDCD6 Developers. Accessibility",
+                    url = "https://developer.android.com/develop/ui/compose/accessibility/semantics?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Онлайн версия кроссворда для детей Всезнайка",
+                    textUrl = "\uD83D\uDCD6 Кроссворд для настоящих эрудитов ",
+                    url = "https://www.obovsemka.com/crosswordy/crossword-vseznajka.html"
+                ),
+
+            ),
+        ),
+
+
+        ExampleCode(
             id = 1,
             title = "Доступность текста",
             comment = """
@@ -6435,6 +6771,7 @@ fun DrawAnimeScaleAText(
 
             """.trimIndent(),
             lambdaFun = { SemanticsText() },
+            nameFun = "SemanticsText.kt",
 
             code ="""
 @Composable
