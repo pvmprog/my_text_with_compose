@@ -281,6 +281,14 @@
     <td><img src="screenshots/screenshot501.jpg" width=270 height=520></td>
     <td><img src="screenshots/screenshot502.jpg" width=270 height=520></td>
   </tr>
+  <tr>
+    <td><img src="screenshots/screenshot60a.jpg" width=270 height=520></td>
+    <td><img src="screenshots/screenshot609.jpg" width=270 height=520></td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/screenshot607.jpg" width=270 height=520></td>
+    <td><img src="screenshots/screenshot608.jpg" width=270 height=520></td>
+  </tr>
    
  </table>
 
@@ -326,6 +334,12 @@
 </p>
 <p align="center">
     <img src="screenshots/anime_v3.gif" alt="Start screen" />
+</p>
+<p align="center">
+   **************************************************
+</p>
+<p align="center">
+    <img src="screenshots/video_clicked.gif" alt="Start screen" />
 </p>
 <p align="center">
    **************************************************
