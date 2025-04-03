@@ -115,6 +115,7 @@ fun ClickableMyText(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
+        Text("Отгадайте слово")
         ClickableText(
             text = annotatedString,
             modifier = Modifier

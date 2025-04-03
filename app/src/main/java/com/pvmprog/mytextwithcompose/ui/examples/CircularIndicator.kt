@@ -38,7 +38,7 @@ import com.pvmprog.mytextwithcompose.ui.theme.MyTextWithComposeTheme
 @Composable
 fun CircularIndicator(
     isExpanded: Boolean = false,
-    progress: String = "prog"
+    progress: String = "%"
 ) {
     val sliderPosition = remember {
         mutableFloatStateOf(30f)
