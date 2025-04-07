@@ -70,8 +70,12 @@
     <td>to be continued</td>
   </tr>
   <tr>
-    <td><img src="screenshots/screenshot010.jpg" width=190 height=360> </td>
-    <td><img src="screenshots/screenshot011.jpg" width=190 height=360> </td>
+    <td><img src="screenshots/screenshot0001.jpg" width=190 height=360> </td>
+    <td><img src="screenshots/screenshot0002.jpg" width=190 height=360> </td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/screenshot0003.jpg" width=190 height=360> </td>
+    <td><img src="screenshots/screenshot0004.jpg" width=190 height=360> </td>
   </tr>
  </table>
 
