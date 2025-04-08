@@ -12,6 +12,12 @@
     <string name="next">next</string>
     <string name="zoom_is_default">zoom is default</string>
 
+    <string name="attention">Attention</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="delete_question">Вы уверены, что хотите удалить?</string>
+
+
     <string name="day_of_month">There are %2$d days in %1$s</string>
     <string name="results_screen">Results screen</string>
     <string name="source_code">Source code</string>
@@ -27,5 +33,17 @@
     <string name="welcome_to_b_android_b"><![CDATA[Welcome to <b>Android</b>!]]></string>
 
     <string name="temperature">t = %1$d °C</string>
+    <string name="comment_gates">Кованые ворота с элементами художественной ковки создают роскошный внешний вид Вашего участка.</string>
+    <string name="gates">Ворота</string>
+    <string name="canopy">Навес</string>
+    <string name="comment_canopy">Навес на крыльцо или козырек над дверью - долговечное и хорошее решение для Вашего дома.</string>
+    <string name="fence">Забор</string>
+    <string name="comment_fence">Забор с использованием декларативной ковки, наилучшим образом сочетается с любыми вариантами окружающего ландшафта.</string>
+    <string name="ladder">Лестница</string>
+    <string name="comment_ladder">Лестница на второй этаж - гордость и визитная карточка Вашего дома.</string>
+    <string name="gilding">Золочение</string>
+    <string name="comment_gilding">Сусальная позолота придает изысканный и роскошный вид любому изделию.</string>
+    <string name="modeling">Моделирование</string>
+    <string name="comment_modeling">3D-моделирование объектов. Визуализация объектов, создание чертежей.</string>
 
 </resources>

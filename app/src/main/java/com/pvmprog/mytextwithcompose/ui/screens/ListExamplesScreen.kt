@@ -63,7 +63,7 @@ fun ListExamplesScreen(
         val item = itemList[i]
         message += "\n"
         message += "#${item.title} #"
-        message += "${i+1}) "+item.comment
+        message += "|_${i+1}| "+item.comment
     }
     LazyColumn {
         item {

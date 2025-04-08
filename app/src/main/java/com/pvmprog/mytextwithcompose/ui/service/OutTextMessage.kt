@@ -23,6 +23,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.BaselineShift
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
@@ -71,16 +72,36 @@ fun OutTextMessage(
                 messageArrayList.forEachIndexed { index, s ->
                     if (index % 2 != 0) {
                         val isColorTwo = (s[0] == '!')
-                        withStyle(
-                            style = SpanStyle(
-                                fontSize = (sizeFontText+2).sp,
-                                fontFamily = Alice,
-                                color = if (isColorTwo)  highLightedColor2
-                                else  highLightedColor,
-                            )
-                        ) {
-                            if (isColorTwo) append(s.substring(1))
-                            else append(s)
+                        val isSmall = (s[0] == '_')
+
+                        if (isSmall){
+                            withStyle(
+                                style = SpanStyle(
+                                    baselineShift = BaselineShift.Superscript,
+                                    fontSize = 10.sp,
+                                    fontFamily = FontFamily.SansSerif,
+                                    color = when {
+                                        isColorBackground -> Color.Unspecified
+                                        else -> colorText
+                                    }
+                                )
+                            ) {
+                                append(s.substring(1))
+                            }
+
+                        } else {
+                            withStyle(
+                                style = SpanStyle(
+                                    fontSize = (sizeFontText+2).sp,
+                                    fontFamily = Alice,
+                                    color = if (isColorTwo)  highLightedColor2
+                                    else  highLightedColor,
+                                )
+                            ) {
+                                if (isColorTwo) append(s.substring(1))
+                                else append(s)
+                            }
+
                         }
 
                     } else {
@@ -170,7 +191,7 @@ fun OutTextMessagePreview() {
         ) {
             OutTextMessage(
                 message = """
-|Ресурсы| — это дополнительные файлы и |!статический| контент, который использует приложение.
+|_10| |Ресурсы| — это дополнительные файлы и |!статический| контент, который использует приложение.
                    
                     """.trimIndent(),
                 sizeFontText = 18,

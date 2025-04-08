@@ -8,17 +8,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import com.pvmprog.mytextwithcompose.ui.service.translate_old.DataHighCode.highCodeList
 import com.pvmprog.mytextwithcompose.data.model.ExampleCode
-import com.pvmprog.mytextwithcompose.ui.service.translate_old.HighlightCode
 import com.pvmprog.mytextwithcompose.data.model.TextClickLink
 import com.pvmprog.mytextwithcompose.ui.examples.AnimationBgGradient
 import com.pvmprog.mytextwithcompose.ui.examples.AnimationChildren
 import com.pvmprog.mytextwithcompose.ui.examples.AnimationContent
 import com.pvmprog.mytextwithcompose.ui.examples.AnimationContentSize
 import com.pvmprog.mytextwithcompose.ui.examples.AnimationCrossfade
-import com.pvmprog.mytextwithcompose.ui.examples.AnimationInfiniteTransition
 import com.pvmprog.mytextwithcompose.ui.examples.AnimationTransition
 import com.pvmprog.mytextwithcompose.ui.examples.AnimationVisibilityContent
 import com.pvmprog.mytextwithcompose.ui.examples.AnimationVisibilityExpend
@@ -67,6 +63,8 @@ import com.pvmprog.mytextwithcompose.ui.examples.ArrowIndicator
 import com.pvmprog.mytextwithcompose.ui.examples.ArrowNewIndicator
 import com.pvmprog.mytextwithcompose.ui.examples.CircularIndicator
 import com.pvmprog.mytextwithcompose.ui.examples.ClickableMyText
+import com.pvmprog.mytextwithcompose.ui.examples.LineDriverIndicator
+import com.pvmprog.mytextwithcompose.ui.examples.ListProducts
 import com.pvmprog.mytextwithcompose.ui.examples.PieChart
 import com.pvmprog.mytextwithcompose.ui.examples.SelectableText
 import com.pvmprog.mytextwithcompose.ui.examples.TextColorAny
@@ -74,7 +72,7 @@ import com.pvmprog.mytextwithcompose.ui.examples.TextFontFamalyAlternate
 import com.pvmprog.mytextwithcompose.ui.examples.TextFontFamily
 import com.pvmprog.mytextwithcompose.ui.examples.TextLineHeight
 import com.pvmprog.mytextwithcompose.ui.examples.TypographyStyles
-import com.pvmprog.mytextwithcompose.ui.service.tranlate_new.HighlightColor
+import com.pvmprog.mytextwithcompose.ui.examples.data.DataItemProducts
 
 object DataCodeUI {
     val codeUI: List<ExampleCode> = listOf(
@@ -7255,6 +7253,288 @@ private fun writeFrame(
         ),
 
         ExampleCode(
+            title = "Линейный индикатор",
+            comment = """
+Пример линейного индикатора                
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Графика в Compose ",
+                    textUrl = "\uD83D\uDCD6 Отображать текст",
+                    url = "https://developer.android.com/develop/ui/compose/graphics/draw/overview?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Что стоит учесть при построении круговых диаграмм",
+                    textUrl = "\uD83D\uDCD6 Netology.ru ",
+                    url = "https://netology.ru/blog/03-2021-krugovye-diagrammy"
+                ),
+                TextClickLink(
+                    text = "androidx. compose. ui. graphics. drawscope ",
+                    textUrl = "\uD83D\uDCD6 Developers graphics drawscope",
+                    url = "https://developer.android.com/reference/kotlin/androidx/compose/ui/graphics/drawscope/package-summary"
+                ),
+            ),
+
+            lambdaFun = { LineDriverIndicator(it) },
+            nameFun = "LineDriverIndicator.kt",
+            code = """
+@Composable
+fun LineDriverIndicator(
+    isExpanded: Boolean = false,
+    labelSlider: String = "kV",
+    mivValue:Float = 0f,
+    maxValue:Float = 120f,
+    alarmValue:Float = 105f
+) {
+    val sliderPosition = remember {
+        mutableFloatStateOf(43f)
+    }
+
+    val modifier = Modifier
+        .fillMaxWidth(if (isExpanded) 0.8f else 1f)
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(MaterialTheme.colorScheme.tertiaryContainer)
+            .padding(top = 32.dp)
+            .padding(8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+
+    ) {
+        IndicatorLine(
+            modifier = modifier,
+            value = sliderPosition.floatValue,
+            minValue = mivValue,
+            maxValue = maxValue,
+            alarmValue = alarmValue,
+            unitOfMeasurement = labelSlider
+        )
+        SliderSimple(labelSlider+":", sliderPosition, mivValue, maxValue,modifier)
+    }
+}
+
+@Composable
+private fun IndicatorLine(
+    title: String = "Напряжение электрофильта",
+    modifier: Modifier = Modifier,
+    value: Float = 0f,
+    minValue: Float = 0f,
+    maxValue: Float = 120f,
+    alarmValue: Float = maxValue - 25f,
+    indentDp: Int = 16,
+    strokeWidth: Float = 15f, //Ширина ползунка
+    quantity: Int = 8,    //кол-во сегментов
+    background: Color = MaterialTheme.colorScheme.background,
+    colorArrow: Color = MaterialTheme.colorScheme.onBackground,
+    colorValue: Color = MaterialTheme.colorScheme.secondary,
+    colorAlarm: Color = MaterialTheme.colorScheme.error,
+    height: Int = 80,
+    unitOfMeasurement: String = "kV",
+    styleScaleValues: TextStyle = TextStyle(
+        textAlign = TextAlign.Center,
+        fontSize = 18.sp,
+        color = MaterialTheme.colorScheme.onTertiaryContainer,
+    ),
+    styleRealValue: TextStyle = TextStyle(
+        textAlign = TextAlign.Center,
+        fontFamily = FontFamily.SansSerif,
+        fontSize = 25.sp,
+        color = colorValue,
+    )
+
+) {
+    val textMeasurer = rememberTextMeasurer()
+
+    Card {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Text(title)
+            Row(
+                modifier = modifier
+                    .fillMaxWidth()
+                    .background(background),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                LineIndicator(
+                    modifier = Modifier
+                        .height(height.dp)
+                        .weight(1f),
+                    textMeasurer = textMeasurer,
+                    color = colorArrow,
+                    minValue = minValue,
+                    maxValue = maxValue,
+                    quantity = quantity * 2,
+                    strokeWidth = if (strokeWidth > 2f) strokeWidth / 2 else 2f,
+                    indentDp = indentDp,
+                    style = styleScaleValues,
+                    alarmValue = alarmValue,
+                    alarmColor = colorAlarm,
+                    realValue = value
+                )
+                Spacer(
+                    modifier = Modifier
+                        .width(2.dp)
+                        .background(styleRealValue.color)
+                        .height(height.dp)
+                )
+                Column(
+                    modifier = Modifier
+                        .background(background)
+                        .padding(horizontal = 8.dp)
+                        .widthIn(min = 70.dp)
+                        .height(height.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Text(
+                        "%.1f".format(value), style = styleRealValue.merge(
+                            color = if (value >= alarmValue) colorAlarm else colorValue
+                        )
+                    )
+                    Text(unitOfMeasurement, style = styleRealValue)
+
+                }
+
+            }
+
+        }
+
+    }
+
+}
+
+@Composable
+fun LineIndicator(
+    modifier: Modifier = Modifier,
+    textMeasurer: TextMeasurer,
+    color: Color,
+    minValue: Float,
+    maxValue: Float,
+    quantity: Int,       //кол-во сегментов
+    strokeWidth: Float,
+    sliderHeightDp: Int = 30,
+    divisionHeight: Int = 10,
+    indentDp: Int = 0,
+    style: TextStyle,
+    alarmValue: Float = 0f,
+    alarmColor: Color,
+    realValue: Float = 70f
+) {
+    //Контроль на корректность выводимого значения
+    val outValue = if (realValue > maxValue) maxValue
+    else if (realValue < minValue) minValue
+    else realValue
+
+    Canvas(modifier) {
+        val indentPx = indentDp.dp.toPx()
+        val widthIndicator = size.width - 2 * indentPx
+
+//рисуем бегунок (прямоугольник),размеры которого будем изменять
+        val sliderWidth = outValue * widthIndicator / maxValue
+        drawRect(
+            topLeft = Offset(
+                x = indentPx,
+                y = size.height - sliderHeightDp.dp.toPx()
+            ),
+
+            size = Size(
+                width = sliderWidth,
+                height = sliderHeightDp.dp.toPx()
+            ),
+
+//градиент цвета заливки
+            brush = Brush.linearGradient(
+                colors = listOf(
+                    Color(0xff2962ff),
+                    Color(0xffffeb3b),
+                    Color(0xffff5722),
+                )
+            ),
+        )
+
+//нижняя линия индикатора
+        drawLine(
+            start = Offset(indentPx, size.height),
+            end = Offset(size.width - indentPx, size.height),
+            strokeWidth = strokeWidth,
+            color = color
+        )
+
+//приращение величин
+        val increment = (maxValue - minValue) / quantity
+        val dx = widthIndicator / quantity
+        var inc = 0
+        var isSmoll = false
+
+        for (i in 0..quantity) {
+            val value = minValue + i * increment
+            val x = indentPx + i * dx
+            val y1 = size.height - sliderHeightDp.dp.toPx()
+
+            val y2 = if (isSmoll) y1 - divisionHeight
+            else y1 - 2 * divisionHeight
+
+            val isBorder = if ((i == 0) || (i == quantity)) true
+            else false
+            //рисуем деление
+            drawLine(
+                start = Offset(x, y = if (isBorder) size.height else y1),
+                end = Offset(x, y = y2),
+                strokeWidth = strokeWidth,
+                color = color
+            )
+
+            if (inc == 0) {
+                //Выводим значения над делениями
+                val textValue = "${'$'}{value.toInt()}"
+                val valueLayout = textMeasurer.measure(textValue, style)
+                val xx = when (i) {
+                    0 -> x - 6.dp.toPx()
+                    quantity -> x - valueLayout.size.width + 6.dp.toPx()
+                    else -> x - valueLayout.size.width / 2
+                }
+                drawText(
+                    textMeasurer = textMeasurer,
+                    text = textValue,
+                    style = style,
+                    topLeft = Offset(
+                        x = xx,
+                        y = y2 - valueLayout.size.height - 8.dp.toPx()
+                    ),
+                )
+            }
+
+            inc++
+            if (inc >= 4) inc = 0
+            isSmoll = !isSmoll
+
+        }
+
+
+//рисуем указатель предельного допустимого значения
+        val alarmX = alarmValue * widthIndicator / (maxValue - minValue) + indentPx
+        val alarmY = size.height - sliderHeightDp.dp.toPx() + 3.dp.toPx()
+        val alarmdWidth = 6.dp.toPx()
+        val alarmTop = alarmY - 5 * divisionHeight
+        val path = Path().apply {
+            moveTo(alarmX, alarmY)
+            lineTo(alarmX - alarmdWidth, alarmTop)
+            lineTo(alarmX + alarmdWidth, alarmTop)
+        }
+        drawPath(path, alarmColor)
+
+    }
+
+}
+                
+            """.trimIndent()
+        ),
+
+        ExampleCode(
             title = "Маштабирование на холсте",
             comment = """
 Функция DrawScope.|withTransform()| позволяет применить к рисункам несколько преобразований.
@@ -7788,6 +8068,399 @@ LocalDensity.current.|fontScale| является маштабным коэфф�
             ),
         ),
 
+        ExampleCode(
+            title = "Переходы общих элементов",
+            comment = """
+ |SharedTransitionLayout| - самый внешний макет, необходимый для реализации переходов общих элементов. Он предоставляет |SharedTransitionScope|. Чтобы использовать модификаторы общего элемента, составные элементы должны находиться в |SharedTransitionScope|.
+
+ Modifier.|sharedElement|() : модификатор, который помечает в |SharedTransitionScope| составной объект, который должен сопоставляться с другим составным объектом.
+
+ Modifier.|sharedBounds|() : модификатор, который указывает |SharedTransitionScope| , что границы этого составного объекта должны использоваться в качестве границ контейнера, где должен происходить переход. 
+ 
+ В отличие от |sharedElement|() , |sharedBounds|() предназначен для визуально другого контента.
+
+Важным моментом при создании общих элементов в |Compose| является то, как они работают с наложениями и обрезкой.    
+            
+            """.trimIndent(),
+            lambdaFun = { ListProducts(it,DataItemProducts.listProducts) },
+            nameFun = "ListProducts.kt",
+            code ="""
+@OptIn(ExperimentalSharedTransitionApi::class)
+@Composable
+fun ListProducts(
+    isExpanded: Boolean = false,
+    itemList: List<ItemProduct>
+) {
+    var showDetails by remember {
+        mutableStateOf(false)
+    }
+
+    var item by remember {
+        mutableStateOf(ItemProduct())
+    }
+
+//самый внешний макет, необходимый для реализации переходов общих элементов
+    SharedTransitionLayout {
+        AnimatedContent(
+            targetState = showDetails,
+            label = "basic_transition"
+        ) { targetState ->
+            if (!targetState) {
+                MainContent(
+                    itemList = itemList,
+                    onShowDetails = {
+                        showDetails = true
+                        item = it
+                    },
+                    animatedVisibilityScope = this@AnimatedContent,
+                    sharedTransitionScope = this@SharedTransitionLayout
+                )
+            } else {
+                DetailsContent(
+                    isExpanded = isExpanded,
+                    item = item,
+                    onBack = {
+                      showDetails = false
+                    },
+                    animatedVisibilityScope = this@AnimatedContent,
+                    sharedTransitionScope = this@SharedTransitionLayout
+                )
+            }
+        }
+
+    }
+
+}
+
+@OptIn(ExperimentalSharedTransitionApi::class)
+private val boundsTransform = BoundsTransform { _: Rect, _: Rect ->
+    tween(durationMillis = boundsAnimationDurationMillis, easing = FastOutSlowInEasing)
+}
+
+
+@OptIn(ExperimentalSharedTransitionApi::class)
+@Composable
+private fun MainContent(
+    modifier: Modifier = Modifier,
+    itemList: List<ItemProduct>,
+    onShowDetails: (ItemProduct) -> Unit = {},
+    sharedTransitionScope: SharedTransitionScope,
+    animatedVisibilityScope: AnimatedVisibilityScope
+
+){
+    with(sharedTransitionScope){
+        LazyVerticalGrid(
+            columns = GridCells.Adaptive(150.dp),
+            contentPadding = PaddingValues(4.dp),
+            modifier = modifier
+                .padding(8.dp)
+                .sharedBounds(
+                    rememberSharedContentState(key = "bounds"),
+                    animatedVisibilityScope = animatedVisibilityScope,
+                    enter = fadeIn(
+                        tween(
+                            boundsAnimationDurationMillis,
+                            easing = FastOutSlowInEasing
+                        )
+                    ),
+                    exit = fadeOut(
+                        tween(
+                            boundsAnimationDurationMillis,
+                            easing = FastOutSlowInEasing
+                        )
+                    ),
+                    boundsTransform = boundsTransform
+                )
+
+        ) {
+            itemsIndexed(itemList) { _,item ->
+                ItemSharedUI(item,onShowDetails,sharedTransitionScope,animatedVisibilityScope)
+            }
+        }
+
+    }
+
+}
+
+
+@OptIn(ExperimentalSharedTransitionApi::class)
+@Composable
+private fun DetailsContent(
+    isExpanded: Boolean = false,
+    item: ItemProduct,
+    onBack: () -> Unit = {},
+    sharedTransitionScope: SharedTransitionScope,
+    animatedVisibilityScope: AnimatedVisibilityScope,
+){
+
+    with(sharedTransitionScope) {
+        LazyColumn(modifier = Modifier.fillMaxSize()) {
+            item {
+                val modifier = Modifier
+                    .padding(top = 70.dp, start = 16.dp, end = 16.dp)
+                    .sharedBounds(
+                        rememberSharedContentState(key = "bounds"),
+                        animatedVisibilityScope = animatedVisibilityScope,
+                        enter = fadeIn(
+                            tween(
+                                durationMillis = boundsAnimationDurationMillis,
+                                easing = FastOutSlowInEasing
+                            )
+                        ),
+                        exit = fadeOut(
+                            tween(
+                                durationMillis = boundsAnimationDurationMillis,
+                                easing = FastOutSlowInEasing
+                            )
+                        ),
+                        boundsTransform = boundsTransform
+                    )
+                    .border(1.dp, Color.Gray.copy(alpha = 0.5f), RoundedCornerShape(8.dp))
+                    .background(
+                        MaterialTheme.colorScheme.secondaryContainer,
+                        RoundedCornerShape(8.dp)
+                    )
+                    .clickable(
+                        interactionSource = remember { MutableInteractionSource() },
+                        indication = null
+                    ) {
+                        onBack()
+                    }
+                    .fillMaxSize()
+                    .padding(8.dp)
+
+                if (isExpanded) DetailsSharedExpandedItemUI(item,modifier,sharedTransitionScope,animatedVisibilityScope)
+                else DetailsSharedItemUI(item,modifier,sharedTransitionScope,animatedVisibilityScope)
+
+            }
+        }
+
+
+    }
+}
+
+@OptIn(ExperimentalSharedTransitionApi::class)
+@Composable
+private fun ItemSharedUI(
+    item: ItemProduct,
+    onItemClick: (ItemProduct) -> Unit = {},
+    sharedTransitionScope: SharedTransitionScope,
+    animatedVisibilityScope: AnimatedVisibilityScope,
+    modifier: Modifier = Modifier,
+){
+    Card(
+        modifier = modifier
+            .padding(4.dp)
+            .fillMaxWidth()
+            .requiredHeight(270.dp)  //296
+            .clickable { onItemClick(item) },
+        elevation = CardDefaults.cardElevation(),  //8.dp
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            with(sharedTransitionScope) {
+
+                Text(
+                    text = stringResource(id = item.idTitle),
+                    textAlign = TextAlign.Center,
+                    fontWeight = FontWeight.Bold,
+                    modifier = modifier
+                        .sharedBounds(
+                            rememberSharedContentState(key = "title ${'$'}{item.idTitle}"),
+                            animatedVisibilityScope = animatedVisibilityScope
+                        )
+                        .padding(top = 4.dp, bottom = 8.dp)
+                )
+
+                Image(
+                    modifier = Modifier
+                        .sharedElement(
+                            rememberSharedContentState(key = "image ${'$'}{item.idTitle}"),
+                            animatedVisibilityScope = animatedVisibilityScope
+                        )
+                        .padding(16.dp)
+                        .weight(1f),
+                    painter = painterResource(id = item.idImage),
+                    contentDescription = "",
+                    contentScale = ContentScale.Crop
+                )
+
+                Text(
+                    text = setPriceString(item.price.toString()),
+                    textAlign = TextAlign.Center,
+                    modifier = modifier
+                        .padding(top = 4.dp, bottom = 8.dp)
+                )
+            }
+
+        }
+    }
+
+}
+
+
+@OptIn(ExperimentalSharedTransitionApi::class)
+@Composable
+private fun DetailsSharedItemUI(
+    item: ItemProduct,
+    modifier: Modifier = Modifier
+        .padding(top = 70.dp, start = 16.dp, end = 16.dp)
+        .border(1.dp, Color.Gray.copy(alpha = 0.5f), RoundedCornerShape(8.dp))
+        .background(
+            MaterialTheme.colorScheme.secondaryContainer,
+            RoundedCornerShape(8.dp)
+        )
+        .padding(8.dp),
+    sharedTransitionScope: SharedTransitionScope,
+    animatedVisibilityScope: AnimatedVisibilityScope,
+
+
+){
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        with(sharedTransitionScope) {
+            Image(
+                modifier = Modifier
+                    .sharedElement(
+                        rememberSharedContentState(key = "image ${'$'}{item.idTitle}"),
+                        animatedVisibilityScope = animatedVisibilityScope
+                    )
+                    .fillMaxWidth(),
+                painter = painterResource(id = item.idImage),
+                contentDescription = "",
+            )
+            Text(
+                text = stringResource(id = item.idTitle),
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onSecondaryContainer,
+                modifier = Modifier
+                    .sharedBounds(
+                        rememberSharedContentState(key = "title ${'$'}{item.idTitle}"),
+                        animatedVisibilityScope = animatedVisibilityScope
+                    )
+            )
+            Text(
+                text = stringResource(id = item.idComment),
+                color = MaterialTheme.colorScheme.onSecondaryContainer,
+                textAlign = TextAlign.Justify,
+            )
+            Text(
+                text = setPriceString(item.price.toString()),
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.onSecondaryContainer
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+        }
+    }
+
+}
+
+
+
+@OptIn(ExperimentalSharedTransitionApi::class)
+@Composable
+private fun DetailsSharedExpandedItemUI(
+    item: ItemProduct,
+    modifier: Modifier = Modifier
+        .padding(top = 70.dp, start = 16.dp, end = 16.dp)
+        .border(1.dp, Color.Gray.copy(alpha = 0.5f), RoundedCornerShape(8.dp))
+        .fillMaxWidth()
+        .background(
+            MaterialTheme.colorScheme.secondaryContainer,
+            RoundedCornerShape(8.dp)
+        )
+        .padding(8.dp),
+    sharedTransitionScope: SharedTransitionScope,
+    animatedVisibilityScope: AnimatedVisibilityScope,
+
+){
+    Row(
+        modifier = modifier,
+        horizontalArrangement = Arrangement.Start,
+    ) {
+        with(sharedTransitionScope) {
+            Image(
+                painter = painterResource(id = item.idImage),
+                contentDescription = "",
+                modifier = Modifier
+                    .sharedElement(
+                        rememberSharedContentState(key = "image ${'$'}{item.idTitle}"),
+                        animatedVisibilityScope = animatedVisibilityScope
+                    )
+                    .weight(1f),
+            )
+            Column(
+                modifier = Modifier
+                    .padding(horizontal = 16.dp)
+                    .weight(1f),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                Text(
+                    text = stringResource(id = item.idTitle),
+                    textAlign = TextAlign.Center,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSecondaryContainer,
+                    modifier = Modifier
+                        .sharedBounds(
+                            rememberSharedContentState(key = "title ${'$'}{item.idTitle}"),
+                            animatedVisibilityScope = animatedVisibilityScope
+                        )
+                        .padding(bottom = 8.dp)
+                )
+                Text(
+                    text = stringResource(id = item.idComment),
+                    color = MaterialTheme.colorScheme.onSecondaryContainer,
+                    textAlign = TextAlign.Justify,
+                )
+
+
+            }
+        }
+
+    }
+
+}
+
+
+private fun setPriceString(priceStr:String = "0"):AnnotatedString = buildAnnotatedString {
+    withStyle(
+        style = ParagraphStyle(
+            textAlign = TextAlign.Center,
+        )
+    ) {
+        withStyle(
+            style = SpanStyle(
+                color = Color.Red,
+                fontFamily = FontFamily.Cursive,
+                fontSize = 24.sp
+            )
+        ) {
+            append("${'$'}")
+        }
+        withStyle(
+            style = SpanStyle(
+                fontSize = 18.sp
+            )
+        ) {
+            append(priceStr)
+        }
+    }
+}
+                
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Переходы общих элементов ",
+                    textUrl = "\uD83D\uDCD6 Developers. Compose ",
+                    url = "https://developer.android.com/develop/ui/compose/animation/shared-elements?hl=ru"
+                ),
+            ),
+        ),
 
 
 
