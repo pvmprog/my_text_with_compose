@@ -63,6 +63,7 @@ import com.pvmprog.mytextwithcompose.ui.examples.ArrowIndicator
 import com.pvmprog.mytextwithcompose.ui.examples.ArrowNewIndicator
 import com.pvmprog.mytextwithcompose.ui.examples.CircularIndicator
 import com.pvmprog.mytextwithcompose.ui.examples.ClickableMyText
+import com.pvmprog.mytextwithcompose.ui.examples.FormatString
 import com.pvmprog.mytextwithcompose.ui.examples.LineDriverIndicator
 import com.pvmprog.mytextwithcompose.ui.examples.ListProducts
 import com.pvmprog.mytextwithcompose.ui.examples.PieChart
@@ -73,6 +74,7 @@ import com.pvmprog.mytextwithcompose.ui.examples.TextFontFamily
 import com.pvmprog.mytextwithcompose.ui.examples.TextLineHeight
 import com.pvmprog.mytextwithcompose.ui.examples.TypographyStyles
 import com.pvmprog.mytextwithcompose.ui.examples.data.DataItemProducts
+import kotlin.math.PI
 
 object DataCodeUI {
     val codeUI: List<ExampleCode> = listOf(
@@ -294,9 +296,321 @@ fun Modifier.|padding|(
             """.trimIndent()
         ),
 
+        ExampleCode(
+            title = "Форматирование строки",
+            comment = """
+Форматирование включает в себя объединение строк, выравнивание текстов, форматирование десятичных чисел и т. д.
+
+Способы форматирования:
+
+1. |С использованием интерполяции| 
+  "${'$'}{variable}"
+
+
+2. |С использованием шаблонов|
+ "${'$'}{"${'$'}%.nf".format(variable)}"
+ 
+                
+3. |С  использование метода String.format()|   
+ "String.format("%.nf", variable)"
+ Спецификаторы типа:                
+ |%b| – логическое значение
+ |%c| — символы (заключены в ‘’)
+ |%d| – целые числа со знаком, например 1,2,14.
+ |%e| — числа с плавающей запятой в научных обозначениях, например 1,5e12.
+ |%f| — числа с плавающей запятой в десятичном формате, например 45.2341.
+ |%g| — числа с плавающей запятой в десятичном или научном значении, в зависимости от размера значения.
+ |%h| – Хэш-код данного аргумента
+ |%n| – символ новой строки
+ |%o| – восьмеричные целые числа (целые числа с основанием 8)
+ |%s| – Строковые типы данных.
+ |%t| — дата или время в формате даты и времени.
+ |%x| – шестнадцатеричные целые числа с основанием 16.   
+ 
+
+4. |C использованием заполнения(padding)|  
+ "[String.format("%-ns", variable)]"
+         
+5. |C использованием функций padStart() и padEnd()| 
+ "variable.padStart(n)"
+ "variable.padEnd(n)"
+          
+Шаблоны:                
+                
+        |%d|     подставить число типа Int;
+        |%3d|    подставить число типа Int, заняв не меньше трёх позиций (пустые заполняются по умолчанию пробелами);
+        |%c|     подставить символ;
+        |%s|     подставить строку;
+        |%20s|   подставить строку, заняв не меньше 20 позиций;
+        |%lf|    подставить число типа Double в обычном формате;
+        |%le|    подставить число типа Double в экспоненциальном формате вида 1.3e+4;
+        |%6.2lf| подставить число типа Double в обычном формате, заняв не меньше шести позиций и используя ровно два знака после запятой.
+                
+            """.trimIndent(),
+
+            links = listOf(
+                TextClickLink(
+                    text = "Format String in Kotlin With Examples",
+                    textUrl = "\uD83D\uDCD6 SparkByExamples.com",
+                    url = "https://sparkbyexamples.com/kotlin/format-string-in-kotlin-with-examples/"
+                ),
+                TextClickLink(
+                    text = "Форматирование строки ",
+                    textUrl = "\uD83D\uDCD6 Kotlin Playground",
+                    url = "https://play.kotlinlang.org/#eyJ2ZXJzaW9uIjoiMS45LjIwIiwiY29kZSI6ImZ1biBtYWluKCkge1xuICAgIHZhbCBudW0gPSAxNDdcbiAgICB2YWwgdHlwZXMgPSBhcnJheU9mKFxuICAgICAgICBcImRlY2ltYWw6XCIsXG4gICAgICAgIFwiaGV4OlwiLFxuICAgICAgICBcImJpbmFyeTpcIlxuICAgIClcbiAgICB2YWwgdmFscyA9IGFycmF5T2YoXG4gICAgICAgIG51bS50b1N0cmluZygpLFxuICAgICAgICBudW0udG9TdHJpbmcoMTYpLnRvVXBwZXJDYXNlKCkucGFkU3RhcnQoNCwnMCcpLFxuICAgICAgICBudW0udG9TdHJpbmcoMikucGFkU3RhcnQoOCwnMCcpXG4gICAgICAgIClcbiAgICBwcmludGxuKFwiXCIucGFkU3RhcnQoMjcsJy0nKSlcbiAgICBmb3IgKGkgaW4gMC4uMil7XG4gICAgICAgIHByaW50bG4oXCJ8IFwiICsgdHlwZXNbaV0ucGFkRW5kKDEwKSArXCIgfCBcIisgdmFsc1tpXS5wYWRTdGFydCgxMCkrXCIgfFwiKVxuICAgIHByaW50bG4oXCJcIi5wYWRTdGFydCgyNywnLScpKVxuICAgIH1cbiAgICBcbn0iLCJwbGF0Zm9ybSI6ImphdmEiLCJhcmdzIjoiIn0="
+                ),
+                TextClickLink(
+                    text = "Дата и время ",
+                    textUrl = "\uD83D\uDCD6 Kotlin Playground",
+                    url = "https://play.kotlinlang.org/#eyJ2ZXJzaW9uIjoiMS44LjIxIiwiY29kZSI6ImltcG9ydCBqYXZhLnRleHQuU2ltcGxlRGF0ZUZvcm1hdFxuaW1wb3J0IGphdmEudXRpbC4qXG5cbmZ1biBtYWluKCkge1xuICAgIFxuICAgIHZhbCBkYXRlID0gRGF0ZSgpIFxuXG4gICAgcHJpbnRsbihcIkRhdGU6ICRkYXRlXCIpICBcblxuICAgIC8vIEZvcm1hdCB0aGUgZGF0ZSB2YWx1ZSB1c2luZyBTaW1wbGVEYXRlRm9ybWF0XG4gICAgcHJpbnRsbihcIkRhdGU6ICR7U2ltcGxlRGF0ZUZvcm1hdChcImRkLU1NLXl5eXlcIikuZm9ybWF0KGRhdGUpfVwiKSAgXG4gICAgcHJpbnRsbihcIlRpbWU6ICR7U2ltcGxlRGF0ZUZvcm1hdChcImhoOm1tOnNzXCIpLmZvcm1hdChkYXRlKX1cIikgIFxuIFxufSIsInBsYXRmb3JtIjoiamF2YSIsImFyZ3MiOiIifQ=="
+                ),
+            ),
+            lambdaFun = { FormatString() },
+            nameFun = "FormatString.kt",
+            code ="""
+@Preview("Dark Theme", showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun FormatString(){
+    val date = Date()
+    Column(
+        modifier = Modifier
+            .padding(16.dp)
+            .fillMaxWidth()
+            .verticalScroll(rememberScrollState()),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        Text(
+            text = "1. Строковая интерполяция",
+            fontWeight = FontWeight.Bold
+        )
+        var name = "Павел"
+        val age = 30
+
+        var message = "Меня зовут ${'$'}name, мне ${'$'}age лет"
+        OutTextInfo(
+            formatStr = "Меня зовут ${'$'}name, мне ${'$'}age лет",
+            message = message,
+        )
+
+        Text(
+            text = "2. Шаблоны",
+            fontWeight = FontWeight.Bold
+        )
+
+        val quantity = 10
+        val price = 1.23
+        val total = price * quantity
+
+        message = "Итого: ${'$'}quantity тетрадей \nстоят ${'$'}{"$%.2f".format(total)}"
+        OutTextInfo(
+            formatStr = "\"Итого: ${'$'}quantity тетрадей \nстоят ${'$'}{\"${'$'}%.2f\".format(total)}\"",
+            message = message,
+
+        )
+
+        Text(
+            text = "3. String.format()",
+            fontWeight = FontWeight.Bold
+        )
+
+        val boolValue = true
+        OutTextInfo(
+            formatStr = "\"%b\".format(boolValue)\nboolValue=${'$'}boolValue",
+            message = "%b".format(boolValue)
+        )
+        val charValue = 'A'
+        OutTextInfo(
+            formatStr = "\"%c\".format(charValue)\ncharValue='A'",
+            message = "%c".format(charValue)
+        )
+        val intValue = 25
+        OutTextInfo(
+            formatStr = "\"%d\".format(intValue)\nintValue=${'$'}intValue",
+            message = "%d".format(intValue)
+        )
+        OutTextInfo(
+            formatStr = "\"%4d\".format(intValue)",
+            message = "%4d".format(intValue)
+        )
+        OutTextInfo(
+            formatStr = "\"%04d\".format(intValue)",
+            message = "%04d".format(intValue)
+        )
+        val floatValue = 33.3449f
+        OutTextInfo(
+            formatStr = "\"%f\".format(floatValue)\nfloatValue=33.3449f",
+            message = "%f".format(floatValue)
+        )
+        OutTextInfo(
+            formatStr = "\"%.2f\".format(floatValue)",
+            message = "%.2f".format(floatValue)
+        )
+
+        val doubleValue = 32.44
+        OutTextInfo(
+            formatStr = "\"%.1f\".format(doubleValue)\ndoubleValue=32.44",
+            message = "%.1f".format(doubleValue)
+        )
+        val hexValue = 255
+        OutTextInfo(
+            formatStr = "\"%x\".format(hexValue)\nhexValue = 255",
+            message = "%x".format(hexValue)
+        )
+
+        OutTextInfo(
+            formatStr = "hexValue.toHexString()",
+            message = hexValue.toHexString()
+        )
+
+        OutTextInfo(
+            formatStr = "String.format(\"%.2f\", PI)",
+            message = String.format("%.2f", PI)
+        )
+        message = "Пи = $PI"
+        OutTextInfo(
+            formatStr = "Пи = ${'$'}PI",
+            message = message
+        )
+        OutTextInfo(
+            formatStr = "String.format(\"%+.4f\", 3.141592)",
+            message = String.format("%+.4f", 3.141592)
+        )
+
+        Text(
+            text = "4. Заполнение (padding)",
+            fontWeight = FontWeight.Bold
+        )
+        OutTextInfo(
+            formatStr = "\"\".padStart(22,'-')",
+            message = "".padStart(22,'-'),
+            fontFamily = FontFamily.Monospace
+
+        )
+        name = "Иван Иванович"
+        OutTextInfo(
+            formatStr = "| \${'$'}{String.format(\"%-20s\", name)} |",
+            message = "|${'$'}{String.format("%-20s", name)}|",
+            fontFamily = FontFamily.Monospace
+
+        )
+        name = "Семен Семенович"
+        OutTextInfo(
+            formatStr = "|\${'$'}{String.format(\"%-20s\", name)}|",
+            message = "|${'$'}{String.format("%-20s", name)}|",
+            fontFamily = FontFamily.Monospace
+
+        )
+        name = "Петр Петрович"
+        OutTextInfo(
+            formatStr = "|\${'$'}{name.padEnd(20,' ')}|",
+            message = "|${'$'}{name.padEnd(20, ' ')}|",
+            fontFamily = FontFamily.Monospace
+        )
+        name = "Иван Иванович"
+        OutTextInfo(
+            formatStr = "|\${'$'}{name.padStart(20,' ')}|",
+            message = "|${'$'}{name.padStart(20, ' ')}|",
+            fontFamily = FontFamily.Monospace
+        )
+
+        OutTextInfo(
+            formatStr = "hexValue.toString(16).toUpperCase().padStart(4,'0')",
+            message = hexValue.toString(16).toUpperCase().padStart(4,'0')
+        )
+
+        Text(
+            text = "5. Дата и время",
+            fontWeight = FontWeight.Bold
+        )
+        message = date.toString()
+        OutTextInfo(
+            formatStr = "date.toString()",
+            message = message
+        )
+
+        message = SimpleDateFormat("dd-MM-yyyy").format(date)
+        OutTextInfo(
+            formatStr = "SimpleDateFormat(\"dd-MM-yyyy\").format(date)",
+            message = message
+        )
+
+        message = SimpleDateFormat("hh:mm:ss").format(date)
+        OutTextInfo(
+            formatStr = "SimpleDateFormat(\"hh:mm:ss\").format(date)",
+            message = message
+        )
+
+        val time = 12567  //длительность в секундах
+        message = timeSecondsToStr(time)
+        OutTextInfo(
+            formatStr = "String.format(\"%02d:%02d:%02d\", hour, minute, second)",
+            message = message
+        )
+
+        val seconds = timeStrToSeconds(message)
+        OutTextInfo(
+            formatStr = "seconds.toString()",
+            message = seconds.toString()
+        )
+
+    }
+}
+
+@Composable
+fun OutTextInfo(
+    formatStr:String = "",
+    message:String = "",
+    fontFamily:FontFamily = FontFamily.SansSerif
+){
+    Column(
+        modifier = Modifier
+            .fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = formatStr,
+            textAlign = TextAlign.Center,
+            color = MaterialTheme.colorScheme.secondary,
+            fontSize = 12.sp
+        )
+        Text(
+            text = message,
+            textAlign = TextAlign.Center,
+            fontFamily = fontFamily
+            )
+
+    }
+
+}
+
+// convert int value (seconds) -> "hh:mm:ss" 
+fun timeSecondsToStr(seconds: Int): String {
+    val hour = seconds / 3600
+    val minute = (seconds % 3600) / 60
+    val second = seconds % 60
+    return String.format("%02d:%02d:%02d", hour, minute, second)
+}
+
+// convert "hh:mm:ss" -> int value (seconds)
+fun timeStrToSeconds(str: String): Int {
+    val parts = str.split(":")
+    var result = 0
+    return try {
+        for (part in parts) {
+            val number = part.toInt()
+            result = result * 60 + number
+        }
+        result
+    }
+    catch (e: NumberFormatException) {
+        -1
+    }
+}                
+            """.trimIndent()
+        ),
 
         ExampleCode(
-            id = 2,
             title = "Использование ресурсов",
             comment = """
 Используйте API |stringResource| для получения строки, статически определенной в ваших |!XML| ресурсах.
@@ -364,6 +678,8 @@ fun Modifier.|padding|(
 }
             """.trimIndent()
         ),
+
+
         ExampleCode(
             id = 3,
             title = "Размер шрифта",

@@ -18,6 +18,13 @@ object DataTranslate {
         HighlightColor("remember", 4),
         HighlightColor("colorScheme", 4),
         HighlightColor("LazyColumn", 4),
+
+        HighlightColor("for ", 7),
+        HighlightColor("return ", 7),
+        HighlightColor("try ", 7),
+        HighlightColor("catch ", 7),
+        HighlightColor(" in ", 7),
+
         )
 
     val listWhile = listOf(
