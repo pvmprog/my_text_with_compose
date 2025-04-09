@@ -359,9 +359,6 @@
 <p align="center">
    **************************************************
 </p>
-<p align="center">
-    <video src="screenshots/video_shared.mp4" alt="Start screen" />
-</p>
 
 
 
