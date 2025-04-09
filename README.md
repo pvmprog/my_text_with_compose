@@ -300,9 +300,6 @@
 <p align="center">
     <img src="screenshots/video_lineind.gif" alt="Start screen" />
 </p>
-<p align="center">
-   **************************************************
-</p>
 
 
 <p align="center">
@@ -357,11 +354,16 @@
    **************************************************
 </p>
 <p align="center">
-    <img src="screenshots/video_shared.mp4" alt="Start screen" />
+    <img src="screenshots/video_shared.gif" alt="Start screen" />
 </p>
 <p align="center">
    **************************************************
 </p>
+
+<video controls="" width="800" height="500" muted="" loop="" autoplay="">
+   <source src="screenshots/video_shared.mp4" type="video/mp4">
+</video>
+
 
     
 
