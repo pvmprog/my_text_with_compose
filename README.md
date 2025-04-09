@@ -294,6 +294,13 @@
    
  </table>
 
+<p align="center">
+   **************************************************
+</p>
+<p align="center">
+    <img src="screenshots/video_lineind.gif" alt="Start screen" />
+</p>
+
 
 <p align="center">
    **************************************************
@@ -346,6 +353,14 @@
 <p align="center">
    **************************************************
 </p>
+<p align="center">
+    <img src="screenshots/video_shared.gif" alt="Start screen" />
+</p>
+<p align="center">
+   **************************************************
+</p>
+
+
 
     
 
