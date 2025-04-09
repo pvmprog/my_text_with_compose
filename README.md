@@ -359,10 +359,10 @@
 <p align="center">
    **************************************************
 </p>
+<p align="center">
+    <video src="screenshots/video_shared.mp4" alt="Start screen" />
+</p>
 
-<video controls="" width="800" height="500" muted="" loop="" autoplay="">
-   <source src="screenshots/video_shared.mp4" type="video/mp4">
-</video>
 
 
     
