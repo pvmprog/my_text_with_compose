@@ -191,6 +191,10 @@ private fun MainContent(
                                 text = setPriceString(item.price.toString()),
                                 textAlign = TextAlign.Center,
                                 modifier = Modifier
+                                    .sharedBounds(
+                                        rememberSharedContentState(key = "price ${item.titleResId}"),
+                                        animatedVisibilityScope = animatedVisibilityScope
+                                    )
                                     .padding(top = 4.dp, bottom = 8.dp)
                             )
 
@@ -226,7 +230,7 @@ private fun DetailsContent(
         LazyColumn(modifier = Modifier.fillMaxSize()) {
             item {
                 val modifier = Modifier
-                    .padding(top = 70.dp, start = 16.dp, end = 16.dp)
+                    .padding(top = 20.dp, start = 16.dp, end = 16.dp)
                     .sharedBounds(
                         rememberSharedContentState(key = "bounds"),
                         animatedVisibilityScope = animatedVisibilityScope,
@@ -319,6 +323,11 @@ private fun DetailsSharedItemUI(
             )
             Text(
                 text = setPriceString(item.price.toString()),
+                modifier = Modifier
+                    .sharedBounds(
+                        rememberSharedContentState(key = "price ${item.titleResId}"),
+                        animatedVisibilityScope = animatedVisibilityScope
+                    ),
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colorScheme.onSecondaryContainer
             )
