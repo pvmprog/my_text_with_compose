@@ -47,7 +47,7 @@ fun FormatString(){
 
         var message = "Меня зовут $name, мне $age лет"
         OutTextInfo(
-            formatStr = "Меня зовут ${'$'}name, мне ${'$'}age лет",
+            formatStr = "\"Меня зовут ${'$'}name, мне ${'$'}age лет\"",
             message = message,
         )
 
@@ -76,17 +76,17 @@ fun FormatString(){
 
         val boolValue = true
         OutTextInfo(
-            formatStr = "\"%b\".format(boolValue)\nboolValue=$boolValue",
+            formatStr = "\"%b\".format(boolValue),\nboolValue=$boolValue",
             message = "%b".format(boolValue)
         )
         val charValue = 'A'
         OutTextInfo(
-            formatStr = "\"%c\".format(charValue)\ncharValue='A'",
+            formatStr = "\"%c\".format(charValue),\ncharValue='A'",
             message = "%c".format(charValue)
         )
         val intValue = 25
         OutTextInfo(
-            formatStr = "\"%d\".format(intValue)\nintValue=$intValue",
+            formatStr = "\"%d\".format(intValue),\nintValue=$intValue",
             message = "%d".format(intValue)
         )
         OutTextInfo(
@@ -99,7 +99,7 @@ fun FormatString(){
         )
         val floatValue = 33.3449f
         OutTextInfo(
-            formatStr = "\"%f\".format(floatValue)\nfloatValue=33.3449f",
+            formatStr = "\"%f\".format(floatValue),\nfloatValue=33.3449f",
             message = "%f".format(floatValue)
         )
         OutTextInfo(
@@ -110,13 +110,18 @@ fun FormatString(){
 
         val doubleValue = 32.44
         OutTextInfo(
-            formatStr = "\"%.1f\".format(doubleValue)\ndoubleValue=32.44",
+            formatStr = "\"%.1f\".format(doubleValue),\ndoubleValue=32.44",
             message = "%.1f".format(doubleValue)
         )
         val hexValue = 255
         OutTextInfo(
-            formatStr = "\"%x\".format(hexValue)\nhexValue = 255",
+            formatStr = "\"%x\".format(hexValue),\nhexValue = 255",
             message = "%x".format(hexValue)
+        )
+
+        OutTextInfo(
+            formatStr = "\"%04x\".format(hexValue).uppercase()",
+            message = "%04x".format(hexValue).uppercase()
         )
 
         OutTextInfo(

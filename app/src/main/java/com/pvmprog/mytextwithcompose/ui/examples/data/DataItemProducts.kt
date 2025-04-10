@@ -5,40 +5,46 @@ import com.pvmprog.mytextwithcompose.R
 object DataItemProducts {
     val listProducts: List<ItemProduct> = listOf(
         ItemProduct(
-            idTitle = R.string.gates,//ворота
-            idImage = R.drawable.gates,
-            idComment = R.string.comment_gates,
+            idProduct = 0,
+            titleResId = R.string.gates,//ворота
+            imageResId = R.drawable.gates,
+            contentDescriptionResId = R.string.comment_gates,
             price = 5000
         ),
         ItemProduct(
-            idTitle = R.string.canopy, //навес
-            idImage = R.drawable.canopy,
-            idComment = R.string.comment_canopy,
+            idProduct = 1,
+            titleResId = R.string.canopy, //навес
+            imageResId = R.drawable.canopy,
+            contentDescriptionResId = R.string.comment_canopy,
             price = 1200
 
         ),
         ItemProduct(
-            idTitle = R.string.fence, //забор
-            idImage = R.drawable.fence,
-            idComment = R.string.comment_fence,
+            idProduct = 2,
+            titleResId = R.string.fence, //забор
+            imageResId = R.drawable.fence,
+            contentDescriptionResId = R.string.comment_fence,
             price = 570
         ),
         ItemProduct(
-            idTitle = R.string.ladder, //лестница
-            idImage = R.drawable.ladder,
-            idComment = R.string.comment_ladder,
+            idProduct = 3,
+            titleResId = R.string.ladder, //лестница
+            imageResId = R.drawable.ladder,
+            contentDescriptionResId = R.string.comment_ladder,
             price = 17000
         ),
         ItemProduct(
-            idTitle = R.string.gilding, //Золочение
-            idImage = R.drawable.gilding,
-            idComment = R.string.comment_gilding,
+            idProduct = 4,
+            titleResId = R.string.gilding, //Золочение
+            imageResId = R.drawable.gilding,
+            contentDescriptionResId = R.string.comment_gilding,
             price = 1000
         ),
         ItemProduct(
-            idTitle = R.string.modeling,  //Моделирование
-            idImage = R.drawable.modeling,
-            idComment = R.string.comment_modeling
+            idProduct = 5,
+            titleResId = R.string.modeling,  //Моделирование
+            imageResId = R.drawable.modeling,
+            contentDescriptionResId = R.string.comment_modeling
         ),
     )
 }

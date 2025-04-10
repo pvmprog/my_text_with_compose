@@ -25,17 +25,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.carousel.HorizontalMultiBrowseCarousel
+import androidx.compose.material3.carousel.rememberCarouselState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -53,32 +51,34 @@ import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.pvmprog.mytextwithcompose.data.Constants.boundsAnimationDurationMillis
-import com.pvmprog.mytextwithcompose.ui.examples.data.DataItemProducts
+import com.pvmprog.mytextwithcompose.data.Constants
+import com.pvmprog.mytextwithcompose.ui.examples.data.DataItemProducts.listProducts
 import com.pvmprog.mytextwithcompose.ui.examples.data.ItemProduct
+import com.pvmprog.mytextwithcompose.ui.theme.Alice
 import com.pvmprog.mytextwithcompose.ui.theme.MyTextWithComposeTheme
 
-@OptIn(ExperimentalSharedTransitionApi::class)
+
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalSharedTransitionApi::class)
 @Composable
-fun ListProducts(
+fun CarouselProducts(
     isExpanded: Boolean = false,
-    itemList: List<ItemProduct>
+    items: List<ItemProduct> = listProducts
 ) {
     var showDetails by remember {
         mutableStateOf(false)
     }
 
-    var item by remember {
+    var product by remember {
         mutableStateOf(ItemProduct())
     }
 
-//самый внешний макет, необходимый для реализации переходов общих элементов
     SharedTransitionLayout {
         AnimatedContent(
             targetState = showDetails,
@@ -86,10 +86,10 @@ fun ListProducts(
         ) { targetState ->
             if (!targetState) {
                 MainContent(
-                    itemList = itemList,
+                    items = items,
                     onShowDetails = {
                         showDetails = true
-                        item = it
+                        product = it
                     },
                     animatedVisibilityScope = this@AnimatedContent,
                     sharedTransitionScope = this@SharedTransitionLayout
@@ -97,69 +97,118 @@ fun ListProducts(
             } else {
                 DetailsContent(
                     isExpanded = isExpanded,
-                    item = item,
+                    item = product,
                     onBack = {
-                      showDetails = false
+                        showDetails = false
                     },
                     animatedVisibilityScope = this@AnimatedContent,
                     sharedTransitionScope = this@SharedTransitionLayout
                 )
             }
         }
-
     }
+
 
 }
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 private val boundsTransform = BoundsTransform { _: Rect, _: Rect ->
-    tween(durationMillis = boundsAnimationDurationMillis, easing = FastOutSlowInEasing)
+    tween(durationMillis = Constants.boundsAnimationDurationMillis, easing = FastOutSlowInEasing)
 }
 
 
-@OptIn(ExperimentalSharedTransitionApi::class)
+@OptIn(ExperimentalSharedTransitionApi::class, ExperimentalMaterial3Api::class)
 @Composable
 private fun MainContent(
     modifier: Modifier = Modifier,
-    itemList: List<ItemProduct>,
+    items: List<ItemProduct>,
     onShowDetails: (ItemProduct) -> Unit = {},
     sharedTransitionScope: SharedTransitionScope,
     animatedVisibilityScope: AnimatedVisibilityScope
 
-){
-    with(sharedTransitionScope){
-        LazyVerticalGrid(
-            columns = GridCells.Adaptive(150.dp),
-            contentPadding = PaddingValues(4.dp),
+) {
+    with(sharedTransitionScope) {
+        LazyColumn(
             modifier = modifier
-                .padding(8.dp)
+                .fillMaxSize()
                 .sharedBounds(
                     rememberSharedContentState(key = "bounds"),
                     animatedVisibilityScope = animatedVisibilityScope,
                     enter = fadeIn(
                         tween(
-                            boundsAnimationDurationMillis,
+                            Constants.boundsAnimationDurationMillis,
                             easing = FastOutSlowInEasing
                         )
                     ),
                     exit = fadeOut(
                         tween(
-                            boundsAnimationDurationMillis,
+                            Constants.boundsAnimationDurationMillis,
                             easing = FastOutSlowInEasing
                         )
                     ),
                     boundsTransform = boundsTransform
                 )
+                .background(MaterialTheme.colorScheme.tertiaryContainer)
 
         ) {
-            itemsIndexed(itemList) { _,item ->
-//                ItemUI(item,onShowDetails)
-                ItemSharedUI(item,onShowDetails,sharedTransitionScope,animatedVisibilityScope)
+            item {
+                HorizontalMultiBrowseCarousel(
+                    state = rememberCarouselState { items.count() },
+                    modifier = Modifier
+                        .width(412.dp)
+                        .height(281.dp),
+                    preferredItemWidth = 186.dp,
+                    itemSpacing = 8.dp,
+                    contentPadding = PaddingValues(horizontal = 16.dp)
+                ) { i ->
+                    val item = items[i]
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        with(sharedTransitionScope) {
+                            Text(
+                                text = stringResource(item.titleResId),
+                                modifier = Modifier
+                                    .sharedBounds(
+                                        rememberSharedContentState(key = "title ${item.titleResId}"),
+                                        animatedVisibilityScope = animatedVisibilityScope
+                                    ),
+                                color = MaterialTheme.colorScheme.onSecondaryContainer,                        )
+                            Image(
+                                modifier = Modifier
+                                    .height(205.dp)
+                                    .sharedElement(
+                                        rememberSharedContentState(key = "image ${item.titleResId}"),
+                                        animatedVisibilityScope = animatedVisibilityScope
+                                    )
+                                    .clickable { onShowDetails(item) }
+                                    .maskClip(MaterialTheme.shapes.extraLarge),
+                                painter = painterResource(id = item.imageResId),
+                                contentDescription = stringResource(item.contentDescriptionResId),
+                                contentScale = ContentScale.Crop
+                            )
+                            Text(
+                                text = setPriceString(item.price.toString()),
+                                textAlign = TextAlign.Center,
+                                modifier = Modifier
+                                    .padding(top = 4.dp, bottom = 8.dp)
+                            )
+
+                        }
+                    }
+                }
+                Text(
+                    text = myDescription(),
+                    textAlign = TextAlign.Justify,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp)
+                )
+
             }
         }
 
     }
-
 }
 
 
@@ -183,13 +232,13 @@ private fun DetailsContent(
                         animatedVisibilityScope = animatedVisibilityScope,
                         enter = fadeIn(
                             tween(
-                                durationMillis = boundsAnimationDurationMillis,
+                                durationMillis = Constants.boundsAnimationDurationMillis,
                                 easing = FastOutSlowInEasing
                             )
                         ),
                         exit = fadeOut(
                             tween(
-                                durationMillis = boundsAnimationDurationMillis,
+                                durationMillis = Constants.boundsAnimationDurationMillis,
                                 easing = FastOutSlowInEasing
                             )
                         ),
@@ -209,9 +258,6 @@ private fun DetailsContent(
                     .fillMaxSize()
                     .padding(8.dp)
 
-//                if (isExpanded) DetailsExpandedItemUI(item,modifier)
-//                else DetailsItemUI(item,modifier)
-
                 if (isExpanded) DetailsSharedExpandedItemUI(item,modifier,sharedTransitionScope,animatedVisibilityScope)
                 else DetailsSharedItemUI(item,modifier,sharedTransitionScope,animatedVisibilityScope)
 
@@ -222,112 +268,6 @@ private fun DetailsContent(
     }
 }
 
-@OptIn(ExperimentalSharedTransitionApi::class)
-@Composable
-private fun ItemSharedUI(
-    item: ItemProduct,
-    onItemClick: (ItemProduct) -> Unit = {},
-    sharedTransitionScope: SharedTransitionScope,
-    animatedVisibilityScope: AnimatedVisibilityScope,
-    modifier: Modifier = Modifier,
-){
-    Card(
-        modifier = modifier
-            .padding(4.dp)
-            .fillMaxWidth()
-            .requiredHeight(270.dp)  //296
-            .clickable { onItemClick(item) },
-        elevation = CardDefaults.cardElevation(),  //8.dp
-    ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            with(sharedTransitionScope) {
-
-                Text(
-                    text = stringResource(id = item.titleResId),
-                    textAlign = TextAlign.Center,
-                    fontWeight = FontWeight.Bold,
-                    modifier = modifier
-                        .sharedBounds(
-                            rememberSharedContentState(key = "title ${item.titleResId}"),
-                            animatedVisibilityScope = animatedVisibilityScope
-                        )
-                        .padding(top = 4.dp, bottom = 8.dp)
-                )
-
-                Image(
-                    modifier = Modifier
-                        .sharedElement(
-                            rememberSharedContentState(key = "image ${item.titleResId}"),
-                            animatedVisibilityScope = animatedVisibilityScope
-                        )
-                        .padding(16.dp)
-                        .weight(1f),
-                    painter = painterResource(id = item.imageResId),
-                    contentDescription = "",
-                    contentScale = ContentScale.Crop
-                )
-
-                Text(
-                    text = setPriceString(item.price.toString()),
-                    textAlign = TextAlign.Center,
-                    modifier = modifier
-                        .padding(top = 4.dp, bottom = 8.dp)
-                )
-            }
-
-        }
-    }
-
-}
-
-
-@Composable
-private fun ItemUI(
-    item: ItemProduct,
-    onItemClick: (ItemProduct) -> Unit = {},
-    modifier: Modifier = Modifier
-){
-    Card(
-        modifier = modifier
-            .padding(4.dp)
-            .fillMaxWidth()
-            .requiredHeight(270.dp)  //296
-            .clickable { onItemClick(item) },
-        elevation = CardDefaults.cardElevation(),  //8.dp
-    ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(
-                text = stringResource(id = item.titleResId),
-                textAlign = TextAlign.Center,
-                fontWeight = FontWeight.Bold,
-                modifier = modifier
-                    .padding(top = 4.dp, bottom = 8.dp)
-            )
-
-            Image(
-                modifier = Modifier
-                    .padding(16.dp)
-                    .weight(1f),
-                painter = painterResource(id = item.imageResId),
-                contentDescription = "",
-                contentScale = ContentScale.Crop
-            )
-
-            Text(
-                text = setPriceString(item.price.toString()),
-                textAlign = TextAlign.Center,
-                modifier = modifier
-                    .padding(top = 4.dp, bottom = 8.dp)
-            )
-
-        }
-    }
-
-}
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
@@ -345,7 +285,7 @@ private fun DetailsSharedItemUI(
     animatedVisibilityScope: AnimatedVisibilityScope,
 
 
-){
+    ){
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -388,53 +328,6 @@ private fun DetailsSharedItemUI(
 
 }
 
-
-@Composable
-private fun DetailsItemUI(
-    item: ItemProduct,
-    modifier: Modifier = Modifier
-        .padding(top = 70.dp, start = 16.dp, end = 16.dp)
-        .border(1.dp, Color.Gray.copy(alpha = 0.5f), RoundedCornerShape(8.dp))
-        .background(
-            MaterialTheme.colorScheme.secondaryContainer,
-            RoundedCornerShape(8.dp)
-        )
-        .padding(8.dp),
-){
-    Column(
-        modifier = modifier,
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-        Image(
-            modifier = Modifier
-                .fillMaxWidth(),
-            painter = painterResource(id = item.imageResId),
-            contentDescription = "",
-        )
-        Text(
-            text = stringResource(id = item.titleResId),
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onSecondaryContainer,
-            modifier = Modifier
-                .padding(bottom = 8.dp)
-        )
-        Text(
-            text = stringResource(id = item.contentDescriptionResId),
-            color = MaterialTheme.colorScheme.onSecondaryContainer,
-            textAlign = TextAlign.Justify,
-        )
-        Text(
-            text = setPriceString(item.price.toString()),
-            textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.onSecondaryContainer
-        )
-        Spacer(modifier = Modifier.height(4.dp))
-
-    }
-
-}
-
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 private fun DetailsSharedExpandedItemUI(
@@ -451,7 +344,7 @@ private fun DetailsSharedExpandedItemUI(
     sharedTransitionScope: SharedTransitionScope,
     animatedVisibilityScope: AnimatedVisibilityScope,
 
-){
+    ){
     Row(
         modifier = modifier,
         horizontalArrangement = Arrangement.Start,
@@ -500,58 +393,49 @@ private fun DetailsSharedExpandedItemUI(
 
 }
 
+
+
 @Composable
-private fun DetailsExpandedItemUI(
-    item: ItemProduct,
-    modifier: Modifier = Modifier
-        .padding(top = 70.dp, start = 16.dp, end = 16.dp)
-        .border(1.dp, Color.Gray.copy(alpha = 0.5f), RoundedCornerShape(8.dp))
-        .fillMaxWidth()
-        .background(
-            MaterialTheme.colorScheme.secondaryContainer,
-            RoundedCornerShape(8.dp)
+fun myDescription(
+    fontSize:Int = 18,
+    style:SpanStyle = SpanStyle(
+        fontSize = fontSize.sp,
+        fontFamily = Alice,
+        fontStyle = FontStyle.Italic,
+    )
+): AnnotatedString = buildAnnotatedString {
+    withStyle(
+        style = style.merge(
+            SpanStyle(
+                color = MaterialTheme.colorScheme.onTertiaryContainer,
+            )
         )
-        .padding(8.dp),
-){
-    Row(
-        modifier = modifier,
-        horizontalArrangement = Arrangement.Start,
     ) {
-        Image(
-            painter = painterResource(id = item.imageResId),
-            contentDescription = "",
-            modifier = Modifier
-                .weight(1f),
-        )
-        Column(
-            modifier = Modifier
-                .padding(horizontal = 16.dp)
-                .weight(1f),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            Text(
-                text = stringResource(id = item.titleResId),
-                textAlign = TextAlign.Center,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onSecondaryContainer,
-                modifier = Modifier
-                    .padding(bottom = 8.dp)
-            )
-            Text(
-                text = stringResource(id = item.contentDescriptionResId),
-                color = MaterialTheme.colorScheme.onSecondaryContainer,
-                textAlign = TextAlign.Justify,
-            )
-
-
-        }
-
+        append("Изготовление металлоконструкций любой сложности. ")
     }
 
+    withStyle(
+        style = style.merge(
+            SpanStyle(
+                fontSize = (fontSize-4).sp
+            )
+        )    ){
+        append("Имею большой опыт работы с металлом и знаю, как создать конструкции, которые будут надежными и прочными. Использую только качественные материалы, соответствующие высоким стандартам качества.")
+    }
+    withStyle(
+        style = style.merge(
+            SpanStyle(
+                fontSize = (fontSize-4).sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onSecondaryContainer,
+
+            )
+        )    ){
+        append(" Инновационные решения и самые передовые технологии помогают добиться хороших результатов. ")
+    }
+
+
 }
-
-
 
 private fun setPriceString(priceStr:String = "0"):AnnotatedString = buildAnnotatedString {
     withStyle(
@@ -563,14 +447,14 @@ private fun setPriceString(priceStr:String = "0"):AnnotatedString = buildAnnotat
             style = SpanStyle(
                 color = Color.Red,
                 fontFamily = FontFamily.Cursive,
-                fontSize = 24.sp
+                fontSize = 20.sp
             )
         ) {
             append("$")
         }
         withStyle(
             style = SpanStyle(
-                fontSize = 18.sp
+                fontSize = 14.sp
             )
         ) {
             append(priceStr)
@@ -580,41 +464,16 @@ private fun setPriceString(priceStr:String = "0"):AnnotatedString = buildAnnotat
 
 
 @Preview("Light Theme",showBackground = true)
-@Preview("Dark Theme", uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
-@Composable
-fun PreviewItemUI() {
-    MyTextWithComposeTheme {
-        ItemUI(
-            modifier = Modifier
-                .width(150.dp),
-            item = DataItemProducts.listProducts[0],
-        )
-    }
-
-}
-
-
-@Preview("Light Theme",showBackground = true)
 @Preview("Dark Theme", showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-fun  DetailsItemUIPreview() {
+fun HorizontalCarouselPreview() {
     MyTextWithComposeTheme {
-        DetailsItemUI(DataItemProducts.listProducts[0])
+        Surface(
+            color = MaterialTheme.colorScheme.background
+        ) {
+            CarouselProducts()
+        }
+
     }
 }
-
-
-
-@Preview("Light Theme", showBackground = true,widthDp = 1000,heightDp = 400)
-@Preview("Dark Theme", showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES,widthDp = 1000,heightDp = 400)
-@Composable
-fun  DetailsItemUIPreviewExpanded() {
-    MyTextWithComposeTheme {
-        DetailsExpandedItemUI(DataItemProducts.listProducts[0])
-    }
-}
-
-
-
-
 

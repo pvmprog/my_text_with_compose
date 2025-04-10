@@ -1,6 +1,5 @@
 package com.pvmprog.mytextwithcompose.data.locale
 
-import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
 
 object DataColor {
