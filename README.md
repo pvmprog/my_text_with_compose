@@ -359,6 +359,12 @@
 <p align="center">
    **************************************************
 </p>
+<p align="center">
+    <img src="screenshots/video_carusel.gif" alt="Start screen" />
+</p>
+<p align="center">
+   **************************************************
+</p>
 
 
 
