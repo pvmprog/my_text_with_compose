@@ -306,6 +306,7 @@ private fun DetailsSharedItemUI(
                 painter = painterResource(id = item.imageResId),
                 contentDescription = "",
             )
+/*
             Text(
                 text = stringResource(id = item.titleResId),
                 fontWeight = FontWeight.Bold,
@@ -316,6 +317,8 @@ private fun DetailsSharedItemUI(
                         animatedVisibilityScope = animatedVisibilityScope
                     )
             )
+
+ */
             Text(
                 text = stringResource(id = item.contentDescriptionResId),
                 color = MaterialTheme.colorScheme.onSecondaryContainer,
@@ -376,6 +379,7 @@ private fun DetailsSharedExpandedItemUI(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
+/*
                 Text(
                     text = stringResource(id = item.titleResId),
                     textAlign = TextAlign.Center,
@@ -388,12 +392,25 @@ private fun DetailsSharedExpandedItemUI(
                         )
                         .padding(bottom = 8.dp)
                 )
+
+ */
                 Text(
                     text = stringResource(id = item.contentDescriptionResId),
                     color = MaterialTheme.colorScheme.onSecondaryContainer,
                     textAlign = TextAlign.Justify,
                 )
 
+                Text(
+                    text = setPriceString(item.price.toString()),
+                    modifier = Modifier
+                        .sharedBounds(
+                            rememberSharedContentState(key = "price ${item.titleResId}"),
+                            animatedVisibilityScope = animatedVisibilityScope
+                        ),
+                    textAlign = TextAlign.Center,
+                    color = MaterialTheme.colorScheme.onSecondaryContainer
+                )
+                Spacer(modifier = Modifier.height(4.dp))
 
             }
         }
