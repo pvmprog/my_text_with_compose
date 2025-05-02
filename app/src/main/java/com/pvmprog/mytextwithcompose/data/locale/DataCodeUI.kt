@@ -61,20 +61,25 @@ import com.pvmprog.mytextwithcompose.ui.examples.AnnotatedParagraph
 import com.pvmprog.mytextwithcompose.ui.examples.AnnotatedBaseLineShift
 import com.pvmprog.mytextwithcompose.ui.examples.ArrowIndicator
 import com.pvmprog.mytextwithcompose.ui.examples.ArrowNewIndicator
+import com.pvmprog.mytextwithcompose.ui.examples.BasicTextAutoSize
 import com.pvmprog.mytextwithcompose.ui.examples.CircularIndicator
 import com.pvmprog.mytextwithcompose.ui.examples.ClickableMyText
 import com.pvmprog.mytextwithcompose.ui.examples.Emoticons
 import com.pvmprog.mytextwithcompose.ui.examples.FormatString
 import com.pvmprog.mytextwithcompose.ui.examples.CarouselProducts
+import com.pvmprog.mytextwithcompose.ui.examples.CheckboxWithTextExample
+import com.pvmprog.mytextwithcompose.ui.examples.EllipsisText
 import com.pvmprog.mytextwithcompose.ui.examples.LineDriverIndicator
 import com.pvmprog.mytextwithcompose.ui.examples.ListProducts
 import com.pvmprog.mytextwithcompose.ui.examples.PieChart
+import com.pvmprog.mytextwithcompose.ui.examples.SegmentedButtonExample
 import com.pvmprog.mytextwithcompose.ui.examples.SelectableText
 import com.pvmprog.mytextwithcompose.ui.examples.TextColorAny
 import com.pvmprog.mytextwithcompose.ui.examples.TextFontFamalyAlternate
 import com.pvmprog.mytextwithcompose.ui.examples.TextFontFamily
 import com.pvmprog.mytextwithcompose.ui.examples.TextLineHeight
 import com.pvmprog.mytextwithcompose.ui.examples.TypographyStyles
+import com.pvmprog.mytextwithcompose.ui.examples.VertikalOrientationText
 import com.pvmprog.mytextwithcompose.ui.examples.data.DataItemProducts
 import kotlin.math.PI
 
@@ -2945,40 +2950,47 @@ AGSL |не поддерживает| директивы препроцессор
                    
 Примечание. 
   Текст, который выходит за пределы своих границ с помощью |Visible|, может быть обрезан другими модификаторами, такими как Modifier.|clipToBounds|
+  
+  Кроме того, в |Compose 1.8| улучшена обработка переполнения текста с помощью новых опций:
+   TextOverflow.|StartEllipsis| 
+   TextOverflow.|MiddleEllipsis|, 
+   которые позволяют отображать многоточие в начале или середине текстовой строки пока только при /maxLines = 1/
                 
             """.trimIndent(),
-            lambdaFun = { SimpleLimit() },
+            nameFun = "EllipsisText.kt",
+            lambdaFun = { EllipsisText() },
             code ="""
-@Composable
-fun SimpleLimit() {
-
-    val padding = dimensionResource(
-        id = R.dimen.padding_medium
-    )
-
-    LazyColumn(
-        modifier = Modifier
-            .border(1.dp, MaterialTheme.colorScheme.onBackground)
-            .padding(padding),
-    ) {
-        item {
+            // ...
+            
             Text(
-                text = "Очень длинный-длинный текст ".repeat(20),
+                text = text,
                 overflow = TextOverflow.Ellipsis,
-                maxLines = 2,
+                maxLines = 1,
             )
+            Text(
+                text = text,
+                overflow = TextOverflow.StartEllipsis,
+                maxLines = 1,
+            )
+            Text(
+                text = text,
+                overflow = TextOverflow.MiddleEllipsis,
+                maxLines = 1,
+            )
+            
+            //...
 
-        }
-
-    }
-
-}
             """.trimIndent(),
             links = listOf(
                 TextClickLink(
                     text = "Больше информации смотрите ",
                     textUrl = "\uD83D\uDCD6 Developers. Стиль текста",
                     url = "https://developer.android.com/develop/ui/compose/text/style-text?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Что нового в выпуске Jetpack Compose от 25 апреля 25 года",
+                    textUrl = "\uD83D\uDCD6 Блог разработчиков Android ",
+                    url = "https://android-developers.googleblog.com/2025/04/whats-new-in-jetpack-compose-april-25.html"
                 ),
             ),
 
@@ -8921,7 +8933,142 @@ fun HorizontalMultiBrowseCarousel(
             ),
         ),
 
+        ExampleCode(
+            title = "Ресайзинг текста под контейнер",
+            comment = """
+Параметр |autoSize| в |!BasicText| автоматически подстраивает размер текста под размер контейнера.                
+            """.trimIndent(),
+            lambdaFun = { BasicTextAutoSize() },
+            nameFun = "BasicTextAutoSize.kt",
+            code ="""
+    Box(
+        modifier = Modifier
+            .background(MaterialTheme.colorScheme.secondary)
+            .fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        BasicText(
+            text = "С Новым годом!",
+            modifier = Modifier
+                .padding(16.dp),
+            maxLines = 1,
+            autoSize = TextAutoSize.StepBased()
+        )
 
+    }                
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Что нового в выпуске Jetpack Compose от 25 апреля 25 года",
+                    textUrl = "\uD83D\uDCD6 Блог разработчиков Android ",
+                    url = "https://android-developers.googleblog.com/2025/04/whats-new-in-jetpack-compose-april-25.html"
+                ),
+            ),
+        ),
+
+        ExampleCode(
+            title = "Вертикальная ориентация текста",
+            comment = """
+            Модификатор .|rotate|(-90f) позволяет развернуть текст по вертикали.
+            """.trimIndent(),
+            lambdaFun = { VertikalOrientationText(it) },
+            nameFun = "VertikalOrientationText.kt",
+            code ="""
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Что нового в выпуске Jetpack Compose от 25 апреля 25 года",
+                    textUrl = "\uD83D\uDCD6 Блог разработчиков Android ",
+                    url = "https://android-developers.googleblog.com/2025/04/whats-new-in-jetpack-compose-april-25.html"
+                ),
+                TextClickLink(
+                    text = "Официальная среда разработки приложений для Android",
+                    textUrl = "\uD83D\uDCD6 Android Studio ",
+                    url = "https://developer.android.com/studio?utm_source=android-studio&hl=ru"
+                ),
+            ),
+        ),
+
+        ExampleCode(
+            title = "Параметры печи",
+            comment = """
+ Используйте |SegmentedButton|,чтобы пользователи могли выбирать из набора опций, расположенных рядом.
+
+ Сегментированные кнопки помогают пользователям выбирать параметры, переключать представления или сортировать элементы.
+
+ Существует два типа сегментированных кнопок:
+    Кнопка одиночного выбора : позволяет пользователям выбрать один вариант.
+    Кнопка множественного выбора : позволяет пользователям выбирать от двух до пяти элементов. Для более сложного выбора или более пяти предметов используйте фишки
+                 
+ Используйте макеты |SingleChoiceSegmentedButtonRow| и |MultiChoiceSegmentedButtonRow| для создания сегментированных кнопок. 
+ Эти макеты гарантируют правильное расположение и размер |SegmentedButton| , а также общие следующие ключевые параметры:
+
+    space : регулирует перекрытие между кнопками.
+    content : Содержит содержимое сегментированной строки кнопки, которая обычно представляет собой последовательность SegmentedButton .                 
+    """.trimIndent(),
+            lambdaFun = { SegmentedButtonExample(it) },
+            nameFun = "SegmentedButtonExample.kt",
+            code ="""
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Сегментированная кнопка  ",
+                    textUrl = "\uD83D\uDCD6 Android. Developers ",
+                    url = "https://developer.android.com/develop/ui/compose/components/segmented-button?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Segmented buttons.  ",
+                    textUrl = "\uD83D\uDCD6 m3.material.io ",
+                    url = "https://m3.material.io/components/segmented-buttons/overview"
+                ),
+                TextClickLink(
+                    text = "Пример использования ",
+                    textUrl = "\uD83D\uDCD6 SegmentedButtonSingleSelectSample() ",
+                    url = "https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/material3/material3/samples/src/main/java/androidx/compose/material3/samples/SegmentedButtonSamples.kt"
+                ),
+            ),
+        ),
+
+        ExampleCode(
+            title = "Контроллер безопасности",
+            comment = """
+Checkbox позволяют пользователют выбрать один или несколько вариантов из набора. Обычно представляются в вертикальном списке.
+                 
+ Поскольку набор параметров флажков позволяет пользователю выбирать несколько элементов, каждый флажок управляется отдельно, и для каждого из них необходимо зарегистрировать прослушиватель кликов.
+                  
+            """.trimIndent(),
+            lambdaFun = { CheckboxWithTextExample(it) },
+            nameFun = "CheckboxWithTextExample.kt",
+            code ="""
+import androidx.compose.material3.Checkbox
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+
+val checkedState = remember { mutableStateOf(true) }
+Checkbox(
+    checked = checkedState.value, 
+    onCheckedChange = { checkedState.value = it }
+)
+                
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Добавьте флажки в свое приложение  ",
+                    textUrl = "\uD83D\uDCD6  Android.Developers ",
+                    url = "https://developer.android.com/reference/kotlin/androidx/compose/material3/package-summary#Checkbox(kotlin.Boolean,kotlin.Function1,androidx.compose.ui.Modifier,kotlin.Boolean,androidx.compose.material3.CheckboxColors,androidx.compose.foundation.interaction.MutableInteractionSource)"
+                ),
+                TextClickLink(
+                    text = "Material Design checkbox  ",
+                    textUrl = "\uD83D\uDCD6  m3.material.io ",
+                    url = "https://m3.material.io/components/checkbox/overview"
+                ),
+                TextClickLink(
+                    text = "Пример использования ",
+                    textUrl = "\uD83D\uDCD6  CheckboxWithTextSample ",
+                    url = "https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/material3/material3/samples/src/main/java/androidx/compose/material3/samples/CheckboxSamples.kt"
+                ),
+            ),
+        ),
 
         )
 }

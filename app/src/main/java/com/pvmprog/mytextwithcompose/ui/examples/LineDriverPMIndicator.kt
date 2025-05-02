@@ -25,8 +25,10 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextMeasurer
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.rememberTextMeasurer
@@ -37,17 +39,16 @@ import androidx.compose.ui.unit.sp
 import com.pvmprog.mytextwithcompose.ui.service.SliderSimple
 import com.pvmprog.mytextwithcompose.ui.theme.MyTextWithComposeTheme
 
-
 @Composable
-fun LineDriverIndicator(
+fun LineDriverPMIndicator(
     isExpanded: Boolean = false,
-    labelSlider: String = "kV",
-    mivValue:Float = 0f,
-    maxValue:Float = 120f,
-    alarmValue:Float = 105f
+    labelSlider: String = "мм.в.с",
+    mivValue:Float = -5f,
+    maxValue:Float = 5f,
+    alarmValue:Float = 3f
 ) {
     val sliderPosition = remember {
-        mutableFloatStateOf(43f)
+        mutableFloatStateOf(2f)
     }
 
     val modifier = Modifier
@@ -63,21 +64,22 @@ fun LineDriverIndicator(
         verticalArrangement = Arrangement.spacedBy(16.dp)
 
     ) {
-        IndicatorLine(
+        IndicatorPMLine(
             modifier = modifier,
             value = sliderPosition.floatValue,
             minValue = mivValue,
             maxValue = maxValue,
             alarmValue = alarmValue,
-            unitOfMeasurement = labelSlider
+            unitOfMeasurement = buildAnnotatedString { append(labelSlider) },
+            quantity = 10
         )
         SliderSimple(labelSlider+":", sliderPosition, mivValue, maxValue,modifier)
     }
 }
 
 @Composable
-fun IndicatorLine(
-    title: String = "Напряжение электрофильтра",
+fun IndicatorPMLine(
+    title: String = "Давление в пересыпной камере",
     modifier: Modifier = Modifier,
     value: Float = 0f,
     minValue: Float = 0f,
@@ -86,12 +88,13 @@ fun IndicatorLine(
     indentDp: Int = 16,
     strokeWidth: Float = 15f, //Ширина ползунка
     quantity: Int = 8,    //кол-во сегментов
+    isOutAvar:Boolean = false,
     background: Color = MaterialTheme.colorScheme.background,
     colorArrow: Color = MaterialTheme.colorScheme.onBackground,
     colorValue: Color = MaterialTheme.colorScheme.secondary,
     colorAlarm: Color = MaterialTheme.colorScheme.error,
     height: Int = 80,
-    unitOfMeasurement: String = "kV",
+    unitOfMeasurement: AnnotatedString = buildAnnotatedString { append("kV") },   // String = "kV",
     styleScaleValues: TextStyle = TextStyle(
         textAlign = TextAlign.Center,
         fontSize = 18.sp,
@@ -119,7 +122,7 @@ fun IndicatorLine(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
             ) {
-                LineIndicator(
+                LinePMIndicator(
                     modifier = Modifier
                         .height(height.dp)
                         .weight(1f),
@@ -133,7 +136,8 @@ fun IndicatorLine(
                     style = styleScaleValues,
                     alarmValue = alarmValue,
                     alarmColor = colorAlarm,
-                    realValue = value
+                    realValue = value,
+                    isOutAlarm = isOutAvar
                 )
                 Spacer(
                     modifier = Modifier
@@ -168,7 +172,7 @@ fun IndicatorLine(
 }
 
 @Composable
-fun LineIndicator(
+fun LinePMIndicator(
     modifier: Modifier = Modifier,
     textMeasurer: TextMeasurer,
     color: Color,
@@ -182,7 +186,8 @@ fun LineIndicator(
     style: TextStyle,
     alarmValue: Float = 0f,
     alarmColor: Color,
-    realValue: Float = 70f
+    realValue: Float = 70f,
+    isOutAlarm: Boolean = false,
 ) {
     //Контроль на корректность выводимого значения
     val outValue = if (realValue > maxValue) maxValue
@@ -194,7 +199,7 @@ fun LineIndicator(
         val widthIndicator = size.width - 2 * indentPx
 
 //рисуем бегунок (прямоугольник),размеры которого будем изменять
-        val sliderWidth = outValue * widthIndicator / maxValue
+        val sliderWidth = (outValue - minValue) * widthIndicator / (maxValue - minValue)
         drawRect(
             topLeft = Offset(
                 x = indentPx,
@@ -274,31 +279,31 @@ fun LineIndicator(
 
         }
 
-if (alarmValue != 0f){
+        if (isOutAlarm){
 //рисуем указатель предельного допустимого значения
-    val alarmX = alarmValue * widthIndicator / (maxValue - minValue) + indentPx
-    val alarmY = size.height - sliderHeightDp.dp.toPx() + 3.dp.toPx()
-    val alarmdWidth = 6.dp.toPx()
-    val alarmTop = alarmY - 5 * divisionHeight
-    val path = Path().apply {
-        moveTo(alarmX, alarmY)
-        lineTo(alarmX - alarmdWidth, alarmTop)
-        lineTo(alarmX + alarmdWidth, alarmTop)
+            val alarmX = (alarmValue  - minValue) * widthIndicator / (maxValue - minValue) + indentPx
+            val alarmY = size.height - sliderHeightDp.dp.toPx() + 3.dp.toPx()
+            val alarmdWidth = 6.dp.toPx()
+            val alarmTop = alarmY - 5 * divisionHeight
+            val path = Path().apply {
+                moveTo(alarmX, alarmY)
+                lineTo(alarmX - alarmdWidth, alarmTop)
+                lineTo(alarmX + alarmdWidth, alarmTop)
+            }
+            drawPath(path, alarmColor)
+
+        }
+
     }
-    drawPath(path, alarmColor)
-
-}
-
-}
 
 }
 
 
 @Preview("Light Theme", showBackground = true)
 @Composable
-fun LineDriverIndicatorPreview() {
+fun LineDriverPMIndicatorPreview() {
     MyTextWithComposeTheme {
-        LineDriverIndicator(false)
+        LineDriverPMIndicator(false)
     }
 }
 
@@ -311,9 +316,8 @@ fun LineDriverIndicatorPreview() {
     heightDp = 400
 )
 @Composable
-fun LineDriverIndicatorPreviewExpanded() {
+fun LineDriverPMIndicatorPreviewExpanded() {
     MyTextWithComposeTheme {
-        LineDriverIndicator(true)
+        LineDriverPMIndicator(true)
     }
 }
-

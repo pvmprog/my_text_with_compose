@@ -7,6 +7,7 @@ plugins {
 
 }
 
+
 android {
     namespace = "com.pvmprog.mytextwithcompose"
     compileSdk = 35
