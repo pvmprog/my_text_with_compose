@@ -16,7 +16,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -24,42 +24,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.pvmprog.mytextwithcompose.ui.examples.data.DataItemMes.messages
+import com.pvmprog.mytextwithcompose.ui.examples.data.DataItemStates
+import com.pvmprog.mytextwithcompose.ui.examples.data.ItemState
 import com.pvmprog.mytextwithcompose.ui.theme.MyTextWithComposeTheme
 
-data class ItemState( // use val instead of var, so you cannot change it
-    val title: String = "",
-    val checkedState: Boolean = false,
-)
 
-
-object DataItemStates {
-    val kbStatesIn: List<ItemState> = listOf(
-        ItemState("Авария: BДГ",false),
-        ItemState("Авария: НДГ",false),
-        ItemState("Авария: НРП",false),
-        ItemState("Авария: НДВ",false),
-        ItemState("Дымосос выключен",false),
-        ItemState("Наличие пламени",true),
-        ItemState("Кнопка: Аварийный STOP",false),
-        ItemState("Кнопка: Ручной поджиг",false),
-    )
-    val kbStatesOut: List<ItemState> = listOf(
-        ItemState("Продувка",false),
-        ItemState("Поджиг разрешен",true),
-        ItemState("Защита печи включена",false),
-        ItemState("Отсечение газа",false),
-        ItemState("Запрет работы",false),
-        ItemState("Температура КУ > 500°C",false),
-        ItemState("Ошибка наличия пламени",false),
-    )
-}
 
 
 @Composable
 fun CheckboxWithTextExample(
     isExpanded: Boolean = false,
     ) {
-    var selectedIndex by remember { mutableStateOf(0) }
+    var selectedIndex by remember { mutableIntStateOf(1) }
     val options = listOf("КБ (входы)", "КБ (выходы)")
     val listIn: List<ItemState> = DataItemStates.kbStatesIn
     val listOut: List<ItemState> = DataItemStates.kbStatesOut
@@ -69,7 +46,7 @@ fun CheckboxWithTextExample(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        SegmentedButtonSelect(selectedIndex,options,{selectedIndex = it})
+        SegmentedButtonSelect(selectedIndex,options,{ selectedIndex = it } )
 
         when (selectedIndex){
             0 -> GroupoutCheckbox(listIn)
@@ -82,21 +59,23 @@ fun CheckboxWithTextExample(
 
 @Composable
 fun GroupoutCheckbox(
-    list: List<ItemState> = DataItemStates.kbStatesIn
+    list: List<ItemState>  = DataItemStates.kbStatesIn
 ){
     LazyColumn(
         modifier = Modifier
             .fillMaxWidth(),
     ) {
-        items(list) {
-            CheckboxWithTextSample(it.title,it.checkedState)
+        items(list){
+            CheckboxWithTextSample(it.idMes,it.checkedState)
         }
     }
+
+
 }
 
 @Composable
 fun CheckboxWithTextSample(
-    nameOption: String = "Option selection",
+    codeOption: Int = 0,
     checkedState:Boolean = false,
     onStateChange:(Boolean) -> Unit = {}
 ) {
@@ -118,8 +97,9 @@ fun CheckboxWithTextSample(
             checked = checkedState,
             onCheckedChange = null // null recommended for accessibility with screenreaders
         )
+
         Text(
-            text = nameOption,
+            text = if (codeOption < messages.size) messages[codeOption].message else "",
             style = MaterialTheme.typography.bodyLarge,
             modifier = Modifier.padding(start = 16.dp)
         )

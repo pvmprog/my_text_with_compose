@@ -8,6 +8,17 @@ import androidx.compose.ui.text.style.BaselineShift
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.sp
 
+data class ItemParam(
+    val name: String = "",
+    val value:Float = 0f,
+    val min:Float = 0f,
+    val max:Float = 100f,
+    val avar:Float = 0f,
+    val quantity:Int = 8,
+    val isOutAvar:Boolean = false,
+    val type:Int = 0
+)
+
 object DataItemParam {
 
     val sliders: List<AnnotatedString> = listOf(

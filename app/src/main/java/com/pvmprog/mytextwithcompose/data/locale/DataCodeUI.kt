@@ -68,6 +68,7 @@ import com.pvmprog.mytextwithcompose.ui.examples.Emoticons
 import com.pvmprog.mytextwithcompose.ui.examples.FormatString
 import com.pvmprog.mytextwithcompose.ui.examples.CarouselProducts
 import com.pvmprog.mytextwithcompose.ui.examples.CheckboxWithTextExample
+import com.pvmprog.mytextwithcompose.ui.examples.DatePickerWithTextExample
 import com.pvmprog.mytextwithcompose.ui.examples.EllipsisText
 import com.pvmprog.mytextwithcompose.ui.examples.LineDriverIndicator
 import com.pvmprog.mytextwithcompose.ui.examples.ListProducts
@@ -9023,7 +9024,7 @@ fun HorizontalMultiBrowseCarousel(
                 ),
                 TextClickLink(
                     text = "Пример использования ",
-                    textUrl = "\uD83D\uDCD6 SegmentedButtonSingleSelectSample() ",
+                    textUrl = "\uD83D\uDCD6 SegmentedButtonSamples.kt ",
                     url = "https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/material3/material3/samples/src/main/java/androidx/compose/material3/samples/SegmentedButtonSamples.kt"
                 ),
             ),
@@ -9064,11 +9065,54 @@ Checkbox(
                 ),
                 TextClickLink(
                     text = "Пример использования ",
-                    textUrl = "\uD83D\uDCD6  CheckboxWithTextSample ",
+                    textUrl = "\uD83D\uDCD6  CheckboxSamples.kt ",
                     url = "https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/material3/material3/samples/src/main/java/androidx/compose/material3/samples/CheckboxSamples.kt"
                 ),
             ),
         ),
+        ExampleCode(
+            title = "Журнал сообщений",
+            comment = """
+|Date pickers| позволяют пользователям выбирать дату, диапазон дат или и то, и другое. Они используют диалоговое окно календаря или ввод текста, чтобы пользователи могли выбирать даты.
+                
+ Существует три типа выбора даты:
+    |Закреплено| : отображается внутри макета. Он подходит для компактных макетов, где выделенный диалог может показаться навязчивым.
+    |Модальное окно| : отображается в виде диалогового окна, накладывающего содержимое приложения. Это обеспечивает четкую фокусировку на выборе даты.
+    |Модальный ввод| : объединяет текстовое поле с модальным выбором даты.
+
+Вы можете реализовать эти средства выбора дат в своем приложении, используя следующие составные элементы:
+
+    |DatePicker| : общий вариант для выбора даты. Используемый вами контейнер определяет, закреплен ли он или является моделью.
+
+    |DatePickerDialog| : контейнер для модальных и модальных средств выбора даты ввода.
+
+    |DateRangePicker| : для любого средства выбора даты, где пользователь может выбрать диапазон с датой начала и окончания.                
+
+            """.trimIndent(),
+            lambdaFun = { DatePickerWithTextExample() },
+            nameFun = "DatePickerWithTextExample.kt",
+            code ="""
+            """.trimIndent(),
+            links = listOf(
+                TextClickLink(
+                    text = "Выбор даты  ",
+                    textUrl = "\uD83D\uDCD6  Android.Developers ",
+                    url = "https://developer.android.com/develop/ui/compose/components/datepickers?hl=ru"
+                ),
+                TextClickLink(
+                    text = "Пример использования ",
+                    textUrl = "\uD83D\uDCD6  DatePickerSamples.kt ",
+                    url = "https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/material3/material3/samples/src/main/java/androidx/compose/material3/samples/DatePickerSamples.kt"
+                ),
+                TextClickLink(
+                    text = "Коды смайликов «Символы» эмодзи ",
+                    textUrl = "\uD83D\uDCD6  Смайлики-эмодзи → Символы ",
+                    url = "https://emojio.ru/symbols.html"
+                ),
+            ),
+        ),
+
+
 
         )
 }
