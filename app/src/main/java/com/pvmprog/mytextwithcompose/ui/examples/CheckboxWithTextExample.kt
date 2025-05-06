@@ -24,7 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.pvmprog.mytextwithcompose.ui.examples.data.DataItemMes.messages
+import com.pvmprog.mytextwithcompose.ui.examples.data.DataItemMessageType.typesOfMessages
 import com.pvmprog.mytextwithcompose.ui.examples.data.DataItemStates
 import com.pvmprog.mytextwithcompose.ui.examples.data.ItemState
 import com.pvmprog.mytextwithcompose.ui.theme.MyTextWithComposeTheme
@@ -36,18 +36,19 @@ import com.pvmprog.mytextwithcompose.ui.theme.MyTextWithComposeTheme
 fun CheckboxWithTextExample(
     isExpanded: Boolean = false,
     ) {
-    var selectedIndex by remember { mutableIntStateOf(1) }
+    var selectedIndex by remember { mutableIntStateOf(0) }
     val options = listOf("КБ (входы)", "КБ (выходы)")
     val listIn: List<ItemState> = DataItemStates.kbStatesIn
     val listOut: List<ItemState> = DataItemStates.kbStatesOut
+    val dateTime: String = "05/05/2025 15:23:45"
     Column(
         modifier = Modifier
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
+        Text(dateTime)
         SegmentedButtonSelect(selectedIndex,options,{ selectedIndex = it } )
-
         when (selectedIndex){
             0 -> GroupoutCheckbox(listIn)
             else -> GroupoutCheckbox(listOut)
@@ -98,9 +99,22 @@ fun CheckboxWithTextSample(
             onCheckedChange = null // null recommended for accessibility with screenreaders
         )
 
+        var avarPred = 0
+        val text = if (codeOption < typesOfMessages.size) {
+            if (typesOfMessages[codeOption].code == 2) avarPred = 1
+            if (typesOfMessages[codeOption].code == 3) avarPred = 2
+            if (!checkedState) avarPred = 0
+            typesOfMessages[codeOption].message
+        } else ""
+
         Text(
-            text = if (codeOption < messages.size) messages[codeOption].message else "",
+            text = text,
             style = MaterialTheme.typography.bodyLarge,
+            color =  when(avarPred) {
+                1 -> MaterialTheme.colorScheme.error
+                2 -> MaterialTheme.colorScheme.outlineVariant
+                else -> MaterialTheme.colorScheme.onBackground
+            },
             modifier = Modifier.padding(start = 16.dp)
         )
     }

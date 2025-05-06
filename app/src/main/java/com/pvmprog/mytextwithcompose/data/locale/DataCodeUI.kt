@@ -9109,6 +9109,11 @@ Checkbox(
                     textUrl = "\uD83D\uDCD6  Смайлики-эмодзи → Символы ",
                     url = "https://emojio.ru/symbols.html"
                 ),
+                TextClickLink(
+                    text = "Пример использования ",
+                    textUrl = "\uD83D\uDCD6  ButtonSamples.kt ",
+                    url = "https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/material3/material3/samples/src/main/java/androidx/compose/material3/samples/ButtonSamples.kt"
+                ),
             ),
         ),
 

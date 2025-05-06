@@ -54,6 +54,8 @@ object DataItemParam {
                 append("/ч")
             }
         },
+        //5
+        buildAnnotatedString { append("%") },
 
         )
 
@@ -97,6 +99,16 @@ object DataItemParam {
             avar = 118f,
             isOutAvar = true,
             type = 3      //KPa
+        ),
+        ItemParam(
+            name = "Заслонка",
+            value = 47.5f,
+            min = 0f,
+            max = 100f,
+            quantity = 10,
+            avar = 70f,
+            isOutAvar = true,
+            type = 5      //%
         ),
     )
 

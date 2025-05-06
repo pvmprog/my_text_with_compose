@@ -9,24 +9,26 @@ object DataItemStates {
 
     val kbStatesIn: List<ItemState> = listOf(
         ItemState(0,false),
-        ItemState(1,false),
+        ItemState(1,true),
         ItemState(2,false),
         ItemState(3,false),
         ItemState(4,false),
-        ItemState(5,true),
-        ItemState(6,false),
+        ItemState(5,false),
+        ItemState(6,true),
         ItemState(7,false),
     )
 
     val kbStatesOut: List<ItemState> = listOf(
         ItemState(8,false),
-        ItemState(9,true),
+        ItemState(9,false),
         ItemState(10,false),
-        ItemState(11,false),
-        ItemState(12,false),
+        ItemState(11,true),
+        ItemState(12,true),
         ItemState(13,false),
         ItemState(14,false),
     )
+
+
 
 }
 

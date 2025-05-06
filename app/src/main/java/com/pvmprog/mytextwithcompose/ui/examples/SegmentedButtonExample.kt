@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
@@ -33,14 +34,18 @@ import com.pvmprog.mytextwithcompose.ui.theme.MyTextWithComposeTheme
 fun SegmentedButtonExample(
     isExpanded: Boolean = false,
 ) {
-    var selectedIndex by remember { mutableIntStateOf(0) }
+    var selectedIndex by remember { mutableIntStateOf(2) }
     val options = listOf("Температура", "Давление","Газ")
+    val dateTime = "05/05/2025 15:23:45"
+
     Column(
         modifier = Modifier
+            .padding(top = 8.dp)
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
+        Text(dateTime)
         SegmentedButtonSelect(selectedIndex,options,{selectedIndex = it})
 
         when (selectedIndex){
